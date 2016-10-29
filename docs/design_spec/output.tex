@@ -1,2 +1,58 @@
 % file containing a detailed description of the output of the ToL editor
 % Zach
+
+\section{Output of Program}
+The output required of this program, in order for it to interact with the current system, must be in the .tan2 format.  This format has three major pieces: the header, the frames, and the time signatures.
+\newline
+\subsection{Header for the .tan2 File}
+The header is divided into 5 pieces:
+	\begin{itemize}
+		\item The Version Number: 0.4 in the current, perhaps 0.5 or 1.0 for this project
+		\item File Type: either NoAudioFile or its converse
+		\item Last Color Used: the last RGB value used in editing the frames
+		\item List of Pre-Set Colors: the RGB values for each of the pre-set colors included in the program
+		\item Show information: the number of frames, the heighth, and the width of the tower in the frame
+	\end{itemize}
+\subsection{Frames in the .tan2 File}
+The frames are displayed in a particular format in the .tan2 file.
+	\begin{itemize}
+		\item It is essentially a grid of numbers, from 0 to 255
+		\item Each group of 3, reading from left to right, represents the color of 1 LED in the frame
+		\item There is a color for each of the LEDs in the frame, not just the 10x4 that is the actual tower windows
+	\end{itemize}
+
+\subsection{Time Signatures}
+The start value, usually 0, is placed directly after the header and before the first frame.  After each of the frames is the next time signature, which is the previous value plus the increment specified by the editor.  The exception is the final frame, which is not followed by a time signature, and terminates the file.  The default is .050 s, which shows up as 50 in the .tan2 file.  Hence the default measure of time in the program is ms.
+
+\subsection{File Example}
+0.4  
+NoAudioFile
+0 0 255 
+169 169 169 128 128 0 139 0 139 0 139 139 0 0 139 0 100 0 139 0 0 0 0 0 128 128 128 255 255 0 255 0 255 0 255 255 0 0 255 0 128 0 255 0 0 255 255 255 
+1 10 4 
+0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0 0 255 0 0 255 0 0 255 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0 0 0 0 0 0 0 0 255 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0 0 255 0 0 255 0 0 255 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0 0 255 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0 0 0 0 0 255 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0 0 0 0 0 0 0 0 255 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+
+In this example, the first line is the version number.  The second line is the file type; third line is the last color used; while the fourth and fifth lines are the pre-set colors.  The sixth line is the number of frames, the height of the tower, and the width of the tower.  The seventh line is the time signature; and the remainder is the grid of LED colors.
+
+\subsection{Notes}
+The format of the .tan2 file is very straightforward.  It has simple requirements, and these could be easily produced.  The data required would also be fairly easy to store, as both the pre-set colors and the grid of LEDs could be stored in arrays, while the type and the last color used could be variables.  The version number and tower size could be constants.  And the time signatures could be determined as the frames are added on; while the frame number could be the size of a linked list holding the frames.  
