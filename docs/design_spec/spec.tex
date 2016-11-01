@@ -1,1 +1,30 @@
 % main file to collate all of the sections together
+
+\documentclass[12pt]{extarticle}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{eurosym}
+\usepackage{subfiles}
+\usepackage [autostyle, english = american]{csquotes}
+\usepackage[top=2.75cm, bottom=1.75cm, left=1.75cm, right=1.75cm]{geometry} 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\MakeOuterQuote{"}
+
+\lhead{CS-383: Tower of Lights Design Design Specification}
+\chead{}
+\rhead{\today}
+
+\titlespacing{\section}{0pt}{3pt}{3pt}
+\titlespacing{\subsection}{20pt}{3pt}{3pt}
+
+\begin{document}
+
+\subfile{./possible_improvements.tex}
+
+\end{document}
