@@ -1,2 +1,44 @@
-% file containing a description of the UI and functionality for the toolboxes in the GUI
-% Peter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file contains a description of the UI and functionality for the ToolBox portion of the GUI.
+%% Peter Fetros
+%% CS 383
+%% 11/1/2016
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%TODO: adjust header info as necessary to mesh with spec.tex and other child documents
+\documentclass{article} 
+
+\begin{document}
+	\section{Editor}
+	
+	\subsection{Functionality: General}
+	The ToolBox portion of the GUI will be a rectangular area that will contain several different tabs. Each tab will contain tools for a specific category, such as tools used for selecting colors and tools for editing and manipulating frames of the animation. Two such tabs that have been decided are the “Color Tab” and the “Editing Tab” which are described below. However more tabs may be added as future improvements.
+	\subsection{Functionality: Color Tab}
+This tab will include several tools used for selecting and saving colors that will then be used for creating the tower lights animation frames. The following are the current features planned for this tab.
+	\begin{itemize}
+			\item Color wheel (pallet) for visually selecting the desired color by using the mouse to click on a location within the wheel.
+			\item Predefined color selection box as well as a box to select colors that have previously been saved for easier access later.
+			\item Several  boxes that allows a text input representation of a color in the following format:
+		\begin{itemize}
+				\item Red, Green, Blue (RGB)
+				\item HTML Hexadecimal Codes
+				\item Cyan, Yellow, Magenta, Key (CYMK)
+		\end{itemize}
+	\end{itemize}
+
+	\subsection{Functionality: Editing Tab}
+	This tab will include several tools used for selecting and editing frames that have already been made. This includes features such as
+	\begin{itemize}
+			\item Adding a range of frames: Insert a large number of frames by referring to the frame index and the number of frames you'd like to insert.
+			\item Removing a range of frames: Remove a large number of frames by referring to the first and last frame indices that you would like to remove.
+			\item Copying sections of a frame: Designate a frame and add its content to a selection of other frames.
+	\end{itemize}
+	
+	\subsection{Notes}
+	\begin{itemize}
+		\item The toolbox section of the GUI will work alongside the Editor section to create a frame/animation. 
+
+		\item It will be possible to later designate more ToolBox Tabs such that Tabs can be added and removed at will by both programmers and users.
+	\end{itemize}
+	
+\end{document}
