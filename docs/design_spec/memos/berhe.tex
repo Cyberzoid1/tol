@@ -1,1 +1,89 @@
-% memo for submission of first draft of design spec
+%% file containing a description of the UI and functionality of the GUI's menu options
+%% Adonay Berhe					Nov - 1 - 2016
+%% CS 383
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[preprint,12pt]{article}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+\title{\textbf {Menu Bar Design Specifications}}
+\author{Adonay Berhe}
+\date{November 1, 2016}
+
+
+\begin{document}
+\maketitle
+
+\section*{Introduction}
+
+{This specification document illustrates the base features of the intended Menu bar of the new Tower of Lights editor. The bar contains numerous features that are similarto the existing UI with a few additions. The descriptions of the sections are listed as follows.}
+
+\section*{Features and Descriptions}
+
+\subsection*{File}
+
+{This drop-down list deals with IO manipulation. Features include:}
+
+\begin{itemize}
+\item \textbf{New} - Creates a new blank project. 
+\item \textbf{Open} - Opens an existing .tan2 file for editing.
+\item \textbf{Import} - .............
+\item \textbf{Save} - Saves file.
+\item \textbf{Save As} - Similar to traditilonal "Save As" option.
+\item \textbf{Close} - Closes window. 
+\item \textbf{Exit} - Exits program.
+
+\end{itemize}
+
+\subsection*{Edit}
+
+{This drop-down list displays options for editing the document at a frame-level (rearrange, delete, insert, clear, ...) and cell-level (individual box). For some of these functionalities - Insert, Delete, Copy ... - short-cut icons will be available on the editor window}
+
+\begin{itemize}
+\item \textbf{Insert} - Insert a frame before or after current frame.
+\item \textbf{Delete} - Delete current frame.
+\item \textbf{Clear} - Clear entire frame.
+\item \textbf{Clear Cell} - Clear LED selection of a specific cell.
+\item \textbf{Randomize} - Fill a frame with random combinations of colors and shades.
+\end{itemize}
+
+\subsection*{Tools}
+
+{This drop-down list will include all the tool-boxes that the editor will be using including a checkbox option for users to check-off tools that they desire to have present in the editor window. Tool boxes include:}
+
+\begin{itemize}
+\item \textbf{Frame toolbox}
+\item \textbf{LED toolbox}
+
+\end{itemize}
+
+\subsection*{Search}
+
+{This option will enable users to search for a specific frame by label or frame number.}
+
+\section*{Future Works}
+
+{These features will not be present in the first few iterations of the software; however, they are expected to be implemented around week four. }
+
+\subsection*{Playback}
+
+{This drop-down list will be used to play, pause, or stop the various animations created within an open file. Options include: }
+\begin{itemize}
+\item \textbf{Play/Pause} - Play or pause an animation.
+\item \textbf{Stop} - Stops an animation and resets frame location to the beginning.
+\item \textbf{Preview Mode} -Plays animaiton in a new window with pictorial representation of the Tower building.
+
+\end{itemize}
+
+\subsection*{Animations}
+
+{This feature will be added under "Edit". The purpose of this feature is to enable users to select from a list of built-in animations (snake, sine wave, ...) and specify the number of frames to be used upon creation of animations. Due to lack of time and presence of features with higher-priorities, implementation of this feature is expected to take place in the very late stages of development (Week 4 and 5). }
+
+
+\end{document}
