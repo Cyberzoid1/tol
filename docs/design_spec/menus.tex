@@ -3,28 +3,21 @@
 %% CS 383
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[preprint,12pt]{article}
-\usepackage{geometry}
- \geometry{
- a4paper,
- total={170mm,257mm},
- left=20mm,
- top=20mm,
- }
+\documentclass[]{article}
 
 \begin{document}
 
-\centerline{\textbf {\large Menu Bar}}
+\section{Menu Bar}
 
 
 
-\section{Introduction}
+\subsection{Introduction}
 
 {This specification document illustrates the base features of the intended Menu bar of the new Tower of Lights editor. The bar contains numerous features that are similarto the existing UI with a few additions. The descriptions of the sections are listed as follows.}
 
-\section{Features and Descriptions}
+\subsection{Features and Descriptions}
 
-\subsection{File}
+\subsubsection{File}
 
 {This drop-down list deals with IO manipulation. Features include:}
 
@@ -38,7 +31,7 @@
 
 \end{itemize}
 
-\subsection{Edit}
+\subsubsection{Edit}
 
 {This drop-down list displays options for editing the document at a frame-level (rearrange, delete, insert, clear, ...) and cell-level (individual box). For some of these functionalities - Insert, Delete, Copy ... - short-cut icons will be available on the editor window}
 
@@ -50,7 +43,7 @@
 \item \textbf{Randomize} - Fill a frame with random combinations of colors and shades.
 \end{itemize}
 
-\subsection{Tools}
+\subsubsection{Tools}
 
 {This drop-down list will include all the tool-boxes that the editor will be using including a checkbox option for users to check-off tools that they desire to have present in the editor window. Tool boxes include:}
 
@@ -60,15 +53,15 @@
 
 \end{itemize}
 
-\subsection{Search}
+\subsubsection{Search}
 
 {This option will enable users to search for a specific frame by label or frame number.}
 
-\section{Future Works}
+\subsection{Future Works}
 
 {These features will not be present in the first few iterations of the software; however, they are expected to be implemented around week four. }
 
-\subsection{Playback}
+\subsubsection{Playback}
 
 {This drop-down list will be used to play, pause, or stop the various animations created within an open file. Options include: }
 \begin{itemize}
@@ -78,7 +71,7 @@
 
 \end{itemize}
 
-\subsection{Animations}
+\subsubsection{Animations}
 
 {This feature will be added under "Edit". The purpose of this feature is to enable users to select from a list of built-in animations (snake, sine wave, ...) and specify the number of frames to be used upon creation of animations. Due to lack of time and presence of features with higher-priorities, implementation of this feature is expected to take place in the very late stages of development (Week 4 and 5). }
 

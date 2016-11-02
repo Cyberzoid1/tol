@@ -1,2 +1,6 @@
-menus.pdf
-menus.synctex.gz
+*.pdf
+*.gz
+*.out
+*.log
+*.aux
+*.toc
