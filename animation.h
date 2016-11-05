@@ -16,6 +16,12 @@
 #include <tuple>
 #include "frame.h"
 
+//number of recently used colors that are stored by the ToL editor
+const int NUMCOLORS = 16;
+
+/*
+ * Structure for storing sets of rgb color values.
+ */
 struct RGB
 {
 	int red;
@@ -23,14 +29,17 @@ struct RGB
 	int blue;
 };
 typedef struct RGB rgb;
-
+/*
+ * Class for storing a list of frames and other information related to
+ * the overall animation.
+ */
 class Animation{
    private:
       std::list<Frame> frames;
 	  double version;
 	  std::string filename;
 	  rgb lastColor;
-	  rgb recentColors[16];
+	  rgb recentColors[NUMCOLORS];
 	  int numFrames;
 	  int height;
 	  int width;
@@ -38,14 +47,14 @@ class Animation{
    public:
 	   Animation();
 	   ~Animation();
-	   void setFrames(std::list<Frame> frames);
+	   void setFrames(std::list<Frame> frms);
 	   std::list<Frame> getFrames();
 	   void setVersion(double ver);
 	   double getVersion();
 	   void setFilename(std::string fname);
 	   std::string getFilename();
-	   void setLastColor(rgb color);
-	   std::tuple<int, int, int> getLastColor();
+	   void setLastColor(int red, int green, int blue);
+	   rgb getLastColor();
 	   void setRecentColors(rgb *recColors);
 	   rgb* getRecentColors();
 	   int getNumFrames();
@@ -56,7 +65,7 @@ class Animation{
 
 	   void addFrame(Frame frame);
 	   void duplicateFrame(Frame frame);
-	   void removeFrame(int position);
+	   void removeFrame(Frame frame);
 	   std::string toString();
 };
 #endif
