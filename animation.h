@@ -26,7 +26,7 @@ const int NUMCOLORS = 16;
 class Animation {
 private:
 	std::list<Frame> frames;
-	double version;
+	std::string version;
 	std::string filename;
 	rgb lastColor;
 	rgb recentColors[NUMCOLORS];
@@ -39,8 +39,8 @@ public:
 	~Animation();
 	void setFrames(std::list<Frame> frms);
 	std::list<Frame> getFrames();
-	void setVersion(double ver);
-	double getVersion();
+	void setVersion(std::string ver);
+	std::string getVersion();
 	void setFilename(std::string fname);
 	std::string getFilename();
 	void setLastColor(int red, int green, int blue);

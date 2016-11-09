@@ -14,7 +14,7 @@
  */
 Animation::Animation()
 {
-	version = 0.4;
+	version = "0.4";
 	filename = "";
 	numFrames = frames.size();
 	height = 10;
@@ -46,14 +46,14 @@ std::list<Frame> Animation::getFrames()
  * Set the Animation's version number.
  * @param ver
  */
-void Animation::setVersion(double ver)
+void Animation::setVersion(std::string ver)
 {
 	version = ver;
 }
 /**
  * Return the animation's version.
  */
-double Animation::getVersion()
+std::string Animation::getVersion()
 {
 	return version;
 }
@@ -226,7 +226,7 @@ std::string Animation::toString()
 		frms += it->toString();
 	}
 
-	return (std::to_string(version) + "\n"
+	return (version + "\n"
 		+ ((filename != "") ? filename : "No sound file specified") + "\n"
 		+ std::to_string(lastColor.red) + " " + std::to_string(lastColor.green) + " " + std::to_string(lastColor.blue) + "\n"
 		+ recColors + "\n"
