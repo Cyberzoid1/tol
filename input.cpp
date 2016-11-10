@@ -135,6 +135,63 @@ void readHeader(std::ifstream &tanfile, Animation *animation) {
 	}
 }
 /**
+ * Parse the RGB values for a row of cells from the specified data and
+ * set the corresponding cell colors in the frame.
+ * @param rowNum index of the current row in the Frame
+ * @param data string containing the cell values
+ * @param frame pointer to frame
+ * @param width of the frame
+ */
+void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width) {
+	std::vector<std::string> cellValues = tokenize(data);
+
+	//since the cell values are stored in RGB triples, there should be 3*width of the animation
+	if (cellValues.size() == width*3) {
+		int red, green, blue;
+		int colNum = 0;
+		for (int i = 0; i < cellValues.size(); i += 3) {
+			red = convertRgbInputStr(cellValues[i]);
+			green = convertRgbInputStr(cellValues[i + 1]);
+			blue = convertRgbInputStr(cellValues[i + 2]);
+			//TODO: verify if there is a bug in Frame::setCellColor()
+			frame->setCellColor(colNum++, rowNum, red, green, blue);
+		}
+	}
+	else {
+		//throw error; will implement once ported into Qt framework
+	}
+}
+/**
+ * Read in the frames from the tanfile and store them in the Animation's list.
+ * Note: this function picks up in the file where readHeader ended.
+ * @param tanfile file containing the animation data
+ * @param animation pointer to the Animation
+ */
+void readFrames(std::ifstream &tanfile, Animation *animation){
+	std::string line;
+	Frame frame(animation->getWidth(), animation->getHeight());
+	std::list<Frame> frames;
+	int pos = 0;
+	while (std::getline(tanfile, line))
+	{
+		//the first line contains the time stamp
+		frame.setStartTime(0 /*TODO: pass in converted time stamp once Frame class is fixed*/);
+		//now read as many lines as are specified by the animation's height
+		//each line corresponds to a row in the animation
+		for (int i = 0; i < animation->getHeight(); i++)
+		{
+			line = "";
+			std::getline(tanfile, line);
+			handleRowOfCells(i, line, &frame, animation->getWidth());
+		}
+		//now that all of the data has been collected for a single frame
+		//handle that data and add it to the list of frames
+		frame.setFrameNumber(pos++);
+		frames.push_back(frame);
+	}
+	animation->setFrames(frames);
+}
+/**
  * Read in an Animation from the specified file.
  * @param filename
  */
@@ -144,6 +201,7 @@ Animation readInAnimation(const char *filename) {
 	std::ifstream tanfile;
 	tanfile.open(filename);
 	readHeader(tanfile, &animation);
+	readFrames(tanfile, &animation);
 	tanfile.close();
 
 	return animation;
