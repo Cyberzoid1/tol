@@ -65,7 +65,8 @@ std::string Animation::getVersion()
 void Animation::setFilename(std::string fname)
 {
 	//may need to check for invalid char's as well
-	if (fname.find(".wav") != std::string::npos)
+	if (fname.compare("NoAudioFile") == 0 || 
+		fname.find(".wav") != std::string::npos)
 		filename = fname;
 	else
 		filename = fname.append(".wav");
@@ -227,7 +228,7 @@ std::string Animation::toString()
 	}
 
 	return (version + "\n"
-		+ ((filename != "") ? filename : "No sound file specified") + "\n"
+		+ ((filename != "") ? filename : "NoAudioFile") + "\n"
 		+ std::to_string(lastColor.red) + " " + std::to_string(lastColor.green) + " " + std::to_string(lastColor.blue) + "\n"
 		+ recColors + "\n"
 		+ std::to_string(frames.size()) + " " + std::to_string(height) + " " + std::to_string(width) + "\n"
