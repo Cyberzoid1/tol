@@ -7,6 +7,7 @@
 #define CELL_H
 
 #include "rgb.h"
+#include <string>
 
 class Cell {
 public:
@@ -14,10 +15,11 @@ public:
     ~Cell();
     void setColor(int red, int green, int blue);
     void setColor(rgb newColorValue);
+    rgb Cell::getColor();
     std::string toString();
     
 private:
-    rbg colorValue;
+    rgb colorValue;
 };
 
 

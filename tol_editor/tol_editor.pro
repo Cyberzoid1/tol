@@ -13,8 +13,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    animation.cpp \
+    cell.cpp \
+    frame.cpp \
+    input.cpp \
+    outputfile.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    animation.h \
+    cell.h \
+    frame.h \
+    input.h \
+    outputfile.h \
+    rgb.h
 
 FORMS    += mainwindow.ui

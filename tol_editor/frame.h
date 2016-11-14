@@ -7,6 +7,7 @@
 #include "Cell.h"
 #include <string>
 #include <vector>
+#include <iterator>
 
 class Frame {
 public:

@@ -16,7 +16,7 @@ Animation::Animation()
 {
 	version = "0.4";
 	filename = "";
-	numFrames = frames.size();
+    numFrames = (int)frames.size();
 	height = 10;
 	width = 4;
 }
@@ -119,7 +119,7 @@ rgb* Animation::getRecentColors()
  */
 int Animation::getNumFrames()
 {
-	return frames.size();
+    return (int)frames.size();
 }
 /**
  * Set the height of the animation.
