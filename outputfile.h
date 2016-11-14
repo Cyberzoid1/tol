@@ -19,8 +19,9 @@
  * Header for functions relating to writing out  tan file
  */
 
-std::string formatFileName(std::string rawFileName);
 int writeFile(std::string rawFileName, Animation* animation);
+
+std::string formatFileName(std::string rawFileName);
 std::string getErrorString(int errorCode);
 
 #endif /* outputfile_h */

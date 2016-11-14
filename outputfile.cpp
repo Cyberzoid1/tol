@@ -12,7 +12,8 @@
  * Check the filename for extenstion and add it if not present
  * @param The raw file name string passed into writefile
  */
-std::string formatFileName(std::string rawFileName) {
+std::string formatFileName(std::string rawFileName)
+{
     std::string lowerName = rawFileName;
     std::transform(lowerName.begin(), lowerName.end(), lowerName.begin(), ::tolower);
     
@@ -27,14 +28,14 @@ std::string formatFileName(std::string rawFileName) {
  * @param The file name or path where the file should be written
  * @param animation pointer to the Animation object
  */
-int writeFile(std::string rawFileName, Animation* animation) {
+int writeFile(std::string rawFileName, Animation* animation)
+{
     
-    if (rawFileName.size() == 0) {
+    if (rawFileName.size() == 0)
         return -1;
-    }
-    if (animation == NULL) {
+
+    if (animation == NULL)
         return -2;
-    }
     
     std::string fileName = formatFileName(rawFileName);
     
@@ -43,9 +44,8 @@ int writeFile(std::string rawFileName, Animation* animation) {
         outFile << animation->toString();
         outFile.close();
     }
-    else {
+    else
         return -3;
-    }
     
     return 0;
 }
@@ -55,7 +55,8 @@ int writeFile(std::string rawFileName, Animation* animation) {
  * returned by the writeFile function
  * @param Integer Error number returned by the writeFile function
  */
-std::string getErrorString(int errorCode) {
+std::string getErrorString(int errorCode)
+{
     switch (errorCode) {
         case 0:
             return "No Error.";

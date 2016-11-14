@@ -1,41 +1,58 @@
-//
-//  cell.cpp
-//
-//  Created by Peter Fetros on 11/7/16.
-//  Copyright © 2016 Peter Fetros. All rights reserved.
-//
+/**
+ * CS 383
+ * Group #4
+ * Created: 11/05/2016
+ *
+ * This file contains the implimentation of the Cell class defined in cell.h
+ */
 
 #include "cell.h"
 
-Cell::Cell() {
-    colorValue.red = 0;
-    colorValue.green = 0;
-    colorValue.blue = 0;
+/**
+ * Initialize a cell with the defualt color black
+ */
+Cell::Cell()
+{
+    colorValue = RGB();
 }
 
-Cell::~Cell() {
-}
-
-void Cell::setColor(int red, int green, int blue) {
-    colorValue.red = red;
-    colorValue.green = green;
-    colorValue.blue = blue;
-}
-
-void Cell::setColor(rgb newColorValue) {
+/**
+ * Initialize a cell with an rgb structure
+ * @param Color of the cell contained in an rgb struct
+ */
+Cell::Cell(RGB newColorValue)
+{
     colorValue = newColorValue;
 }
 
-rgb Cell::getColor() {
+/**
+ * Destructor empty for now
+ */
+Cell::~Cell()
+{
+}
+
+/**
+ * Sets the color of the cell using an rgb struct
+ * @param Color of the cell contained in an rgb struct
+ */
+void Cell::setColor(RGB newColorValue)
+{
+    colorValue = newColorValue;
+}
+
+/**
+ * Returns the color of this cell as an rgb struct
+ */
+RGB Cell::getColor()
+{
     return colorValue;
 }
 
-std::string Cell::toString() {
-    std::string cellString = "";
-    
-    cellString += std::to_string(colorValue.red) + " ";
-    cellString += std::to_string(colorValue.green) + " ";
-    cellString += std::to_string(colorValue.blue);
-    
-    return cellString;
+/**
+ * Serializes this class as a string suitable for output as part of a .tan file
+ */
+std::string Cell::toString()
+{
+    return colorValue.toString();
 }
