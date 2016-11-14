@@ -1,5 +1,10 @@
-//  Created by Peter Fetros on 11/7/16.
-
+/**
+ * CS 383
+ * Group #4
+ * Created: 11/07/2016
+ *
+ * This file contains the method definitions for the Frame class.
+ */
 
 #ifndef FRAME_H
 #define FRAME_H
@@ -9,7 +14,12 @@
 #include <vector>
 #include <iterator>
 
-class Frame {
+/**
+ * Class for storing all cells and represents a single
+ * frame of the animation
+ */
+class Frame
+{
 public:
     Frame();
     Frame(int width, int height);
@@ -21,9 +31,8 @@ public:
     int getStartTime();
     void setStartTime(int time);
     
-    void setCellColor(int x, int y, int red, int green, int blue);
-    void setCellColor(int x, int y, rgb color);
-    rgb getCellColor(int x, int y);
+    void setCellColor(int x, int y, RGB color);
+    RGB getCellColor(int x, int y);
 
     std::string toString();
     
