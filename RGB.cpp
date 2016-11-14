@@ -15,8 +15,8 @@
 RGB::RGB()
 {
     this->red = 0;
-    this->red = 0;
-    this->red = 0;
+    this->green = 0;
+    this->blue = 0;
 }
 
 /**
@@ -28,8 +28,8 @@ RGB::RGB()
 RGB::RGB(int red, int green, int blue)
 {
     this->red = checkRange(red);
-    this->red = checkRange(green);
-    this->red = checkRange(blue);
+    this->green = checkRange(green);
+    this->blue = checkRange(blue);
 }
 
 /**
@@ -55,9 +55,9 @@ RGB::RGB(std::string hex)
  */
 RGB::RGB(int hue, float saturation, float lightness)
 {
-    int hueAngle =  std::abs(hue % 360);
-    int saturationValue = std::abs(ceil(saturation)) - std::abs(saturation);
-    int lightnessValue = std::abs(ceil(lightness)) - std::abs(lightness);
+    int hueAngle = (std::abs(hue) % 360);
+    int saturationValue = (ceil(std::abs(saturation)) - std::abs(saturation));
+    int lightnessValue = (ceil(std::abs(lightness)) - std::abs(lightness));
     
     float C = (1 - std::abs(2*lightnessValue - 1)) * saturationValue;
     float X = C * (1 - std::abs(((hueAngle / 60) % 2) - 1));
@@ -102,7 +102,7 @@ RGB::~RGB()
  */
 int RGB::getRed()
 {
-    return red;
+    return this->red;
 }
 
 /**
@@ -119,7 +119,7 @@ void RGB::setRed(int red)
  */
 int RGB::getGreen()
 {
-    return green;
+    return this->green;
 }
 
 /**
@@ -136,7 +136,7 @@ void RGB::setGreen(int green)
  */
 int RGB::getBlue()
 {
-    return blue;
+    return this->blue;
 }
 
 /**
@@ -157,8 +157,8 @@ void RGB::setBlue(int blue)
 void RGB::setColor(int red, int green, int blue)
 {
     this->red = checkRange(red);
-    this->red = checkRange(green);
-    this->red = checkRange(blue);
+    this->green = checkRange(green);
+    this->blue = checkRange(blue);
     
 }
 
@@ -186,9 +186,9 @@ void RGB::setColor(std::string hex)
  */
 void RGB::setColor(int hue, float saturation, float lightness)
 {
-    int hueAngle =  std::abs(hue % 360);
-    int saturationValue = std::abs(ceil(saturation)) - std::abs(saturation);
-    int lightnessValue = std::abs(ceil(lightness)) - std::abs(lightness);
+    int hueAngle = (std::abs(hue) % 360);
+    int saturationValue = (ceil(std::abs(saturation)) - std::abs(saturation));
+    int lightnessValue = (ceil(std::abs(lightness)) - std::abs(lightness));
     
     float C = (1 - std::abs(2*lightnessValue - 1)) * saturationValue;
     float X = C * (1 - std::abs(((hueAngle / 60) % 2) - 1));
@@ -228,9 +228,9 @@ std::string RGB::toString()
 {
     std::string cellString = "";
     
-    cellString += std::to_string(red) + " ";
-    cellString += std::to_string(green) + " ";
-    cellString += std::to_string(blue);
+    cellString += std::to_string(this->red) + " ";
+    cellString += std::to_string(this->green) + " ";
+    cellString += std::to_string(this->blue);
     
     return cellString;
 }
@@ -240,6 +240,5 @@ std::string RGB::toString()
  */
 int RGB::checkRange(int cValue)
 {
-    int value = std::abs((cValue % 255));
-    return value;
+    return (std::abs(cValue) % 255);
 }
