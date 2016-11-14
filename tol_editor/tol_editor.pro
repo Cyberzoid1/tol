@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     cell.cpp \
     frame.cpp \
     input.cpp \
-    outputfile.cpp
+    outputfile.cpp \
+    RGB.cpp
 
 HEADERS  += mainwindow.h \
     animation.h \

@@ -33,7 +33,7 @@ Animation::~Animation()
  */
 void Animation::setFrames(std::list<Frame> frms)
 {
-
+    frames = frms;
 }
 /**
  * Return the list of frames from the Animation.
@@ -86,14 +86,12 @@ std::string Animation::getFilename()
  */
 void Animation::setLastColor(int red, int green, int blue)
 {
-	lastColor.red = ((red >= 0 && red <= 255) ? red : 0);
-	lastColor.green = ((green >= 0 && green <= 255) ? green : 0);
-	lastColor.blue = ((blue >= 0 && blue <= 255) ? blue : 0);
+    lastColor.setColor(red, green, blue);
 }
 /**
  * Return the last color used on the Animation in the editor.
  */
-rgb Animation::getLastColor()
+RGB Animation::getLastColor()
 {
 	return lastColor;
 }
@@ -101,7 +99,7 @@ rgb Animation::getLastColor()
  * Set the values of the recent colors used on the Animation in the editor.
  * @param recColors array of rgb structures
  */
-void Animation::setRecentColors(rgb *recColors)
+void Animation::setRecentColors(RGB *recColors)
 {
 	for (int i = 0; i < NUMCOLORS; i++) {
 		recentColors[i] = recColors[i];
@@ -110,7 +108,7 @@ void Animation::setRecentColors(rgb *recColors)
 /**
  * Return a pointer to the array of recently used colors.
  */
-rgb* Animation::getRecentColors()
+RGB* Animation::getRecentColors()
 {
 	return recentColors;
 }
@@ -212,9 +210,9 @@ std::string Animation::toString()
 	std::string recColors = "";
 	for (int i = 0; i < NUMCOLORS; i++)
 	{
-		recColors += (std::to_string(recentColors[i].red) + " "
-			+ std::to_string(recentColors[i].green) + " "
-			+ std::to_string(recentColors[i].blue)
+        recColors += (std::to_string(recentColors[i].getRed()) + " "
+            + std::to_string(recentColors[i].getGreen()) + " "
+            + std::to_string(recentColors[i].getBlue())
 			+ " ");
 		//add a new line halfway through
 		if (i == (NUMCOLORS / 2) - 1)
@@ -229,7 +227,7 @@ std::string Animation::toString()
 
 	return (version + "\n"
 		+ ((filename != "") ? filename : "NoAudioFile") + "\n"
-		+ std::to_string(lastColor.red) + " " + std::to_string(lastColor.green) + " " + std::to_string(lastColor.blue) + "\n"
+        + std::to_string(lastColor.getRed()) + " " + std::to_string(lastColor.getGreen()) + " " + std::to_string(lastColor.getBlue()) + "\n"
 		+ recColors + "\n"
 		+ std::to_string(frames.size()) + " " + std::to_string(height) + " " + std::to_string(width) + "\n"
 		+ frms);

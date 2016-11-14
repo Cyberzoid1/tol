@@ -19,14 +19,6 @@ std::vector<std::string> tokenize(std::string data) {
 	return tokens;
 }
 /**
- * Convert the specified string to an int and then ensure that it is between 0-255.
- * @param str string containing an integer
- */
-int convertRgbInputStr(std::string str) {
-	int val = std::stoi(str);
-	return ((val >= 0 && val <= 255) ? val : 0);
-}
-/**
  * Use the specified data to set the RGB values of the Animation's last color.
  * @param data string with values
  * @param animation pointer to the Animation object
@@ -52,16 +44,16 @@ void handleLastColor(std::string data, Animation *animation) {
  */
 void handleRecentColors(std::string data, Animation *animation) {
 	std::vector<std::string> tokData = tokenize(data);
-	rgb recentColors[NUMCOLORS];
-	rgb tmp;
+    RGB recentColors[NUMCOLORS];
+    RGB tmp;
 	///Since the colors are stored in RGB format, there should be 3 times
 	///the total number of colors stored in the data
 	if ((NUMCOLORS * 3) == tokData.size()) {
 		int j = 0;
 		for (int i = 0; i < tokData.size(); i += 3) {
-			tmp.red = convertRgbInputStr(tokData[i]);
-			tmp.green = convertRgbInputStr(tokData[i + 1]);
-			tmp.blue = convertRgbInputStr(tokData[i + 2]);
+            tmp.setColor(std::stoi(tokData[i]),
+                         std::stoi(tokData[i+1]),
+                         std::stoi(tokData[i+2]));
 			recentColors[j++] = tmp;
 		}
 		animation->setRecentColors(recentColors);
@@ -144,17 +136,16 @@ void readHeader(std::ifstream &tanfile, Animation *animation) {
  */
 void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width) {
 	std::vector<std::string> cellValues = tokenize(data);
-
+    RGB tmp;
 	//since the cell values are stored in RGB triples, there should be 3*width of the animation
-	if (cellValues.size() == width*3) {
-		int red, green, blue;
+    if (cellValues.size() == width*3) {
 		int colNum = 0;
 		for (int i = 0; i < cellValues.size(); i += 3) {
-			red = convertRgbInputStr(cellValues[i]);
-			green = convertRgbInputStr(cellValues[i + 1]);
-			blue = convertRgbInputStr(cellValues[i + 2]);
+            tmp.setColor(std::stoi(cellValues[i]),
+                         std::stoi(cellValues[i+1]),
+                         std::stoi(cellValues[i+2]));
 			//TODO: verify if there is a bug in Frame::setCellColor()
-			frame->setCellColor(colNum++, rowNum, red, green, blue);
+            frame->setCellColor(colNum++, rowNum, tmp);
 		}
 	}
 	else {

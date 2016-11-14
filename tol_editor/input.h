@@ -16,7 +16,6 @@
 #include <iterator>
 
 std::vector<std::string> tokenize(std::string data);
-int convertRgbInputStr(std::string str);
 void handleLastColor(std::string data, Animation *animation);
 void handleRecentColors(std::string data, Animation *animation);
 void handleConfigInfo(std::string data, Animation *animation);

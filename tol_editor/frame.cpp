@@ -65,7 +65,7 @@ void Frame::setCellColor(int x, int y, RGB color)
     if (y > cells.size() || y < 0 || x > cells[y].size() || x < 0)
         return;
     
-    cells[y-1][x-1].setColor(color);
+    cells[y][x].setColor(color);
 }
 
 

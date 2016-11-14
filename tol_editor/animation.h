@@ -14,7 +14,7 @@
 #include <list>
 #include <string>
 #include "frame.h"
-#include "rgb.h"
+#include "RGB.h"
 
 ///number of recently used colors that are stored by the ToL editor
 const int NUMCOLORS = 16;
@@ -28,8 +28,8 @@ private:
 	std::list<Frame> frames;
 	std::string version;
 	std::string filename;
-	rgb lastColor;
-	rgb recentColors[NUMCOLORS];
+    RGB lastColor;
+    RGB recentColors[NUMCOLORS];
 	int numFrames;
 	int height;
 	int width;
@@ -44,9 +44,9 @@ public:
 	void setFilename(std::string fname);
 	std::string getFilename();
 	void setLastColor(int red, int green, int blue);
-	rgb getLastColor();
-	void setRecentColors(rgb *recColors);
-	rgb* getRecentColors();
+    RGB getLastColor();
+    void setRecentColors(RGB *recColors);
+    RGB* getRecentColors();
 	int getNumFrames();
 	void setHeight(int h);
 	int getHeight();
