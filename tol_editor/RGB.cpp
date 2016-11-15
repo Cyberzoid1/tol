@@ -240,5 +240,5 @@ std::string RGB::toString()
  */
 int RGB::checkRange(int cValue)
 {
-    return (std::abs(cValue) % 255);
+    return (std::abs(cValue) % 256);
 }

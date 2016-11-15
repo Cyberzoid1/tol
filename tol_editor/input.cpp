@@ -27,9 +27,9 @@ void handleLastColor(std::string data, Animation *animation) {
 	std::vector<std::string> rgbValues = tokenize(data);
 
 	if (rgbValues.size() == 3) {
-		animation->setLastColor(std::stoi(rgbValues[0]),
-			std::stoi(rgbValues[1]),
-			std::stoi(rgbValues[2]));
+        animation->setLastColor(std::stoi(rgbValues[0]),
+            std::stoi(rgbValues[1]),
+            std::stoi(rgbValues[2]));
 	} 
 	else 
 	{
@@ -140,11 +140,10 @@ void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width) {
 	//since the cell values are stored in RGB triples, there should be 3*width of the animation
     if (cellValues.size() == width*3) {
 		int colNum = 0;
-		for (int i = 0; i < cellValues.size(); i += 3) {
+        for (int i = 0; i < cellValues.size(); i += 3) {
             tmp.setColor(std::stoi(cellValues[i]),
                          std::stoi(cellValues[i+1]),
                          std::stoi(cellValues[i+2]));
-			//TODO: verify if there is a bug in Frame::setCellColor()
             frame->setCellColor(colNum++, rowNum, tmp);
 		}
 	}

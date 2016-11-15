@@ -1,4 +1,7 @@
 #include "mainwindow.h"
+#include "animation.h"
+#include "input.h"
+#include "outputfile.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
