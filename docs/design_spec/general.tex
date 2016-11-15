@@ -2,14 +2,7 @@
 % Subsections: goals, dev plans, timeline, use cases/flowcharts
 % Domanic
 \documentclass{article}
-\usepackage{ragged2e}
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows}
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=red!30]
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=blue!30]
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
-\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, text width=1.5cm, draw=black, fill=green!30]
-\tikzstyle{arrow} = [thick, ->, >=stealth]
+
 \begin{document}
 \section{General}
 This design spec is to outline and specify the details of our team's Tower of Light project. Throughout this document our team will detail how we have decided to develop this application, starting with our goals and getting down to functionality and features.
@@ -26,12 +19,12 @@ We plan to develop our application through the specified goals and time line. Ea
 This time line is a rough estimate of each week's tasks that will be completed to finish our Tower of Lights application. It has yet to be fully reviewed by the team and is subject to change.
 	\begin{itemize}
 		\item \textbf{Week 1 (10/26 - 11/2)} The first week will be dedicated to completing the rough draft of this Design Specification. 
-		\item \textbf{Week 2 (11/2 - 11/9)} Since the Design of a program is crucial this week will also be used to finish the design specification in greater detail.
-		\item \textbf{Week 3 (11/9 - 11/16)} Once the overall design of the application is finished we will create the interface we decided with Qt.
-		\item \textbf{Week 4 (11/16 - 11/23)} With a completed interface our team can start to program in the core functionality for the application.
-		\item \textbf{Week 5 (11/23 - 11/30)} It will probably take some extra time to get the base program working so this week will also be assigned to finishing the first version, although 				can be used for additional features if ahead of time.
-		\item \textbf{Week 6 (11/30 - 12/7)} At this point we should have some working version and from here we can continue adding features till the due date.
-		\item \textbf{Week 7 (12/7 - 12/14)} This will be the absolute last week (possibly) to finish our application with additional features.
+		\item \textbf{Week 2 (11/2 - 11/11)} Initial development: part of the group works on starting the User Interface, while part of the group creates the necessary data structures and handles the File I/O.
+		\item \textbf{Week 3 (11/11 - 11/18)} Continue work on User Interface, test File I/O more rigorously, and integrate work into base Qt project.
+		\item \textbf{Week 4 (11/18 - 11/25)} Continue development and work towards first working prototype.
+		\item \textbf{Week 5 (11/25 - 12/2)} Seek to complete first working prototype and run testing.
+		\item \textbf{Week 6 (12/2 - 12/9)} Address any bugs in the first prototype and keep developing functionality that needs to be implemented.
+		\item \textbf{Week 7 (12/9 - 12/14)} Complete version of the program that will be turned in and run final testing.
 	\end{itemize}
 \subsection{Flowchart}
 This section is used to display several flowcharts where each is a representation for how a user will interact with a section of the program. These flowcharts will represent how we want the core functionality of the application to function.
