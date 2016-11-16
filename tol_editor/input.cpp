@@ -90,12 +90,12 @@ void handleConfigInfo(std::string data, Animation *animation) {
 void readHeader(std::ifstream &tanfile, Animation *animation) {
 	enum lines
 	{
-		version, file, lastColor, recentColors1, recentColors2, config
+        version, file, lastColor, recentColors, config
 	};
 	std::string line;
 	std::string recColors = "";
 	int lineNum = 0;
-	while (lineNum < 6 && std::getline(tanfile, line))
+    while (lineNum < 5 && std::getline(tanfile, line))
 	{
 		switch (lineNum++)
 		{
@@ -108,15 +108,8 @@ void readHeader(std::ifstream &tanfile, Animation *animation) {
 		case lastColor:
 			handleLastColor(line, animation);
 			break;
-		case recentColors1:
-			///simply store the first line of recent colors to be handled once
-			///the next line is read in
-			recColors = line + " ";
-			break;
-		case recentColors2:
-			///add on the second line of recent colors and then handle it all together
-			recColors += line;
-			handleRecentColors(recColors, animation);
+        case recentColors:
+            handleRecentColors(line, animation);
 			break;
 		case config:
 			handleConfigInfo(line, animation);
@@ -137,6 +130,7 @@ void readHeader(std::ifstream &tanfile, Animation *animation) {
 void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width) {
 	std::vector<std::string> cellValues = tokenize(data);
     RGB tmp;
+    //TODO: adjust to handle .tan2 format ((3*width)+context cells)
 	//since the cell values are stored in RGB triples, there should be 3*width of the animation
     if (cellValues.size() == width*3) {
 		int colNum = 0;
@@ -165,7 +159,7 @@ void readFrames(std::ifstream &tanfile, Animation *animation){
 	while (std::getline(tanfile, line))
 	{
 		//the first line contains the time stamp
-		frame.setStartTime(0 /*TODO: pass in converted time stamp once Frame class is fixed*/);
+        frame.setStartTime(std::stoi(line));
 		//now read as many lines as are specified by the animation's height
 		//each line corresponds to a row in the animation
 		for (int i = 0; i < animation->getHeight(); i++)
