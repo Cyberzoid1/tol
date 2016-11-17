@@ -20,6 +20,8 @@ void handleLastColor(std::string data, Animation *animation);
 void handleRecentColors(std::string data, Animation *animation);
 void handleConfigInfo(std::string data, Animation *animation);
 void readHeader(std::ifstream &tanfile, Animation *animation);
+int getActualWidth(std::ifstream &tanfile);
+int getActualHeight(std::ifstream &tanfile);
 void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width);
 void readFrames(std::ifstream &tanfile, Animation *animation);
 Animation readInAnimation(const char *filename);
