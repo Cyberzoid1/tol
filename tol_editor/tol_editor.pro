@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     frame.cpp \
     input.cpp \
     outputfile.cpp \
-    RGB.cpp
+    RGB.cpp \
+    toolbox.cpp
 
 HEADERS  += mainwindow.h \
     animation.h \
@@ -27,6 +28,7 @@ HEADERS  += mainwindow.h \
     frame.h \
     input.h \
     outputfile.h \
-    rgb.h
+    rgb.h \
+    toolbox.h
 
 FORMS    += mainwindow.ui

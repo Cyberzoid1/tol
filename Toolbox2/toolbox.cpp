@@ -1,7 +1,6 @@
 #include <QPalette>
 #include <QColorDialog>
 #include "toolbox.h"
-#include "colorwheel.h"
 #include "ui_toolbox.h"
 
 Toolbox::Toolbox(QWidget *parent) :

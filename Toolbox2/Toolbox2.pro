@@ -13,10 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        toolbox.cpp \
-    colorwheel.cpp
+        toolbox.cpp
 
-HEADERS  += toolbox.h \
-    colorwheel.h
+HEADERS  += toolbox.h
 
 FORMS    += toolbox.ui
