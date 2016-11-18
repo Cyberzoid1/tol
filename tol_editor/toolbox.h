@@ -14,16 +14,16 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTimeEdit>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <QColorDialog>
-#include <QObject>
-#include <QWidget>
 
 /**
  * Toolbox class definition - this will be worked on
@@ -37,22 +37,57 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab;
     QWidget *tab_2;
-    QGridLayout *gridLayout_3;
-    QHBoxLayout *horizontalLayout_5;
-    QSpinBox *addFramesStart;
-    QSpinBox *addFramesEnd;
-    QPushButton *addFramesButton;
-    QHBoxLayout *horizontalLayout_3;
-    QHBoxLayout *horizontalLayout_2;
-    QSpinBox *copyFramesStart;
-    QSpinBox *copyFramesEnd;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_10;
     QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
+    QLabel *label;
+    QSpinBox *addFramesStart;
+    QLabel *label_6;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *label_2;
+    QSpinBox *addFramesEnd;
+    QLabel *label_5;
+    QPushButton *addFramesButton;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_9;
+    QSpinBox *removeFramesStart;
+    QLabel *label_10;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *label_7;
+    QSpinBox *removeFramesEnd;
+    QLabel *label_11;
+    QPushButton *removeFramesButton;
+    QHBoxLayout *horizontalLayout_3;
+    QVBoxLayout *verticalLayout_5;
+    QLabel *label_4;
     QSpinBox *copyFramesIndex;
+    QLabel *label_12;
+    QVBoxLayout *verticalLayout_6;
+    QLabel *label_3;
+    QSpinBox *copyFramesStart;
+    QLabel *label_13;
+    QVBoxLayout *verticalLayout_7;
+    QLabel *label_8;
+    QSpinBox *copyFramesEnd;
+    QLabel *label_14;
     QPushButton *copyFramesButton;
     QHBoxLayout *horizontalLayout_4;
-    QSpinBox *removeFramesStart;
-    QSpinBox *removeFramesEnd;
-    QPushButton *removeFramesButton;
+    QVBoxLayout *verticalLayout_8;
+    QLabel *label_15;
+    QTimeEdit *currentTime;
+    QLabel *label_23;
+    QLabel *label_21;
+    QLabel *label_19;
+    QLabel *label_17;
+    QVBoxLayout *verticalLayout_9;
+    QLabel *label_16;
+    QTimeEdit *timeInterval;
+    QLabel *label_24;
+    QLabel *label_22;
+    QLabel *label_20;
+    QLabel *label_18;
     QColorDialog *dialog;
 
     void setupUi(QWidget *Toolbox);
