@@ -1,10 +1,7 @@
 /**
- * CS 383
- * Group #4
- * Created 11/08/2016
- *
- * This file provides the function definitions for reading data in from a .tan file.
- */
+* @name Input
+*/
+
 #include "input.h"
 
 /**

@@ -1,10 +1,6 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/08/2016
- *
- * This file contains the methods for writing out a .tan file
- */
+* @name Output
+*/
 
 #include "outputfile.h"
 

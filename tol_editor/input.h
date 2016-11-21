@@ -1,9 +1,12 @@
 /**
-* CS 383
-* Group #4
-* Created 11/09/2016
-*
-* This file provides the function stubs for reading data in from a .tan file.
+* @author Trevor Morse
+* @date 11/09/2016
+* @name Input
+* @brief This is the header file that defines the file reading functionality.
+* @details This header file defines the different functions that are used
+* during the process of reading an animations .tan file into the Tower Lights
+* animator and then extracting the information and translating it into the proper
+* data structures and objects
 */
 #ifndef INPUT_H
 #define INPUT_H

@@ -1,11 +1,7 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/07/2016
- *
- * This file contains the implimentation details of the Frame class defined in
- * frame.h
- */
+* @class Frame
+*/
+
 #include "frame.h"
 
 /**

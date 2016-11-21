@@ -1,10 +1,14 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/07/2016
- *
- * This file contains the method definitions for the Frame class.
- */
+* @author Peter Fetros
+* @date 11/07/2016
+* @class Frame
+* @brief This is the header file for the Frame class.
+* @details This class contains all of the information for a single
+* frame of an animation. Objects of this class are comprised of a
+* 2-Dimensional array of cell objects that make up the frames color parts.
+* This class is also used to interact with the different cells, for example setting
+* cell colors.
+*/
 
 #ifndef FRAME_H
 #define FRAME_H
@@ -14,10 +18,6 @@
 #include <vector>
 #include <iterator>
 
-/**
- * Class for storing all cells and represents a single
- * frame of the animation
- */
 class Frame
 {
 public:
@@ -37,9 +37,9 @@ public:
     std::string toString();
     
 private:
-    std::vector<std::vector<Cell>> cells;
-    int frameNumber;
-    int startTime;
+    std::vector<std::vector<Cell>> cells; //!< 2-Dimenstional Vector of cell objects making up the pixles of the frame
+    int frameNumber; //!< This framse index location within the complete animation
+    int startTime; //!< The time in milliseconds that this frame will be played during the Animation
 };
 
 

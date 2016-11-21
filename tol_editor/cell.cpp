@@ -1,10 +1,6 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/05/2016
- *
- * This file contains the implimentation of the Cell class defined in cell.h
- */
+* @class Cell
+*/
 
 #include "cell.h"
 
