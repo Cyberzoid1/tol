@@ -15,7 +15,7 @@
 Animation::Animation()
 {
 	version = "0.4";
-	filename = "";
+    filename = "NoAudioFile";
     numFrames = (int)frames.size();
 	height = 10;
 	width = 4;
@@ -28,12 +28,13 @@ Animation::~Animation()
 
 }
 /**
- * TODO: determine what we want setFrames to do
+ * Set the list of frames in the animation and update numFrames.
  * @param frms list of Frames
  */
 void Animation::setFrames(std::list<Frame> frms)
 {
     frames = frms;
+    numFrames = (int)frames.size();
 }
 /**
  * Return the list of frames from the Animation.
@@ -213,10 +214,7 @@ std::string Animation::toString()
         recColors += (std::to_string(recentColors[i].getRed()) + " "
             + std::to_string(recentColors[i].getGreen()) + " "
             + std::to_string(recentColors[i].getBlue())
-			+ " ");
-		//add a new line halfway through
-		if (i == (NUMCOLORS / 2) - 1)
-			recColors += "\n";
+            + " ");
 	}
 
 	std::string frms = "";

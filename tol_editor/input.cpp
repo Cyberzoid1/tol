@@ -90,12 +90,12 @@ void handleConfigInfo(std::string data, Animation *animation) {
 void readHeader(std::ifstream &tanfile, Animation *animation) {
 	enum lines
 	{
-		version, file, lastColor, recentColors1, recentColors2, config
+        version, file, lastColor, recentColors, config
 	};
 	std::string line;
 	std::string recColors = "";
 	int lineNum = 0;
-	while (lineNum < 6 && std::getline(tanfile, line))
+    while (lineNum < 5 && std::getline(tanfile, line))
 	{
 		switch (lineNum++)
 		{
@@ -108,15 +108,8 @@ void readHeader(std::ifstream &tanfile, Animation *animation) {
 		case lastColor:
 			handleLastColor(line, animation);
 			break;
-		case recentColors1:
-			///simply store the first line of recent colors to be handled once
-			///the next line is read in
-			recColors = line + " ";
-			break;
-		case recentColors2:
-			///add on the second line of recent colors and then handle it all together
-			recColors += line;
-			handleRecentColors(recColors, animation);
+        case recentColors:
+            handleRecentColors(line, animation);
 			break;
 		case config:
 			handleConfigInfo(line, animation);
@@ -126,6 +119,76 @@ void readHeader(std::ifstream &tanfile, Animation *animation) {
 		}
 	}
 }
+/**
+ * Look ahead in the file to the first line of cell values. Tokenize that line
+ * to determine the number of values and divide that by 3 to account for the RGB triples.
+ * Note: This function should only be called after reading the .tan2 file header and
+ * just before reading in the frames.
+ * @param tanfile file containing the data
+ * @return {int} width of the frames stored in the file
+ */
+int getActualWidth(std::ifstream &tanfile) {
+    if (tanfile.good()){
+        //store the current position of the file for resetting later
+        std::streampos startPos = tanfile.tellg();
+        std::string line;
+        //skip first line; it contains the frame's start time
+        std::getline(tanfile,line);
+        //this line contains the first row of cells
+        std::getline(tanfile, line);
+        std::vector<std::string> cells = tokenize(line);
+
+        //reset the file position to where it was at the start of the call
+        tanfile.seekg(startPos);
+
+        //divide the size by 3 to account for the RGB triples
+        return (int)(cells.size()/3);
+    }
+    return -1;
+}
+/**
+ * Look ahead in the file to determine the actual height of the frame in a .tan2 file.
+ * Count the number of rows before the line containing the next frame's start time is hit.
+ * Note: This function should only be called after reading the .tan2 file header and
+ * just before reading in the frames.
+ * @param tanfile
+ * @return
+ */
+int getActualHeight(std::ifstream &tanfile){
+    if (tanfile.good()){
+        //store the current position of the file for resetting later
+        std::streampos startPos = tanfile.tellg();
+        std::string line;
+        int actualHeight = 0;
+
+        //skip first line; it contains the frame's start time
+        std::getline(tanfile, line);
+        //this next line is the first row of cells in the frame; start with it
+        std::getline(tanfile, line);
+        //If the tokenized line contains more than one item, then it is another
+        //row of cells and should be counted into the frame's actualHeight.
+        //If the tokenized line only contains less than one item, then it is the start time
+        //for the next frame or the end of file and the count should be stopped.
+        while(tokenize(line).size() > 1){
+            actualHeight++;
+            std::getline(tanfile, line);
+        }
+
+        //if the animation file only had one frame, then it will have reached the eof
+        //if so, clear the eof bit and set it back to the original position from the start of the file
+        if(tanfile.eof()){
+            tanfile.clear();
+            tanfile.seekg(startPos, std::ios_base::beg);
+        }
+        //if not, simply reset to the original position
+        else
+            tanfile.seekg(startPos);
+
+        return actualHeight;
+    }
+    return -1;
+}
+
 /**
  * Parse the RGB values for a row of cells from the specified data and
  * set the corresponding cell colors in the frame.
@@ -158,14 +221,24 @@ void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width) {
  * @param animation pointer to the Animation
  */
 void readFrames(std::ifstream &tanfile, Animation *animation){
-	std::string line;
-	Frame frame(animation->getWidth(), animation->getHeight());
+    /*
+     * Note: Due to the pre-existing format of the .tan2 file and its
+     * storage of the incorrect height and width of a frame in its config info,
+     * it is necessary to programmatically determine those values through reading the file.
+     * This is relatively costly since it involves multiple file I/O operations, but is necessary
+     * in order to be backwards-compatible with existing infrastructure.
+     */
+    animation->setWidth(getActualWidth(tanfile));
+    animation->setHeight(getActualHeight(tanfile));
+    Frame frame(animation->getWidth(), animation->getHeight());
+
+    std::string line;
 	std::list<Frame> frames;
 	int pos = 0;
 	while (std::getline(tanfile, line))
 	{
 		//the first line contains the time stamp
-		frame.setStartTime(0 /*TODO: pass in converted time stamp once Frame class is fixed*/);
+        frame.setStartTime(std::stoi(line));
 		//now read as many lines as are specified by the animation's height
 		//each line corresponds to a row in the animation
 		for (int i = 0; i < animation->getHeight(); i++)
@@ -190,8 +263,10 @@ Animation readInAnimation(const char *filename) {
 
 	std::ifstream tanfile;
 	tanfile.open(filename);
-	readHeader(tanfile, &animation);
-	readFrames(tanfile, &animation);
+    if (tanfile.good()){
+        readHeader(tanfile, &animation);
+        readFrames(tanfile, &animation);
+    }
 	tanfile.close();
 
 	return animation;
