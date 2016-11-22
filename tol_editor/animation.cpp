@@ -25,13 +25,9 @@ Animation::~Animation()
 
 }
 /**
-<<<<<<< Updated upstream
  * Set the list of frames in the animation and update numFrames.
- * @param frms list of Frames
-=======
- * TODO: determine what we want setFrames to do
- * @param frms A list of Frames representing ...?
->>>>>>> Stashed changes
+ * @param frms List of Frames
+ * @return Void.
  */
 void Animation::setFrames(std::list<Frame> frms)
 {
@@ -51,7 +47,7 @@ std::list<Frame> Animation::getFrames()
 /**
  * Set the Animation's version number.
  * @param ver String representation of the version being used for
- * the .tan file.
+ * the .tan2 file.
  * @return Void.
  */
 void Animation::setVersion(std::string ver)
@@ -237,7 +233,7 @@ void Animation::removeFrames(int start, int stop)
 }
 
 /**
- * Serializes the Animation into a string suitable for output in a .tan file.
+ * Serializes the Animation into a string suitable for output in a .tan2 file.
  * @return A string object consisting of the tan file header information followed
  * by the formatted frames and their associated start times in milliseconds.
  */

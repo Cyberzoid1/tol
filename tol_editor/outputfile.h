@@ -4,7 +4,7 @@
 * @name Input
 * @brief This is the header file that defines the file output functionality.
 * @details This header file defines the different functions that are used
-* during the process of writing an animations into a .tan file. It also defines
+* during the process of writing an animations into a .tan2 file. It also defines
 * several helper functions that are used for determinding proper filename and paths
 * as well a function for getting a string representation of any errors returned by the
 * file writing process.

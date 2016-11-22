@@ -4,8 +4,26 @@
 #include "outputfile.h"
 #include <QApplication>
 
+/**
+ * Initial point of execution for the program. Yhis function
+ * will initialyze the Qt window for the Tower Lights Animator and
+ * also Initialize any data structures necessary for it's function.
+ * @param argc An Integer representing the number of arguments
+ * passed into the application.
+ * @param argv A Pointer to a character array that contains the
+ * arguments passed into the application.
+ * @return An Integer representing the exit status of the program
+ * once it ends its execution.
+ */
 int main(int argc, char *argv[])
 {
+    //test area
+    std::string testFile = "/Users/Alpha/Desktop/Sample3.tan2";
+    Animation animation = readInAnimation(testFile.c_str());
+
+    writeFile("/Users/Alpha/Desktop/testOut.tan2", &animation);
+    //
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

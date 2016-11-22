@@ -6,7 +6,9 @@
 
 /**
  * Parse the specified string by spaces and store in a vector.
- * @param data string to be parsed
+ * @param data String object to be parsed
+ * @return A STL Vector containing strings each comprised of a
+ * single RGB value stored as a string
  */
 std::vector<std::string> tokenize(std::string data) {
 	std::istringstream buf(data);
@@ -15,10 +17,11 @@ std::vector<std::string> tokenize(std::string data) {
 	std::vector<std::string> tokens(beg, end);
 	return tokens;
 }
+
 /**
  * Use the specified data to set the RGB values of the Animation's last color.
- * @param data string with values
- * @param animation pointer to the Animation object
+ * @param data String object with RGB values.
+ * @param animation A Pointer to an Animation object.
  */
 void handleLastColor(std::string data, Animation *animation) {
 	std::vector<std::string> rgbValues = tokenize(data);
@@ -33,11 +36,13 @@ void handleLastColor(std::string data, Animation *animation) {
 		//throw error; will implement once ported into Qt framework
 	}
 }
+
 /**
  * Parse the specified data to obtain the RGB values for the NUMCOLORS most recently
  * used colors in the Animation.
- * @param data string with the values
- * @param animation pointer to the Animation object
+ * @param data String containing the RGB values.
+ * @param animation A Pointer to an Animation object.
+ * @return Void.
  */
 void handleRecentColors(std::string data, Animation *animation) {
 	std::vector<std::string> tokData = tokenize(data);
@@ -61,9 +66,10 @@ void handleRecentColors(std::string data, Animation *animation) {
 	}
 }
 /**
- * Parse the config info from the specified data string.
- * @param data string with the info
- * @param animation pointer to the Animation object
+ * Parse a String containing the configuration info from the specified data string.
+ * @param data String with the configuration info.
+ * @param animation A pointer to an Animation object.
+ * @return Void.
  */
 void handleConfigInfo(std::string data, Animation *animation) {
 	std::vector<std::string> tokData = tokenize(data);
@@ -80,9 +86,11 @@ void handleConfigInfo(std::string data, Animation *animation) {
 	}
 }
 /**
- * Read in the Animation's header info from the specified file.
- * @param tanfile file reference
- * @param animation pointer to the Animation object
+ * Read in and parse the Animation's header info from the specified file.
+ * @param tanfile A Reference to an ifstream object pointing
+ * to the .tan2 file.
+ * @param animation A Pointer to an Animation object.
+ * @return Void.
  */
 void readHeader(std::ifstream &tanfile, Animation *animation) {
 	enum lines
@@ -117,12 +125,14 @@ void readHeader(std::ifstream &tanfile, Animation *animation) {
 	}
 }
 /**
- * Look ahead in the file to the first line of cell values. Tokenize that line
- * to determine the number of values and divide that by 3 to account for the RGB triples.
- * Note: This function should only be called after reading the .tan2 file header and
+ * Looks ahead in the file to the first line of cell values. Then tokenizes that line
+ * to determine the number of values and divides that by 3 to account for the RGB triples
+ * in order to find the number of cells in each row.
+ * @note This function should only be called after reading the .tan2 file header and
  * just before reading in the frames.
- * @param tanfile file containing the data
- * @return {int} width of the frames stored in the file
+ * @param tanfile A reference to an ifstream object pointing
+ * to the .tan2 file.
+ * @return {int} Width of the frames stored in the file.
  */
 int getActualWidth(std::ifstream &tanfile) {
     if (tanfile.good()){
@@ -144,12 +154,14 @@ int getActualWidth(std::ifstream &tanfile) {
     return -1;
 }
 /**
- * Look ahead in the file to determine the actual height of the frame in a .tan2 file.
- * Count the number of rows before the line containing the next frame's start time is hit.
- * Note: This function should only be called after reading the .tan2 file header and
+ * Looks ahead in the file to determine the actual height of the frame in a .tan2  file. Then
+ * counts the number of rows before the line containing the next frame's start time in order
+ * to determine the number of rows in a column.
+ * @note This function should only be called after reading the .tan2  file header and
  * just before reading in the frames.
- * @param tanfile
- * @return
+ * @param tanfile A reference to an ifstream object pointing
+ * to the .tan2 file.
+ * @return Integer value representing the number of rows in a .tan2 file
  */
 int getActualHeight(std::ifstream &tanfile){
     if (tanfile.good()){
@@ -189,10 +201,11 @@ int getActualHeight(std::ifstream &tanfile){
 /**
  * Parse the RGB values for a row of cells from the specified data and
  * set the corresponding cell colors in the frame.
- * @param rowNum index of the current row in the Frame
- * @param data string containing the cell values
- * @param frame pointer to frame
- * @param width of the frame
+ * @param rowNum Index of the current row in the Frame.
+ * @param data String object containing the cell values.
+ * @param frame A Pointer to a frame object.
+ * @param width Width of the frame in cell objects.
+ * @return Void.
  */
 void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width) {
 	std::vector<std::string> cellValues = tokenize(data);
@@ -213,9 +226,15 @@ void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width) {
 }
 /**
  * Read in the frames from the tanfile and store them in the Animation's list.
- * Note: this function picks up in the file where readHeader ended.
- * @param tanfile file containing the animation data
- * @param animation pointer to the Animation
+ * @note This function picks up in the file where readHeader ended.
+ * @note Due to the pre-existing format of the .tan2 file and its
+     * storage of the incorrect height and width of a frame in its config info,
+     * it is necessary to programmatically determine those values through reading the file.
+     * This is relatively costly since it involves multiple file I/O operations, but is necessary
+     * in order to be backwards-compatible with existing infrastructure.
+ * @param tanfile A Reference to an ifstream object pointing
+ * to the .tan2 file.
+ * @param animation A Pointer to the Animation
  */
 void readFrames(std::ifstream &tanfile, Animation *animation){
     /*
@@ -252,8 +271,9 @@ void readFrames(std::ifstream &tanfile, Animation *animation){
 	animation->setFrames(frames);
 }
 /**
- * Read in an Animation from the specified file.
- * @param filename
+ * Read in an Animation from the specified file location/name.
+ * @param a filename or filepath to read from.
+ * @return An Animation object containing the animation.
  */
 Animation readInAnimation(const char *filename) {
 	Animation animation;

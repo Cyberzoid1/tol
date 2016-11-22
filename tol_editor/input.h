@@ -4,7 +4,7 @@
 * @name Input
 * @brief This is the header file that defines the file reading functionality.
 * @details This header file defines the different functions that are used
-* during the process of reading an animations .tan file into the Tower Lights
+* during the process of reading an animations .tan2 file into the Tower Lights
 * animator and then extracting the information and translating it into the proper
 * data structures and objects
 */

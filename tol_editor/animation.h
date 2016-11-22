@@ -48,8 +48,8 @@ public:
 
 private:
     std::list<Frame> frames; //!< List containing the ordered sequence of frames.
-    std::string version; //!< Version of the .tan file used for import/export.
-    std::string filename; //!< Name of the .tan file to be exported.
+    std::string version; //!< Version of the .tan2 file used for import/export.
+    std::string filename; //!< Name of the .tan2 file to be exported.
     RGB lastColor; //!< The last color used while creating the animation.
     RGB recentColors[NUMCOLORS]; //!< The 16 Most recent colors used.
     int numFrames; //!< The total number of frames in the animation.

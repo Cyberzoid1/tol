@@ -12,9 +12,9 @@ std::string formatFileName(std::string rawFileName)
 {
     std::string lowerName = rawFileName;
     std::transform(lowerName.begin(), lowerName.end(), lowerName.begin(), ::tolower);
-    
-    if (lowerName.find(".tan",lowerName.size()-4) == std::string::npos)
-        return (rawFileName + ".tan");
+    std::string fileType = ".tan2";
+    if (lowerName.find(fileType,lowerName.size()-fileType.size()) == std::string::npos)
+        return (rawFileName + ".tan2");
     else
         return rawFileName;
 }
