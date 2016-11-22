@@ -26,32 +26,27 @@
  * Set up the User interface elements according to the
  * defined layout in the Qt Creator editor
  */
-void Toolbox::setupUiTotal(QWidget *Toolbox)
+void Toolbox::setupUi(QWidget *Toolbox)
 {
-    if (Toolbox->objectName().isEmpty())
-            Toolbox->setObjectName(QStringLiteral("Toolbox"));
-            Toolbox->resize(530, 635);
+    if (Toolbox->objectName().isEmpty()){
+        Toolbox->setObjectName(QStringLiteral("Toolbox"));
+    }
 
-            setupUiTabs(Toolbox);
+    Toolbox->resize(530, 635);
 
-            widget = new QWidget(tab_2);
-            widget->setObjectName(QStringLiteral("widget"));
-            widget->setGeometry(QRect(9, 9, 481, 581));
+    setupUiTabs(Toolbox);
 
-            setupUiLabels(widget);
+    setupUiMasterWidget();
 
-            setupUiWidgets(widget);
+    setupUiLabels(widget);
 
-            setupUiLayouts(widget);
+    setupUiWidgets(widget);
 
-            retranslateUi(Toolbox);
+    setupUiLayouts(widget);
 
-            tabWidget->setCurrentIndex(0);
+    setupUiColorDialogue();
 
-    dialog = new QColorDialog(this->tab);
-    dialog->setWindowFlags(Qt::SubWindow);
-    dialog->setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
-    dialog->move(0,50);
+    retranslateUi(Toolbox);
 
     QMetaObject::connectSlotsByName(Toolbox);
 } // setupUi
@@ -69,6 +64,12 @@ void Toolbox::setupUiTabs(QWidget *Toolbox){
     tab_2 = new QWidget();
     tab_2->setObjectName(QStringLiteral("tab_2"));
     tabWidget->addTab(tab_2, QString());
+}
+
+void Toolbox::setupUiMasterWidget(){
+    widget = new QWidget(tab_2);
+    widget->setObjectName(QStringLiteral("widget"));
+    widget->setGeometry(QRect(9, 9, 481, 581));
 }
 
 void Toolbox::setupUiLabels(QWidget *widget)
@@ -321,6 +322,15 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
     label_18->setText(QString());
     tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Toolbox", "Editing", 0));
 } // retranslateUi
+
+void Toolbox::setupUiColorDialogue(){
+    tabWidget->setCurrentIndex(0);
+
+    dialog = new QColorDialog(this->tab);
+    dialog->setWindowFlags(Qt::SubWindow);
+    dialog->setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
+    dialog->move(0,50);
+}
 
 /**
  * Signal Function Stubs

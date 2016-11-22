@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     toolboxParent->setParent(&w);
 
     Toolbox t;
-    t.setupUiTotal(toolboxParent);
+    t.setupUi(toolboxParent);
 
     toolboxParent->show();
 
