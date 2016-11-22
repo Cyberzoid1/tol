@@ -1,16 +1,12 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/12/2016
- *
- * This file contains the implimentations of the RGB class used
- * to hold Red Green Blue values.
- */
+* @class RGB
+*/
 
 #include "RGB.h"
 
 /**
- * Default constructor initializes color to black
+ * Default constructor initializing all color components
+ * to the default value of 0.
  */
 RGB::RGB()
 {
@@ -20,10 +16,11 @@ RGB::RGB()
 }
 
 /**
- * constructor that initializes color to passed in values
- * @param integer value representing amount of red
- * @param integer value representing amount of green
- * @param integer value representing amount of blue
+ * constructor that initializes the RGB object to the
+ * color component values passed in to the constructor.
+ * @param red Integer value representing amount of red.
+ * @param green Integer value representing amount of green.
+ * @param blue Integer value representing amount of blue.
  */
 RGB::RGB(int red, int green, int blue)
 {
@@ -33,8 +30,10 @@ RGB::RGB(int red, int green, int blue)
 }
 
 /**
- * constructor that initializes color to a html hex value
- * @param a string value representing a 6 bit hexidecimal value
+ * constructor that initializes the RGB object to the
+ * color to the color passed in after converting it from HTNL Hex to
+ * RGB
+ * @param hex A string object representing a 6 bit hexidecimal value
  */
 RGB::RGB(std::string hex)
 {
@@ -48,7 +47,9 @@ RGB::RGB(std::string hex)
 }
 
 /**
- * constructor that converts Hue Saturation Lightness to RGB and creates object
+ * constructor that initializes the RGB object to the
+ * color passed in after converting it from HSL (Hue Saturation
+ * Lightness) to RGB color format.
  * @param an integer representing an angle of hue between 0 and 360
  * @param a float representing saturation, between 0 and 1
  * @param a float representing lightness, between 0 and 1
@@ -240,5 +241,5 @@ std::string RGB::toString()
  */
 int RGB::checkRange(int cValue)
 {
-    return (std::abs(cValue) % 255);
+    return (std::abs(cValue) % 256);
 }
