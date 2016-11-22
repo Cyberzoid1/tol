@@ -1,32 +1,29 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/08/2016
- *
- * This file contains the methods for writing out a .tan file
- */
+* @name Output
+*/
 
 #include "outputfile.h"
 
 /**
- * Check the filename for extenstion and add it if not present
- * @param The raw file name string passed into writefile
+ * Check the filename for extenstion and add it if not present.
+ * @param rawFileName The raw file name string passed into writefile.
+ * @return A string object containing the properly formatted filepath, including file extension.
  */
 std::string formatFileName(std::string rawFileName)
 {
     std::string lowerName = rawFileName;
     std::transform(lowerName.begin(), lowerName.end(), lowerName.begin(), ::tolower);
-    
-    if (lowerName.find(".tan",lowerName.size()-4) == std::string::npos)
-        return (rawFileName + ".tan");
+    std::string fileType = ".tan2";
+    if (lowerName.find(fileType,lowerName.size()-fileType.size()) == std::string::npos)
+        return (rawFileName + ".tan2");
     else
         return rawFileName;
 }
 
 /**
  * Write the animation to a specified file location.
- * @param The file name or path where the file should be written
- * @param animation pointer to the Animation object
+ * @param rawFileName The file name or path where the file should be written
+ * @param animation A pointer to the Animation object
  */
 int writeFile(std::string rawFileName, Animation* animation)
 {
@@ -52,8 +49,9 @@ int writeFile(std::string rawFileName, Animation* animation)
 
 /**
  * returns a string representation of the error, if it exists,
- * returned by the writeFile function
- * @param Integer Error number returned by the writeFile function
+ * returned by the writeFile function.
+ * @param errorCode An Integer representing the error number returned by the writeFile function.
+ * @return A string object containing a description of the error that occured.
  */
 std::string getErrorString(int errorCode)
 {
