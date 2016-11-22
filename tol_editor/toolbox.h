@@ -90,7 +90,15 @@ public:
     QLabel *label_18;
     QColorDialog *dialog;
 
-    void setupUi(QWidget *Toolbox);
+    void setupUiTotal(QWidget *Toolbox);
+
+    void setupUiTabs(QWidget *Toolbox);
+
+    void setupUiLabels(QWidget *widget);
+
+    void setupUiWidgets(QWidget *widget);
+
+    void setupUiLayouts(QWidget *widget);
 
     void retranslateUi(QWidget *Toolbox);
 
