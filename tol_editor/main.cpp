@@ -17,13 +17,6 @@
  */
 int main(int argc, char *argv[])
 {
-    //test area
-    std::string testFile = "/Users/Alpha/Desktop/Sample3.tan2";
-    Animation animation = readInAnimation(testFile.c_str());
-
-    writeFile("/Users/Alpha/Desktop/testOut.tan2", &animation);
-    //
-
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
