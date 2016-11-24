@@ -26,6 +26,15 @@
  * Set up the User interface elements according to the
  * defined layout in the Qt Creator editor
  */
+
+Toolbox::Toolbox(QWidget *parent = 0){
+    setupUi(this);
+}
+
+Toolbox::~Toolbox(){
+
+}
+
 void Toolbox::setupUi(QWidget *Toolbox)
 {
     if (Toolbox->objectName().isEmpty()){
@@ -48,7 +57,7 @@ void Toolbox::setupUi(QWidget *Toolbox)
 
     retranslateUi(Toolbox);
 
-    QMetaObject::connectSlotsByName(Toolbox);
+    //QMetaObject::connectSlotsByName(Toolbox);
 } // setupUi
 
 void Toolbox::setupUiTabs(QWidget *Toolbox){
@@ -178,6 +187,9 @@ void Toolbox::setupUiWidgets(QWidget *widget)
 
     copyFramesButton = new QPushButton(widget);
     copyFramesButton->setObjectName(QStringLiteral("copyFramesButton"));
+
+    //widget->connect(Toolbox::copyFramesButton, SIGNAL(clicked(bool)), SLOT(Toolbox::on_copyFramesButton_clicked()));
+    copyFramesButton->connect(copyFramesButton, SIGNAL(clicked(bool)), SLOT(Toolbox::on_copyFramesButton_clicked()));
 
     currentTime = new QTimeEdit(widget);
     currentTime->setObjectName(QStringLiteral("currentTime"));
@@ -380,9 +392,14 @@ void Toolbox::on_copyFramesIndex_valueChanged(int arg1)
 
 }
 
+/*void Toolbox::on_addFramesButton_click()
+{
+    qDebug("HERE! on_addFramesButton_click");
+}*/
+
 void Toolbox::on_copyFramesButton_clicked()
 {
-
+    qDebug("HERE! on_copyFramesButton_clicked");
 }
 
 void Toolbox::colorChanged()

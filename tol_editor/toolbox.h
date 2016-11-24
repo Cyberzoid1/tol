@@ -31,7 +31,7 @@
  */
 class Toolbox //: public QObject
 {
-   // Q_OBJECT
+   Q_OBJECT
 
 public:
     QTabWidget *tabWidget;
@@ -89,6 +89,9 @@ public:
     QLabel *label_20;
     QLabel *label_18;
     QColorDialog *dialog;
+
+    Toolbox(QWidget *parent = 0);
+    ~Toolbox();
 
     void setupUi(QWidget *Toolbox);
 
