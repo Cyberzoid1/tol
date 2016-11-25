@@ -1,11 +1,12 @@
 /**
-* CS 383
-* Group #4
-* Created: 11/05/2016
+* @author Trevor Morse
+* @date 11/05/2016
+* @class Animation
+* @brief This is the header file for the Animation class.
+* @details This class is utilized to store the sequence of
+* frames in the Tower of Light's animation as well as the header
+* info for the resulting .tan2 file.
 *
-* This is the header file for the Animation class. This class is utilized to store
-* the sequence of frames in the Tower of Light's animation as well as the header info
-* for the resulting .tan2 file.
 */
 
 #ifndef ANIMATION_H
@@ -19,21 +20,7 @@
 ///number of recently used colors that are stored by the ToL editor
 const int NUMCOLORS = 16;
 
-/**
-* Class for storing a list of frames and other information related to
-* the overall animation.
-*/
 class Animation {
-private:
-	std::list<Frame> frames;
-	std::string version;
-	std::string filename;
-    RGB lastColor;
-    RGB recentColors[NUMCOLORS];
-	int numFrames;
-	int height;
-	int width;
-
 public:
 	Animation();
 	~Animation();
@@ -58,5 +45,15 @@ public:
 	void removeFrame(int pos);
 	void removeFrames(int first, int last);
 	std::string toString();
+
+private:
+    std::list<Frame> frames; //!< List containing the ordered sequence of frames.
+    std::string version; //!< Version of the .tan2 file used for import/export.
+    std::string filename; //!< Name of the .tan2 file to be exported.
+    RGB lastColor; //!< The last color used while creating the animation.
+    RGB recentColors[NUMCOLORS]; //!< The 16 Most recent colors used.
+    int numFrames; //!< The total number of frames in the animation.
+    int height; //!< The height in cell objects of each animation frame.
+    int width; //!< The width in cell objects of each animation frame.
 };
 #endif

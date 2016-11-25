@@ -1,11 +1,13 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/12/2016
- *
- * This file contains the definitions of RGB class used
- * to hold Red Green Blue values.
- */
+* @author Peter Fetros
+* @date 11/12/2016
+* @class RGB
+* @brief This is the header file that defines the RGB class.
+* @details This header file defines the class used to contain the color data
+* used by the cells to determine what color they will be during an animation.
+* It also contains several methods for converting different color representations
+* into the RGB color format.
+*/
 
 #ifndef RGB_h
 #define RGB_h
@@ -37,9 +39,9 @@ public:
     std::string toString();
     
 private:
-    int red;
-    int green;
-    int blue;
+    int red; //!< An integer between 0 and 255 representing the red component of the color
+    int green; //!< An integer between 0 and 255 representing the green component of the color
+    int blue; //!< An integer between 0 and 255 representing the blue component of the color
     
     static int checkRange(int cValue);
 };

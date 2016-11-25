@@ -1,15 +1,12 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/07/2016
- *
- * This file contains the implimentation details of the Frame class defined in
- * frame.h
- */
+* @class Frame
+*/
+
 #include "frame.h"
 
 /**
- * initializes an empty Frame object.
+ * Initializes an empty frame object with the default
+ * values; FrameNumber: 0, and startTime = 0.
  */
 Frame::Frame()
 {
@@ -18,9 +15,10 @@ Frame::Frame()
 }
 
 /**
- * Initialize a frame with a specific width and height.
- * @param width of the frame (number of cells in a row)
- * @param height of the frame (number of rows in a frame)
+ * Initialize a frame object by specifying the frames
+ * width in cell objects followed by its height in cell objects.
+ * @param width Width of the frame (number of cells in a row)
+ * @param height Height of the frame (number of rows in a column)
  */
 Frame::Frame(int width, int height)
 {
@@ -37,7 +35,7 @@ Frame::Frame(int width, int height)
 
 /**
  * Initialize a frame as a copy of another frame
- * @param reference to a pre-exisitng frame
+ * @param newFrame Reference to a pre-exisitng frame
  */
 Frame::Frame(Frame* newFrame)
 {
@@ -47,18 +45,21 @@ Frame::Frame(Frame* newFrame)
 }
 
 /**
- * Placeholder for a destructor if needed in the future
+ * Default destructor, no memory to clean up so empty for
+ * now.
  */
 Frame::~Frame()
 {
 }
 
 /**
- * Set the color of a Cell at a x,y positon using seperate ints
- * for the red, green, blue values
- * @param Column position in the row of the frame
- * @param Row position in the frame
- * @param RGB class holding the color data for the cell
+ * Set the color of a Cell at a position by passing in an
+ * x and y coordinate along with an RGB object containing
+ * the color to make the cell.
+ * @param x Index of the selected row position in the frame.
+ * @param y Index of the selected column position in the frame.
+ * @param color RGB class holding the color data for the cell.
+ * @return Void.
  */
 void Frame::setCellColor(int x, int y, RGB color)
 {
@@ -70,9 +71,10 @@ void Frame::setCellColor(int x, int y, RGB color)
 
 
 /**
- * get the color of a cell using it's coordinates inside the frame
- * @param Column position in the row of the frame
- * @param Row position in the frame
+ * get the color of a cell using it's x and y position inside the frame.
+ * @param x Index of the selected row position in the frame.
+ * @param y Index of the selected column position in the frame.
+ * @return An RGB object containing the color of the specified cell.
  */
 RGB Frame::getCellColor(int x, int y)
 {
@@ -83,7 +85,9 @@ RGB Frame::getCellColor(int x, int y)
 }
 
 /**
- * get the number of a frame
+ * Get the number representing the frames position in the
+ * animation in relation to the first frame.
+ * @return An integer representing this frames position.
  */
 int Frame::getFrameNumber()
 {
@@ -91,8 +95,10 @@ int Frame::getFrameNumber()
 }
 
 /**
- * set the number of a frame
- * @param Int representing frame number
+ * Set the number representing the frames position in the
+ * animation in relation to the first frame.
+ * @param number An integer representing this frames position.
+ * @return Void.
  */
 void Frame::setFrameNumber(int number)
 {
@@ -100,7 +106,9 @@ void Frame::setFrameNumber(int number)
 }
 
 /**
- * get the frame start time
+ * Get the frame's start time in milliseconds.
+ * @return An Integer representing the time to show this
+ * frame during the animation, in milliseconds.
  */
 int Frame::getStartTime()
 {
@@ -108,8 +116,10 @@ int Frame::getStartTime()
 }
 
 /**
- * set the frame start time
- * @param Int representing the frame start time
+ * Set the frame's start time in milliseconds.
+ * @param time An Integer representing the time to show this
+ * frame during the animation, in milliseconds.
+ * @return Void.
  */
 void Frame::setStartTime(int time)
 {
@@ -118,11 +128,14 @@ void Frame::setStartTime(int time)
 
 
 /**
- * Serialize the frame into string format suitable for tan file ouput.
+ * Serialize the frame into a string object representing this
+ * frame which is suitable for output into a .tan2 file
+ * @return A string object starting with the startTime followed by
+ * triples representing the color of every cell in the animation.
  */
 std::string Frame::toString()
 {
-    std::string frameString = "";
+    std::string frameString = std::to_string(startTime);
     
     for(auto columnIt = cells.begin(); columnIt != cells.end(); ++columnIt) {
         
