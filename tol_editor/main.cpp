@@ -18,14 +18,7 @@ int main(int argc, char *argv[])
      *  Setup the user interface within that widget
      *  Show the widget
      */
-    QWidget *toolboxParent;
-    toolboxParent = new QWidget();
-    toolboxParent->setParent(&w);
-
-    Toolbox t;
-    t.setupUi(toolboxParent);
-
-    toolboxParent->show();
+    Toolbox *t = new Toolbox(&w);
 
     return a.exec();
 }

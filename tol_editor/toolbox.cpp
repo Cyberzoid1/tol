@@ -20,6 +20,8 @@
 #include <QtWidgets/QWidget>
 #include <QColorDialog>
 #include <QObject>
+#include <QTime>
+#include <mainwindow.h>
 #include "toolbox.h"
 
 /**
@@ -27,23 +29,21 @@
  * defined layout in the Qt Creator editor
  */
 
-Toolbox::Toolbox(QWidget *parent = 0){
-    setupUi(this);
+Toolbox::Toolbox(QWidget *parent){
+    setupUi(parent);
 }
 
 Toolbox::~Toolbox(){
 
 }
 
-void Toolbox::setupUi(QWidget *Toolbox)
+void Toolbox::setupUi(QWidget *parent)
 {
-    if (Toolbox->objectName().isEmpty()){
-        Toolbox->setObjectName(QStringLiteral("Toolbox"));
+    if (parent->objectName().isEmpty()){
+        parent->setObjectName(QStringLiteral("Toolbox"));
     }
 
-    Toolbox->resize(530, 635);
-
-    setupUiTabs(Toolbox);
+    setupUiTabs(parent);
 
     setupUiMasterWidget();
 
@@ -55,245 +55,310 @@ void Toolbox::setupUi(QWidget *Toolbox)
 
     setupUiColorDialogue();
 
-    retranslateUi(Toolbox);
+    retranslateUi(parent);
 
-    //QMetaObject::connectSlotsByName(Toolbox);
 } // setupUi
 
 void Toolbox::setupUiTabs(QWidget *Toolbox){
-    tabWidget = new QTabWidget(Toolbox);
-    tabWidget->setObjectName(QStringLiteral("tabWidget"));
-    tabWidget->setGeometry(QRect(10, 10, 511, 621));
-    tabWidget->setAutoFillBackground(false);
+    tabParent = new QTabWidget(Toolbox);
+    tabParent->setObjectName(QStringLiteral("tabParent"));
+    tabParent->setGeometry(QRect(10, 10, 511, 621));
+    tabParent->setAutoFillBackground(false);
+    tabParent->show();
 
-    tab = new QWidget();
-    tab->setObjectName(QStringLiteral("tab"));
-    tabWidget->addTab(tab, QString());
+    tabColor = new QWidget();
+    tabColor->setObjectName(QStringLiteral("tabColor"));
+    tabParent->addTab(tabColor, QString());
 
-    tab_2 = new QWidget();
-    tab_2->setObjectName(QStringLiteral("tab_2"));
-    tabWidget->addTab(tab_2, QString());
+    tabEdit = new QWidget();
+    tabEdit->setObjectName(QStringLiteral("tabEdit"));
+    tabParent->addTab(tabEdit, QString());
+
 }
 
 void Toolbox::setupUiMasterWidget(){
-    widget = new QWidget(tab_2);
+    widget = new QWidget(tabEdit);
     widget->setObjectName(QStringLiteral("widget"));
     widget->setGeometry(QRect(9, 9, 481, 581));
 }
 
 void Toolbox::setupUiLabels(QWidget *widget)
 {
-    label = new QLabel(widget);
-    label->setObjectName(QStringLiteral("label"));
+    lblAddFramesStart = new QLabel(widget);
+    lblAddFramesStart->setObjectName(QStringLiteral("lblAddFramesStart"));
+    lblAddFramesStart->show();
 
-    label_6 = new QLabel(widget);
-    label_6->setObjectName(QStringLiteral("label_6"));
+    lblAddFramesStartSpacer = new QLabel(widget);
+    lblAddFramesStartSpacer->setObjectName(QStringLiteral("lblAddFramesStartSpacer"));
+    lblAddFramesStartSpacer->show();
 
-    label_2 = new QLabel(widget);
-    label_2->setObjectName(QStringLiteral("label_2"));
+    lblAddFramesEnd = new QLabel(widget);
+    lblAddFramesEnd->setObjectName(QStringLiteral("lblAddFramesEnd"));
+    lblAddFramesEnd->show();
 
-    label_5 = new QLabel(widget);
-    label_5->setObjectName(QStringLiteral("label_5"));
+    lblAddFramesEndSpacer = new QLabel(widget);
+    lblAddFramesEndSpacer->setObjectName(QStringLiteral("lblAddFramesEndSpacer"));
+    lblAddFramesEndSpacer->show();
 
-    label_9 = new QLabel(widget);
-    label_9->setObjectName(QStringLiteral("label_9"));
+    lblRemoveFramesFirst = new QLabel(widget);
+    lblRemoveFramesFirst->setObjectName(QStringLiteral("lblRemoveFramesFirst"));
+    lblRemoveFramesFirst->show();
 
-    label_10 = new QLabel(widget);
-    label_10->setObjectName(QStringLiteral("label_10"));
+    lblRemoveFramesFirstSpacer = new QLabel(widget);
+    lblRemoveFramesFirstSpacer->setObjectName(QStringLiteral("lblRemoveFramesFirstSpacer"));
+    lblRemoveFramesFirstSpacer->show();
 
-    label_7 = new QLabel(widget);
-    label_7->setObjectName(QStringLiteral("label_7"));
+    lblRemoveFramesLast = new QLabel(widget);
+    lblRemoveFramesLast->setObjectName(QStringLiteral("lblRemoveFramesLast"));
+    lblRemoveFramesLast->show();
 
-    label_11 = new QLabel(widget);
-    label_11->setObjectName(QStringLiteral("label_11"));
+    lblRemoveFramesLastSpacer = new QLabel(widget);
+    lblRemoveFramesLastSpacer->setObjectName(QStringLiteral("lblRemoveFramesLastSpacer"));
+    lblRemoveFramesLastSpacer->show();
 
-    label_4 = new QLabel(widget);
-    label_4->setObjectName(QStringLiteral("label_4"));
+    lblCopyFramesFrame = new QLabel(widget);
+    lblCopyFramesFrame->setObjectName(QStringLiteral("lblCopyFramesFrame"));
+    lblCopyFramesFrame->show();
 
-    label_17 = new QLabel(widget);
-    label_17->setObjectName(QStringLiteral("label_17"));
+    lblTimingCurrentTimeSpacer1 = new QLabel(widget);
+    lblTimingCurrentTimeSpacer1->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer1"));
+    lblTimingCurrentTimeSpacer1->show();
 
-    label_12 = new QLabel(widget);
-    label_12->setObjectName(QStringLiteral("label_12"));
+    lblCopyFramesFrameSpacer = new QLabel(widget);
+    lblCopyFramesFrameSpacer->setObjectName(QStringLiteral("lblCopyFramesFrameSpacer"));
+    lblCopyFramesFrameSpacer->show();
 
-    label_3 = new QLabel(widget);
-    label_3->setObjectName(QStringLiteral("label_3"));
+    lblCopyFramesStart = new QLabel(widget);
+    lblCopyFramesStart->setObjectName(QStringLiteral("lblCopyFramesStart"));
+    lblCopyFramesStart->show();
 
-    label_13 = new QLabel(widget);
-    label_13->setObjectName(QStringLiteral("label_13"));
+    lblCopyFramesStartSpacer = new QLabel(widget);
+    lblCopyFramesStartSpacer->setObjectName(QStringLiteral("lblCopyFramesStartSpacer"));
+    lblCopyFramesStartSpacer->show();
 
-    label_8 = new QLabel(widget);
-    label_8->setObjectName(QStringLiteral("label_8"));
+    lblCopyFramesEnd = new QLabel(widget);
+    lblCopyFramesEnd->setObjectName(QStringLiteral("lblCopyFramesEnd"));
+    lblCopyFramesEnd->show();
 
-    label_14 = new QLabel(widget);
-    label_14->setObjectName(QStringLiteral("label_14"));
+    lblCopyFramesEndSpacer = new QLabel(widget);
+    lblCopyFramesEndSpacer->setObjectName(QStringLiteral("lblCopyFramesEndSpacer"));
+    lblCopyFramesEndSpacer->show();
 
-    label_15 = new QLabel(widget);
-    label_15->setObjectName(QStringLiteral("label_15"));
+    lblTimingCurrentTime = new QLabel(widget);
+    lblTimingCurrentTime->setObjectName(QStringLiteral("lblTimingCurrentTime"));
+    lblTimingCurrentTime->show();
 
-    label_23 = new QLabel(widget);
-    label_23->setObjectName(QStringLiteral("label_23"));
+    lblTimingCurrentTimeSpacer4 = new QLabel(widget);
+    lblTimingCurrentTimeSpacer4->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer4"));
+    lblTimingCurrentTimeSpacer4->show();
 
-    label_21 = new QLabel(widget);
-    label_21->setObjectName(QStringLiteral("label_21"));
+    lblTimingCurrentTimeSpacer3 = new QLabel(widget);
+    lblTimingCurrentTimeSpacer3->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer3"));
+    lblTimingCurrentTimeSpacer3->show();
 
-    label_19 = new QLabel(widget);
-    label_19->setObjectName(QStringLiteral("label_19"));
+    lblTimingCurrentTimeSpacer2 = new QLabel(widget);
+    lblTimingCurrentTimeSpacer2->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer2"));
+    lblTimingCurrentTimeSpacer2->show();
 
-    label_16 = new QLabel(widget);
-    label_16->setObjectName(QStringLiteral("label_16"));
+    lblTimingTimeInterval = new QLabel(widget);
+    lblTimingTimeInterval->setObjectName(QStringLiteral("lblTimingTimeInterval"));
+    lblTimingTimeInterval->show();
 
-    label_24 = new QLabel(widget);
-    label_24->setObjectName(QStringLiteral("label_24"));
+    lblTimingTimeIntervalSpacer1 = new QLabel(widget);
+    lblTimingTimeIntervalSpacer1->setObjectName(QStringLiteral("lblTimingTimeIntervalSpacer1"));
+    lblTimingTimeIntervalSpacer1->show();
 
-    label_22 = new QLabel(widget);
-    label_22->setObjectName(QStringLiteral("label_22"));
+    lblTimingTimeIntervalSpacer2 = new QLabel(widget);
+    lblTimingTimeIntervalSpacer2->setObjectName(QStringLiteral("lblTimingTimeIntervalSpacer2"));
+    lblTimingTimeIntervalSpacer2->show();
 
-    label_20 = new QLabel(widget);
-    label_20->setObjectName(QStringLiteral("label_20"));
+    lblTimingTimeIntervalSpacer3 = new QLabel(widget);
+    lblTimingTimeIntervalSpacer3->setObjectName(QStringLiteral("lblTimingTimeIntervalSpacer3"));
+    lblTimingTimeIntervalSpacer3->show();
 
-    label_18 = new QLabel(widget);
-    label_18->setObjectName(QStringLiteral("label_18"));
+    lblTimingTimeIntervalSpacer4 = new QLabel(widget);
+    lblTimingTimeIntervalSpacer4->setObjectName(QStringLiteral("lblTimingTimeIntervalSpacer4"));
+    lblTimingTimeIntervalSpacer4->show();
 }
 
 void Toolbox::setupUiWidgets(QWidget *widget)
 {
+    /**
+     * Set up Add Frames Widgets
+     */
     addFramesStart = new QSpinBox(widget);
     addFramesStart->setObjectName(QStringLiteral("addFramesStart"));
+    addFramesStart->connect(addFramesStart, SIGNAL(valueChanged(int)), this, SLOT(on_addFramesStart_valueChanged(int)));
 
     addFramesEnd = new QSpinBox(widget);
     addFramesEnd->setObjectName(QStringLiteral("addFramesEnd"));
+    addFramesEnd->connect(addFramesEnd, SIGNAL(valueChanged(int)), this, SLOT(on_addFramesEnd_valueChanged(int)));
 
     addFramesButton = new QPushButton(widget);
     addFramesButton->setObjectName(QStringLiteral("addFramesButton"));
+    addFramesButton->connect(addFramesButton, SIGNAL(clicked(bool)), this, SLOT(on_addFramesButton_clicked()));
 
+    /**
+     * Set up Remove Frames Widgets
+     */
     removeFramesStart = new QSpinBox(widget);
     removeFramesStart->setObjectName(QStringLiteral("removeFramesStart"));
+    removeFramesStart->connect(removeFramesStart, SIGNAL(valueChanged(int)), this, SLOT(on_removeFramesStart_valueChanged(int)));
 
     removeFramesEnd = new QSpinBox(widget);
     removeFramesEnd->setObjectName(QStringLiteral("removeFramesEnd"));
+    removeFramesEnd->connect(removeFramesEnd, SIGNAL(valueChanged(int)), this, SLOT(on_removeFramesEnd_valueChanged(int)));
 
     removeFramesButton = new QPushButton(widget);
     removeFramesButton->setObjectName(QStringLiteral("removeFramesButton"));
+    removeFramesButton->connect(removeFramesButton, SIGNAL(clicked(bool)), this, SLOT(on_removeFramesButton_clicked()));
 
+    /**
+     * Set up Copy Frames Widgets
+     */
     copyFramesIndex = new QSpinBox(widget);
     copyFramesIndex->setObjectName(QStringLiteral("copyFramesIndex"));
+    copyFramesIndex->connect(copyFramesIndex, SIGNAL(valueChanged(int)), this, SLOT(on_copyFramesIndex_valueChanged(int)));
 
     copyFramesStart = new QSpinBox(widget);
     copyFramesStart->setObjectName(QStringLiteral("copyFramesStart"));
+    copyFramesStart->connect(copyFramesStart, SIGNAL(valueChanged(int)), this, SLOT(on_copyFramesStart_valueChanged(int)));
 
     copyFramesEnd = new QSpinBox(widget);
     copyFramesEnd->setObjectName(QStringLiteral("copyFramesEnd"));
+    copyFramesEnd->connect(copyFramesEnd, SIGNAL(valueChanged(int)), this, SLOT(on_copyFramesEnd_valueChanged(int)));
 
     copyFramesButton = new QPushButton(widget);
     copyFramesButton->setObjectName(QStringLiteral("copyFramesButton"));
+    copyFramesButton->connect(copyFramesButton, SIGNAL(clicked(bool)), this, SLOT(on_copyFramesButton_clicked()));
 
-    //widget->connect(Toolbox::copyFramesButton, SIGNAL(clicked(bool)), SLOT(Toolbox::on_copyFramesButton_clicked()));
-    copyFramesButton->connect(copyFramesButton, SIGNAL(clicked(bool)), SLOT(Toolbox::on_copyFramesButton_clicked()));
-
+    /**
+     * Set up Timing Widgets
+     */
     currentTime = new QTimeEdit(widget);
     currentTime->setObjectName(QStringLiteral("currentTime"));
+    currentTime->connect(currentTime, SIGNAL(timeChanged(QTime)), this, SLOT(on_currentTime_timeChanged(QTime)));
 
     timeInterval = new QTimeEdit(widget);
     timeInterval->setObjectName(QStringLiteral("timeInterval"));
     timeInterval->setTimeSpec(Qt::LocalTime);
+    timeInterval->connect(timeInterval, SIGNAL(timeChanged(QTime)), this, SLOT(on_timeInterval_timeChanged(QTime)));
 }
 
 void Toolbox::setupUiLayouts(QWidget *widget)
 {
-    verticalLayout_10 = new QVBoxLayout(widget);
-    verticalLayout_10->setSpacing(6);
-    verticalLayout_10->setContentsMargins(11, 11, 11, 11);
-    verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
-    verticalLayout_10->setContentsMargins(0, 0, 0, 0);
-    horizontalLayout = new QHBoxLayout();
-    horizontalLayout->setSpacing(6);
-    horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-    verticalLayout = new QVBoxLayout();
-    verticalLayout->setSpacing(6);
-    verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-    verticalLayout->addWidget(label);
-    verticalLayout->addWidget(addFramesStart);
-    verticalLayout->addWidget(label_6);
-    horizontalLayout->addLayout(verticalLayout);
-    verticalLayout_2 = new QVBoxLayout();
-    verticalLayout_2->setSpacing(6);
-    verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-    verticalLayout_2->addWidget(label_2);
-    verticalLayout_2->addWidget(addFramesEnd);
-    verticalLayout_2->addWidget(label_5);
-    horizontalLayout->addLayout(verticalLayout_2);
-    horizontalLayout->addWidget(addFramesButton);
-    verticalLayout_10->addLayout(horizontalLayout);
-    horizontalLayout_2 = new QHBoxLayout();
-    horizontalLayout_2->setSpacing(6);
-    horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-    verticalLayout_3 = new QVBoxLayout();
-    verticalLayout_3->setSpacing(6);
-    verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-    verticalLayout_3->addWidget(label_9);
-    verticalLayout_3->addWidget(removeFramesStart);
-    verticalLayout_3->addWidget(label_10);
-    horizontalLayout_2->addLayout(verticalLayout_3);
-    verticalLayout_4 = new QVBoxLayout();
-    verticalLayout_4->setSpacing(6);
-    verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-    verticalLayout_4->addWidget(label_7);
-    verticalLayout_4->addWidget(removeFramesEnd);
-    verticalLayout_4->addWidget(label_11);
-    horizontalLayout_2->addLayout(verticalLayout_4);
-    horizontalLayout_2->addWidget(removeFramesButton);
-    verticalLayout_10->addLayout(horizontalLayout_2);
-    horizontalLayout_3 = new QHBoxLayout();
-    horizontalLayout_3->setSpacing(6);
-    horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-    verticalLayout_5 = new QVBoxLayout();
-    verticalLayout_5->setSpacing(6);
-    verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
-    verticalLayout_5->addWidget(label_4);
-    verticalLayout_5->addWidget(copyFramesIndex);
-    verticalLayout_5->addWidget(label_12);
-    horizontalLayout_3->addLayout(verticalLayout_5);
-    verticalLayout_6 = new QVBoxLayout();
-    verticalLayout_6->setSpacing(6);
-    verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
-    verticalLayout_6->addWidget(label_3);
-    verticalLayout_6->addWidget(copyFramesStart);
-    verticalLayout_6->addWidget(label_13);
-    horizontalLayout_3->addLayout(verticalLayout_6);
-    verticalLayout_7 = new QVBoxLayout();
-    verticalLayout_7->setSpacing(6);
-    verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
-    verticalLayout_7->addWidget(label_8);
-    verticalLayout_7->addWidget(copyFramesEnd);
-    verticalLayout_7->addWidget(label_14);
-    horizontalLayout_3->addLayout(verticalLayout_7);
-    horizontalLayout_3->addWidget(copyFramesButton);
-    verticalLayout_10->addLayout(horizontalLayout_3);
-    horizontalLayout_4 = new QHBoxLayout();
-    horizontalLayout_4->setSpacing(6);
-    horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-    verticalLayout_8 = new QVBoxLayout();
-    verticalLayout_8->setSpacing(6);
-    verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
-    verticalLayout_8->addWidget(label_15);
-    verticalLayout_8->addWidget(currentTime);
-    verticalLayout_8->addWidget(label_23);
-    verticalLayout_8->addWidget(label_21);
-    verticalLayout_8->addWidget(label_19);
-    verticalLayout_8->addWidget(label_17);
-    horizontalLayout_4->addLayout(verticalLayout_8);
-    verticalLayout_9 = new QVBoxLayout();
-    verticalLayout_9->setSpacing(6);
-    verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
-    verticalLayout_9->addWidget(label_16);
-    verticalLayout_9->addWidget(timeInterval);
-    verticalLayout_9->addWidget(label_24);
-    verticalLayout_9->addWidget(label_22);
-    verticalLayout_9->addWidget(label_20);
-    verticalLayout_9->addWidget(label_18);
-    horizontalLayout_4->addLayout(verticalLayout_9);
-    verticalLayout_10->addLayout(horizontalLayout_4);
+    /**
+     * Set up Master Layout
+     */
+    loMasterLayout = new QVBoxLayout(widget);
+    loMasterLayout->setSpacing(6);
+    loMasterLayout->setContentsMargins(11, 11, 11, 11);
+    loMasterLayout->setObjectName(QStringLiteral("loMasterLayout"));
+    loMasterLayout->setContentsMargins(0, 0, 0, 0);
+
+    /**
+     * Set up Add Frames Layout
+     */
+    loAddFrames = new QHBoxLayout();
+    loAddFrames->setSpacing(6);
+    loAddFrames->setObjectName(QStringLiteral("loAddFrames"));
+    loAddFramesStart = new QVBoxLayout();
+    loAddFramesStart->setSpacing(6);
+    loAddFramesStart->setObjectName(QStringLiteral("loAddFramesStart"));
+    loAddFramesStart->addWidget(lblAddFramesStart);
+    loAddFramesStart->addWidget(addFramesStart);
+    loAddFramesStart->addWidget(lblAddFramesStartSpacer);
+    loAddFrames->addLayout(loAddFramesStart);
+    loAddFramesEnd = new QVBoxLayout();
+    loAddFramesEnd->setSpacing(6);
+    loAddFramesEnd->setObjectName(QStringLiteral("loAddFramesEnd"));
+    loAddFramesEnd->addWidget(lblAddFramesEnd);
+    loAddFramesEnd->addWidget(addFramesEnd);
+    loAddFramesEnd->addWidget(lblAddFramesEndSpacer);
+    loAddFrames->addLayout(loAddFramesEnd);
+    loAddFrames->addWidget(addFramesButton);
+    loMasterLayout->addLayout(loAddFrames);
+
+    /**
+     * Set up Remove Frames Layout
+     */
+    loRemoveFrames = new QHBoxLayout();
+    loRemoveFrames->setSpacing(6);
+    loRemoveFrames->setObjectName(QStringLiteral("loRemoveFrames"));
+    loRemoveFramesFirst = new QVBoxLayout();
+    loRemoveFramesFirst->setSpacing(6);
+    loRemoveFramesFirst->setObjectName(QStringLiteral("loRemoveFramesFirst"));
+    loRemoveFramesFirst->addWidget(lblRemoveFramesFirst);
+    loRemoveFramesFirst->addWidget(removeFramesStart);
+    loRemoveFramesFirst->addWidget(lblRemoveFramesFirstSpacer);
+    loRemoveFrames->addLayout(loRemoveFramesFirst);
+    loRemoveFramesLast = new QVBoxLayout();
+    loRemoveFramesLast->setSpacing(6);
+    loRemoveFramesLast->setObjectName(QStringLiteral("loRemoveFramesLast"));
+    loRemoveFramesLast->addWidget(lblRemoveFramesLast);
+    loRemoveFramesLast->addWidget(removeFramesEnd);
+    loRemoveFramesLast->addWidget(lblRemoveFramesLastSpacer);
+    loRemoveFrames->addLayout(loRemoveFramesLast);
+    loRemoveFrames->addWidget(removeFramesButton);
+    loMasterLayout->addLayout(loRemoveFrames);
+
+    /**
+     * Set up Copy Frames Layout
+     */
+    loCopyFrames = new QHBoxLayout();
+    loCopyFrames->setSpacing(6);
+    loCopyFrames->setObjectName(QStringLiteral("loCopyFrames"));
+    loCopyFramesFrame = new QVBoxLayout();
+    loCopyFramesFrame->setSpacing(6);
+    loCopyFramesFrame->setObjectName(QStringLiteral("loCopyFramesFrame"));
+    loCopyFramesFrame->addWidget(lblCopyFramesFrame);
+    loCopyFramesFrame->addWidget(copyFramesIndex);
+    loCopyFramesFrame->addWidget(lblCopyFramesFrameSpacer);
+    loCopyFrames->addLayout(loCopyFramesFrame);
+    loCopyFramesStart = new QVBoxLayout();
+    loCopyFramesStart->setSpacing(6);
+    loCopyFramesStart->setObjectName(QStringLiteral("loCopyFramesStart"));
+    loCopyFramesStart->addWidget(lblCopyFramesStart);
+    loCopyFramesStart->addWidget(copyFramesStart);
+    loCopyFramesStart->addWidget(lblCopyFramesStartSpacer);
+    loCopyFrames->addLayout(loCopyFramesStart);
+    loCopyFramesEnd = new QVBoxLayout();
+    loCopyFramesEnd->setSpacing(6);
+    loCopyFramesEnd->setObjectName(QStringLiteral("loCopyFramesEnd"));
+    loCopyFramesEnd->addWidget(lblCopyFramesEnd);
+    loCopyFramesEnd->addWidget(copyFramesEnd);
+    loCopyFramesEnd->addWidget(lblCopyFramesEndSpacer);
+    loCopyFrames->addLayout(loCopyFramesEnd);
+    loCopyFrames->addWidget(copyFramesButton);
+    loMasterLayout->addLayout(loCopyFrames);
+
+    /**
+     * Set up Timing Layout
+     */
+    loTiming = new QHBoxLayout();
+    loTiming->setSpacing(6);
+    loTiming->setObjectName(QStringLiteral("loTiming"));
+    loTimingCurrentTime = new QVBoxLayout();
+    loTimingCurrentTime->setSpacing(6);
+    loTimingCurrentTime->setObjectName(QStringLiteral("loTimingCurrentTime"));
+    loTimingCurrentTime->addWidget(lblTimingCurrentTime);
+    loTimingCurrentTime->addWidget(currentTime);
+    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer4);
+    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer3);
+    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer2);
+    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer1);
+    loTiming->addLayout(loTimingCurrentTime);
+    loTimingTimeInterval = new QVBoxLayout();
+    loTimingTimeInterval->setSpacing(6);
+    loTimingTimeInterval->setObjectName(QStringLiteral("loTimingTimeInterval"));
+    loTimingTimeInterval->addWidget(lblTimingTimeInterval);
+    loTimingTimeInterval->addWidget(timeInterval);
+    loTimingTimeInterval->addWidget(lblTimingTimeIntervalSpacer1);
+    loTimingTimeInterval->addWidget(lblTimingTimeIntervalSpacer2);
+    loTimingTimeInterval->addWidget(lblTimingTimeIntervalSpacer3);
+    loTimingTimeInterval->addWidget(lblTimingTimeIntervalSpacer4);
+    loTiming->addLayout(loTimingTimeInterval);
+    loMasterLayout->addLayout(loTiming);
 }
 
 /**
@@ -302,46 +367,48 @@ void Toolbox::setupUiLayouts(QWidget *widget)
 void Toolbox::retranslateUi(QWidget *Toolbox)
 {
     Toolbox->setWindowTitle(QApplication::translate("Toolbox", "Toolbox", 0));
-    tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Toolbox", "Color", 0));
-    label->setText(QApplication::translate("Toolbox", "                     Start", 0));
-    label_6->setText(QString());
-    label_2->setText(QApplication::translate("Toolbox", "                      End", 0));
-    label_5->setText(QString());
+    tabParent->setTabText(tabParent->indexOf(tabColor), QApplication::translate("Toolbox", "Color", 0));
+    lblAddFramesStart->setText(QApplication::translate("Toolbox", "                     Start", 0));
+    lblAddFramesStartSpacer->setText(QString());
+    lblAddFramesEnd->setText(QApplication::translate("Toolbox", "                      End", 0));
+    lblAddFramesEndSpacer->setText(QString());
     addFramesButton->setText(QApplication::translate("Toolbox", "Add Frames", 0));
-    label_9->setText(QApplication::translate("Toolbox", "                      First", 0));
-    label_10->setText(QString());
-    label_7->setText(QApplication::translate("Toolbox", "                      Last", 0));
-    label_11->setText(QString());
+    lblRemoveFramesFirst->setText(QApplication::translate("Toolbox", "                      First", 0));
+    lblRemoveFramesFirstSpacer->setText(QString());
+    lblRemoveFramesLast->setText(QApplication::translate("Toolbox", "                      Last", 0));
+    lblRemoveFramesLastSpacer->setText(QString());
     removeFramesButton->setText(QApplication::translate("Toolbox", "Remove Frames", 0));
-    label_4->setText(QApplication::translate("Toolbox", "              Frame", 0));
-    label_12->setText(QString());
-    label_3->setText(QApplication::translate("Toolbox", "               Start", 0));
-    label_13->setText(QString());
-    label_8->setText(QApplication::translate("Toolbox", "               End", 0));
-    label_14->setText(QString());
+    lblCopyFramesFrame->setText(QApplication::translate("Toolbox", "              Frame", 0));
+    lblCopyFramesFrameSpacer->setText(QString());
+    lblCopyFramesStart->setText(QApplication::translate("Toolbox", "               Start", 0));
+    lblCopyFramesStartSpacer->setText(QString());
+    lblCopyFramesEnd->setText(QApplication::translate("Toolbox", "               End", 0));
+    lblCopyFramesEndSpacer->setText(QString());
     copyFramesButton->setText(QApplication::translate("Toolbox", "Copy Frames", 0));
-    label_15->setText(QApplication::translate("Toolbox", "                             Current Time", 0));
+    lblTimingCurrentTime->setText(QApplication::translate("Toolbox", "                             Current Time", 0));
     currentTime->setDisplayFormat(QApplication::translate("Toolbox", "h:mm.ss", 0));
-    label_23->setText(QString());
-    label_21->setText(QString());
-    label_19->setText(QString());
-    label_17->setText(QString());
-    label_16->setText(QApplication::translate("Toolbox", "                             Time interval", 0));
+    lblTimingCurrentTimeSpacer4->setText(QString());
+    lblTimingCurrentTimeSpacer3->setText(QString());
+    lblTimingCurrentTimeSpacer2->setText(QString());
+    lblTimingCurrentTimeSpacer1->setText(QString());
+    lblTimingTimeInterval->setText(QApplication::translate("Toolbox", "                             Time interval", 0));
     timeInterval->setDisplayFormat(QApplication::translate("Toolbox", "h:mm.ss", 0));
-    label_24->setText(QString());
-    label_22->setText(QString());
-    label_20->setText(QString());
-    label_18->setText(QString());
-    tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Toolbox", "Editing", 0));
+    lblTimingTimeIntervalSpacer1->setText(QString());
+    lblTimingTimeIntervalSpacer2->setText(QString());
+    lblTimingTimeIntervalSpacer3->setText(QString());
+    lblTimingTimeIntervalSpacer4->setText(QString());
+    tabParent->setTabText(tabParent->indexOf(tabEdit), QApplication::translate("Toolbox", "Editing", 0));
 } // retranslateUi
 
 void Toolbox::setupUiColorDialogue(){
-    tabWidget->setCurrentIndex(0);
+    tabParent->setCurrentIndex(0);
 
-    dialog = new QColorDialog(this->tab);
-    dialog->setWindowFlags(Qt::SubWindow);
-    dialog->setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
-    dialog->move(0,50);
+    colorDialog = new QColorDialog(this->tabColor);
+    colorDialog->setWindowFlags(Qt::SubWindow);
+    colorDialog->setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
+    colorDialog->move(0,50);
+    colorDialog->show();
+    colorDialog->connect(colorDialog, SIGNAL(currentColorChanged(QColor)), this, SLOT(on_colorDialog_currentColorChanged(QColor)));
 }
 
 /**
@@ -349,60 +416,63 @@ void Toolbox::setupUiColorDialogue(){
  */
 void Toolbox::on_addFramesEnd_valueChanged(int arg1)
 {
-
+    qDebug("HERE! on_addFramesEnd_valueChanged %d", arg1);
 }
 
 void Toolbox::on_addFramesStart_valueChanged(int arg1)
 {
-
+    qDebug("HERE! on_addFramesStart_valueChanged %d", arg1);
 }
 
 void Toolbox::on_addFramesButton_clicked()
 {
-
+    qDebug("HERE! on_addFramesButton_clicked");
 }
 
 void Toolbox::on_removeFramesStart_valueChanged(int arg1)
 {
-
+    qDebug("HERE! on_removeFramesStart_valueChanged %d", arg1);
 }
 
 void Toolbox::on_removeFramesEnd_valueChanged(int arg1)
 {
-
+    qDebug("HERE! on_removeFramesEnd_valueChanged %d", arg1);
 }
 
 void Toolbox::on_removeFramesButton_clicked()
 {
-
+    qDebug("HERE! on_removeFramesButton_clicked");
 }
 
 void Toolbox::on_copyFramesStart_valueChanged(int arg1)
 {
-
+    qDebug("HERE! on_copyFramesStart_valueChanged %d", arg1);
 }
 
 void Toolbox::on_copyFramesEnd_valueChanged(int arg1)
 {
-
+    qDebug("HERE! on_copyFramesEnd_valueChanged %d", arg1);
 }
 
 void Toolbox::on_copyFramesIndex_valueChanged(int arg1)
 {
-
+    qDebug("HERE! on_copyFramesIndex_valueChanged %d", arg1);
 }
-
-/*void Toolbox::on_addFramesButton_click()
-{
-    qDebug("HERE! on_addFramesButton_click");
-}*/
 
 void Toolbox::on_copyFramesButton_clicked()
 {
     qDebug("HERE! on_copyFramesButton_clicked");
 }
 
-void Toolbox::colorChanged()
-{
+void Toolbox::on_currentTime_timeChanged(QTime timeVal){
+    qDebug("HERE! on_currentTime_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
+}
 
+void Toolbox::on_timeInterval_timeChanged(QTime timeVal){
+    qDebug("HERE! on_timeInterval_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
+}
+
+void Toolbox::on_colorDialog_currentColorChanged(QColor colorVal)
+{
+    qDebug("HERE! on_colorDialog_currentColorChanged %d:%d:%d", colorVal.red(), colorVal.green(), colorVal.blue());
 }

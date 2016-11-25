@@ -23,76 +23,113 @@
 #include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <QMainWindow>
+#include <QObject>
+#include <QTime>
 #include <QColorDialog>
+#include <QColor>
 
 /**
  * Toolbox class definition - this will be worked on
  * to make it an explicit QObject
  */
-class Toolbox //: public QObject
+class Toolbox : public QMainWindow
 {
    Q_OBJECT
 
 public:
-    QTabWidget *tabWidget;
-    QWidget *tab;
-    QWidget *tab_2;
-    QWidget *widget;
-    QVBoxLayout *verticalLayout_10;
-    QHBoxLayout *horizontalLayout;
-    QVBoxLayout *verticalLayout;
-    QLabel *label;
-    QSpinBox *addFramesStart;
-    QLabel *label_6;
-    QVBoxLayout *verticalLayout_2;
-    QLabel *label_2;
-    QSpinBox *addFramesEnd;
-    QLabel *label_5;
-    QPushButton *addFramesButton;
-    QHBoxLayout *horizontalLayout_2;
-    QVBoxLayout *verticalLayout_3;
-    QLabel *label_9;
-    QSpinBox *removeFramesStart;
-    QLabel *label_10;
-    QVBoxLayout *verticalLayout_4;
-    QLabel *label_7;
-    QSpinBox *removeFramesEnd;
-    QLabel *label_11;
-    QPushButton *removeFramesButton;
-    QHBoxLayout *horizontalLayout_3;
-    QVBoxLayout *verticalLayout_5;
-    QLabel *label_4;
-    QSpinBox *copyFramesIndex;
-    QLabel *label_12;
-    QVBoxLayout *verticalLayout_6;
-    QLabel *label_3;
-    QSpinBox *copyFramesStart;
-    QLabel *label_13;
-    QVBoxLayout *verticalLayout_7;
-    QLabel *label_8;
-    QSpinBox *copyFramesEnd;
-    QLabel *label_14;
-    QPushButton *copyFramesButton;
-    QHBoxLayout *horizontalLayout_4;
-    QVBoxLayout *verticalLayout_8;
-    QLabel *label_15;
-    QTimeEdit *currentTime;
-    QLabel *label_23;
-    QLabel *label_21;
-    QLabel *label_19;
-    QLabel *label_17;
-    QVBoxLayout *verticalLayout_9;
-    QLabel *label_16;
-    QTimeEdit *timeInterval;
-    QLabel *label_24;
-    QLabel *label_22;
-    QLabel *label_20;
-    QLabel *label_18;
-    QColorDialog *dialog;
+    /**
+     * Tab Widgets
+     */
+    QTabWidget *tabParent;
+    QWidget *tabColor;
+    QWidget *tabEdit;
 
-    Toolbox(QWidget *parent = 0);
+    /**
+     * Master Control Widget
+     */
+    QWidget *widget;
+
+    /**
+     * Add Frame Widgets
+     */
+    QVBoxLayout *loMasterLayout;
+    QHBoxLayout *loAddFrames;
+    QVBoxLayout *loAddFramesStart;
+    QLabel *lblAddFramesStart;
+    QSpinBox *addFramesStart;
+    QLabel *lblAddFramesStartSpacer;
+    QVBoxLayout *loAddFramesEnd;
+    QLabel *lblAddFramesEnd;
+    QSpinBox *addFramesEnd;
+    QLabel *lblAddFramesEndSpacer;
+    QPushButton *addFramesButton;
+
+    /**
+     * Remove Frame Widgets
+     */
+    QHBoxLayout *loRemoveFrames;
+    QVBoxLayout *loRemoveFramesFirst;
+    QLabel *lblRemoveFramesFirst;
+    QSpinBox *removeFramesStart;
+    QLabel *lblRemoveFramesFirstSpacer;
+    QVBoxLayout *loRemoveFramesLast;
+    QLabel *lblRemoveFramesLast;
+    QSpinBox *removeFramesEnd;
+    QLabel *lblRemoveFramesLastSpacer;
+    QPushButton *removeFramesButton;
+
+    /**
+     * Copy Frame Widgets
+     */
+    QHBoxLayout *loCopyFrames;
+    QVBoxLayout *loCopyFramesFrame;
+    QLabel *lblCopyFramesFrame;
+    QSpinBox *copyFramesIndex;
+    QLabel *lblCopyFramesFrameSpacer;
+    QVBoxLayout *loCopyFramesStart;
+    QLabel *lblCopyFramesStart;
+    QSpinBox *copyFramesStart;
+    QLabel *lblCopyFramesStartSpacer;
+    QVBoxLayout *loCopyFramesEnd;
+    QLabel *lblCopyFramesEnd;
+    QSpinBox *copyFramesEnd;
+    QLabel *lblCopyFramesEndSpacer;
+    QPushButton *copyFramesButton;
+
+    /**
+     * Timing Widgets
+     */
+    QHBoxLayout *loTiming;
+    QVBoxLayout *loTimingCurrentTime;
+    QLabel *lblTimingCurrentTime;
+    QTimeEdit *currentTime;
+    QLabel *lblTimingCurrentTimeSpacer1;
+    QLabel *lblTimingCurrentTimeSpacer2;
+    QLabel *lblTimingCurrentTimeSpacer3;
+    QLabel *lblTimingCurrentTimeSpacer4;
+    QVBoxLayout *loTimingTimeInterval;
+    QLabel *lblTimingTimeInterval;
+    QTimeEdit *timeInterval;
+    QLabel *lblTimingTimeIntervalSpacer1;
+    QLabel *lblTimingTimeIntervalSpacer2;
+    QLabel *lblTimingTimeIntervalSpacer3;
+    QLabel *lblTimingTimeIntervalSpacer4;
+
+    /**
+     * Color Dialog Box Widget
+     */
+    QColorDialog *colorDialog;
+
+    /**
+     * Toolbox Constructor/ Destructor Functions
+     */
+    explicit Toolbox(QWidget *parent = 0);
     ~Toolbox();
 
+    /**
+     * Toolbox Setup Functions
+     */
     void setupUi(QWidget *Toolbox);
 
     void setupUiTabs(QWidget *Toolbox);
@@ -109,30 +146,7 @@ public:
 
     void retranslateUi(QWidget *Toolbox);
 
-signals:
-    void on_addFramesEnd_changeValue(int arg1);
-
-    void on_addFramesStart_changeValue(int arg1);
-
-    void on_addFramesButton_click();
-
-    void on_removeFramesStart_changeValue(int arg1);
-
-    void on_removeFramesEnd_changeValue(int arg1);
-
-    void on_removeFramesButton_click();
-
-    void on_copyFramesStart_changeValue(int arg1);
-
-    void on_copyFramesEnd_changeValue(int arg1);
-
-    void on_copyFramesIndex_changeValue(int arg1);
-
-    void on_copyFramesButton_click();
-
-    void changeColor();
-
-private slots:
+public slots:
 
     void on_addFramesEnd_valueChanged(int arg1);
 
@@ -154,7 +168,11 @@ private slots:
 
     void on_copyFramesButton_clicked();
 
-    void colorChanged();
+    void on_currentTime_timeChanged(QTime timeVal);
+
+    void on_timeInterval_timeChanged(QTime timeVal);
+
+    void on_colorDialog_currentColorChanged(QColor colorVal);
 };
 
 #endif // TOOLBOX_H
