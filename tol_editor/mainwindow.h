@@ -12,10 +12,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "animation.h"
 
 namespace Ui {
 class MainWindow;
 }
+class QAction;
+class QMenu;
+class Animation;
 
 class MainWindow : public QMainWindow
 {
@@ -25,8 +29,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_actionOpen_triggered();
+
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object
+    Animation *animation;
 };
 
 #endif // MAINWINDOW_H
