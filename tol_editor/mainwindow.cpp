@@ -18,8 +18,18 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/**
+ * Slot for the 'Open' action in the 'File' menu. Reads in an animation
+ * from a .tan2 file.
+ */
 void MainWindow::on_actionOpen_triggered()
 {
-    *animation = readInAnimation("../../tan_files/Sample3.tan2");
+    //obtain the name of the file to open from the dialog
+    QString filename = QFileDialog::getOpenFileName(this,
+                                                    tr("Open File"),
+                                                    "",
+                                                    tr("TAN Files (*.tan2)"));
+    //read in the animation from the file and store it in the window's
+    //data object
+    *animation = readInAnimation(filename.toStdString().c_str());
 }
