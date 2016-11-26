@@ -17,8 +17,6 @@
 namespace Ui {
 class MainWindow;
 }
-class QAction;
-class QMenu;
 class Animation;
 
 class MainWindow : public QMainWindow

@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    animation = new Animation();
     ui->setupUi(this);
 }
 
@@ -20,5 +21,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    std::cout << "test" << std::endl;
+    *animation = readInAnimation("../../tan_files/Sample3.tan2");
 }
