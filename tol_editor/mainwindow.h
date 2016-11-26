@@ -29,6 +29,7 @@ public:
 
 private slots:
     void on_actionOpen_triggered();
+    void on_actionSave_triggered();
 
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object

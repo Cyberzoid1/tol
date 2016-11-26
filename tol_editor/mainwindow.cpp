@@ -5,6 +5,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "input.h"
+#include "outputfile.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -32,4 +33,16 @@ void MainWindow::on_actionOpen_triggered()
     //read in the animation from the file and store it in the window's
     //data object
     *animation = readInAnimation(filename.toStdString().c_str());
+}
+/**
+ * Slot for the 'Save' action in the 'File' menu. Writes the animation out
+ * to the specified .tan2 file.
+ */
+void MainWindow::on_actionSave_triggered()
+{
+    QString filename = QFileDialog::getSaveFileName(this,
+                                                    tr("Save Animation"),
+                                                       "",
+                                                       tr("TAN Files (*.tan2)"));
+    writeFile(filename.toStdString(), animation);
 }
