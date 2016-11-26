@@ -34,14 +34,14 @@ private slots:
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object
 
-    Animation *animation;
+    Animation *animation; //!< Reference to animation storage object
 
-    QMenu *fileMenu;
-    QAction *openAct;
-    QAction *saveAct;
+    QMenu *fileMenu; //!< Reference to the MainWindow's file menu
+    QAction *openAct; //!< Reference to the open action in the file menu
+    QAction *saveAct; //!< Reference to the save action in the file menu
 
-    void createActions();
-    void createMenus();
+    void createActions(); //!< Helper method to instantiate actions
+    void createMenus(); //!< Helper method to instantiate menus
 };
 
 #endif // MAINWINDOW_H
