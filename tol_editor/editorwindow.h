@@ -18,9 +18,15 @@ public:
     struct frameElement                             // nodes for the list of ui frames
     {
         QFrame* self;                               // the frame belonging to the node
-        frameElement *prev;                               // the previous frame
-        frameElement *next;                               // the next frame
+        frameElement *prev;                         // the previous frame
+        frameElement *next;                         // the next frame
+        int isCurrent;                              // if the node is the current frame being viewed
+        int name;
+
+
+
     };
+    frameElement* start;
     void setup();
 
 public slots:
