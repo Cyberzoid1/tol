@@ -28,12 +28,20 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionOpen_triggered();
-    void on_actionSave_triggered();
+    void open();
+    void save();
 
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object
+
     Animation *animation;
+
+    QMenu *fileMenu;
+    QAction *openAct;
+    QAction *saveAct;
+
+    void createActions();
+    void createMenus();
 };
 
 #endif // MAINWINDOW_H

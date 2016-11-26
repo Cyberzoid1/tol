@@ -13,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     animation = new Animation();
     ui->setupUi(this);
+
+    createActions();
+    createMenus();
 }
 
 MainWindow::~MainWindow()
@@ -23,7 +26,7 @@ MainWindow::~MainWindow()
  * Slot for the 'Open' action in the 'File' menu. Reads in an animation
  * from a .tan2 file.
  */
-void MainWindow::on_actionOpen_triggered()
+void MainWindow::open()
 {
     //obtain the name of the file to open from the dialog
     QString filename = QFileDialog::getOpenFileName(this,
@@ -38,11 +41,33 @@ void MainWindow::on_actionOpen_triggered()
  * Slot for the 'Save' action in the 'File' menu. Writes the animation out
  * to the specified .tan2 file.
  */
-void MainWindow::on_actionSave_triggered()
+void MainWindow::save()
 {
     QString filename = QFileDialog::getSaveFileName(this,
                                                     tr("Save Animation"),
                                                        "",
                                                        tr("TAN Files (*.tan2)"));
     writeFile(filename.toStdString(), animation);
+}
+/**
+ * Create actions for the MainWindow's menu and toolbar.
+ */
+void MainWindow::createActions()
+{
+    openAct = new QAction(tr("&Open"), this);
+    openAct->setShortcuts(QKeySequence::Open);
+    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
+
+    saveAct = new QAction(tr("&Save"), this);
+    saveAct->setShortcuts(QKeySequence::Save);
+    connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
+}
+/**
+ * Create menus for the MainWindow's menu and toolbar.
+ */
+void MainWindow::createMenus()
+{
+    fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(openAct);
+    fileMenu->addAction(saveAct);
 }
