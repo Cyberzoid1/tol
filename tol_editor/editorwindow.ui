@@ -24,7 +24,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
-  <widget class="QPushButton" name="Duplicate_Icon">
+  <widget class="QPushButton" name="duplicateIcon">
    <property name="geometry">
     <rect>
      <x>490</x>
@@ -37,7 +37,7 @@
     <string>Duplicate</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Delete_Frame_Icon">
+  <widget class="QPushButton" name="deleteFrameIcon">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -50,7 +50,7 @@
     <string>X</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="New_Frame_Icon">
+  <widget class="QPushButton" name="newFrameIcon">
    <property name="geometry">
     <rect>
      <x>330</x>
@@ -63,7 +63,7 @@
     <string>+</string>
    </property>
   </widget>
-  <widget class="QTableView" name="Previous_Frame">
+  <widget class="QTableView" name="previousFrame">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -73,7 +73,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="Go_Right_Icon">
+  <widget class="QPushButton" name="goRightIcon">
    <property name="geometry">
     <rect>
      <x>630</x>
@@ -86,7 +86,7 @@
     <string>&gt;</string>
    </property>
   </widget>
-  <widget class="QTableView" name="Current_Frame">
+  <widget class="QTableView" name="currentFrame">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -96,7 +96,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="Go_Left_Icon">
+  <widget class="QPushButton" name="goLeftIcon">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -109,7 +109,7 @@
     <string>&lt;</string>
    </property>
   </widget>
-  <widget class="QTableView" name="Next_Frame">
+  <widget class="QTableView" name="nextFrame">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -119,7 +119,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="Up_Dup_Icon">
+  <widget class="QPushButton" name="upDupIcon">
    <property name="geometry">
     <rect>
      <x>500</x>
@@ -129,10 +129,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>UP</string>
+    <string>Up</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Down_Dup_Icon">
+  <widget class="QPushButton" name="downDupIcon">
    <property name="geometry">
     <rect>
      <x>500</x>
@@ -145,7 +145,7 @@
     <string>Down</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Right_Dup_Icon">
+  <widget class="QPushButton" name="rightDupIcon">
    <property name="geometry">
     <rect>
      <x>560</x>
@@ -158,7 +158,7 @@
     <string>Right</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Left_Dup_Icon">
+  <widget class="QPushButton" name="leftDupIcon">
    <property name="geometry">
     <rect>
      <x>450</x>
