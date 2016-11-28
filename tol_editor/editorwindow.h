@@ -14,6 +14,7 @@ class EditorWindow : public QWidget
 public:
     explicit EditorWindow(QWidget *parent = 0);
     ~EditorWindow();
+    void SetTableFrames();
 
 private:
     Ui::EditorWindow *ui;
