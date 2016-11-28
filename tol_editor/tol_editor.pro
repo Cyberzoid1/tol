@@ -14,10 +14,22 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    editorwindow.cpp
+    editorwindow.cpp \
+    animation.cpp \
+    cell.cpp \
+    frame.cpp \
+    input.cpp \
+    outputfile.cpp \
+    RGB.cpp
 
 HEADERS  += mainwindow.h \
-    editorwindow.h
+    animation.h \
+    cell.h \
+    frame.h \
+    input.h \
+    outputfile.h \
+    rgb.h \
+editorwindow.h
 
 FORMS    += mainwindow.ui \
     editorwindow.ui
