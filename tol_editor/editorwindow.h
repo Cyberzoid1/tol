@@ -15,18 +15,18 @@ class EditorWindow : public QWidget
 public:
     explicit EditorWindow(QWidget *parent = 0);     // constructor
     ~EditorWindow();                                // destructor
+
     struct frameElement                             // nodes for the list of ui frames
     {
         QFrame* self;                               // the frame belonging to the node
-        frameElement *prev;                         // the previous frame
-        frameElement *next;                         // the next frame
-        int isCurrent;                              // if the node is the current frame being viewed
+
+        bool isCurrent;                             // if the node is the current frame being viewed
+
         int name;
-
-
-
+        int width;
+        int height;
     };
-    frameElement* start;
+
     void setup();
 
 public slots:
@@ -35,6 +35,7 @@ public slots:
 
 private:
     Ui::EditorWindow *ui;
+    std::list<frameElement> listFrames;
 };
 
 #endif // EDITORWINDOW_H
