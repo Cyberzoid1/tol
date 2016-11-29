@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QTime>
 #include <mainwindow.h>
+#include <QRect>
 #include "toolbox.h"
 
 /**
@@ -62,16 +63,18 @@ void Toolbox::setupUi(QWidget *parent)
 void Toolbox::setupUiTabs(QWidget *Toolbox){
     tabParent = new QTabWidget(Toolbox);
     tabParent->setObjectName(QStringLiteral("tabParent"));
-    tabParent->setGeometry(QRect(10, 10, 511, 621));
+    tabParent->setGeometry(QRect(0, 0, Toolbox->width()*0.7, Toolbox->height()));//QRect(10, 10, 511, 621)
     tabParent->setAutoFillBackground(false);
     tabParent->show();
 
     tabColor = new QWidget();
     tabColor->setObjectName(QStringLiteral("tabColor"));
+    tabColor->setGeometry(QRect(0,0,tabParent->width(), tabParent->height()));
     tabParent->addTab(tabColor, QString());
 
     tabEdit = new QWidget();
     tabEdit->setObjectName(QStringLiteral("tabEdit"));
+    tabEdit->setGeometry(QRect(0,0,tabParent->width(), tabParent->height()));
     tabParent->addTab(tabEdit, QString());
 
 }
@@ -79,7 +82,7 @@ void Toolbox::setupUiTabs(QWidget *Toolbox){
 void Toolbox::setupUiMasterWidget(){
     widget = new QWidget(tabEdit);
     widget->setObjectName(QStringLiteral("widget"));
-    widget->setGeometry(QRect(9, 9, 481, 581));
+    widget->setGeometry(QRect(0, 0, tabEdit->width(), tabEdit->height())); //QRect(9, 9, 481, 581)
 }
 
 void Toolbox::setupUiLabels(QWidget *widget)
@@ -343,10 +346,10 @@ void Toolbox::setupUiLayouts(QWidget *widget)
     loTimingCurrentTime->setObjectName(QStringLiteral("loTimingCurrentTime"));
     loTimingCurrentTime->addWidget(lblTimingCurrentTime);
     loTimingCurrentTime->addWidget(currentTime);
-    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer4);
-    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer3);
-    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer2);
     loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer1);
+    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer2);
+    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer3);
+    loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer4);
     loTiming->addLayout(loTimingCurrentTime);
     loTimingTimeInterval = new QVBoxLayout();
     loTimingTimeInterval->setSpacing(6);
@@ -368,36 +371,52 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
 {
     Toolbox->setWindowTitle(QApplication::translate("Toolbox", "Toolbox", 0));
     tabParent->setTabText(tabParent->indexOf(tabColor), QApplication::translate("Toolbox", "Color", 0));
-    lblAddFramesStart->setText(QApplication::translate("Toolbox", "                     Start", 0));
+    tabParent->setTabText(tabParent->indexOf(tabEdit), QApplication::translate("Toolbox", "Editing", 0));
+
+    /**
+     * Retranslate Add Frames Layout
+     */
+    lblAddFramesStart->setText(QApplication::translate("Toolbox", "Start", 0));//
     lblAddFramesStartSpacer->setText(QString());
-    lblAddFramesEnd->setText(QApplication::translate("Toolbox", "                      End", 0));
+    lblAddFramesEnd->setText(QApplication::translate("Toolbox", "End", 0));//
     lblAddFramesEndSpacer->setText(QString());
     addFramesButton->setText(QApplication::translate("Toolbox", "Add Frames", 0));
-    lblRemoveFramesFirst->setText(QApplication::translate("Toolbox", "                      First", 0));
+
+    /**
+     * Retranslate Remove Frames Layout
+     */
+    lblRemoveFramesFirst->setText(QApplication::translate("Toolbox", "First", 0));//
     lblRemoveFramesFirstSpacer->setText(QString());
-    lblRemoveFramesLast->setText(QApplication::translate("Toolbox", "                      Last", 0));
+    lblRemoveFramesLast->setText(QApplication::translate("Toolbox", "Last", 0));//
     lblRemoveFramesLastSpacer->setText(QString());
     removeFramesButton->setText(QApplication::translate("Toolbox", "Remove Frames", 0));
-    lblCopyFramesFrame->setText(QApplication::translate("Toolbox", "              Frame", 0));
+
+    /**
+     * Retranslate Copy Frames Layout
+     */
+    lblCopyFramesFrame->setText(QApplication::translate("Toolbox", "Frame", 0));//
     lblCopyFramesFrameSpacer->setText(QString());
-    lblCopyFramesStart->setText(QApplication::translate("Toolbox", "               Start", 0));
+    lblCopyFramesStart->setText(QApplication::translate("Toolbox", "Start", 0));//
     lblCopyFramesStartSpacer->setText(QString());
-    lblCopyFramesEnd->setText(QApplication::translate("Toolbox", "               End", 0));
+    lblCopyFramesEnd->setText(QApplication::translate("Toolbox", "End", 0));//
     lblCopyFramesEndSpacer->setText(QString());
     copyFramesButton->setText(QApplication::translate("Toolbox", "Copy Frames", 0));
-    lblTimingCurrentTime->setText(QApplication::translate("Toolbox", "                             Current Time", 0));
+
+    /**
+     * Retranslate Timing Layout
+     */
+    lblTimingCurrentTime->setText(QApplication::translate("Toolbox", "Current Time", 0));//
     currentTime->setDisplayFormat(QApplication::translate("Toolbox", "h:mm.ss", 0));
     lblTimingCurrentTimeSpacer4->setText(QString());
     lblTimingCurrentTimeSpacer3->setText(QString());
     lblTimingCurrentTimeSpacer2->setText(QString());
     lblTimingCurrentTimeSpacer1->setText(QString());
-    lblTimingTimeInterval->setText(QApplication::translate("Toolbox", "                             Time interval", 0));
+    lblTimingTimeInterval->setText(QApplication::translate("Toolbox", "Time interval", 0));//
     timeInterval->setDisplayFormat(QApplication::translate("Toolbox", "h:mm.ss", 0));
     lblTimingTimeIntervalSpacer1->setText(QString());
     lblTimingTimeIntervalSpacer2->setText(QString());
     lblTimingTimeIntervalSpacer3->setText(QString());
     lblTimingTimeIntervalSpacer4->setText(QString());
-    tabParent->setTabText(tabParent->indexOf(tabEdit), QApplication::translate("Toolbox", "Editing", 0));
 } // retranslateUi
 
 void Toolbox::setupUiColorDialogue(){
@@ -408,6 +427,7 @@ void Toolbox::setupUiColorDialogue(){
     colorDialog->setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
     colorDialog->move(0,50);
     colorDialog->show();
+    colorDialog->setGeometry(QRect(0,0,tabColor->width(),tabColor->height()));
     colorDialog->connect(colorDialog, SIGNAL(currentColorChanged(QColor)), this, SLOT(on_colorDialog_currentColorChanged(QColor)));
 }
 
