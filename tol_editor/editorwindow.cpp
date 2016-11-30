@@ -9,59 +9,51 @@ EditorWindow::EditorWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    /*EditorWindow::frameElement *p;
-    EditorWindow::frameElement *q;
-    start = new frameElement;
-    start->self = ui->previousFrame;
-    start->next = NULL;
-    start->prev = NULL;
-    start->isCurrent = 0;
-    start->name = 1;
 
-    q = new frameElement;
-    q->self = ui->currentFrame;
-    q->next = NULL;
-    q->prev = start;
-    q->isCurrent = 1;
-    q->name = 2;
+    EditorWindow::frameElement p;                   // for adding the first pre-set frame to the list
+    p.name = 1;                                     // first frame, so #1
+    p.height = 20;                                  // heighth is 20 for now
+    p.width = 8;                                    // width is 8 for now
+    p.isCurrent = false;                            // does not start out as the current frame
+    p.self = ui->previousFrame;                     // tying it to the UI Element
+    for( int i = 0; i < 20; i++ )                   // set up the cells with black
+    {
+        for( int j = 0; j < 8; j++ )
+        {
+            p.cellGrid[j][i].setColor( 0, 0, 0 );
+        }
+    }
+    listFrames.push_front(p);                       // push it to the front of the list
 
-
-    p = new frameElement;
-    p->self = ui->nextFrame;
-    p->next = NULL;
-    p->prev = q;
-    p->isCurrent = 0;
-    p->name = 3;
-
-
-    q->next = p;
-
-    start->next = q; */
-
-    //std::list<frameElement> listFrames;
-    EditorWindow::frameElement p;
-    p.name = 1;
-    p.height = 20;
-    p.width = 8;
-    p.isCurrent = false;
-    p.self = ui->previousFrame;
-    listFrames.push_front(p);
-
-    EditorWindow::frameElement q;
-    q.name = 2;
-    q.height = 20;
+    EditorWindow::frameElement q;                   // second frame
+    q.name = 2;                                     // second frame, #2
+    q.height = 20;                                  // same as above
     q.width = 8;
-    q.isCurrent = true;
-    q.self = ui->currentFrame;
-    listFrames.push_back(q);
+    q.isCurrent = true;                             // starts out as the current frame
+    q.self = ui->currentFrame;                      // tying to appropriate UI element
+    for( int i = 0; i < 20; i++ )                   // same as above
+    {
+        for( int j = 0; j < 8; j++ )
+        {
+            q.cellGrid[j][i].setColor( 0, 0, 0 );
+        }
+    }
+    listFrames.push_back(q);                        // put it after the first frame in the list
 
-    EditorWindow::frameElement r;
-    r.name = 3;
-    r.height = 20;
+    EditorWindow::frameElement r;                   // third pre-set frame
+    r.name = 3;                                     // third frame, #3
+    r.height = 20;                                  // etc.
     r.width = 8;
     r.isCurrent = false;
     r.self = ui->nextFrame;
-    listFrames.push_back(r);
+    for( int i = 0; i < 20; i++ )
+    {
+        for( int j = 0; j < 8; j++ )
+        {
+           r.cellGrid[j][i].setColor( 0, 0, 0 );
+        }
+    }
+    listFrames.push_back(r);                        // last pre-set frame, so placed at the end of the list
 
 
     //for( frameElement *p = start; p != NULL; p = p->next )
@@ -80,123 +72,146 @@ EditorWindow::~EditorWindow()
 
 void EditorWindow::update()
 {
+    /* This is for when the user clicks the "Go-Left Button"
+     * It should take the view left depending on the current
+     * state of true and false in the isCurrent field of the
+     * frameElement clas
+     */
     frameElement p = listFrames.front();
-    //auto q = std::find( listFrames.begin(), listFrames.end(), p.name+1 );
+    frameElement q = listFrames.back();
     auto it = std::next( listFrames.begin(), 1 );
-    /*frameElement* q;
-    p = start;
-    QSize currSize = ui->currentFrame->frameSize();
-    QSize curr1Size = ui->previousFrame->frameSize();
-    QSize curr2size = ui->nextFrame->frameSize(); */
-    if( it->isCurrent == true ) //currSize != curr1Size && currSize != curr2size )
+    std::list<frameElement>::iterator frameIt;
+    for( frameIt = listFrames.begin(); frameIt != listFrames.end(); frameIt++ )
     {
-        //currSize = curr1Size;
-        /*p = p->next;
-        q = p->next;
-        p->isCurrent = 0;
-        q->isCurrent = 1;
-        p->self->resize( 210, 260 );
-        p->self->move( 30, 220 );
-        q->self->move( 350, 180 );
-        q->self->resize( 290, 350 );
-        ui->nextFrameTable->resize( 290, 350 );
-        start->self->hide(); */
-        frameElement r = listFrames.back();
-
-        //frameElement q;
-        it->isCurrent = false;
-        r.isCurrent = true;
-        it->self->resize( 210, 260 );
-        it->self->move( 30, 220 );
-        p.self->hide();
-        r.self->move( 350, 180 );
-        r.self->resize( 290, 350 );
-        r.self->show();
-        it->self->show();
-
-    }
-    else if( p.isCurrent == true ) //currSize == curr2size && currSize != curr1Size )
-    {
-        p.isCurrent = false;
-        frameElement q = listFrames.back();
-        //frameElement r = listFrames[1];
-        
-        /*auto it = std::find( listFrames.begin(), listFrames.end(), p.name+1);
-        if( it != listFrames.end() )
+        if( frameIt->isCurrent == true )
         {
-                it->isCurrent = true;
-                it->self->resize( 290, 350 );
-                it->self->move( 350, 180 );
-                it->self->show();
-                it++;
-                it->self->show();
-        }*/
-        it->isCurrent = true;
-        it->self->resize( 290, 350 );
-        it->self->move( 350, 180 );
-        it->self->show();
-        q.self->show();
-        p.self->resize( 210, 260 );
-        p.self->move( 30, 220 );
-        p.self->hide();
-
-        /*q = p;
-        p = p->next;
-        q->isCurrent = 0;
-        p->isCurrent = 1;
-        q->self->resize( 210, 260 );
-        q->self->move( 30, 220 );
-        q->self->show();
-        ui->previousFrameTable->resize( 210, 260 );
-        p->self->move( 350, 180 );
-        p->self->resize( 290, 350 );
-        ui->currentFrameTable->resize( 290, 350 );
-        p->next->self->show(); */
+            break;
+        }
     }
+    // Retrieving the relevant frameElements from the list by use of the iterator
+    frameElement currFrameEl = *frameIt;
+    frameElement prevFrameEl = *( std::next( frameIt, -1 ) );
+    frameElement nextFrameEl = *( std::next( frameIt, 1 ) );
+
+
+    if( it->isCurrent == true )                                 // if the center frame is current, it should go left and last frame should be current
+    {
+        it->isCurrent = false;                                  // should no longer be current
+        listFrames.back().isCurrent = true;                     // the back should now be current
+
+        it->self->resize( 210, 260 );                           // resize the middle frame
+        it->self->move( 30, 220 );                              // move it left
+        it->self->show();                                       // make sure it is visible
+
+        q.self->move( 350, 180 );                               // move the last frame to center
+        q.self->resize( 290, 350 );                             // resize it
+        q.self->show();                                         // make sure it is visible
+
+        p.self->hide();                                         // hide the first frame
+        ui->nextFrameTable->resize( 290, 350 );
+
+
+    }
+    else if( listFrames.front().isCurrent == true )             // if the first frame is in the center, it should go left and the middle frame should be in center again
+    {
+        listFrames.front().isCurrent = false;                   // first frame should not be current
+        it->isCurrent = true;                                   // middle frame should be current
+
+        it->self->resize( 290, 350 );                           // resize center frame
+        it->self->move( 350, 180 );                             // move it into place
+        it->self->show();                                       // make sure it is visible
+
+        q.self->show();                                         // make the last frame visible again
+
+        p.self->resize( 210, 260 );                             // resize the first frame
+        p.self->move( 30, 220 );                                // move it left
+        p.self->show();                                         // make sure it is visible
+
+
+
+    }
+    else
+    {
+        //
+    }
+
 
 }
 
 void EditorWindow::lower()
 {
-    /*QSize currSize = ui->currentFrame->frameSize();
-    QSize curr1Size = ui->previousFrame->frameSize();
-    QSize curr2size = ui->nextFrame->frameSize();*/
+
+    /* When the user clicks the "go-right" button
+     * It should take the user right depending on the current
+     * state of true and false in the isCurrent field of the
+     * frameElement class
+     */
+
     frameElement p = listFrames.front();
     frameElement q = listFrames.back();
     auto it = std::next( listFrames.begin(), 1 );
 
-    //p = start;
-
-    if( q.isCurrent == true ) //curr1Size == currSize && currSize != curr2size )
+    std::list<frameElement>::iterator frameIt;
+    for( frameIt = listFrames.begin(); frameIt != listFrames.end(); frameIt++ )
     {
-        //frameElement r = listFrames[1];
-        it->isCurrent = true;
-        q.isCurrent = false;
-        it->self->resize( 290, 350 );
-        ui->currentFrameTable->resize( 290, 350 );
-        it->self->move( 350, 180 );
-        q.self->resize( 210, 260 );
-        ui->nextFrameTable->resize( 210, 260 );
-        q.self->move( 740, 220 );
-        p.self->show();
-        it->self->show();
+        if( frameIt->isCurrent == true )
+        {
+            break;
+        }
     }
-    else if( p.isCurrent == false && q.isCurrent == false ) //curr1Size == curr2size )
-    {
-        //frameElement r = listFrames[1];
 
-        it->isCurrent = false;
-        p.isCurrent = true;
-        it->self->resize( 210, 260 );
-        it->self->move( 740, 220 );
-        p.self->resize( 290, 350 );
-        ui->previousFrameTable->resize( 290, 350 );
-        p.self->move( 350, 180 );
-        q.self->hide();
+    frameElement currFrameEl = *frameIt;
+    frameElement prevFrameEl = *( std::next( frameIt, -1 ) );
+    frameElement nextFrameEl = *( std::next( frameIt, 1 ) );
+
+
+
+    if( q.isCurrent == true )                   // if the last frame is the current one
+    {
+                                                // if the last frame is current, and user clicks to move things right, then all 3
+                                                // should be visible
+        listFrames.back().isCurrent = false;    // set the last frame to false
+        it->isCurrent = true;                   // set the previous one to true
+
+        q.self->move( 740, 220 );               // move the last frame right
+        q.self->resize( 210, 260 );             // resize it
+        q.self->show();                         // make sure it is visible
+
+        it->self->move( 350, 180 );             // move the previous frame to middle
+        it->self->resize( 290, 350 );           // resize it
+        it->self->show();                       // show it
+
+        p.self->show();                         // show the first frame
+
+    }
+    else if( p.isCurrent == false && q.isCurrent == false ) // if both the front and back are false, then the middle should be current
+    {
+
+        it->isCurrent = false;                              // middle should no longer be current
+        listFrames.front().isCurrent = true;                // the first frame should now be visible
+
+        it->self->resize( 210, 260 );                       // resize the middle
+        it->self->move( 740, 220 );                         // move the middle one to the right
+        it->self->show();                                   // make sure the middle is still visible
+
+        p.self->resize( 290, 350 );                         // resize the first frame
+        ui->previousFrameTable->resize( 290, 350 );         // frameTable--unimportant right now
+        p.self->move( 350, 180 );                           // move the first frame to the center spot
+        p.self->show();                                     // make sure it is visible
+
+        q.self->hide();                                     // hide the rightmost frame
     }
 }
 
 void EditorWindow::setup()
 {
 
+
+}
+
+void EditorWindow::cell::setColor(int r, int g, int b)
+{
+    cell::red = r;
+    cell::green = g;
+    cell::blue = b;
 }
