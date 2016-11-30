@@ -1,7 +1,10 @@
+#ifndef EditorWindow_CPP
+#define EditorWindow_CPP
+
 #include "editorwindow.h"
 #include "ui_editorwindow.h"
 
-
+#endif
 
 EditorWindow::EditorWindow(QWidget *parent) :
     QWidget(parent),
@@ -13,19 +16,16 @@ EditorWindow::EditorWindow(QWidget *parent) :
         for(int j = 0; j < ncolumns; j++)
         {
 
+           currCells = createCell();
+           prevCells = createCell();
+           nxtCells = createCell();
 
-           currCells = new QPushButton();
-           prevCells = new QPushButton();
-           nxtCells = new QPushButton();
-
-           currCells -> setStyleSheet("background-color: gray;" "border: solid");
-           prevCells -> setStyleSheet("background-color: gray");
-           nxtCells -> setStyleSheet("background-color: gray");
            ui->currentFrame->addWidget(currCells,i,j,0);
            ui->previousFrame->addWidget(prevCells,i,j,0);
            ui->nextFrame->addWidget(nxtCells,i,j,0);
         }
     }
+
 }
 
 EditorWindow::~EditorWindow()
@@ -35,5 +35,11 @@ EditorWindow::~EditorWindow()
 
 
 
+QPushButton * EditorWindow::createCell()
+{
+    QPushButton * n = new QPushButton();
+    n->setStyleSheet("border: 1px solid;" "background-color: gray");
+    return n;
+}
 
 

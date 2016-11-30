@@ -21,6 +21,7 @@ SOURCES += main.cpp\
     input.cpp \
     outputfile.cpp \
     RGB.cpp
+#    field.cpp
 
 HEADERS  += mainwindow.h \
     animation.h \
@@ -30,6 +31,7 @@ HEADERS  += mainwindow.h \
     outputfile.h \
     rgb.h \
 editorwindow.h
+#    field.h
 
 FORMS    += mainwindow.ui \
     editorwindow.ui
