@@ -19,7 +19,7 @@ class frameElement                             // nodes for the list of ui frame
 {
 public:
     QFrame* self;                               // the frame belonging to the node
-
+    QGridLayout *grid;
     bool isCurrent;                             // if the node is the current frame being viewed
     cell cellGrid[8][20];                       // array of cells for the grid
     int name;                                   // the number identifying the frame
