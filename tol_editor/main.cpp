@@ -13,7 +13,7 @@
 
 
 /**
- * Initial point of execution for the program. Yhis function
+ * Initial point of execution for the program. This function
  * will initialyze the Qt window for the Tower Lights Animator and
  * also Initialize any data structures necessary for it's function.
  * @param argc An Integer representing the number of arguments
@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow mainwindow;
     EditorWindow * editorwindow = new EditorWindow(&mainwindow);
-    editorwindow->SetTableFrames();
     mainwindow.show();
     editorwindow -> show();
 

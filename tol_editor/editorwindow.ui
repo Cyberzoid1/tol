@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>EditorWindow</class>
  <widget class="QWidget" name="EditorWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>984</width>
+    <width>1003</width>
     <height>638</height>
    </rect>
   </property>
@@ -22,7 +25,7 @@
      <height>91</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout"/>
+   <layout class="QHBoxLayout" name="frameList"/>
   </widget>
   <widget class="QPushButton" name="duplicateIcon">
    <property name="geometry">
@@ -63,16 +66,6 @@
     <string>+</string>
    </property>
   </widget>
-  <widget class="QTableView" name="previousFrame">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>220</y>
-     <width>211</width>
-     <height>261</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="goRightIcon">
    <property name="geometry">
     <rect>
@@ -86,16 +79,6 @@
     <string>&gt;</string>
    </property>
   </widget>
-  <widget class="QTableView" name="currentFrame">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>160</y>
-     <width>291</width>
-     <height>351</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="goLeftIcon">
    <property name="geometry">
     <rect>
@@ -107,16 +90,6 @@
    </property>
    <property name="text">
     <string>&lt;</string>
-   </property>
-  </widget>
-  <widget class="QTableView" name="nextFrame">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>220</y>
-     <width>211</width>
-     <height>261</height>
-    </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="upDupIcon">
@@ -170,6 +143,52 @@
    <property name="text">
     <string>Left</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>160</y>
+     <width>291</width>
+     <height>351</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="currentFrame">
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>1</number>
+    </property>
+    <property name="rightMargin">
+     <number>1</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>220</y>
+     <width>211</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="nextFrame"/>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>220</y>
+     <width>211</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="previousFrame"/>
   </widget>
  </widget>
  <resources/>
