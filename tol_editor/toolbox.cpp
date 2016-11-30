@@ -46,6 +46,8 @@ void Toolbox::setupUi(QWidget *parent)
 
     setupUiTabs(parent);
 
+    setupUiColorDialogue();
+
     setupUiMasterWidget();
 
     setupUiLabels(widget);
@@ -54,8 +56,6 @@ void Toolbox::setupUi(QWidget *parent)
 
     setupUiLayouts(widget);
 
-    setupUiColorDialogue();
-
     retranslateUi(parent);
 
 } // setupUi
@@ -63,7 +63,7 @@ void Toolbox::setupUi(QWidget *parent)
 void Toolbox::setupUiTabs(QWidget *Toolbox){
     tabParent = new QTabWidget(Toolbox);
     tabParent->setObjectName(QStringLiteral("tabParent"));
-    tabParent->setGeometry(QRect(0, 0, Toolbox->width()*0.7, Toolbox->height()));//QRect(10, 10, 511, 621)
+    tabParent->setGeometry(QRect(0, 0, Toolbox->width(), Toolbox->height()));//QRect(10, 10, 511, 621)
     tabParent->setAutoFillBackground(false);
     tabParent->show();
 
@@ -82,7 +82,7 @@ void Toolbox::setupUiTabs(QWidget *Toolbox){
 void Toolbox::setupUiMasterWidget(){
     widget = new QWidget(tabEdit);
     widget->setObjectName(QStringLiteral("widget"));
-    widget->setGeometry(QRect(0, 0, tabEdit->width(), tabEdit->height())); //QRect(9, 9, 481, 581)
+    widget->setGeometry(QRect(0, 0, tabParent->width(), tabParent->height())); //QRect(9, 9, 481, 581)
 }
 
 void Toolbox::setupUiLabels(QWidget *widget)
@@ -255,9 +255,8 @@ void Toolbox::setupUiLayouts(QWidget *widget)
      */
     loMasterLayout = new QVBoxLayout(widget);
     loMasterLayout->setSpacing(6);
-    loMasterLayout->setContentsMargins(11, 11, 11, 11);
+    loMasterLayout->setContentsMargins(widget->width()*0.05, widget->height()*0.05, widget->width()*0.05, widget->height()*0.05);
     loMasterLayout->setObjectName(QStringLiteral("loMasterLayout"));
-    loMasterLayout->setContentsMargins(0, 0, 0, 0);
 
     /**
      * Set up Add Frames Layout
@@ -425,10 +424,16 @@ void Toolbox::setupUiColorDialogue(){
     colorDialog = new QColorDialog(this->tabColor);
     colorDialog->setWindowFlags(Qt::SubWindow);
     colorDialog->setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
-    colorDialog->move(0,50);
+    colorDialog->move(0,0);
     colorDialog->show();
     colorDialog->setGeometry(QRect(0,0,tabColor->width(),tabColor->height()));
     colorDialog->connect(colorDialog, SIGNAL(currentColorChanged(QColor)), this, SLOT(on_colorDialog_currentColorChanged(QColor)));
+
+    /**
+     * Set Geometry of the tab widget to match the color dialogue box with a bit of a buffer each direction to make sure
+     * it is big enough
+     */
+    tabParent->setGeometry(0,0,colorDialog->width(), colorDialog->height() +  colorDialog->height()*0.1);
 }
 
 /**
