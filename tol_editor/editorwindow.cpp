@@ -80,18 +80,50 @@ void EditorWindow::update()
     frameElement p = listFrames.front();
     frameElement q = listFrames.back();
     auto it = std::next( listFrames.begin(), 1 );
-    std::list<frameElement>::iterator frameIt;
-    for( frameIt = listFrames.begin(); frameIt != listFrames.end(); frameIt++ )
+
+    if( listFrames.size() > 3 )
     {
-        if( frameIt->isCurrent == true )
+        std::list<frameElement>::iterator frameIt;      // Iterator for finding the current frame
+        for( frameIt = listFrames.begin(); frameIt != listFrames.end(); frameIt++ )
         {
-            break;
+            if( frameIt->isCurrent == true )            // Current Frame will always have isCurrent == true
+            {
+                break;
+            }
         }
+        // Retrieving the relevant frameElements from the list by use of the iterator
+        int size = listFrames.size();
+        frameElement currFrameEl = *frameIt;
+        frameElement prevFrameEl;
+        if( currFrameEl.name != 1 )
+        {
+            prevFrameEl = *( std::next( frameIt, -1 ) );
+        }
+        frameElement nextFrameEl;
+        if( currFrameEl.name < size )
+        {
+           nextFrameEl = *( std::next( frameIt, 1 ) );
+        }
+        frameElement nextnextFrameEl;
+        if( size > 3 )
+        {
+            nextnextFrameEl = *( std::next( frameIt, 2 ) );
+        }
+        // Manipulate the above to produce the shift left
+        prevFrameEl.self->hide();
+
+        currFrameEl.self->resize( 210, 260 );
+        currFrameEl.self->move( 30, 220 );
+
+        nextFrameEl.self->resize( 290, 350 );
+        nextFrameEl.self->move( 350, 180 );
+
+        if( listFrames.size() > 3 )//&& nextFrameEl != listFrames.end()->self )
+        {
+            nextnextFrameEl.self->show();
+        }
+
     }
-    // Retrieving the relevant frameElements from the list by use of the iterator
-    frameElement currFrameEl = *frameIt;
-    frameElement prevFrameEl = *( std::next( frameIt, -1 ) );
-    frameElement nextFrameEl = *( std::next( frameIt, 1 ) );
 
 
     if( it->isCurrent == true )                                 // if the center frame is current, it should go left and last frame should be current
@@ -151,21 +183,39 @@ void EditorWindow::lower()
     frameElement q = listFrames.back();
     auto it = std::next( listFrames.begin(), 1 );
 
-    std::list<frameElement>::iterator frameIt;
-    for( frameIt = listFrames.begin(); frameIt != listFrames.end(); frameIt++ )
+    if( listFrames.size() > 3 )
     {
-        if( frameIt->isCurrent == true )
+        int size = listFrames.size();
+        std::list<frameElement>::iterator frameIt;
+        for( frameIt = listFrames.begin(); frameIt != listFrames.end(); frameIt++ )
         {
-            break;
+            if( frameIt->isCurrent == true )
+            {
+                break;
+            }
         }
+
+        frameElement currFrameEl = *frameIt;
+        frameElement prevFrameEl;
+        frameElement nextFrameEl;
+        frameElement prevPrevFrameEl;
+
+        if( currFrameEl.name != 1 )
+        {
+            prevFrameEl = *( std::next( frameIt, -1 ) );
+            if( size > 3 )
+            {
+                prevPrevFrameEl = *( std::next( frameIt, -2 ) );
+            }
+        }
+        if( currFrameEl.name < size )
+        {
+            nextFrameEl = *( std::next( frameIt, 1 ) );
+        }
+
+
+
     }
-
-    frameElement currFrameEl = *frameIt;
-    frameElement prevFrameEl = *( std::next( frameIt, -1 ) );
-    frameElement nextFrameEl = *( std::next( frameIt, 1 ) );
-
-
-
     if( q.isCurrent == true )                   // if the last frame is the current one
     {
                                                 // if the last frame is current, and user clicks to move things right, then all 3
