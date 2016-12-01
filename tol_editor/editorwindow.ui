@@ -243,7 +243,7 @@
     <layout class="QGridLayout" name="CurrentFrameGrid"/>
    </widget>
   </widget>
-  <widget class="QWidget" name="previousFrame" native="true">
+  <widget class="QFrame" name="previousFrame">
    <property name="geometry">
     <rect>
      <x>30</x>

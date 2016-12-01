@@ -23,7 +23,7 @@ EditorWindow::EditorWindow(QWidget *parent) :
     p.height = 20;                                  // heighth is 20 for now
     p.width = 8;                                    // width is 8 for now
     p.isCurrent = false;                            // does not start out as the current frame
-    //p.self = ui->previousFrame;                     // tying it to the UI Element
+    p.self = ui->previousFrame;                     // tying it to the UI Element
     p.grid = new QGridLayout;                       // set up the grid
 
     QPushButton* button1 = new QPushButton;
@@ -209,14 +209,18 @@ void EditorWindow::update()
             p.self->resize( 210, 260 );                             // resize the first frame
             p.self->move( 30, 220 );                                // move it left
             p.self->show();                                         // make sure it is visible
-            */
+
             ui->CurrentFrameGrid = it->grid;
             ui->previousFrameGrid = p.grid;
             ui->nextFrameGrid = q.grid;
-
+            */
             it->isCurrent = true;
-            listFrames.front().isCurrent = false;
-
+            listFrames.front().isCurrent = false;                   // BEGIN NEW STUFF
+            qDeleteAll( ui->previousFrame->children() );
+            ui->previousFrame->setLayout( p.grid );
+            ui->currentFrame->setLayout( it->grid );
+            ui->nextFrame->setLayout( q.grid );
+                                                                    // END NEW STUFF
 
 
         }
@@ -293,11 +297,15 @@ void EditorWindow::lower()
             it->self->show();                       // show it
 
             p.self->show();                         // show the first frame
-            */
+
             ui->CurrentFrameGrid = it->grid;
             ui->previousFrameGrid = p.grid;
             ui->nextFrameGrid = q.grid;
-
+            */
+            ui->nextFrame->setLayout( q.grid );     // BEGIN NEW STUFF
+            ui->currentFrame->setLayout( it->grid );
+            ui->previousFrame->setLayout( p.grid );
+                                                    // END NEW STUFF
             listFrames.back().isCurrent = false;
             it->isCurrent = true;
 
@@ -318,11 +326,15 @@ void EditorWindow::lower()
             p.self->show();                                     // make sure it is visible
 
             q.self->hide();                                     // hide the rightmost frame
-            */
+
             ui->CurrentFrameGrid = p.grid;
             ui->previousFrameGrid = ui->NullLayout;
             ui->nextFrameGrid = it->grid;
-
+            */
+            qDeleteAll( ui->nextFrame->children() );            // BEGIN NEW STUFF
+            ui->nextFrame->setLayout( it->grid );
+            ui->currentFrame->setLayout( p.grid );
+            //ui->previousFrame->setLayout( ui->NullLayout );     // END NEW STUFF
             it->isCurrent = false;
             listFrames.front().isCurrent = true;
         }
