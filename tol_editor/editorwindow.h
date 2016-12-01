@@ -27,6 +27,7 @@ public slots:
 private:
     Ui::EditorWindow *ui;
     std::list<frameElement> listFrames;
+
 };
 
 

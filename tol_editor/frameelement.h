@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QFrame>
+#include <QGridLayout>
 
 class cell
 {

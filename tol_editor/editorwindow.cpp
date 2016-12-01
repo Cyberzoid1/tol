@@ -2,6 +2,10 @@
 #include "ui_editorwindow.h"
 #include <list>
 #include <iterator>
+#include <QPushButton>
+#include <QGridLayout>
+#include <QLayout>
+#include <QtAlgorithms>
 
 EditorWindow::EditorWindow(QWidget *parent) :
     QWidget(parent),
@@ -9,13 +13,23 @@ EditorWindow::EditorWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //ui->CurrentFrameGrid = new QGridLayout;
+    //ui->previousFrameGrid = new QGridLayout;
+    //ui->nextFrameGrid = new QGridLayout;
+
 
     frameElement p;                   // for adding the first pre-set frame to the list
     p.name = 1;                                     // first frame, so #1
     p.height = 20;                                  // heighth is 20 for now
     p.width = 8;                                    // width is 8 for now
     p.isCurrent = false;                            // does not start out as the current frame
-    p.self = ui->previousFrame;                     // tying it to the UI Element
+    //p.self = ui->previousFrame;                     // tying it to the UI Element
+    p.grid = new QGridLayout;                       // set up the grid
+
+    QPushButton* button1 = new QPushButton;
+    p.grid->addWidget( button1 );
+
+
     for( int i = 0; i < 20; i++ )                   // set up the cells with black
     {
         for( int j = 0; j < 8; j++ )
@@ -31,6 +45,14 @@ EditorWindow::EditorWindow(QWidget *parent) :
     q.width = 8;
     q.isCurrent = true;                             // starts out as the current frame
     q.self = ui->currentFrame;                      // tying to appropriate UI element
+    q.grid = new QGridLayout;
+
+    QPushButton* button2 = new QPushButton;
+    QPushButton* button3 = new QPushButton;
+
+    q.grid->addWidget( button2 );
+    q.grid->addWidget( button3 );
+
     for( int i = 0; i < 20; i++ )                   // same as above
     {
         for( int j = 0; j < 8; j++ )
@@ -46,6 +68,11 @@ EditorWindow::EditorWindow(QWidget *parent) :
     r.width = 8;
     r.isCurrent = false;
     r.self = ui->nextFrame;
+    r.grid = new QGridLayout;
+
+    QPushButton* button4 = new QPushButton;
+    r.grid->addWidget( button4 );
+
     for( int i = 0; i < 20; i++ )
     {
         for( int j = 0; j < 8; j++ )
@@ -60,9 +87,13 @@ EditorWindow::EditorWindow(QWidget *parent) :
     //{
 
     //}
+    // BEGIN NEW STUFF
 
+    ui->currentFrame->setLayout( q.grid );
+    ui->previousFrame->setLayout( p.grid );
+    ui->nextFrame->setLayout( r.grid );
 
-
+    // END NEW STUFF
 }
 
 EditorWindow::~EditorWindow()
@@ -128,7 +159,7 @@ void EditorWindow::update()
     {
         if( it->isCurrent == true )                                 // if the center frame is current, it should go left and last frame should be current
         {
-            it->isCurrent = false;                                  // should no longer be current
+            /*it->isCurrent = false;                                  // should no longer be current
             listFrames.back().isCurrent = true;                     // the back should now be current
 
             it->self->resize( 210, 260 );                           // resize the middle frame
@@ -141,12 +172,32 @@ void EditorWindow::update()
 
             p.self->hide();                                         // hide the first frame
             ui->nextFrameTable->resize( 290, 350 );
+            */
+            /*ui->CurrentFrameGrid = q.grid;
+            ui->previousFrameGrid = it->grid;
+            ui->nextFrameGrid = ui->NullLayout;
+            */
+            //ui->currentFrame->
+            qDeleteAll( ui->previousFrame->children() );            // The NEW STUFF
+            //qDeleteAll( ui->previousFrame->children() );
+            //qDeleteAll( ui->nextFrame->children() );
+
+            ui->previousFrame->setLayout( it->grid );
+
+            ui->currentFrame->setLayout( q.grid );
+
+            ui->nextFrame->setLayout( ui->NullLayout );             // END NEW STUFF
+
+            it->isCurrent = false;
+            listFrames.back().isCurrent = true;
+
 
 
         }
         else if( listFrames.front().isCurrent == true )             // if the first frame is in the center, it should go left and the middle frame should be in center again
         {
-            listFrames.front().isCurrent = false;                   // first frame should not be current
+            /*
+             * listFrames.front().isCurrent = false;                   // first frame should not be current
             it->isCurrent = true;                                   // middle frame should be current
 
             it->self->resize( 290, 350 );                           // resize center frame
@@ -158,6 +209,13 @@ void EditorWindow::update()
             p.self->resize( 210, 260 );                             // resize the first frame
             p.self->move( 30, 220 );                                // move it left
             p.self->show();                                         // make sure it is visible
+            */
+            ui->CurrentFrameGrid = it->grid;
+            ui->previousFrameGrid = p.grid;
+            ui->nextFrameGrid = q.grid;
+
+            it->isCurrent = true;
+            listFrames.front().isCurrent = false;
 
 
 
@@ -222,7 +280,7 @@ void EditorWindow::lower()
         if( q.isCurrent == true )                   // if the last frame is the current one
         {
                                                     // if the last frame is current, and user clicks to move things right, then all 3
-                                                    // should be visible
+            /*                                        // should be visible
             listFrames.back().isCurrent = false;    // set the last frame to false
             it->isCurrent = true;                   // set the previous one to true
 
@@ -235,11 +293,18 @@ void EditorWindow::lower()
             it->self->show();                       // show it
 
             p.self->show();                         // show the first frame
+            */
+            ui->CurrentFrameGrid = it->grid;
+            ui->previousFrameGrid = p.grid;
+            ui->nextFrameGrid = q.grid;
+
+            listFrames.back().isCurrent = false;
+            it->isCurrent = true;
 
         }
         else if( p.isCurrent == false && q.isCurrent == false ) // if both the front and back are false, then the middle should be current
         {
-
+            /*
             it->isCurrent = false;                              // middle should no longer be current
             listFrames.front().isCurrent = true;                // the first frame should now be visible
 
@@ -253,6 +318,13 @@ void EditorWindow::lower()
             p.self->show();                                     // make sure it is visible
 
             q.self->hide();                                     // hide the rightmost frame
+            */
+            ui->CurrentFrameGrid = p.grid;
+            ui->previousFrameGrid = ui->NullLayout;
+            ui->nextFrameGrid = it->grid;
+
+            it->isCurrent = false;
+            listFrames.front().isCurrent = true;
         }
     }
 }
