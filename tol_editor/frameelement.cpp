@@ -14,6 +14,7 @@
  * This sets the RGB values of the cells
  */
 
+
 void cell::setColor( int r, int g, int b )
 {
     cell::red = r;
@@ -25,3 +26,13 @@ void cell::setCell( QPushButton* button )
 {
     cell::self = button;
 }
+
+frameElement::frameElement()
+{
+    width = 8;
+    height = 20;
+    isCurrent = false;
+    grid = new QGridLayout;
+}
+
+

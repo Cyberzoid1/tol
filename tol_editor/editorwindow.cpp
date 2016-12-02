@@ -42,12 +42,8 @@ EditorWindow::EditorWindow(QWidget *parent) :
 
 
     frameElement p;                                 // for adding the first pre-set frame to the list
-    p.name = 1;                                     // first frame, so #1
-    p.height = 20;                                  // heighth is 20 for now
-    p.width = 8;                                    // width is 8 for now
-    p.isCurrent = false;                            // does not start out as the current frame
-    p.self = ui->previousFrame;                     // tying it to the UI Element
-    p.grid = new QGridLayout(this);                 // set up the grid
+    p.name = 1;
+    p.self = ui->previousFrame;
     setup( p );                                     // set up the cells
     listFrames.push_front(p);                       // push it to the front of the list
 
@@ -63,11 +59,8 @@ EditorWindow::EditorWindow(QWidget *parent) :
 
     frameElement q;                                 // second frame
     q.name = 2;                                     // second frame, #2
-    q.height = 20;                                  // defaults
-    q.width = 8;
     q.isCurrent = true;                             // starts out as the current frame
     q.self = ui->currentFrame;                      // tying to appropriate UI element
-    q.grid = new QGridLayout(this);
     setup( q );
     listFrames.push_back( q );                        // put it after the first frame in the list
 
@@ -83,11 +76,7 @@ EditorWindow::EditorWindow(QWidget *parent) :
 
     frameElement r;                                 // third pre-set frame
     r.name = 3;                                     // third frame, #3
-    r.height = 20;                                  // etc.
-    r.width = 8;
-    r.isCurrent = false;
     r.self = ui->nextFrame;
-    r.grid = new QGridLayout(this);
     setup( r );
     listFrames.push_back(r);                        // last pre-set frame, so placed at the end of the list
 

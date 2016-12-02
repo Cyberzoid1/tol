@@ -20,6 +20,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 
+
 class cell
 {
     int red;                                    //!< A number to hold red values
@@ -29,6 +30,8 @@ class cell
 public:
     void setColor( int r, int g, int b );
     void setCell( QPushButton* button );
+
+
 };
 
 
@@ -42,6 +45,14 @@ public:
     int name;                                   //!< A name, which is the number identifying the frame
     int width;                                  //!< A number holding the width of the frame
     int height;                                 //!< A number holding the height of the frame
+
+
+public slots:
+    //void colorChangedHandler();
+
+public:
+    frameElement();
+    //~frameElement();
 };
 
 #endif // FRAMEELEMENT_H
