@@ -28,6 +28,7 @@ class cell
     QPushButton* self;                          //!< A pointer to the QPushButton the cell refers to
 public:
     void setColor( int r, int g, int b );
+    void setCell( QPushButton* button );
 };
 
 

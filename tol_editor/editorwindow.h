@@ -34,12 +34,22 @@ public:
     explicit EditorWindow(QWidget *parent = 0);     // constructor
     ~EditorWindow();                                // destructor
 
-    void setup();
+    void setup( frameElement q );
     QPushButton* createCell();                      // create Cells
 
 public slots:
     void update();                                  // for the go-left UI button
     void lower();                                   // for the go-right UI Button
+    //void upHandler();
+    //void downHandler();
+    //void rightHandler();
+    //void leftHandler();
+    //void duplicateHandler();
+    //void addFrameHandler();
+    //void clearFrameHandler();
+    //void deleteFrameHandler();
+    //void inputTanHandler();
+
 
 private:
     Ui::EditorWindow *ui;

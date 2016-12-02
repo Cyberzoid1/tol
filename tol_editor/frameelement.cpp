@@ -20,3 +20,8 @@ void cell::setColor( int r, int g, int b )
     cell::green = g;
     cell::blue = b;
 }
+
+void cell::setCell( QPushButton* button )
+{
+    cell::self = button;
+}
