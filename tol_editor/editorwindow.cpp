@@ -21,7 +21,6 @@ EditorWindow::EditorWindow(QWidget *parent) :
     ui->previousFrame->addLayout(frameList.pop_front().getGrid(),0,0,Qt::Alignment());
 
 //    eFrame = new EditorFrame();
-//    EditorFrame n1, n2;
 //    ui->previousFrame->addLayout(eFrame->getGrid(),0,0,Qt::Alignment());
 //    ui->CurrentFrameGrid->addLayout(n1.getGrid(),0,0,Qt::Alignment());
 //    ui->nextFrame->addLayout(n2.getGrid(),0,0,Qt::Alignment());

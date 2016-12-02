@@ -21,20 +21,20 @@ public:
     QPushButton * createCell();
 
 public slots:
-    void upHandler();
-    void downHandler();
-    void rightHandler();
-    void leftHandler();
-    void duplicateHandler();
-    void addFrameHandler();
-    void clearFrameHandler();
-    void deleteFrameHandler();
-    void inputTanHandler();
+//    void upHandler();
+//    void downHandler();
+//    void rightHandler();
+//    void leftHandler();
+//    void duplicateHandler();
+//    void addFrameHandler();
+//    void clearFrameHandler();
+//    void deleteFrameHandler();
+//    void inputTanHandler();
 
 
 private:
     Ui::EditorWindow *ui;
-   // EditorFrame *eFrame;
+//    EditorFrame *eFrame;
     std::list<EditorFrame> frameList;
 
 

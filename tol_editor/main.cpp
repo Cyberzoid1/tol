@@ -4,9 +4,9 @@
 #include "mainwindow.h"
 #include "editorwindow.h"
 #include <QApplication>
-#include "animation.h"
-#include "input.h"
-#include "outputfile.h"
+//#include "animation.h"
+//#include "input.h"
+//#include "outputfile.h"
 
 #endif  //MainWindow_M
 
