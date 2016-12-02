@@ -19,7 +19,10 @@ public:
     explicit EditorWindow(QWidget *parent = 0);
     ~EditorWindow();
     QPushButton * createCell();
-
+    std::list<EditorFrame>::iterator getCurr();
+    std::list<EditorFrame>::iterator getPrev();
+    std::list<EditorFrame>::iterator getNext();
+    bool isCurrent();
 public slots:
 //    void upHandler();
 //    void downHandler();
@@ -36,8 +39,8 @@ private:
     Ui::EditorWindow *ui;
 //    EditorFrame *eFrame;
     std::list<EditorFrame> frameList;
-
-
+    std::list<EditorFrame>::iterator prev, next, curr;
+    bool isCurr;
 
 };
 
