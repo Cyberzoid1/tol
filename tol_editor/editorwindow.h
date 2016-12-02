@@ -1,3 +1,16 @@
+/**
+* @author Zachary Spence & Adonay Berhe
+* @date 11/18/2016
+* @class EditorWindow
+* @brief This is the header file for the EditorWindow class.
+* @details This class is utilized to setup the editing window of
+* the UI in the Tower of Light's project as well as a list of @frameElement
+* nodes and the rules defining their setup and movement in the window.
+*/
+
+
+
+
 #ifndef EDITORWINDOW_H
 #define EDITORWINDOW_H
 
@@ -30,12 +43,12 @@ public slots:
 
 private:
     Ui::EditorWindow *ui;
-    std::list<frameElement> listFrames;             // List of frames
-    std::list<frameElement>::iterator currFrame;    // An iterator to always point to the first frame
+    std::list<frameElement> listFrames;             //!< List containing the ordered sequence of frames in the UI
+    std::list<frameElement>::iterator currFrame;    //!< An iterator for referencing the frame in listFrames that is current viewed
 
-    QPushButton *currCells;                         // for adding current cells to the initial current window
-    QPushButton *prevCells;                         // for adding cells to the initial previous window
-    QPushButton *nxtCells;                          // for adding cells to the intital next window
+    QPushButton *currCells;                         //!< variable for adding current cells to the initial current window
+    QPushButton *prevCells;                         //!< variable for adding cells to the initial previous window
+    QPushButton *nxtCells;                          //!< variable for adding cells to the intital next window
 
 };
 
