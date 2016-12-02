@@ -15,21 +15,25 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     editorwindow.cpp \
-    animation.cpp \
-    cell.cpp \
-    frame.cpp \
-    input.cpp \
-    outputfile.cpp \
-    RGB.cpp
+    editorframe.cpp
+#    animation.cpp \
+#    cell.cpp \
+#    frame.cpp \
+#    input.cpp \
+#    outputfile.cpp \
+#    RGB.cpp
+#    field.cpp
 
 HEADERS  += mainwindow.h \
-    animation.h \
-    cell.h \
-    frame.h \
-    input.h \
-    outputfile.h \
-    rgb.h \
-editorwindow.h
+#    animation.h \
+#    cell.h \
+#    frame.h \
+#    input.h \
+#    outputfile.h \
+#    rgb.h \
+     editorwindow.h \
+    editorframe.h
+#    field.h
 
 FORMS    += mainwindow.ui \
     editorwindow.ui

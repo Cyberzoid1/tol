@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1003</width>
-    <height>638</height>
+    <width>1319</width>
+    <height>642</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,10 +19,10 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>40</y>
-     <width>891</width>
-     <height>91</height>
+     <x>170</x>
+     <y>0</y>
+     <width>1001</width>
+     <height>61</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="frameList"/>
@@ -30,8 +30,8 @@
   <widget class="QPushButton" name="duplicateIcon">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>550</y>
+     <x>740</x>
+     <y>560</y>
      <width>71</width>
      <height>28</height>
     </rect>
@@ -43,8 +43,8 @@
   <widget class="QPushButton" name="deleteFrameIcon">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>550</y>
+     <x>640</x>
+     <y>560</y>
      <width>41</width>
      <height>28</height>
     </rect>
@@ -56,8 +56,8 @@
   <widget class="QPushButton" name="newFrameIcon">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>550</y>
+     <x>580</x>
+     <y>560</y>
      <width>41</width>
      <height>28</height>
     </rect>
@@ -69,8 +69,8 @@
   <widget class="QPushButton" name="goRightIcon">
    <property name="geometry">
     <rect>
-     <x>630</x>
-     <y>330</y>
+     <x>930</x>
+     <y>320</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -82,8 +82,8 @@
   <widget class="QPushButton" name="goLeftIcon">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>330</y>
+     <x>340</x>
+     <y>320</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -95,8 +95,8 @@
   <widget class="QPushButton" name="upDupIcon">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>520</y>
+     <x>750</x>
+     <y>530</y>
      <width>51</width>
      <height>28</height>
     </rect>
@@ -108,8 +108,8 @@
   <widget class="QPushButton" name="downDupIcon">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>580</y>
+     <x>750</x>
+     <y>590</y>
      <width>51</width>
      <height>28</height>
     </rect>
@@ -121,8 +121,8 @@
   <widget class="QPushButton" name="rightDupIcon">
    <property name="geometry">
     <rect>
-     <x>560</x>
-     <y>550</y>
+     <x>810</x>
+     <y>560</y>
      <width>41</width>
      <height>28</height>
     </rect>
@@ -134,8 +134,8 @@
   <widget class="QPushButton" name="leftDupIcon">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>550</y>
+     <x>700</x>
+     <y>560</y>
      <width>41</width>
      <height>28</height>
     </rect>
@@ -147,13 +147,13 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>160</y>
-     <width>291</width>
-     <height>351</height>
+     <x>450</x>
+     <y>80</y>
+     <width>421</width>
+     <height>441</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="currentFrame">
+   <layout class="QGridLayout" name="CurrentFrameGrid">
     <property name="leftMargin">
      <number>1</number>
     </property>
@@ -171,10 +171,10 @@
   <widget class="QWidget" name="gridLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>690</x>
+     <x>1010</x>
      <y>220</y>
-     <width>211</width>
-     <height>261</height>
+     <width>241</width>
+     <height>291</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="nextFrame"/>
@@ -182,10 +182,10 @@
   <widget class="QWidget" name="gridLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>60</x>
      <y>220</y>
-     <width>211</width>
-     <height>261</height>
+     <width>241</width>
+     <height>281</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="previousFrame"/>

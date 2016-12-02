@@ -1,12 +1,12 @@
 #ifndef EDITORWINDOW_H
 #define EDITORWINDOW_H
 
+#include "editorframe.h"
 #include <QWidget>
 #include <QPushButton>
-
-#define nrows 20
-#define ncolumns 10
-
+#include <list>
+#include <iterator>
+#include <QtAlgorithms>
 
 namespace Ui {
 class EditorWindow;
@@ -19,24 +19,24 @@ class EditorWindow : public QWidget
 public:
     explicit EditorWindow(QWidget *parent = 0);
     ~EditorWindow();
-
-    void setFrames(/* <list>*/);
+    QPushButton * createCell();
+public slots:
+    void upHandler();
+    void downHandler();
+    void rightHandler();
+    void leftHandler();
+    void duplicateHandler();
+    void addFrameHandler();
+    void clearFrameHandler();
+    void deleteFrameHandler();
+    void inputTanHandler();
 
 private:
     Ui::EditorWindow *ui;
-    QPushButton *currCells;
-    QPushButton *prevCells;
-    QPushButton *nxtCells;
+   // EditorFrame *eFrame;
+    std::list<EditorFrame> frameList;
 
 };
-
-QPushButton {
-    border: 2px solid #8f8f91;
-    border-radius: 6px;
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
-    min-width: 80px;
-}
 
 
 #endif // EDITORWINDOW_H
