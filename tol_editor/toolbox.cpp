@@ -25,6 +25,7 @@
 #include <QRect>
 #include <QFont>
 #include <QLabel>
+#include <QMainWindow>
 #include "toolbox.h"
 
 /**

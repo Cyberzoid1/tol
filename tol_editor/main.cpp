@@ -5,7 +5,7 @@
 #include "toolbox.h"
 #include <QApplication>
 #include <QWidget>
-
+#include <QMainWindow>
 /**
  * Initial point of execution for the program. Yhis function
  * will initialyze the Qt window for the Tower Lights Animator and

@@ -29,6 +29,7 @@
 #include <QColorDialog>
 #include <QColor>
 #include <QFont>
+#include <QMainWindow>
 
 /**
  * Toolbox class definition - this will be worked on

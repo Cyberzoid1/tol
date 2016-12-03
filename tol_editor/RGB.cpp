@@ -32,13 +32,8 @@ RGB::RGB(int red, int green, int blue)
 /**
  * constructor that initializes the RGB object to the
  * color to the color passed in after converting it from HTNL Hex to
-<<<<<<< HEAD
- * RGB
- * @param hex A string object representing a 6 bit hexidecimal value
-=======
  * RGB.
  * @param hex A string object representing a 6 bit hexidecimal value.
->>>>>>> master
  */
 RGB::RGB(std::string hex)
 {
@@ -55,16 +50,10 @@ RGB::RGB(std::string hex)
  * constructor that initializes the RGB object to the
  * color passed in after converting it from HSL (Hue Saturation
  * Lightness) to RGB color format.
-<<<<<<< HEAD
- * @param an integer representing an angle of hue between 0 and 360
- * @param a float representing saturation, between 0 and 1
- * @param a float representing lightness, between 0 and 1
-=======
  * @param hue An integer representing an angle of hue between 0 and 360.
  * @param saturation A float representing saturation, between 0 and 1.
  * @param lightness A float representing lightness, between 0 and 1.
  *
->>>>>>> master
  */
 RGB::RGB(int hue, float saturation, float lightness)
 {

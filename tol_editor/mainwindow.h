@@ -34,8 +34,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object
-<<<<<<< HEAD
-=======
 
     Animation *animation; //!< Reference to animation storage object
 
@@ -45,7 +43,6 @@ private:
 
     void createActions(); //!< Helper method to instantiate actions
     void createMenus(); //!< Helper method to instantiate menus
->>>>>>> master
 };
 
 #endif // MAINWINDOW_H
