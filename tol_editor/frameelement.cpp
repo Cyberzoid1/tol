@@ -35,4 +35,19 @@ frameElement::frameElement()
     grid = new QGridLayout;
 }
 
+frameElement::~frameElement()
+{
+    //
+}
+
+frameElement::frameElement(int n, int h, int w, bool isCurr)
+{
+    name = n;
+    height = h;
+    width = w;
+    isCurrent = isCurr;
+    self = new QFrame;
+    grid = new QGridLayout;
+}
+
 

@@ -52,7 +52,8 @@ public slots:
 
 public:
     frameElement();
-    //~frameElement();
+    frameElement( int n, int h, int w, bool isCurr );
+    ~frameElement();
 };
 
 #endif // FRAMEELEMENT_H

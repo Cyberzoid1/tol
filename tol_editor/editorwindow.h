@@ -18,6 +18,8 @@
 #include <QFrame>
 #include <frameelement.h>
 #include <QPushButton>
+#include <list>
+#include <iterator>
 
 #define nrows 20
 #define ncolumns 8
@@ -36,6 +38,9 @@ public:
 
     void setup( frameElement q );
     QPushButton* createCell();                      // create Cells
+    void moveLeft( std::list<frameElement>::iterator q );
+    void moveCent( std::list<frameElement>::iterator q );
+    void moveRght( std::list<frameElement>::iterator q );
 
 public slots:
     void update();                                  // for the go-left UI button
