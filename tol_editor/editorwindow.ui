@@ -307,17 +307,6 @@
     <layout class="QGridLayout" name="nextFrameGrid"/>
    </widget>
   </widget>
-  <widget class="QWidget" name="gridLayoutWidget_4">
-   <property name="geometry">
-    <rect>
-     <x>930</x>
-     <y>40</y>
-     <width>160</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="NullLayout"/>
-  </widget>
  </widget>
  <resources/>
  <connections>
