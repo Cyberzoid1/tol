@@ -89,9 +89,9 @@ EditorWindow::EditorWindow(QWidget *parent) :
       * are defaults, then this can be done statically
       */
 
-    ui->currentFrame->setLayout( q.grid );
-    ui->previousFrame->setLayout( p.grid );
-    ui->nextFrame->setLayout( r.grid );
+    q.self->setLayout( q.grid );
+    p.self->setLayout( p.grid );
+    r.self->setLayout( r.grid );
 
     /** These lines setup an iterator on the list of frameElements
       * The iterator, currFrame, was defined in the .h and should
@@ -198,14 +198,8 @@ void EditorWindow::update()
 
             ui->nextFrameTable->resize( 290, 350 );
             afterNext = std::next( currFrame, 2 );      // assign the frame after next to the afterNext iterator
-            next->self->move( 350, 180 );               // move the next frame left to center
-            next->self->resize( 290, 350 );             // resize it accordingly
-            next->self->show();                         // make sure it is visible
-            next->isCurrent = true;                     // update the boolean
-            currFrame->self->move( 30, 220 );           // move the current frame to left
-            currFrame->self->resize( 210, 260 );        // resize accordingly
-            currFrame->self->show();                    // make sure visible
-            currFrame->isCurrent = false;               // update the boolean
+            moveCent( next );
+            moveLeft( currFrame );
             afterNext->self->show();                    // show the frame after next
             currFrame = next;                           // update the iterator to point to the current frame
 
@@ -214,14 +208,8 @@ void EditorWindow::update()
         {
             ui->nextFrameTable->resize( 290, 350 );
             prev->self->hide();                         // hide the previous frame
-            currFrame->self->move( 30, 220 );           // move the current frame left
-            currFrame->self->resize( 210, 260 );        // resize it accordingly
-            currFrame->self->show();                    // make sure it is visible
-            currFrame->isCurrent = false;               // update the boolean
-            next->self->move( 350, 180 );               // move the next frame left
-            next->self->resize( 290, 350 );             // resize it accordingly
-            next->self->show();                         // make sure it is visible
-            next->isCurrent = true;                     // update the boolean
+            moveLeft( currFrame );
+            moveCent( next );
             currFrame = next;                           // update the iterator to point to the current frame
 
 
@@ -311,14 +299,8 @@ void EditorWindow::lower()
         {
             ui->previousFrameTable->resize( 290, 350 );
             beforePrev = std::next( currFrame, -2 );        // Assign beforePrev to the frame before prev
-            prev->self->move( 350, 180 );                   // move the previous frame to the center "Go Right"
-            prev->self->resize( 290, 350 );                 // change the size to accomodate its position
-            prev->self->show();                             // make sure it is visible
-            prev->isCurrent = true;                         // set its isCurrent to true
-            currFrame->self->move( 740, 220 );              // move the current frame to the right "Go Right"
-            currFrame->self->resize( 210, 260 );            // resize the frame to accomodate its position
-            currFrame->self->show();                        // make sure it is visible
-            currFrame->isCurrent = false;                   // set its isCurrent to false, as no longer current
+            moveCent( prev );
+            moveRght( currFrame );
             beforePrev->self->show();                       // show the frame before previous
             currFrame = prev;                               // update the iterator to point to the current frame
 
@@ -327,14 +309,8 @@ void EditorWindow::lower()
         {
             ui->previousFrameTable->resize( 290, 350 );
             next->self->hide();                             // hide the next frame
-            currFrame->self->move( 740, 220 );              // Moving, resizing, and showing the current frame in the "next" position
-            currFrame->self->resize( 210, 260 );
-            currFrame->self->show();
-            currFrame->isCurrent = false;                   // Set its boolean to false
-            prev->self->move( 350, 180 );                   // take the previous frame and put it in the center position
-            prev->self->resize( 290, 350 );
-            prev->self->show();
-            prev->isCurrent = true;                         // Set its boolean to true
+            moveRght( currFrame );
+            moveCent( prev );
             currFrame = prev;                               // Update the iterator
 
         }
@@ -377,3 +353,26 @@ QPushButton* EditorWindow::createCell()                                         
 }
 
 
+void EditorWindow::moveLeft( std::list<frameElement>::iterator q )
+{
+    q->self->move( 30, 220 );
+    q->self->resize( 210, 260 );
+    q->self->show();
+    q->isCurrent = false;
+}
+
+void EditorWindow::moveCent( std::list<frameElement>::iterator q )
+{
+    q->self->move( 350, 180 );
+    q->self->resize( 290, 350 );
+    q->self->show();
+    q->isCurrent= true;
+}
+
+void EditorWindow::moveRght( std::list<frameElement>::iterator q )
+{
+    q->self->move( 740, 220 );
+    q->self->resize( 210, 260 );
+    q->self->show();
+    q->isCurrent = false;
+}
