@@ -2,7 +2,9 @@
 #include "animation.h"
 #include "input.h"
 #include "outputfile.h"
+#include "toolbox.h"
 #include <QApplication>
+#include <QWidget>
 
 /**
  * Initial point of execution for the program. Yhis function

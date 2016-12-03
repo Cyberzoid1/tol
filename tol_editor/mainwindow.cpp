@@ -14,6 +14,14 @@ MainWindow::MainWindow(QWidget *parent) :
     animation = new Animation();
     ui->setupUi(this);
 
+    hlayout = new QHBoxLayout;
+    wrapper = new QWidget;
+    toolbox = new Toolbox(wrapper);
+    hlayout->addWidget(toolbox);
+    wrapper->setLayout(hlayout);
+
+    this->setCentralWidget(wrapper);
+
     createActions();
     createMenus();
 }
