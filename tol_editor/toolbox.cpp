@@ -23,6 +23,8 @@
 #include <QTime>
 #include <mainwindow.h>
 #include <QRect>
+#include <QFont>
+#include <QLabel>
 #include "toolbox.h"
 
 /**
@@ -89,6 +91,9 @@ void Toolbox::setupUiLabels(QWidget *widget)
 {
     lblAddFramesStart = new QLabel(widget);
     lblAddFramesStart->setObjectName(QStringLiteral("lblAddFramesStart"));
+    toolBoxFont = lblAddFramesStart->font();
+    toolBoxFont.setPointSize(8);
+    lblAddFramesStart->setFont(toolBoxFont);
     lblAddFramesStart->show();
 
     lblAddFramesStartSpacer = new QLabel(widget);
@@ -97,6 +102,9 @@ void Toolbox::setupUiLabels(QWidget *widget)
 
     lblAddFramesEnd = new QLabel(widget);
     lblAddFramesEnd->setObjectName(QStringLiteral("lblAddFramesEnd"));
+    toolBoxFont = lblAddFramesEnd->font();
+    toolBoxFont.setPointSize(8);
+    lblAddFramesEnd->setFont(toolBoxFont);
     lblAddFramesEnd->show();
 
     lblAddFramesEndSpacer = new QLabel(widget);
@@ -105,6 +113,9 @@ void Toolbox::setupUiLabels(QWidget *widget)
 
     lblRemoveFramesFirst = new QLabel(widget);
     lblRemoveFramesFirst->setObjectName(QStringLiteral("lblRemoveFramesFirst"));
+    toolBoxFont = lblRemoveFramesFirst->font();
+    toolBoxFont.setPointSize(8);
+    lblRemoveFramesFirst->setFont(toolBoxFont);
     lblRemoveFramesFirst->show();
 
     lblRemoveFramesFirstSpacer = new QLabel(widget);
@@ -113,6 +124,9 @@ void Toolbox::setupUiLabels(QWidget *widget)
 
     lblRemoveFramesLast = new QLabel(widget);
     lblRemoveFramesLast->setObjectName(QStringLiteral("lblRemoveFramesLast"));
+    toolBoxFont = lblRemoveFramesLast->font();
+    toolBoxFont.setPointSize(8);
+    lblRemoveFramesLast->setFont(toolBoxFont);
     lblRemoveFramesLast->show();
 
     lblRemoveFramesLastSpacer = new QLabel(widget);
@@ -121,11 +135,10 @@ void Toolbox::setupUiLabels(QWidget *widget)
 
     lblCopyFramesFrame = new QLabel(widget);
     lblCopyFramesFrame->setObjectName(QStringLiteral("lblCopyFramesFrame"));
+    toolBoxFont = lblCopyFramesFrame->font();
+    toolBoxFont.setPointSize(8);
+    lblCopyFramesFrame->setFont(toolBoxFont);
     lblCopyFramesFrame->show();
-
-    lblTimingCurrentTimeSpacer1 = new QLabel(widget);
-    lblTimingCurrentTimeSpacer1->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer1"));
-    lblTimingCurrentTimeSpacer1->show();
 
     lblCopyFramesFrameSpacer = new QLabel(widget);
     lblCopyFramesFrameSpacer->setObjectName(QStringLiteral("lblCopyFramesFrameSpacer"));
@@ -133,6 +146,9 @@ void Toolbox::setupUiLabels(QWidget *widget)
 
     lblCopyFramesStart = new QLabel(widget);
     lblCopyFramesStart->setObjectName(QStringLiteral("lblCopyFramesStart"));
+    toolBoxFont = lblCopyFramesStart->font();
+    toolBoxFont.setPointSize(8);
+    lblCopyFramesStart->setFont(toolBoxFont);
     lblCopyFramesStart->show();
 
     lblCopyFramesStartSpacer = new QLabel(widget);
@@ -141,6 +157,9 @@ void Toolbox::setupUiLabels(QWidget *widget)
 
     lblCopyFramesEnd = new QLabel(widget);
     lblCopyFramesEnd->setObjectName(QStringLiteral("lblCopyFramesEnd"));
+    toolBoxFont = lblCopyFramesEnd->font();
+    toolBoxFont.setPointSize(8);
+    lblCopyFramesEnd->setFont(toolBoxFont);
     lblCopyFramesEnd->show();
 
     lblCopyFramesEndSpacer = new QLabel(widget);
@@ -149,22 +168,32 @@ void Toolbox::setupUiLabels(QWidget *widget)
 
     lblTimingCurrentTime = new QLabel(widget);
     lblTimingCurrentTime->setObjectName(QStringLiteral("lblTimingCurrentTime"));
+    toolBoxFont = lblTimingCurrentTime->font();
+    toolBoxFont.setPointSize(8);
+    lblTimingCurrentTime->setFont(toolBoxFont);
     lblTimingCurrentTime->show();
 
-    lblTimingCurrentTimeSpacer4 = new QLabel(widget);
-    lblTimingCurrentTimeSpacer4->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer4"));
-    lblTimingCurrentTimeSpacer4->show();
-
-    lblTimingCurrentTimeSpacer3 = new QLabel(widget);
-    lblTimingCurrentTimeSpacer3->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer3"));
-    lblTimingCurrentTimeSpacer3->show();
+    lblTimingCurrentTimeSpacer1 = new QLabel(widget);
+    lblTimingCurrentTimeSpacer1->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer1"));
+    lblTimingCurrentTimeSpacer1->show();
 
     lblTimingCurrentTimeSpacer2 = new QLabel(widget);
     lblTimingCurrentTimeSpacer2->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer2"));
     lblTimingCurrentTimeSpacer2->show();
 
+    lblTimingCurrentTimeSpacer3 = new QLabel(widget);
+    lblTimingCurrentTimeSpacer3->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer3"));
+    lblTimingCurrentTimeSpacer3->show();
+
+    lblTimingCurrentTimeSpacer4 = new QLabel(widget);
+    lblTimingCurrentTimeSpacer4->setObjectName(QStringLiteral("lblTimingCurrentTimeSpacer4"));
+    lblTimingCurrentTimeSpacer4->show();
+
     lblTimingTimeInterval = new QLabel(widget);
     lblTimingTimeInterval->setObjectName(QStringLiteral("lblTimingTimeInterval"));
+    toolBoxFont = lblTimingTimeInterval->font();
+    toolBoxFont.setPointSize(8);
+    lblTimingTimeInterval->setFont(toolBoxFont);
     lblTimingTimeInterval->show();
 
     lblTimingTimeIntervalSpacer1 = new QLabel(widget);
@@ -192,14 +221,25 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     addFramesStart = new QSpinBox(widget);
     addFramesStart->setObjectName(QStringLiteral("addFramesStart"));
     addFramesStart->connect(addFramesStart, SIGNAL(valueChanged(int)), this, SLOT(on_addFramesStart_valueChanged(int)));
+    toolBoxFont = addFramesStart->font();
+    toolBoxFont.setPointSize(8);
+    addFramesStart->setFont(toolBoxFont);
+    addFramesStart->setRange(0, 0);
 
     addFramesEnd = new QSpinBox(widget);
     addFramesEnd->setObjectName(QStringLiteral("addFramesEnd"));
     addFramesEnd->connect(addFramesEnd, SIGNAL(valueChanged(int)), this, SLOT(on_addFramesEnd_valueChanged(int)));
+    toolBoxFont = addFramesEnd->font();
+    toolBoxFont.setPointSize(8);
+    addFramesEnd->setFont(toolBoxFont);
+    addFramesEnd->setRange(0, 999999);
 
     addFramesButton = new QPushButton(widget);
     addFramesButton->setObjectName(QStringLiteral("addFramesButton"));
     addFramesButton->connect(addFramesButton, SIGNAL(clicked(bool)), this, SLOT(on_addFramesButton_clicked()));
+    toolBoxFont = addFramesButton->font();
+    toolBoxFont.setPointSize(8);
+    addFramesButton->setFont(toolBoxFont);
 
     /**
      * Set up Remove Frames Widgets
@@ -207,14 +247,25 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     removeFramesStart = new QSpinBox(widget);
     removeFramesStart->setObjectName(QStringLiteral("removeFramesStart"));
     removeFramesStart->connect(removeFramesStart, SIGNAL(valueChanged(int)), this, SLOT(on_removeFramesStart_valueChanged(int)));
+    toolBoxFont = removeFramesStart->font();
+    toolBoxFont.setPointSize(8);
+    removeFramesStart->setFont(toolBoxFont);
+    removeFramesStart->setRange(0, 0);
 
     removeFramesEnd = new QSpinBox(widget);
     removeFramesEnd->setObjectName(QStringLiteral("removeFramesEnd"));
     removeFramesEnd->connect(removeFramesEnd, SIGNAL(valueChanged(int)), this, SLOT(on_removeFramesEnd_valueChanged(int)));
+    toolBoxFont = removeFramesEnd->font();
+    toolBoxFont.setPointSize(8);
+    removeFramesEnd->setFont(toolBoxFont);
+    removeFramesEnd->setRange(0, 0);
 
     removeFramesButton = new QPushButton(widget);
     removeFramesButton->setObjectName(QStringLiteral("removeFramesButton"));
     removeFramesButton->connect(removeFramesButton, SIGNAL(clicked(bool)), this, SLOT(on_removeFramesButton_clicked()));
+    toolBoxFont = removeFramesButton->font();
+    toolBoxFont.setPointSize(8);
+    removeFramesButton->setFont(toolBoxFont);
 
     /**
      * Set up Copy Frames Widgets
@@ -222,18 +273,33 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     copyFramesIndex = new QSpinBox(widget);
     copyFramesIndex->setObjectName(QStringLiteral("copyFramesIndex"));
     copyFramesIndex->connect(copyFramesIndex, SIGNAL(valueChanged(int)), this, SLOT(on_copyFramesIndex_valueChanged(int)));
+    toolBoxFont = copyFramesIndex->font();
+    toolBoxFont.setPointSize(8);
+    copyFramesIndex->setFont(toolBoxFont);
+    copyFramesIndex->setRange(0, 0);
 
     copyFramesStart = new QSpinBox(widget);
     copyFramesStart->setObjectName(QStringLiteral("copyFramesStart"));
     copyFramesStart->connect(copyFramesStart, SIGNAL(valueChanged(int)), this, SLOT(on_copyFramesStart_valueChanged(int)));
+    toolBoxFont = copyFramesStart->font();
+    toolBoxFont.setPointSize(8);
+    copyFramesStart->setFont(toolBoxFont);
+    copyFramesStart->setRange(0, 0);
 
     copyFramesEnd = new QSpinBox(widget);
     copyFramesEnd->setObjectName(QStringLiteral("copyFramesEnd"));
     copyFramesEnd->connect(copyFramesEnd, SIGNAL(valueChanged(int)), this, SLOT(on_copyFramesEnd_valueChanged(int)));
+    toolBoxFont = copyFramesEnd->font();
+    toolBoxFont.setPointSize(8);
+    copyFramesEnd->setFont(toolBoxFont);
+    copyFramesEnd->setRange(0, 0);
 
     copyFramesButton = new QPushButton(widget);
     copyFramesButton->setObjectName(QStringLiteral("copyFramesButton"));
     copyFramesButton->connect(copyFramesButton, SIGNAL(clicked(bool)), this, SLOT(on_copyFramesButton_clicked()));
+    toolBoxFont = copyFramesButton->font();
+    toolBoxFont.setPointSize(8);
+    copyFramesButton->setFont(toolBoxFont);
 
     /**
      * Set up Timing Widgets
@@ -241,11 +307,19 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     currentTime = new QTimeEdit(widget);
     currentTime->setObjectName(QStringLiteral("currentTime"));
     currentTime->connect(currentTime, SIGNAL(timeChanged(QTime)), this, SLOT(on_currentTime_timeChanged(QTime)));
+    toolBoxFont = currentTime->font();
+    toolBoxFont.setPointSize(8);
+    currentTime->setFont(toolBoxFont);
+    currentTime->setDisplayFormat("mm:ss.zzz");
 
     timeInterval = new QTimeEdit(widget);
     timeInterval->setObjectName(QStringLiteral("timeInterval"));
     timeInterval->setTimeSpec(Qt::LocalTime);
     timeInterval->connect(timeInterval, SIGNAL(timeChanged(QTime)), this, SLOT(on_timeInterval_timeChanged(QTime)));
+    toolBoxFont = timeInterval->font();
+    toolBoxFont.setPointSize(8);
+    timeInterval->setFont(toolBoxFont);
+    timeInterval->setDisplayFormat("mm:ss.zzz");
 }
 
 void Toolbox::setupUiLayouts(QWidget *widget)
@@ -375,29 +449,29 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
     /**
      * Retranslate Add Frames Layout
      */
-    lblAddFramesStart->setText(QApplication::translate("Toolbox", "Start", 0));//
+    lblAddFramesStart->setText(QApplication::translate("Toolbox", "Insertion Index", 0));//
     lblAddFramesStartSpacer->setText(QString());
-    lblAddFramesEnd->setText(QApplication::translate("Toolbox", "End", 0));//
+    lblAddFramesEnd->setText(QApplication::translate("Toolbox", "Number of Frames", 0));//
     lblAddFramesEndSpacer->setText(QString());
     addFramesButton->setText(QApplication::translate("Toolbox", "Add Frames", 0));
 
     /**
      * Retranslate Remove Frames Layout
      */
-    lblRemoveFramesFirst->setText(QApplication::translate("Toolbox", "First", 0));//
+    lblRemoveFramesFirst->setText(QApplication::translate("Toolbox", "Starting Index", 0));//
     lblRemoveFramesFirstSpacer->setText(QString());
-    lblRemoveFramesLast->setText(QApplication::translate("Toolbox", "Last", 0));//
+    lblRemoveFramesLast->setText(QApplication::translate("Toolbox", "Ending Index", 0));//
     lblRemoveFramesLastSpacer->setText(QString());
     removeFramesButton->setText(QApplication::translate("Toolbox", "Remove Frames", 0));
 
     /**
      * Retranslate Copy Frames Layout
      */
-    lblCopyFramesFrame->setText(QApplication::translate("Toolbox", "Frame", 0));//
+    lblCopyFramesFrame->setText(QApplication::translate("Toolbox", "Insertion Index", 0));//
     lblCopyFramesFrameSpacer->setText(QString());
-    lblCopyFramesStart->setText(QApplication::translate("Toolbox", "Start", 0));//
+    lblCopyFramesStart->setText(QApplication::translate("Toolbox", "Copy Starting Index", 0));//
     lblCopyFramesStartSpacer->setText(QString());
-    lblCopyFramesEnd->setText(QApplication::translate("Toolbox", "End", 0));//
+    lblCopyFramesEnd->setText(QApplication::translate("Toolbox", "Copy Ending Index", 0));//
     lblCopyFramesEndSpacer->setText(QString());
     copyFramesButton->setText(QApplication::translate("Toolbox", "Copy Frames", 0));
 
@@ -405,13 +479,13 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
      * Retranslate Timing Layout
      */
     lblTimingCurrentTime->setText(QApplication::translate("Toolbox", "Current Time", 0));//
-    currentTime->setDisplayFormat(QApplication::translate("Toolbox", "h:mm.ss", 0));
+    currentTime->setDisplayFormat(QApplication::translate("Toolbox", "mm:ss.zzz", 0));
     lblTimingCurrentTimeSpacer4->setText(QString());
     lblTimingCurrentTimeSpacer3->setText(QString());
     lblTimingCurrentTimeSpacer2->setText(QString());
     lblTimingCurrentTimeSpacer1->setText(QString());
     lblTimingTimeInterval->setText(QApplication::translate("Toolbox", "Time interval", 0));//
-    timeInterval->setDisplayFormat(QApplication::translate("Toolbox", "h:mm.ss", 0));
+    timeInterval->setDisplayFormat(QApplication::translate("Toolbox", "mm:ss.zzz", 0));
     lblTimingTimeIntervalSpacer1->setText(QString());
     lblTimingTimeIntervalSpacer2->setText(QString());
     lblTimingTimeIntervalSpacer3->setText(QString());
@@ -428,6 +502,9 @@ void Toolbox::setupUiColorDialogue(){
     colorDialog->show();
     colorDialog->setGeometry(QRect(0,0,tabColor->width(),tabColor->height()));
     colorDialog->connect(colorDialog, SIGNAL(currentColorChanged(QColor)), this, SLOT(on_colorDialog_currentColorChanged(QColor)));
+    toolBoxFont = colorDialog->font();
+    toolBoxFont.setPointSize(8);
+    colorDialog->setFont(toolBoxFont);
 
     /**
      * Set Geometry of the tab widget to match the color dialogue box with a bit of a buffer each direction to make sure
@@ -491,10 +568,14 @@ void Toolbox::on_copyFramesButton_clicked()
 
 void Toolbox::on_currentTime_timeChanged(QTime timeVal){
     qDebug("HERE! on_currentTime_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
+    int ms = (timeVal.minute() * 60000) + (timeVal.second() * 1000) + (timeVal.msec());
+    qDebug("HERE! on_currentTime_timeChanged in ms: %d", ms);
 }
 
 void Toolbox::on_timeInterval_timeChanged(QTime timeVal){
     qDebug("HERE! on_timeInterval_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
+    int ms = (timeVal.minute() * 60000) + (timeVal.second() * 1000) + (timeVal.msec());
+    qDebug("HERE! on_timeInterval_timeChanged in ms: %d", ms);
 }
 
 void Toolbox::on_colorDialog_currentColorChanged(QColor colorVal)

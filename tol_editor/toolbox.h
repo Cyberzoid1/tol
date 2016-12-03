@@ -28,6 +28,7 @@
 #include <QTime>
 #include <QColorDialog>
 #include <QColor>
+#include <QFont>
 
 /**
  * Toolbox class definition - this will be worked on
@@ -38,6 +39,11 @@ class Toolbox : public QMainWindow
    Q_OBJECT
 
 public:
+    /**
+     * Font Widgets
+     */
+    QFont toolBoxFont;
+
     /**
      * Tab Widgets
      */
@@ -131,6 +137,8 @@ public:
      * Toolbox Setup Functions
      */
     void setupUi(QWidget *Toolbox);
+
+    void setupUiFont();
 
     void setupUiTabs(QWidget *Toolbox);
 
