@@ -135,7 +135,7 @@ void Frame::setStartTime(int time)
  */
 std::string Frame::toString()
 {
-    std::string frameString = std::to_string(startTime);
+    std::string frameString = std::to_string(startTime) + "\n";
     
     for(auto columnIt = cells.begin(); columnIt != cells.end(); ++columnIt) {
         
