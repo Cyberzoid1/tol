@@ -14,13 +14,16 @@ MainWindow::MainWindow(QWidget *parent) :
     animation = new Animation();
     ui->setupUi(this);
 
+    outerWrapper = new QWidget;
     hlayout = new QHBoxLayout;
-    wrapper = new QWidget;
-    toolbox = new Toolbox(wrapper);
-    hlayout->addWidget(toolbox);
-    wrapper->setLayout(hlayout);
+    toolbox = new Toolbox(outerWrapper);
+    editor = new EditorWindow(outerWrapper);
 
-    this->setCentralWidget(wrapper);
+    editor->move(toolbox->width() + 30,0);
+
+    outerWrapper->setLayout(hlayout);
+
+    this->setCentralWidget(outerWrapper);
 
     createActions();
     createMenus();

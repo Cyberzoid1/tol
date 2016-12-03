@@ -15,13 +15,14 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QWidget>
 #include "animation.h"
 #include "toolbox.h"
+#include "editorwindow.h"
 
 namespace Ui {
 class MainWindow;
-class EditorWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -39,8 +40,9 @@ private slots:
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object
     Toolbox *toolbox;
+    EditorWindow *editor;
+    QWidget *outerWrapper;
     QHBoxLayout *hlayout;
-    QWidget *wrapper;
 
     Animation *animation; //!< Reference to animation storage object
 
