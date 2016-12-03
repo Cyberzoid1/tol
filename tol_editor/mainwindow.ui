@@ -19,10 +19,20 @@
     <rect>
      <x>0</x>
      <y>0</y>
+<<<<<<< HEAD
      <width>806</width>
      <height>21</height>
     </rect>
    </property>
+=======
+     <width>891</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
+>>>>>>> 3d95b330d556c364226f54eb099691797c0b58f3
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
