@@ -50,9 +50,10 @@ RGB::RGB(std::string hex)
  * constructor that initializes the RGB object to the
  * color passed in after converting it from HSL (Hue Saturation
  * Lightness) to RGB color format.
- * @param an integer representing an angle of hue between 0 and 360.
- * @param a float representing saturation, between 0 and 1.
- * @param a float representing lightness, between 0 and 1.
+ * @param hue An integer representing an angle of hue between 0 and 360.
+ * @param saturation A float representing saturation, between 0 and 1.
+ * @param lightness A float representing lightness, between 0 and 1.
+ *
  */
 RGB::RGB(int hue, float saturation, float lightness)
 {
@@ -254,7 +255,7 @@ std::string RGB::toString()
  * Returns a color value in the range of 0 to 255.
  * @param cValue An integer representing the raw color passed into the different
  * setters and constructors.
- * @reentrant An int value between 0 and 255, if the value
+ * @return An int value between 0 and 255, if the value
  * was over 255 then value will be modded with 255.
  */
 int RGB::checkRange(int cValue)
