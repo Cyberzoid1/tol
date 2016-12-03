@@ -16,10 +16,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     outerWrapper = new QWidget;
     hlayout = new QHBoxLayout;
-    toolbox = new Toolbox(outerWrapper);
-    editor = new EditorWindow(outerWrapper);
+    tbParent = new QWidget;
+    toolbox = new Toolbox(tbParent);
+    edParent = new QWidget;
+    editor = new EditorWindow(edParent);
 
-    editor->move(toolbox->width() + 30,0);
+    hlayout->addWidget(tbParent);
+    hlayout->addWidget(edParent);
 
     outerWrapper->setLayout(hlayout);
 

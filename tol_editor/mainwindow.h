@@ -39,10 +39,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object
-    Toolbox *toolbox;
-    EditorWindow *editor;
-    QWidget *outerWrapper;
-    QHBoxLayout *hlayout;
+    Toolbox *toolbox; //!< Reference to toolbox object
+    EditorWindow *editor; //!< Reference to editor object
+    QWidget *outerWrapper; //!< Reference to wrapper element that serves as MainWindow's central widget
+    QHBoxLayout *hlayout; //!< Reference to horizontal layout that contains the toolbox and editor
+    QWidget *tbParent; //!< Reference to widget that acts as the toolbox's parent
+    QWidget *edParent; //!< Reference to widget that acts as the editor's parent
 
     Animation *animation; //!< Reference to animation storage object
 
