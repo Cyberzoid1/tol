@@ -17,7 +17,6 @@
 
 namespace Ui {
 class MainWindow;
-class Toolbox;
 }
 
 class MainWindow : public QMainWindow
