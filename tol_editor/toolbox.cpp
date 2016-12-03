@@ -65,7 +65,7 @@ void Toolbox::setupUi(QWidget *parent)
 void Toolbox::setupUiTabs(QWidget *Toolbox){
     tabParent = new QTabWidget(Toolbox);
     tabParent->setObjectName(QStringLiteral("tabParent"));
-    tabParent->setGeometry(QRect(0, 0, Toolbox->width(), Toolbox->height()));//QRect(10, 10, 511, 621)
+    tabParent->setGeometry(QRect(0, 0, Toolbox->width(), Toolbox->height()));
     tabParent->setAutoFillBackground(false);
     tabParent->show();
 
@@ -84,7 +84,7 @@ void Toolbox::setupUiTabs(QWidget *Toolbox){
 void Toolbox::setupUiMasterWidget(){
     widget = new QWidget(tabEdit);
     widget->setObjectName(QStringLiteral("widget"));
-    widget->setGeometry(QRect(0, 0, tabParent->width(), tabParent->height())); //QRect(9, 9, 481, 581)
+    widget->setGeometry(QRect(0, 0, tabParent->width(), tabParent->height()));
 }
 
 void Toolbox::setupUiLabels(QWidget *widget)
