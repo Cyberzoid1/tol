@@ -45,3 +45,8 @@ Makefile*
 # QtCtreator CMake
 CMakeLists.txt.user*
 
+# Doxygen Output
+
+docs/Doxygen/html
+docs/Doxygen/latex
+

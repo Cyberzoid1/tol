@@ -12,6 +12,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
+#include "animation.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,8 +28,24 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void open();
+    void save();
+
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object
+<<<<<<< HEAD
+=======
+
+    Animation *animation; //!< Reference to animation storage object
+
+    QMenu *fileMenu; //!< Reference to the MainWindow's file menu
+    QAction *openAct; //!< Reference to the open action in the file menu
+    QAction *saveAct; //!< Reference to the save action in the file menu
+
+    void createActions(); //!< Helper method to instantiate actions
+    void createMenus(); //!< Helper method to instantiate menus
+>>>>>>> master
 };
 
 #endif // MAINWINDOW_H

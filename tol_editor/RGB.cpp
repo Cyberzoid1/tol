@@ -32,8 +32,13 @@ RGB::RGB(int red, int green, int blue)
 /**
  * constructor that initializes the RGB object to the
  * color to the color passed in after converting it from HTNL Hex to
+<<<<<<< HEAD
  * RGB
  * @param hex A string object representing a 6 bit hexidecimal value
+=======
+ * RGB.
+ * @param hex A string object representing a 6 bit hexidecimal value.
+>>>>>>> master
  */
 RGB::RGB(std::string hex)
 {
@@ -50,9 +55,16 @@ RGB::RGB(std::string hex)
  * constructor that initializes the RGB object to the
  * color passed in after converting it from HSL (Hue Saturation
  * Lightness) to RGB color format.
+<<<<<<< HEAD
  * @param an integer representing an angle of hue between 0 and 360
  * @param a float representing saturation, between 0 and 1
  * @param a float representing lightness, between 0 and 1
+=======
+ * @param hue An integer representing an angle of hue between 0 and 360.
+ * @param saturation A float representing saturation, between 0 and 1.
+ * @param lightness A float representing lightness, between 0 and 1.
+ *
+>>>>>>> master
  */
 RGB::RGB(int hue, float saturation, float lightness)
 {
@@ -99,7 +111,9 @@ RGB::~RGB()
 }
 
 /**
- * Returns an integer value representing the amount of red
+ * Returns an integer value representing the amount of red.
+ * @return An int between 0 and 255 representing the red component of
+ * the RGB value.
  */
 int RGB::getRed()
 {
@@ -107,8 +121,9 @@ int RGB::getRed()
 }
 
 /**
- * Sets the red component of the color
- * @param An int representing the amount of red
+ * Sets the red component of the color.
+ * @param red An int representing the amount of red.
+ * @return Void.
  */
 void RGB::setRed(int red)
 {
@@ -116,7 +131,9 @@ void RGB::setRed(int red)
 }
 
 /**
- * Returns an integer value representing the amount of green
+ * Returns an integer value representing the amount of green.
+ * @return An int between 0 and 255 representing the green component of
+ * the RGB value.
  */
 int RGB::getGreen()
 {
@@ -124,8 +141,9 @@ int RGB::getGreen()
 }
 
 /**
- * Sets the green component of the color
- * @param An int representing the amount of green
+ * Sets the green component of the color.
+ * @param green An int representing the amount of green.
+ * @return Void.
  */
 void RGB::setGreen(int green)
 {
@@ -133,7 +151,9 @@ void RGB::setGreen(int green)
 }
 
 /**
- * Returns an integer value representing the amount of blue
+ * Returns an integer value representing the amount of blue.
+ * @return An int between 0 and 255 representing the blue component of
+ * the RGB value.
  */
 int RGB::getBlue()
 {
@@ -141,8 +161,9 @@ int RGB::getBlue()
 }
 
 /**
- * Sets the blue component of the color
- * @param An int representing the amount of blue
+ * Sets the blue component of the color.
+ * @param blue An int representing the amount of blue.
+ * @return Void.
  */
 void RGB::setBlue(int blue)
 {
@@ -150,10 +171,11 @@ void RGB::setBlue(int blue)
 }
 
 /**
- * Sets the color of the RGB class using 3 intigers
- * @param integer value representing amount of red
- * @param integer value representing amount of green
- * @param integer value representing amount of blue
+ * Sets the color of the RGB class using 3 intigers.
+ * @param red An integer value representing amount of red.
+ * @param green An integer value representing amount of green.
+ * @param blue An integer value representing amount of blue.
+ * @return Void.
  */
 void RGB::setColor(int red, int green, int blue)
 {
@@ -165,8 +187,9 @@ void RGB::setColor(int red, int green, int blue)
 
 /**
  * Sets the color of the RGB class using a 
- * string representation of a hex value
- * @param a string value representing a 6 bit hexidecimal value
+ * string representation of a hex value.
+ * @param hex A string value representing a 6 bit hexidecimal value.
+ * @return Void.
  */
 void RGB::setColor(std::string hex)
 {
@@ -180,10 +203,11 @@ void RGB::setColor(std::string hex)
 }
 
 /**
- * Converts Hue, Saturation, and Lightness to RGB and sets the color
- * @param An integer representing an angle of hue between 0 and 360
- * @param A float representing saturation, between 0 and 1
- * @param A float representing lightness, between 0 and 1
+ * Converts Hue, Saturation, and Lightness to RGB and sets the color.
+ * @param hue An integer representing an angle of hue between 0 and 360.
+ * @param saturation A float representing saturation, between 0 and 1.
+ * @param lightness A float representing lightness, between 0 and 1.
+ * @return Void.
  */
 void RGB::setColor(int hue, float saturation, float lightness)
 {
@@ -223,7 +247,9 @@ void RGB::setColor(int hue, float saturation, float lightness)
 }
 
 /**
- * Converts the RGB class to a string suitable for output
+ * Converts the RGB class to a string suitable for output.
+ * @return A string value containing the red green blue values
+ * each seperated by a single space.
  */
 std::string RGB::toString()
 {
@@ -237,7 +263,11 @@ std::string RGB::toString()
 }
 
 /**
- * Returns a color value in the range of 0 to 255
+ * Returns a color value in the range of 0 to 255.
+ * @param cValue An integer representing the raw color passed into the different
+ * setters and constructors.
+ * @return An int value between 0 and 255, if the value
+ * was over 255 then value will be modded with 255.
  */
 int RGB::checkRange(int cValue)
 {
