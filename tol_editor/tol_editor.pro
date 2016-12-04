@@ -15,14 +15,11 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     editorwindow.cpp \
-    editorframe.cpp
-
+    frameelement.cpp
 
 HEADERS  += mainwindow.h \
-     editorwindow.h \
-     editorframe.h
-
-
+    editorwindow.h \
+    frameelement.h
 
 FORMS    += mainwindow.ui \
-    editorwindow.ui
+editorwindow.ui

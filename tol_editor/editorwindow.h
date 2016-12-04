@@ -1,11 +1,26 @@
+/**
+* @author Zachary Spence & Adonay Berhe
+* @date 11/18/2016
+* @class EditorWindow
+* @brief This is the header file for the EditorWindow class.
+* @details This class is utilized to setup the editing window of
+* the UI in the Tower of Light's project as well as a list of @frameElement
+* nodes and the rules defining their setup and movement in the window.
+*/
+
+
+
+
 #ifndef EDITORWINDOW_H
 #define EDITORWINDOW_H
 
-#include "editorframe.h"
-#include <list>
-#include <iterator>
-#include <QtAlgorithms>
+#include <QWidget>
+#include <QFrame>
+#include <frameelement.h>
+#include <QPushButton>
 
+#define nrows 20
+#define ncolumns 8
 
 namespace Ui {
 class EditorWindow;
@@ -16,33 +31,27 @@ class EditorWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit EditorWindow(QWidget *parent = 0);
-    ~EditorWindow();
-    QPushButton * createCell();
-    std::list<EditorFrame>::iterator getCurr();
-    std::list<EditorFrame>::iterator getPrev();
-    std::list<EditorFrame>::iterator getNext();
-    bool isCurrent();
-public slots:
-//    void upHandler();
-//    void downHandler();
-//    void rightHandler();
-//    void leftHandler();
-//    void duplicateHandler();
-//    void addFrameHandler();
-//    void clearFrameHandler();
-//    void deleteFrameHandler();
-//    void inputTanHandler();
+    explicit EditorWindow(QWidget *parent = 0);     // constructor
+    ~EditorWindow();                                // destructor
 
+//Methods
+    void setup();
+    void setCurrentFrame();
+    QPushButton* createCell();                      // create Cells
+
+
+public slots:
+    void update();                                  // for the go-left UI button
+    void lower();                                   // for the go-right UI Button
 
 private:
     Ui::EditorWindow *ui;
-//    EditorFrame *eFrame;
-    std::list<EditorFrame> frameList;
-    std::list<EditorFrame>::iterator prev, next, curr;
-    bool isCurr;
+    std::list<frameElement> listFrames;             //!< List containing the ordered sequence of frames in the UI
+    std::list<frameElement>::iterator currFrame;    //!< An iterator for referencing the frame in listFrames that is current viewed
 
 };
+
+
 
 
 
