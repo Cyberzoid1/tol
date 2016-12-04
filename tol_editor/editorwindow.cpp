@@ -26,89 +26,6 @@ EditorWindow::EditorWindow(QWidget *parent) :
     ui(new Ui::EditorWindow)
 {
     ui->setupUi(this);
-
-
-
-    /**
-     * This creates an initial frameElement p for the
-     * initial frame that will be in the "previous" or
-     * leftmost position in the UI.  It assigns a name,
-     * a height, a width, whether it is the currently viewed
-     * frame, ties it to a specific UI frame, and sets up
-     * its grid.  It then also fills that grid with all of
-     * the cells required by height and width.
-     */
-
-
-
-    frameElement p;                                 // for adding the first pre-set frame to the list
-    p.name = 1;
-    p.self = ui->previousFrame;
-    setup( p );                                     // set up the cells
-    listFrames.push_front(p);                       // push it to the front of the list
-
-    /**
-     * This creates an initial frameElement q for the
-     * initial frame that will be in the "current" or
-     * center position in the UI.  It assigns a name,
-     * a height, a width, whether it is the currently viewed
-     * frame, ties it to a specific UI frame, and sets up
-     * its grid.  It then also fills that grid with all of
-     * the cells required by height and width.
-     */
-
-    frameElement q;                                 // second frame
-    q.name = 2;                                     // second frame, #2
-    q.isCurrent = true;                             // starts out as the current frame
-    q.self = ui->currentFrame;                      // tying to appropriate UI element
-    setup( q );
-    listFrames.push_back( q );                        // put it after the first frame in the list
-
-    /**
-     * This creates an initial frameElement r for the
-     * initial frame that will be in the "next" or
-     * rightmost position in the UI.  It assigns a name,
-     * a height, a width, whether it is the currently viewed
-     * frame, ties it to a specific UI frame, and sets up
-     * its grid.  It then also fills that grid with all of
-     * the cells required by height and width.
-     */
-
-    frameElement r;                                 // third pre-set frame
-    r.name = 3;                                     // third frame, #3
-    r.self = ui->nextFrame;
-    setup( r );
-    listFrames.push_back(r);                        // last pre-set frame, so placed at the end of the list
-
-
-
-    // BEGIN NEW STUFF
-
-    /** These lines apply the developed grids of the frameElements
-      * to the UI frames themselves.  Since the first 3 frames
-      * are defaults, then this can be done statically
-      */
-
-    q.self->setLayout( q.grid );
-    p.self->setLayout( p.grid );
-    r.self->setLayout( r.grid );
-
-    /** These lines setup an iterator on the list of frameElements
-      * The iterator, currFrame, was defined in the .h and should
-      * always point the to the frame currently being viewed
-      * Initially, that should be the middle frame in the list
-      */
-
-
-    for( currFrame = listFrames.begin(); currFrame != listFrames.end(); currFrame++ )  // Setup the iterator that points to the current frame
-    {
-        if( currFrame->isCurrent == true )            // Current Frame will always have isCurrent == true
-        {
-            break;
-        }
-    }
-
-    // END NEW STUFF
 }
 
 /**
@@ -318,17 +235,15 @@ void EditorWindow::lower()
 
 }
 
-void EditorWindow::setup( frameElement q )
+void EditorWindow::setup( frameElement q, Frame data)
 {
 
-    for( int i = 0; i < nrows; i++ )                   // defaults
+    for( int i = 0; i < q.width; i++ )
     {
-        for( int j = 0; j < ncolumns; j++ )
+        for( int j = 0; j < q.height; j++ )
         {
-            q.cellGrid[j][i].setColor( 0, 0, 0 );
-            currCells = createCell(RGB(100,100,100));
+            currCells = createCell(data.getCellColor(i, j));
             q.grid->addWidget( currCells, i, j, 0 );
-            q.cellGrid[j][i].setCell( currCells );
         }
     }
 
@@ -383,4 +298,36 @@ void EditorWindow::moveRght( std::list<frameElement>::iterator q )
     q->self->resize( 210, 260 );
     q->self->show();
     q->isCurrent = false;
+}
+/**
+ * Called after reading in an animation from a .tan2 file.
+ * Forms a list of frameElements corresponding to the data frames.
+ * Sets up the first three frames in the editor section.
+ * @param animation
+ */
+void EditorWindow::generateUiFrames(Animation *animation)
+{
+    std::list<Frame> frames = animation->getFrames();
+    for (auto it = frames.begin(); it != frames.end(); it++){
+        frameElement newFrameEl(0,
+                                animation->getHeight(),
+                                animation->getWidth(),
+                                false);
+        setup(newFrameEl, *it);
+        listFrames.push_back(newFrameEl);
+    }
+
+    //TODO: implement with helper function
+    //TODO: modify transition code to navigate through the whole list
+    frameElement prev = *listFrames.begin();
+    prev.self = ui->previousFrame;
+    prev.self->setLayout(prev.grid);
+
+    frameElement curr = *std::next(listFrames.begin(), 1);
+    curr.self = ui->currentFrame;
+    curr.self->setLayout(curr.grid);
+
+    frameElement next = *std::next(listFrames.begin(), 2);
+    next.self = ui->nextFrame;
+    next.self->setLayout(next.grid);
 }

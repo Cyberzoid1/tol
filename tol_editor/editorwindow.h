@@ -20,10 +20,8 @@
 #include <QPushButton>
 #include <list>
 #include <iterator>
-#include <RGB.h>
-
-#define nrows 20
-#define ncolumns 8
+#include "RGB.h"
+#include "animation.h"
 
 namespace Ui {
 class EditorWindow;
@@ -37,11 +35,13 @@ public:
     explicit EditorWindow(QWidget *parent = 0);     // constructor
     ~EditorWindow();                                // destructor
 
-    void setup( frameElement q );
+    void setup( frameElement q, Frame data);
     QPushButton* createCell(RGB color);                      // create Cells
     void moveLeft( std::list<frameElement>::iterator q );
     void moveCent( std::list<frameElement>::iterator q );
     void moveRght( std::list<frameElement>::iterator q );
+
+    void generateUiFrames(Animation *animation);
 
 public slots:
     void update();                                  // for the go-left UI button
