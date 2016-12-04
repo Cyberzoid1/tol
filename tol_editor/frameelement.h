@@ -41,7 +41,6 @@ public:
     QFrame* self;                               //!< A pointer to the UI frame belonging to the node
     QGridLayout *grid;                          //!< A pointer to the grid layout of the node
     bool isCurrent;                             //!< A boolean to hold whether the node is the current frame being viewed
-    cell cellGrid[8][20];                       //!< An array of cells for the grid
     int name;                                   //!< A name, which is the number identifying the frame
     int width;                                  //!< A number holding the width of the frame
     int height;                                 //!< A number holding the height of the frame
