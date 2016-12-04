@@ -20,6 +20,7 @@
 #include <QPushButton>
 #include <list>
 #include <iterator>
+#include <RGB.h>
 
 #define nrows 20
 #define ncolumns 8
@@ -37,7 +38,7 @@ public:
     ~EditorWindow();                                // destructor
 
     void setup( frameElement q );
-    QPushButton* createCell();                      // create Cells
+    QPushButton* createCell(RGB color);                      // create Cells
     void moveLeft( std::list<frameElement>::iterator q );
     void moveCent( std::list<frameElement>::iterator q );
     void moveRght( std::list<frameElement>::iterator q );

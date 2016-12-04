@@ -326,7 +326,7 @@ void EditorWindow::setup( frameElement q )
         for( int j = 0; j < ncolumns; j++ )
         {
             q.cellGrid[j][i].setColor( 0, 0, 0 );
-            currCells = createCell();
+            currCells = createCell(RGB(100,100,100));
             q.grid->addWidget( currCells, i, j, 0 );
             q.cellGrid[j][i].setCell( currCells );
         }
@@ -338,17 +338,25 @@ void EditorWindow::setup( frameElement q )
  * @brief EditorWindow::createCell
  * this creates a new QPushbutton with
  * our own style.
+ * @param color RGB object containing the color value
  * @return a pointer to a QPushButton, as
  * that is the implementation of our cells
  * in the UI
  */
 
 
-QPushButton* EditorWindow::createCell()                                         // Definition of the createCell function
+QPushButton* EditorWindow::createCell(RGB color)                                         // Definition of the createCell function
 {
     QPushButton* newCell;                                                       // create the new cell
     newCell = new QPushButton;                                                  // assign it some memory
-    newCell->setStyleSheet( "border: 1px solid;" "background-color: blue");     // Set the style
+    QString colorStr = "background-color: rgb(" +
+            QString::number(color.getRed()) +
+            "," +
+            QString::number(color.getGreen()) +
+            "," +
+            QString::number(color.getBlue()) +
+            ");";
+    newCell->setStyleSheet( "border: 1px solid;" + colorStr);     // Set the style
     return newCell;                                                             // return it
 }
 
