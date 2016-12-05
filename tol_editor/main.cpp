@@ -22,10 +22,5 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    /**
-     * Toolbox Creation:
-     */
-    Toolbox *t = new Toolbox(&w);
-
     return a.exec();
 }

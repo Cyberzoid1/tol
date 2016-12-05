@@ -29,6 +29,7 @@
 #include <QColorDialog>
 #include <QColor>
 #include <QFont>
+#include "animation.h"
 
 /**
  * Toolbox class definition - this will be worked on
@@ -127,10 +128,12 @@ public:
      */
     QColorDialog *colorDialog;
 
+    Animation *animPtr;
+
     /**
      * Toolbox Constructor/ Destructor Functions
      */
-    explicit Toolbox(QWidget *parent = 0);
+    explicit Toolbox(QWidget *parent = 0, Animation *aPtr = 0);
     ~Toolbox();
 
     /**
@@ -153,6 +156,14 @@ public:
     void setupUiColorDialogue();
 
     void retranslateUi(QWidget *Toolbox);
+private:
+    int addFramesInsertionIndex = 0;
+    int addFramesNumberOfFrames = 0;
+    int removeFramesDeletionIndex = 0;
+    int removeFramesNumberOfFrames = 0;
+    int copyFramesInsertionIndex = 0;
+    int copyFramesStartIndex = 0;
+    int copyFramesEndIndex = 0;
 
 public slots:
 
