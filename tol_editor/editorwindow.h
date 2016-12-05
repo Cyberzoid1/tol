@@ -42,6 +42,7 @@ public:
     void moveRght( std::list<frameElement>::iterator q );
 
     void generateUiFrames(Animation *animation);
+    void showFrames(std::vector<frameElement> frames);
 
 public slots:
     void update();                                  // for the go-left UI button

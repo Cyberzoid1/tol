@@ -317,17 +317,31 @@ void EditorWindow::generateUiFrames(Animation *animation)
         listFrames.push_back(newFrameEl);
     }
 
-    //TODO: implement with helper function
     //TODO: modify transition code to navigate through the whole list
-    frameElement prev = *listFrames.begin();
-    prev.self = ui->previousFrame;
-    prev.self->setLayout(prev.grid);
-
-    frameElement curr = *std::next(listFrames.begin(), 1);
-    curr.self = ui->currentFrame;
-    curr.self->setLayout(curr.grid);
-
-    frameElement next = *std::next(listFrames.begin(), 2);
-    next.self = ui->nextFrame;
-    next.self->setLayout(next.grid);
+    std::vector<frameElement> firstFrames = {
+        *listFrames.begin(),
+        *std::next(listFrames.begin(), 1),
+        *std::next(listFrames.begin(), 2)
+    };
+    showFrames(firstFrames);
+}
+/**
+ * Setup the UI to contain the specified frameElements in the previousFrame,
+ * currentFrame, and nextFrame positions in the EditorWindow.
+ * @param frames vector of three frameElements
+ * @return void
+ */
+void EditorWindow::showFrames(std::vector<frameElement> frames)
+{
+    std::vector<QFrame *> uiSlots = {
+        ui->previousFrame,
+        ui->currentFrame,
+        ui->nextFrame
+    };
+    if (frames.size() != uiSlots.size())
+        return;
+    for (int i = 0; i < uiSlots.size(); i++){
+        frames[i].self = uiSlots[i];
+        frames[i].self->setLayout(frames[i].grid);
+    }
 }
