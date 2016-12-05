@@ -307,6 +307,9 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     /**
      * Set up Timing Widgets
      */
+    QTime defaultTime;
+    defaultTime.setHMS(0,0,0,100);
+
     currentTime = new QTimeEdit(widget);
     currentTime->setObjectName(QStringLiteral("currentTime"));
     currentTime->connect(currentTime, SIGNAL(timeChanged(QTime)), this, SLOT(on_currentTime_timeChanged(QTime)));
@@ -314,6 +317,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont.setPointSize(8);
     currentTime->setFont(toolBoxFont);
     currentTime->setDisplayFormat("mm:ss.zzz");
+    //currentTime->setTime(defaultTime);
 
     timeInterval = new QTimeEdit(widget);
     timeInterval->setObjectName(QStringLiteral("timeInterval"));
@@ -323,6 +327,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont.setPointSize(8);
     timeInterval->setFont(toolBoxFont);
     timeInterval->setDisplayFormat("mm:ss.zzz");
+    timeInterval->setTime(defaultTime);
 }
 
 void Toolbox::setupUiLayouts(QWidget *widget)
