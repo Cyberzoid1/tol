@@ -76,9 +76,12 @@ EditorWindow::EditorWindow(QWidget *parent) :
       * are defaults, then this can be done statically
       */
 
-    ui->currentFrame->setLayout( q->grid );
-    ui->previousFrame->setLayout( p->grid );
-    ui->nextFrame->setLayout( r->grid );
+    std::list<frameElement>::iterator temp = listFrames.begin();
+
+    ui->currentFrame->setLayout((*temp).grid);
+    ui->previousFrame->setLayout((*++temp).grid);
+    ui->nextFrame->setLayout((*++temp).grid);
+
 
     /** These lines setup an iterator on the list of frameElements
       * The iterator, currFrame, was defined in the .h and should

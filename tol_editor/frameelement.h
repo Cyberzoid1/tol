@@ -14,7 +14,7 @@
 
 #ifndef FRAMEELEMENT_H
 #define FRAMEELEMENT_H
-
+//#include <QObject>
 #include <QWidget>
 #include <QFrame>
 #include <QGridLayout>
@@ -31,10 +31,12 @@ public:
 };
 
 
-class frameElement                             // nodes for the list of ui frames
+class frameElement: public QObject                             // nodes for the list of ui frames
 {
+    Q_OBJECT
 public:
     frameElement();
+    frameElement(const frameElement &obj);      //!< Explicit copy constructor
     frameElement(int Name, int Height, int Width, bool Curr, QFrame * Self);
     QFrame* self;                               //!< A pointer to the UI frame belonging to the node
     QGridLayout *grid;                          //!< A pointer to the grid layout of the node

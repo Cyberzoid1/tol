@@ -26,6 +26,18 @@ frameElement::frameElement()
     width = 0;
     isCurrent = false;
     grid = new QGridLayout();
+    self = new QFrame();
+}
+frameElement::frameElement(const frameElement &obj)
+{
+    grid = new QGridLayout();
+    grid = obj.grid;
+    self = new QFrame();
+    self = obj.self;
+    isCurrent = obj.isCurrent;
+    name = obj.name;
+    width = obj.width;
+    height = obj.height;
 }
 
 void frameElement::setCurrClickable()
@@ -46,4 +58,9 @@ void cell::setColor( int r, int g, int b )
     cell::red = r;
     cell::green = g;
     cell::blue = b;
+}
+
+void frameElement::handleCellColor()
+{
+    return;
 }
