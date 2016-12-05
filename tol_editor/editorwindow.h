@@ -19,8 +19,6 @@
 #include <frameelement.h>
 #include <QPushButton>
 
-#define nrows 20
-#define ncolumns 8
 
 namespace Ui {
 class EditorWindow;

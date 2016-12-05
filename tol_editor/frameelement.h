@@ -19,6 +19,10 @@
 #include <QFrame>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QAbstractButton>
+
+#define nrows 20
+#define ncolumns 8
 
 class cell
 {
@@ -47,7 +51,7 @@ public:
     int height;                                 //!< A number holding the height of the frame
     void setCurrClickable();
 public slots:
-    void handleCellColor();
+    void handleCellColor(QPushButton * temp);
 };
 
 #endif // FRAMEELEMENT_H

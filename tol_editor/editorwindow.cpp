@@ -131,8 +131,8 @@ void EditorWindow::update()
      * state of true and false in the isCurrent field of the
      * frameElement nodes in the std::list listFrames
      */
-    frameElement p = listFrames.front();
-    frameElement q = listFrames.back();
+    frameElement p = listFrames.front();        //This referencing needed a copy constructor
+    frameElement q = listFrames.back();         //This referencing needed a copy constructor
     std::list<frameElement>::iterator it = std::next( listFrames.begin(), 1 );
     bool prevExist, nextExist;
 
@@ -315,7 +315,16 @@ void EditorWindow::lower()
             currFrame->isCurrent = false;                   // set its isCurrent to false, as no longer current
             beforePrev->self->show();                       // show the frame before previous
             currFrame = prev;                               // update the iterator to point to the current frame
-            currFrame->setCurrClickable();
+
+           /*
+            * Zach, please refactor these transitions into three functions, moveToLeft(), moveToCenter(), and moveToRight().
+            * THis will enable me to isolate the center frame and debug my issues with the slots. I am currently having difficulty
+            * figuring out how to isolate a cell, but i can't see the effects of the code since i don't exactly know where it's coming into play.
+            * please notify me when you have this done.
+            * Thanks
+            */
+
+            //currFrame->setCurrClickable();
         }
         else                                                // When the Current Frame is in the center
         {
@@ -356,7 +365,7 @@ QPushButton* EditorWindow::createCell()                                         
 {
     QPushButton* newCell;                                                       // create the new cell
     newCell = new QPushButton;                                                  // assign it some memory
-    newCell->setStyleSheet( "border: 1px solid;" "background-color: gray");     // Set the style
+    newCell->setStyleSheet("border: 1px solid; background-color: gray");     // Set the style
     return newCell;                                                             // return it
 }
 

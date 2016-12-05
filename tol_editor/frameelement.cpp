@@ -42,6 +42,16 @@ frameElement::frameElement(const frameElement &obj)
 
 void frameElement::setCurrClickable()
 {
+    QPushButton * temp = new QPushButton();
+    for(int i = 0; i < nrows; i++)
+    {
+        for(int j = 0; j < ncolumns; j++)
+        {
+            temp = (QPushButton*)(grid->itemAtPosition(i,j));
+            connect(temp, SIGNAL(clicked()), temp, SLOT(handleCellColor(temp)));
+        }
+    }
+    ///connect(grid,SIGNAL(clicked()), grid, SLOT(handleCellColor()));
     return;
 }
 
@@ -60,7 +70,8 @@ void cell::setColor( int r, int g, int b )
     cell::blue = b;
 }
 
-void frameElement::handleCellColor()
+void frameElement::handleCellColor(QPushButton *temp)
 {
+    temp->setStyleSheet("background-color: blue");
     return;
 }
