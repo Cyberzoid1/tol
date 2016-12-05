@@ -36,6 +36,10 @@ public:
     void setup();
     void setCurrentFrame();
     QPushButton* createCell();                      // create Cells
+	void moveLeft( std::list<frameElement>::iterator q );
+    void moveCent( std::list<frameElement>::iterator q );
+    void moveRght( std::list<frameElement>::iterator q );
+
 
 
 public slots:
