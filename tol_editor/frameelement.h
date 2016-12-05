@@ -19,7 +19,10 @@
 #include <QFrame>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QAbstractButton>
 
+#define nrows 20
+#define ncolumns 8
 
 class cell
 {
@@ -48,12 +51,14 @@ public:
 
 
 public slots:
-    //void colorChangedHandler();
+    void handleCellColor( QPushButton* temp );
 
 public:
-    frameElement();
-    frameElement( int n, int h, int w, bool isCurr );
+    explicit frameElement();
+    frameElement( const frameElement &obj );
+    frameElement( int Name, int Height, int Width, bool Curr, QFrame *Self );
     ~frameElement();
+    void setCurrClickable();
 };
 
 #endif // FRAMEELEMENT_H

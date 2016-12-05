@@ -26,7 +26,7 @@ EditorWindow::EditorWindow(QWidget *parent) :
     ui(new Ui::EditorWindow)
 {
     ui->setupUi(this);
-
+    QPushButton * tempCell;
 
 
     /**
@@ -41,11 +41,9 @@ EditorWindow::EditorWindow(QWidget *parent) :
 
 
 
-    frameElement p;                                 // for adding the first pre-set frame to the list
-    p.name = 1;
-    p.self = ui->previousFrame;
-    setup( p );                                     // set up the cells
-    listFrames.push_front(p);                       // push it to the front of the list
+    frameElement *p = new frameElement( 1, 20, 8, false, ui->previousFrame );
+    setup( *p );                                     // set up the cells
+    listFrames.push_front( *p );                       // push it to the front of the list
 
     /**
      * This creates an initial frameElement q for the
@@ -57,12 +55,9 @@ EditorWindow::EditorWindow(QWidget *parent) :
      * the cells required by height and width.
      */
 
-    frameElement q;                                 // second frame
-    q.name = 2;                                     // second frame, #2
-    q.isCurrent = true;                             // starts out as the current frame
-    q.self = ui->currentFrame;                      // tying to appropriate UI element
-    setup( q );
-    listFrames.push_back( q );                        // put it after the first frame in the list
+    frameElement *q = new frameElement( 2, 20, 8, true, ui->currentFrame );                     // tying to appropriate UI element
+    setup( *q );
+    listFrames.push_back( *q );                        // put it after the first frame in the list
 
     /**
      * This creates an initial frameElement r for the
@@ -74,11 +69,9 @@ EditorWindow::EditorWindow(QWidget *parent) :
      * the cells required by height and width.
      */
 
-    frameElement r;                                 // third pre-set frame
-    r.name = 3;                                     // third frame, #3
-    r.self = ui->nextFrame;
-    setup( r );
-    listFrames.push_back(r);                        // last pre-set frame, so placed at the end of the list
+    frameElement *r = new frameElement( 3, 20, 8, false, ui->nextFrame );
+    setup( *r );
+    listFrames.push_back( *r );                        // last pre-set frame, so placed at the end of the list
 
 
 
@@ -89,9 +82,9 @@ EditorWindow::EditorWindow(QWidget *parent) :
       * are defaults, then this can be done statically
       */
 
-    q.self->setLayout( q.grid );
-    p.self->setLayout( p.grid );
-    r.self->setLayout( r.grid );
+    q->self->setLayout( q->grid );
+    p->self->setLayout( p->grid );
+    r->self->setLayout( r->grid );
 
     /** These lines setup an iterator on the list of frameElements
       * The iterator, currFrame, was defined in the .h and should
@@ -100,13 +93,7 @@ EditorWindow::EditorWindow(QWidget *parent) :
       */
 
 
-    for( currFrame = listFrames.begin(); currFrame != listFrames.end(); currFrame++ )  // Setup the iterator that points to the current frame
-    {
-        if( currFrame->isCurrent == true )            // Current Frame will always have isCurrent == true
-        {
-            break;
-        }
-    }
+    setCurrentFrame();
 
     // END NEW STUFF
 }
@@ -134,8 +121,8 @@ void EditorWindow::update()
      * state of true and false in the isCurrent field of the
      * frameElement nodes in the std::list listFrames
      */
-    frameElement p = listFrames.front();
-    frameElement q = listFrames.back();
+    //frameElement p = listFrames.front();
+    //frameElement q = listFrames.back();
     std::list<frameElement>::iterator it = std::next( listFrames.begin(), 1 );
     bool prevExist, nextExist;
 
@@ -375,4 +362,15 @@ void EditorWindow::moveRght( std::list<frameElement>::iterator q )
     q->self->resize( 210, 260 );
     q->self->show();
     q->isCurrent = false;
+}
+
+void EditorWindow::setCurrentFrame()
+{
+    for( currFrame = listFrames.begin(); currFrame != listFrames.end(); currFrame++ )  // Setup the iterator that points to the current frame
+    {
+        if( currFrame->isCurrent == true )            // Current Frame will always have isCurrent == true
+        {
+            break;
+        }
+    }
 }

@@ -29,25 +29,46 @@ void cell::setCell( QPushButton* button )
 
 frameElement::frameElement()
 {
-    width = 8;
-    height = 20;
+    name= 0;
+    height = 0;
+    width = 0;
     isCurrent = false;
-    grid = new QGridLayout;
+    grid = new QGridLayout();
+    self = new QFrame();
 }
+
+
+frameElement::frameElement(const frameElement &obj)
+{
+    grid = new QGridLayout();
+    grid = obj.grid;
+    self = new QFrame();
+    self = obj.self;
+    isCurrent = obj.isCurrent;
+    name = obj.name;
+    width = obj.width;
+    height = obj.height;
+}
+
 
 frameElement::~frameElement()
 {
     //
 }
 
-frameElement::frameElement(int n, int h, int w, bool isCurr)
+frameElement::frameElement(int Name, int Height, int Width, bool Curr, QFrame * Self)
 {
-    name = n;
-    height = h;
-    width = w;
-    isCurrent = isCurr;
-    self = new QFrame;
-    grid = new QGridLayout;
+    name = Name;
+    height = Height;
+    width = Width;
+    isCurrent = Curr;
+    self = Self;
+    grid = new QGridLayout();
 }
 
+void frameElement::handleCellColor(QPushButton *temp)
+{
+    temp->setStyleSheet("background-color: blue");
+    return;
+}
 

@@ -41,19 +41,12 @@ public:
     void moveLeft( std::list<frameElement>::iterator q );
     void moveCent( std::list<frameElement>::iterator q );
     void moveRght( std::list<frameElement>::iterator q );
+    void setCurrentFrame();
 
 public slots:
     void update();                                  // for the go-left UI button
     void lower();                                   // for the go-right UI Button
-    //void upHandler();
-    //void downHandler();
-    //void rightHandler();
-    //void leftHandler();
-    //void duplicateHandler();
-    //void addFrameHandler();
-    //void clearFrameHandler();
-    //void deleteFrameHandler();
-    //void inputTanHandler();
+
 
 
 private:
