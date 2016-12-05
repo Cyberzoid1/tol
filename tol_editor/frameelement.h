@@ -39,7 +39,7 @@ class frameElement: public QObject                             // nodes for the 
 {
     Q_OBJECT
 public:
-    frameElement();
+    explicit frameElement();
     frameElement(const frameElement &obj);      //!< Explicit copy constructor
     frameElement(int Name, int Height, int Width, bool Curr, QFrame * Self);
     QFrame* self;                               //!< A pointer to the UI frame belonging to the node

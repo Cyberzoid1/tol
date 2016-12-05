@@ -131,8 +131,8 @@ void EditorWindow::update()
      * state of true and false in the isCurrent field of the
      * frameElement nodes in the std::list listFrames
      */
-    frameElement p = listFrames.front();        //This referencing needed a copy constructor
-    frameElement q = listFrames.back();         //This referencing needed a copy constructor
+//    frameElement p = listFrames.front();        //This referencing needed a copy constructor
+//    frameElement q = listFrames.back();         //This referencing needed a copy constructor
     std::list<frameElement>::iterator it = std::next( listFrames.begin(), 1 );
     bool prevExist, nextExist;
 
@@ -243,8 +243,8 @@ void EditorWindow::lower()
      * frameElement class nodes of the std::list listFrames
      */
 
-    frameElement p = listFrames.front();
-    frameElement q = listFrames.back();
+//    frameElement p = listFrames.front();
+//    frameElement q = listFrames.back();
 
 
     std::list<frameElement>::iterator it = std::next( listFrames.begin(), 1 );
