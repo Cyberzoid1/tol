@@ -50,8 +50,7 @@ void MainWindow::open()
     //read in the animation from the file and store it in the window's
     //data object
     *animation = readInAnimation(filename.toStdString().c_str());
-    //generate the UI frame represenations from the backend data
-    editor->generateUiFrames(animation);
+    editor->setupFrames(animation);
 }
 /**
  * Slot for the 'Save' action in the 'File' menu. Writes the animation out

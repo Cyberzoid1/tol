@@ -29,9 +29,8 @@ void cell::setCell( QPushButton* button )
 
 frameElement::frameElement()
 {
-    width = 8;
-    height = 20;
     isCurrent = false;
+    self = new QFrame;
     grid = new QGridLayout;
 }
 

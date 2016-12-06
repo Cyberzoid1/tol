@@ -35,14 +35,12 @@ public:
     explicit EditorWindow(QWidget *parent = 0);     // constructor
     ~EditorWindow();                                // destructor
 
-    void setup( frameElement q, Frame data);
+    void setup(frameElement *frame, Frame data);
     QPushButton* createCell(RGB color);                      // create Cells
-    void moveLeft( std::list<frameElement>::iterator q );
-    void moveCent( std::list<frameElement>::iterator q );
-    void moveRght( std::list<frameElement>::iterator q );
+    void setCellColor(QPushButton *cell, RGB color);
+    void updateCells(frameElement *frame, Frame data);
 
-    void generateUiFrames(Animation *animation);
-    void showFrames(std::vector<frameElement> frames, int currIndex);
+    void setupFrames(Animation *animation);
 
 public slots:
     void update();                                  // for the go-left UI button
@@ -60,15 +58,17 @@ public slots:
 
 private:
     Ui::EditorWindow *ui;
-    std::list<frameElement> listFrames;             //!< List containing the ordered sequence of frames in the UI
-    std::list<frameElement>::iterator currFrame;    //!< An iterator for referencing the frame in listFrames that is current viewed
+    frameElement *prevFrameElement;
+    frameElement *currFrameElement;
+    frameElement *nextFrameElement;
+
+    Animation *animation;
+    std::list<Frame>::iterator currFrame;
     int currIndex;
 
     QPushButton *currCells;                         //!< variable for adding current cells to the initial current window
     QPushButton *prevCells;                         //!< variable for adding cells to the initial previous window
     QPushButton *nxtCells;                          //!< variable for adding cells to the intital next window
-
-    frameElement placeHolder;
 };
 
 

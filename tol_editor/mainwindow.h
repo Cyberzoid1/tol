@@ -32,6 +32,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    Animation *animation; //!< Reference to animation storage object
 
 private slots:
     void open();
@@ -45,8 +46,6 @@ private:
     QHBoxLayout *hlayout; //!< Reference to horizontal layout that contains the toolbox and editor
     QWidget *tbParent; //!< Reference to widget that acts as the toolbox's parent
     QWidget *edParent; //!< Reference to widget that acts as the editor's parent
-
-    Animation *animation; //!< Reference to animation storage object
 
     QMenu *fileMenu; //!< Reference to the MainWindow's file menu
     QAction *openAct; //!< Reference to the open action in the file menu
