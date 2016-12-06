@@ -14,6 +14,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include "animation.h"
+#include "toolbox.h"
 
 namespace Ui {
 class MainWindow;
@@ -42,6 +43,12 @@ private:
 
     void createActions(); //!< Helper method to instantiate actions
     void createMenus(); //!< Helper method to instantiate menus
+
+    Toolbox *tBox; //!< Toolbox object
+
+/*protected:
+    Animation *animation; //!< Reference to animation storage object
+    Toolbox *tBox; //!< Toolbox object*/
 };
 
 #endif // MAINWINDOW_H

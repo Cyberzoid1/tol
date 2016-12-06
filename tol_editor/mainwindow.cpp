@@ -6,6 +6,7 @@
 #include "ui_mainwindow.h"
 #include "input.h"
 #include "outputfile.h"
+#include "toolbox.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createActions();
     createMenus();
+
+    tBox = new Toolbox(this, animation);
 }
 
 MainWindow::~MainWindow()
