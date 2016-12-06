@@ -42,7 +42,7 @@ public:
     void moveRght( std::list<frameElement>::iterator q );
 
     void generateUiFrames(Animation *animation);
-    void showFrames(std::vector<frameElement> frames);
+    void showFrames(std::vector<frameElement> frames, int currIndex);
 
 public slots:
     void update();                                  // for the go-left UI button
@@ -62,11 +62,13 @@ private:
     Ui::EditorWindow *ui;
     std::list<frameElement> listFrames;             //!< List containing the ordered sequence of frames in the UI
     std::list<frameElement>::iterator currFrame;    //!< An iterator for referencing the frame in listFrames that is current viewed
+    int currIndex;
 
     QPushButton *currCells;                         //!< variable for adding current cells to the initial current window
     QPushButton *prevCells;                         //!< variable for adding cells to the initial previous window
     QPushButton *nxtCells;                          //!< variable for adding cells to the intital next window
 
+    frameElement placeHolder;
 };
 
 

@@ -26,6 +26,10 @@ EditorWindow::EditorWindow(QWidget *parent) :
     ui(new Ui::EditorWindow)
 {
     ui->setupUi(this);
+
+    currIndex = 0;
+    ui->GoLeftIcon->setEnabled(false);
+    ui->GoRightIcon->setEnabled(false);
 }
 
 /**
@@ -46,96 +50,107 @@ EditorWindow::~EditorWindow()
 
 void EditorWindow::update()
 {
-    /** This is for when the user clicks the "Go-Left Button"
-     * It should take the UI view left depending on the current
-     * state of true and false in the isCurrent field of the
-     * frameElement nodes in the std::list listFrames
-     */
-    frameElement p = listFrames.front();
-    frameElement q = listFrames.back();
-    std::list<frameElement>::iterator it = std::next( listFrames.begin(), 1 );
-    bool prevExist, nextExist;
+//    /** This is for when the user clicks the "Go-Left Button"
+//     * It should take the UI view left depending on the current
+//     * state of true and false in the isCurrent field of the
+//     * frameElement nodes in the std::list listFrames
+//     */
+//    frameElement p = listFrames.front();
+//    frameElement q = listFrames.back();
+//    std::list<frameElement>::iterator it = std::next( listFrames.begin(), 1 );
+//    bool prevExist, nextExist;
 
-    /**
-     * @brief This section creates iterators previous to and after
-     * the iterator that always points to the current-viewed frame.
-     * These iterators will allow the program to manipulate the frames
-     * around the current frame as well as the current frame itself.
-     * The iterators must be dynamic to accomodate arbitrarily large
-     * lists of frames.  This section also assigns values to the booleans
-     * prevExist and nextExist, which values indicate whether the view is
-     * at the head or the back of the list.  If one of those is the case,
-     * then the booleans prevent stepping off the list.
-     */
+//    /**
+//     * @brief This section creates iterators previous to and after
+//     * the iterator that always points to the current-viewed frame.
+//     * These iterators will allow the program to manipulate the frames
+//     * around the current frame as well as the current frame itself.
+//     * The iterators must be dynamic to accomodate arbitrarily large
+//     * lists of frames.  This section also assigns values to the booleans
+//     * prevExist and nextExist, which values indicate whether the view is
+//     * at the head or the back of the list.  If one of those is the case,
+//     * then the booleans prevent stepping off the list.
+//     */
 
-    std::list<frameElement>::iterator prev, next, beforePrev, afterNext;        // Defines a previous, a next, and for larger lists
-    if( currFrame == listFrames.begin() )                                       // it also defines iterators for after the next and
-    {                                                                           // before the previous
-        prevExist = false;
-        next = std::next( currFrame, 1 );
-        if( listFrames.size() > 3 )
-        {
-            afterNext = std::next( currFrame, 2);
-        }
-    }
-    else if( currFrame == listFrames.end() )
-    {
-        nextExist = false;
-        prev = std::next( currFrame, -1 );
-        if( listFrames.size() > 3 )
-        {
-            beforePrev = std::next( currFrame, -2 );
-        }
-    }
-    else
-    {
-        nextExist = true;
-        prevExist = true;
-        next = std::next( currFrame, 1 );
-        prev = std::next( currFrame, -1 );
-    }
+//    std::list<frameElement>::iterator prev, next, beforePrev, afterNext;        // Defines a previous, a next, and for larger lists
+//    if( currFrame == listFrames.begin() )                                       // it also defines iterators for after the next and
+//    {                                                                           // before the previous
+//        prevExist = false;
+//        next = std::next( currFrame, 1 );
+//        if( listFrames.size() > 3 )
+//        {
+//            afterNext = std::next( currFrame, 2);
+//        }
+//    }
+//    else if( currFrame == listFrames.end() )
+//    {
+//        nextExist = false;
+//        prev = std::next( currFrame, -1 );
+//        if( listFrames.size() > 3 )
+//        {
+//            beforePrev = std::next( currFrame, -2 );
+//        }
+//    }
+//    else
+//    {
+//        nextExist = true;
+//        prevExist = true;
+//        next = std::next( currFrame, 1 );
+//        prev = std::next( currFrame, -1 );
+//    }
 
-    /** This section actually performs the manipulation.
-      * First, it checks if the user is as far left as
-      * possible; if so, then the user cannot proceed farther left.
-      * Otherwise, the program evaluates the values of prevExist and
-      * isCurrent and performs the required motion.
-      */
-
-
-    if( currFrame->name == listFrames.size() )
-    {
-        //
-    }
-    else
-    {
-
-        if( prevExist ==  false )                       // if the user is at the farthest right
-        {
-
-            ui->nextFrameTable->resize( 290, 350 );
-            afterNext = std::next( currFrame, 2 );      // assign the frame after next to the afterNext iterator
-            moveCent( next );
-            moveLeft( currFrame );
-            afterNext->self->show();                    // show the frame after next
-            currFrame = next;                           // update the iterator to point to the current frame
-
-        }
-        else                                            // when the Current frame is a middle frame
-        {
-            ui->nextFrameTable->resize( 290, 350 );
-            prev->self->hide();                         // hide the previous frame
-            moveLeft( currFrame );
-            moveCent( next );
-            currFrame = next;                           // update the iterator to point to the current frame
+//    /** This section actually performs the manipulation.
+//      * First, it checks if the user is as far left as
+//      * possible; if so, then the user cannot proceed farther left.
+//      * Otherwise, the program evaluates the values of prevExist and
+//      * isCurrent and performs the required motion.
+//      */
 
 
-        }
-    }
+//    if( currFrame->name == listFrames.size() )
+//    {
+//        //
+//    }
+//    else
+//    {
+
+//        if( prevExist ==  false )                       // if the user is at the farthest right
+//        {
+
+//            ui->nextFrameTable->resize( 290, 350 );
+//            afterNext = std::next( currFrame, 2 );      // assign the frame after next to the afterNext iterator
+//            moveCent( next );
+//            moveLeft( currFrame );
+//            afterNext->self->show();                    // show the frame after next
+//            currFrame = next;                           // update the iterator to point to the current frame
+
+//        }
+//        else                                            // when the Current frame is a middle frame
+//        {
+//            ui->nextFrameTable->resize( 290, 350 );
+//            prev->self->hide();                         // hide the previous frame
+//            moveLeft( currFrame );
+//            moveCent( next );
+//            currFrame = next;                           // update the iterator to point to the current frame
 
 
-
-
+//        }
+//    }
+    //TODO: refactor slot names so they correlate to the buttons
+    //      test on a screen that I can verify if the move is working
+    //      if working, implement in other slot too
+    //                  and add more error handling/checking
+    frameElement newCurr, newNext;
+    if (currIndex+1 < listFrames.size() - 1)
+        newCurr = *std::next(currFrame, 1);
+    if (currIndex+2 < listFrames.size() - 1)
+        newNext = *std::next(currFrame, 2);
+    std::vector<frameElement> frames = {
+        newCurr,
+        *currFrame,
+        newNext
+    };
+    showFrames(frames, currIndex+1);
 }
 
 
@@ -320,28 +335,44 @@ void EditorWindow::generateUiFrames(Animation *animation)
     //TODO: modify transition code to navigate through the whole list
     std::vector<frameElement> firstFrames = {
         *listFrames.begin(),
-        *std::next(listFrames.begin(), 1),
-        *std::next(listFrames.begin(), 2)
+        placeHolder
     };
-    showFrames(firstFrames);
+    if (listFrames.size() > 1)
+        firstFrames.push_back(*std::next(listFrames.begin(), 1));
+    else
+        firstFrames.push_back(placeHolder);
+
+    showFrames(firstFrames, 0);
 }
 /**
  * Setup the UI to contain the specified frameElements in the previousFrame,
  * currentFrame, and nextFrame positions in the EditorWindow.
- * @param frames vector of three frameElements
+ * @param frames vector of three frameElements {currFrame, prevFrame, nextFrame}
+ * @param currIndex index of the current frame in the listFrames list
  * @return void
  */
-void EditorWindow::showFrames(std::vector<frameElement> frames)
+void EditorWindow::showFrames(std::vector<frameElement> frames, int currIndex)
 {
     std::vector<QFrame *> uiSlots = {
-        ui->previousFrame,
         ui->currentFrame,
+        ui->previousFrame,
         ui->nextFrame
     };
     if (frames.size() != uiSlots.size())
         return;
+    QLayout* tmp;
     for (int i = 0; i < uiSlots.size(); i++){
         frames[i].self = uiSlots[i];
+        tmp = uiSlots[i]->layout();
+        delete tmp;
         frames[i].self->setLayout(frames[i].grid);
     }
+    this->currFrame = std::next(listFrames.begin(), currIndex);
+    this->currIndex = currIndex;
+
+    if (this->currIndex > 0)
+        ui->GoLeftIcon->setEnabled(true);
+    //subtract 1 from size to account for zero-based indexing
+    if (this->currIndex != (listFrames.size() - 1))
+        ui->GoRightIcon->setEnabled(true);
 }
