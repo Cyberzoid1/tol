@@ -19,19 +19,23 @@
  * fills the list of frameElements,
  * and creates all the initial values
  */
-
-
 EditorWindow::EditorWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EditorWindow)
 {
     ui->setupUi(this);
 
-    prevFrameElement = new frameElement;
-    currFrameElement = new frameElement;
-    nextFrameElement = new frameElement;
+    uiContainers = {
+        ui->previousFrame,
+        ui->currentFrame,
+        ui->nextFrame
+    };
+    for (int i = 0; i < 3; i++)
+        uiFrames.push_back(new frameElement);
 
     currIndex = 0;
+    connect(ui->GoLeftIcon, SIGNAL(clicked(bool)), this, SLOT(goLeft()));
+    connect(ui->GoRightIcon, SIGNAL(clicked(bool)), this, SLOT(goRight()));
     ui->GoLeftIcon->setEnabled(false);
     ui->GoRightIcon->setEnabled(false);
 }
@@ -46,29 +50,71 @@ EditorWindow::~EditorWindow()
 }
 
 /**
- * @brief EditorWindow::update
  * This is the slot for when the
- * "Go-Right" Button is clicked
+ * "Go-Left" Button is clicked
  * by the user
  */
-
-void EditorWindow::update()
+void EditorWindow::goLeft()
 {
+    int width = animation->getWidth();
+    int height = animation->getHeight();
+    Frame newPrev(width, height),
+          newCurr(width, height);
 
+    if (currIndex - 2 > 0)
+        newPrev = *std::next(currFrame, -2);
+    if (currIndex - 1 > 0)
+        newCurr = *std::next(currFrame, -1);
+
+    std::vector<Frame> activeFrames = {
+        newPrev,
+        newCurr,
+        *currFrame
+    };
+
+    for (int i = 0; i < activeFrames.size(); i++){
+        updateCells(uiFrames[i], activeFrames[i]);
+    }
+    currFrame--;
+    currIndex--;
+    ui->GoRightIcon->setEnabled(true);
 }
 
 
 /**
- * @brief EditorWindow::lower
  * This is the slot used when the user
  * clicks the "Go-Right" button.
  */
-
-void EditorWindow::lower()
+void EditorWindow::goRight()
 {
-    updateCells(currFrameElement, *currFrame);
-}
+    int width = animation->getWidth();
+    int height = animation->getHeight();
+    Frame newCurr(width, height),
+          newNext(width, height);
 
+    if (frames.size() > 1)
+        newCurr = *std::next(currFrame, 1);
+    if (frames.size() > 2)
+        newNext = *std::next(currFrame, 2);
+
+    std::vector<Frame> activeFrames = {
+        *currFrame,
+        newCurr,
+        newNext
+    };
+
+    for (int i = 0; i < activeFrames.size(); i++){
+        updateCells(uiFrames[i], activeFrames[i]);
+    }
+    currFrame++;
+    currIndex++;
+    ui->GoLeftIcon->setEnabled(true);
+}
+/**
+ * Setup the specified frameElement.
+ * @param frame
+ * @param data
+ */
 void EditorWindow::setup(frameElement *frame,Frame data)
 {
 
@@ -97,48 +143,56 @@ QPushButton* EditorWindow::createCell(RGB color)                                
     setCellColor(newCell, color);
     return newCell;                                                             // return it
 }
+/**
+ * Set the color of a cell in a frame to the specified color.
+ * @param cell
+ * @param color
+ */
 void EditorWindow::setCellColor(QPushButton *cell, RGB color)
 {
-    QString colorStr = "background-color: rgb(" +
-            QString::number(color.getRed()) +
-            "," +
-            QString::number(color.getGreen()) +
-            "," +
-            QString::number(color.getBlue()) +
-            ");";
-    cell->setStyleSheet( "border: 1px solid;" + colorStr);
+    QColor qcolor(color.getRed(), color.getGreen(), color.getBlue());
+    QPalette pal = cell->palette();
+    pal.setColor(QPalette::Button, qcolor);
+    cell->setAutoFillBackground(true);
+    cell->setPalette(pal);
+    cell->setFlat(true);
+    cell->update();
 }
+/**
+ * Update the colors of the cells in the specified frame after a transition.
+ * @param frame
+ * @param data
+ */
 void EditorWindow::updateCells(frameElement *frame, Frame data)
 {
     for (int i = 0; i < animation->getWidth(); i++){
         for (int j = 0; j < animation->getHeight(); j++){
             QLayoutItem *cell = frame->grid->itemAtPosition(i, j);
-            setCellColor((QPushButton*)cell, data.getCellColor(i, j));
+            QWidget *widg = cell->widget();
+            QPushButton *button = dynamic_cast<QPushButton*>(widg);
+            setCellColor(button, data.getCellColor(i, j));
         }
     }
 }
-
+/**
+ * Using the animation read in from the file, setup the first few frames
+ * in the UI of the editor window. Also, handle enabling/disabling the
+ * navigation buttons.
+ * @param animation
+ */
 void EditorWindow::setupFrames(Animation *animation)
 {
+    this->frames = animation->getFrames();
     this->animation = animation;
-    std::vector<QFrame*> uiContainers = {
-        ui->previousFrame,
-        ui->currentFrame,
-        ui->nextFrame
-    };
-    std::vector<frameElement*> uiFrames = {
-        prevFrameElement,
-        currFrameElement,
-        nextFrameElement
-    };
+
     Frame prev(animation->getWidth(), animation->getHeight());
     std::vector<Frame> dataFrames = {
         prev,
-        *animation->getFrames().begin()
+        *frames.begin()
     };
     Frame next = prev;
     if (animation->getNumFrames() > 1)
-        next = *std::next(animation->getFrames().begin(), 1);
+        next = *std::next(frames.begin(), 1);
     dataFrames.push_back(next);
 
     for (int i = 0; i < uiFrames.size(); i++){
@@ -146,4 +200,12 @@ void EditorWindow::setupFrames(Animation *animation)
         uiFrames[i]->self = uiContainers[i];
         uiFrames[i]->self->setLayout(uiFrames[i]->grid);
     }
+    this->currFrame = frames.begin();
+    this->currIndex = 0;
+
+    if (this->currIndex > 0)
+        ui->GoLeftIcon->setEnabled(true);
+    //subtract 1 from size to account for zero-based indexing
+    if (this->currIndex != (frames.size() - 1))
+        ui->GoRightIcon->setEnabled(true);
 }

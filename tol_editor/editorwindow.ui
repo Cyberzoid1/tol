@@ -267,38 +267,5 @@
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>GoLeftIcon</sender>
-   <signal>clicked()</signal>
-   <receiver>EditorWindow</receiver>
-   <slot>lower()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>240</x>
-     <y>370</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>491</x>
-     <y>318</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>GoRightIcon</sender>
-   <signal>clicked()</signal>
-   <receiver>EditorWindow</receiver>
-   <slot>update()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>690</x>
-     <y>370</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>491</x>
-     <y>318</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -43,8 +43,8 @@ public:
     void setupFrames(Animation *animation);
 
 public slots:
-    void update();                                  // for the go-left UI button
-    void lower();                                   // for the go-right UI Button
+    void goLeft();                                  // for the go-left UI button
+    void goRight();                                   // for the go-right UI Button
     //void upHandler();
     //void downHandler();
     //void rightHandler();
@@ -55,14 +55,14 @@ public slots:
     //void deleteFrameHandler();
     //void inputTanHandler();
 
-
 private:
     Ui::EditorWindow *ui;
-    frameElement *prevFrameElement;
-    frameElement *currFrameElement;
-    frameElement *nextFrameElement;
+
+    std::vector<QFrame*> uiContainers;
+    std::vector<frameElement*> uiFrames;
 
     Animation *animation;
+    std::list<Frame> frames;
     std::list<Frame>::iterator currFrame;
     int currIndex;
 
