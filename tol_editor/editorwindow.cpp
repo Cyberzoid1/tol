@@ -352,12 +352,13 @@ QPushButton* EditorWindow::createCell()                                         
     QPushButton* newCell;                                                       // create the new cell
     newCell = new QPushButton;                                                  // assign it some memory
     newCell->setStyleSheet("border: 1px solid; background-color: gray");     // Set the style
-    connect(newCell, SIGNAL(clicked()), newCell, SLOT(EditorWindow::handleCellColor(newCell)));
+    connect(newCell, SIGNAL(clicked()), this, SLOT(handleCellColor()));     //Trever Was Here!!!!!!!!!!!!!!!!
     return newCell;                                                             // return it
 }
 
-void EditorWindow::handleCellColor(QPushButton *temp)
+void EditorWindow::handleCellColor()
 {
+    QPushButton * temp = qobject_cast<QPushButton*>(sender());
     temp->setStyleSheet("background-color: blue");
     return;
 }

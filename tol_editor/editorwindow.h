@@ -45,7 +45,7 @@ public:
 public slots:
     void update();                                  // for the go-left UI button
     void lower();                                   // for the go-right UI Button
-    void handleCellColor(QPushButton *);
+    void handleCellColor();
 
 private:
     Ui::EditorWindow *ui;
