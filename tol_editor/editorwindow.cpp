@@ -2,7 +2,6 @@
 * @class EditorWindow
 */
 
-
 #include "editorwindow.h"
 #include "ui_editorwindow.h"
 #include <list>
