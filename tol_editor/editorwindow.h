@@ -41,6 +41,7 @@ public:
     void updateCells(frameElement *frame, Frame data);
 
     void setupFrames(Animation *animation);
+    void toggleNavButtons();
 
 public slots:
     void goLeft();                                  // for the go-left UI button

@@ -77,7 +77,7 @@ void EditorWindow::goLeft()
     }
     currFrame--;
     currIndex--;
-    ui->GoRightIcon->setEnabled(true);
+    toggleNavButtons();
 }
 
 
@@ -92,9 +92,11 @@ void EditorWindow::goRight()
     Frame newCurr(width, height),
           newNext(width, height);
 
-    if (frames.size() > 1)
+    if (frames.size() > 1 &&
+            currIndex + 1 < frames.size())
         newCurr = *std::next(currFrame, 1);
-    if (frames.size() > 2)
+    if (frames.size() > 2 &&
+            currIndex + 2 < frames.size())
         newNext = *std::next(currFrame, 2);
 
     std::vector<Frame> activeFrames = {
@@ -108,7 +110,7 @@ void EditorWindow::goRight()
     }
     currFrame++;
     currIndex++;
-    ui->GoLeftIcon->setEnabled(true);
+    toggleNavButtons();
 }
 /**
  * Setup the specified frameElement.
@@ -203,9 +205,21 @@ void EditorWindow::setupFrames(Animation *animation)
     this->currFrame = frames.begin();
     this->currIndex = 0;
 
+    toggleNavButtons();
+}
+/**
+ * Toggle navigation buttons to prevent the user from transitioning
+ * beyond the start or end of the list of frames.
+ */
+void EditorWindow::toggleNavButtons()
+{
     if (this->currIndex > 0)
         ui->GoLeftIcon->setEnabled(true);
+    else
+        ui->GoLeftIcon->setEnabled(false);
     //subtract 1 from size to account for zero-based indexing
-    if (this->currIndex != (frames.size() - 1))
+    if (this->currIndex < (frames.size() - 1))
         ui->GoRightIcon->setEnabled(true);
+    else
+        ui->GoRightIcon->setEnabled(false);
 }
