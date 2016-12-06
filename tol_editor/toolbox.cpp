@@ -617,16 +617,18 @@ void Toolbox::on_removeFramesEnd_valueChanged(int arg1)
  */
 void Toolbox::on_removeFramesButton_clicked()
 {
-    if(removeFramesEnd->value() != 0){
-        //animPtr->removeFrames(removeFramesDeletionIndex, removeFramesDeletionIndex + removeFramesNumberOfFrames);
-        for(int i = 0; i < removeFramesNumberOfFrames; i++){
-            if(removeFramesDeletionIndex <= animPtr->getNumFrames()){
-                animPtr->removeFrame(removeFramesDeletionIndex);
-            }
-            else{
-                qDebug("HERE! on_removeFramesButton_clicked - removeFramesDeletionIndex Beyond Range...");
-            }
-        }
+    std::list<Frame> frames = animPtr->getFrames();
+
+    if(removeFramesDeletionIndex+removeFramesNumberOfFrames <= animPtr->getNumFrames() && removeFramesNumberOfFrames != 0) {
+        std::list<Frame>::iterator startIt = frames.begin();
+        std::list<Frame>::iterator endIt = frames.begin();
+
+        std::advance(startIt,removeFramesDeletionIndex);
+        std::advance(endIt,removeFramesDeletionIndex+removeFramesNumberOfFrames);
+
+        frames.erase(startIt,endIt);
+        animPtr->setFrames(frames);
+    }
         qDebug("HERE! on_removeFramesButton_clicked");
         addFramesStart->setRange(0, animPtr->getNumFrames() - 1);
         removeFramesStart->setRange(0, animPtr->getNumFrames() - 1);
@@ -674,6 +676,22 @@ void Toolbox::on_copyFramesEnd_valueChanged(int arg1)
  */
 void Toolbox::on_copyFramesButton_clicked()
 {
+    std::list<Frame> frames = animPtr->getFrames();
+    std::list<Frame> tempFrames = animPtr->getFrames();
+
+    std::list<Frame>::iterator insertIt = frames.begin();
+    std::list<Frame>::iterator startCopyIt = tempFrames.begin();
+    std::list<Frame>::iterator endCopyIt = tempFrames.begin();
+
+    std::advance(insertIt,copyFramesInsertionIndex);
+    std::advance(startCopyIt,copyFramesStartIndex);
+    std::advance(endCopyIt,copyFramesEndIndex);
+
+    frames.splice(insertIt,tempFrames,startCopyIt,endCopyIt);
+
+    animPtr->setFrames(frames);
+
+
     qDebug("HERE! on_copyFramesButton_clicked");
     addFramesStart->setRange(0, animPtr->getNumFrames() - 1);
     removeFramesStart->setRange(0, animPtr->getNumFrames() - 1);
