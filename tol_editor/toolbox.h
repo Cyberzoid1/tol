@@ -35,7 +35,7 @@
  * Toolbox class definition - this will be worked on
  * to make it an explicit QObject
  */
-class Toolbox : public QMainWindow
+class Toolbox : public QWidget
 {
    Q_OBJECT
 
@@ -156,6 +156,7 @@ public:
     void setupUiColorDialogue();
 
     void retranslateUi(QWidget *Toolbox);
+
 private:
     int addFramesInsertionIndex = 0;
     int addFramesNumberOfFrames = 0;

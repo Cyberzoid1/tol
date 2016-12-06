@@ -63,6 +63,7 @@ void Toolbox::setupUi(QWidget *parent)
 
     retranslateUi(parent);
 
+    tabParent->move(0, 50);
 } // setupUi
 
 void Toolbox::setupUiTabs(QWidget *Toolbox){
@@ -81,7 +82,6 @@ void Toolbox::setupUiTabs(QWidget *Toolbox){
     tabEdit->setObjectName(QStringLiteral("tabEdit"));
     tabEdit->setGeometry(QRect(0,0,tabParent->width(), tabParent->height()));
     tabParent->addTab(tabEdit, QString());
-
 }
 
 void Toolbox::setupUiMasterWidget(){
