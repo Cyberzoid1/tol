@@ -70,8 +70,8 @@ void cell::setColor( int r, int g, int b )
     cell::blue = b;
 }
 
-void frameElement::handleCellColor(QPushButton *temp)
-{
-    temp->setStyleSheet("background-color: blue");
-    return;
-}
+//void frameElement::handleCellColor(QPushButton *temp)
+//{
+//    temp->setStyleSheet("background-color: blue");
+//    return;
+//}

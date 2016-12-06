@@ -51,7 +51,7 @@ public:
     int height;                                 //!< A number holding the height of the frame
     void setCurrClickable();
 public slots:
-    void handleCellColor(QPushButton * temp);
+//    void handleCellColor(QPushButton * temp);
 };
 
 #endif // FRAMEELEMENT_H

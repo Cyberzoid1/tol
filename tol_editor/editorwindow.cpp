@@ -320,6 +320,7 @@ void EditorWindow::moveCent( std::list<frameElement>::iterator q )
     q->self->resize( 290, 350 );
     q->self->show();
     q->isCurrent= true;
+    //q->setCurrClickable();
 }
 
 void EditorWindow::moveRght( std::list<frameElement>::iterator q )
@@ -351,7 +352,13 @@ QPushButton* EditorWindow::createCell()                                         
     QPushButton* newCell;                                                       // create the new cell
     newCell = new QPushButton;                                                  // assign it some memory
     newCell->setStyleSheet("border: 1px solid; background-color: gray");     // Set the style
+    connect(newCell, SIGNAL(clicked()), newCell, SLOT(EditorWindow::handleCellColor(newCell)));
     return newCell;                                                             // return it
 }
 
+void EditorWindow::handleCellColor(QPushButton *temp)
+{
+    temp->setStyleSheet("background-color: blue");
+    return;
+}
 

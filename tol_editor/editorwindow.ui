@@ -18,7 +18,7 @@
     <rect>
      <x>20</x>
      <y>60</y>
-     <width>988</width>
+     <width>990</width>
      <height>91</height>
     </rect>
    </property>
@@ -388,7 +388,7 @@
    <sender>GoLeftIcon</sender>
    <signal>clicked()</signal>
    <receiver>EditorWindow</receiver>
-   <slot>update()</slot>
+   <slot>lower()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>240</x>
@@ -404,7 +404,7 @@
    <sender>GoRightIcon</sender>
    <signal>clicked()</signal>
    <receiver>EditorWindow</receiver>
-   <slot>lower()</slot>
+   <slot>update()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>690</x>
