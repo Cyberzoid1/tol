@@ -1,5 +1,5 @@
 /**
-* @author Zachary Spence & Adonay Berhe
+* @author Zachary Spence & Adonay Berhe & Trevor Morse
 * @date 11/18/2016
 * @class EditorWindow
 * @brief This is the header file for the EditorWindow class.

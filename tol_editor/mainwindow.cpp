@@ -21,12 +21,18 @@ MainWindow::MainWindow(QWidget *parent) :
     edParent = new QWidget;
     editor = new EditorWindow(edParent);
 
+    tbParent->setMaximumWidth(toolbox->width());
+    edParent->setMaximumWidth(editor->width());
+    hlayout->setSpacing(0);
+    hlayout->setMargin(0);
     hlayout->addWidget(tbParent);
     hlayout->addWidget(edParent);
 
     outerWrapper->setLayout(hlayout);
 
     this->setCentralWidget(outerWrapper);
+    this->setMinimumWidth(toolbox->width() + editor->width());
+    this->setMinimumHeight(editor->height());
 
     createActions();
     createMenus();
