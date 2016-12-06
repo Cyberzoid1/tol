@@ -1,11 +1,11 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/17/2016
- *
- * This file contains the definitions of Toolbox class used
- * to hold the color picker and various other tools.
- */
+* @author Matthew Holman and Domanic Welker
+* @date 11/17/2016
+* @class Toolbox
+* @brief This is the header file that defines the Toolbox class.
+* @details This file contains the definitions of Toolbox class used
+* to hold the color picker and various other tools.
+*/
 
 #ifndef TOOLBOX_H
 #define TOOLBOX_H

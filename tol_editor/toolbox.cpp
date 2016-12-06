@@ -7,6 +7,10 @@
  * to hold the color picker widget and other tools.
  */
 
+/**
+ * @class Toolbox
+ */
+
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -30,10 +34,11 @@
 #include "mainwindow.h"
 
 /**
- * Set up the User interface elements according to the
+ * Constructor that sets up the User interface elements according to the
  * defined layout in the Qt Creator editor
+ * @param A pointer to the parent widget of the toolbox
+ * @param A pointer to the animation class of the parent
  */
-
 Toolbox::Toolbox(QWidget *parent, Animation *aPtr){
     animPtr = aPtr;
     setupUi(parent);
@@ -43,6 +48,10 @@ Toolbox::~Toolbox(){
 
 }
 
+/**
+ * Sets up the entire graphical user interface for the toolbox
+ * @param A pointer to the parent widget of the toolbox
+ */
 void Toolbox::setupUi(QWidget *parent)
 {
     if (parent->objectName().isEmpty()){
@@ -66,6 +75,10 @@ void Toolbox::setupUi(QWidget *parent)
     tabParent->move(0, 50);
 } // setupUi
 
+/**
+ * Used to create the tab widget in the toolbox
+ * @param A pointer to the parent widget of the toolbox
+ */
 void Toolbox::setupUiTabs(QWidget *Toolbox){
     tabParent = new QTabWidget(Toolbox);
     tabParent->setObjectName(QStringLiteral("tabParent"));
@@ -84,12 +97,19 @@ void Toolbox::setupUiTabs(QWidget *Toolbox){
     tabParent->addTab(tabEdit, QString());
 }
 
+/**
+ * Used to create the widget that the editing portion of the toolbox is made in
+ */
 void Toolbox::setupUiMasterWidget(){
     widget = new QWidget(tabEdit);
     widget->setObjectName(QStringLiteral("widget"));
     widget->setGeometry(QRect(0, 0, tabParent->width(), tabParent->height()));
 }
 
+/**
+ * Used to create and setup all the label widgets in the toolbox
+ * @param A pointer to the "master widget" setup for the editing tab
+ */
 void Toolbox::setupUiLabels(QWidget *widget)
 {
     lblAddFramesStart = new QLabel(widget);
@@ -216,6 +236,11 @@ void Toolbox::setupUiLabels(QWidget *widget)
     lblTimingTimeIntervalSpacer4->show();
 }
 
+/**
+ * Used to create and setup the various widgets used in the toolbox including Add Frames Widgets, Remove Frames Widgets,
+ * Copy Frames Widgets, and Timing Widgets.
+ * @param A pointer to the "master widget" setup for the editing tab
+ */
 void Toolbox::setupUiWidgets(QWidget *widget)
 {
     /**
@@ -330,6 +355,10 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     timeInterval->setTime(defaultTime);
 }
 
+/**
+ * Used to layout all the created widgets neatly
+ * @param A pointer to the "master widget" setup for the editing tab
+ */
 void Toolbox::setupUiLayouts(QWidget *widget)
 {
     /**
@@ -447,6 +476,7 @@ void Toolbox::setupUiLayouts(QWidget *widget)
 
 /**
  * Function to retranslate the user interface
+ * @param A pointer to the parent widget of the toolbox
  */
 void Toolbox::retranslateUi(QWidget *Toolbox)
 {
@@ -500,6 +530,9 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
     lblTimingTimeIntervalSpacer4->setText(QString());
 } // retranslateUi
 
+/**
+ * Used to create and setup the color options under the color tab using the QColorDialogue
+ */
 void Toolbox::setupUiColorDialogue(){
     tabParent->setCurrentIndex(0);
 
@@ -522,7 +555,8 @@ void Toolbox::setupUiColorDialogue(){
 }
 
 /**
- * Signal Function Stubs
+ * Signal for when the value for the end frame box associated with add frames is changed
+ * @param An integer value of what the number has been changed to
  */
 void Toolbox::on_addFramesStart_valueChanged(int arg1)
 {
@@ -530,12 +564,19 @@ void Toolbox::on_addFramesStart_valueChanged(int arg1)
     qDebug("HERE! on_addFramesStart_valueChanged %d", addFramesInsertionIndex);
 }
 
+/**
+ * Signal for when the value for the start frame box associated with add frames is changed
+ * @param An integer value of what the number has been changed to
+ */
 void Toolbox::on_addFramesEnd_valueChanged(int arg1)
 {
     addFramesNumberOfFrames = arg1;
     qDebug("HERE! on_addFramesEnd_valueChanged %d", addFramesNumberOfFrames);
 }
 
+/**
+ * Signal for when the button associated with add frames is clicked
+ */
 void Toolbox::on_addFramesButton_clicked()
 {
     for(int i = 0; i < addFramesNumberOfFrames; i++){
@@ -550,6 +591,10 @@ void Toolbox::on_addFramesButton_clicked()
     copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);
 }
 
+/**
+ * Signal for when the value for the start frame box associated with remove frames is changed
+ * @param An integer value of what the number has been changed to
+ */
 void Toolbox::on_removeFramesStart_valueChanged(int arg1)
 {
     removeFramesDeletionIndex = arg1;
@@ -557,12 +602,19 @@ void Toolbox::on_removeFramesStart_valueChanged(int arg1)
     removeFramesEnd->setRange(0, animPtr->getNumFrames() - removeFramesDeletionIndex - 1);
 }
 
+/**
+ * Signal for when the value for the end frame box associated with remove frames is changed
+ * @param An integer value of what the number has been changed to
+ */
 void Toolbox::on_removeFramesEnd_valueChanged(int arg1)
 {
     removeFramesNumberOfFrames = arg1;
     qDebug("HERE! on_removeFramesEnd_valueChanged %d", removeFramesNumberOfFrames);
 }
 
+/**
+ * Signal for when the button associated with remove frames is clicked
+ */
 void Toolbox::on_removeFramesButton_clicked()
 {
     if(removeFramesEnd->value() != 0){
@@ -585,12 +637,20 @@ void Toolbox::on_removeFramesButton_clicked()
     }
 }
 
+/**
+ * Signal for when the value for the index frame box associated with copy frames is changed
+ * @param An integer value of what the number has been changed to
+ */
 void Toolbox::on_copyFramesIndex_valueChanged(int arg1)
 {
     copyFramesInsertionIndex = arg1;
     qDebug("HERE! on_copyFramesIndex_valueChanged %d", copyFramesInsertionIndex);
 }
 
+/**
+ * Signal for when the value for the start frame box associated with copy frames is changed
+ * @param An integer value of what the number has been changed to
+ */
 void Toolbox::on_copyFramesStart_valueChanged(int arg1)
 {
     copyFramesStartIndex = arg1;
@@ -598,6 +658,10 @@ void Toolbox::on_copyFramesStart_valueChanged(int arg1)
     qDebug("HERE! on_copyFramesStart_valueChanged %d", copyFramesStartIndex);
 }
 
+/**
+ * Signal for when the value for the end frame box associated with copy frames is changed
+ * @param An integer value of what the number has been changed to
+ */
 void Toolbox::on_copyFramesEnd_valueChanged(int arg1)
 {
     copyFramesEndIndex = arg1;
@@ -605,6 +669,9 @@ void Toolbox::on_copyFramesEnd_valueChanged(int arg1)
     qDebug("HERE! on_copyFramesEnd_valueChanged %d", copyFramesEndIndex);
 }
 
+/**
+ * Signal for when the button associated with copy frames is clicked
+ */
 void Toolbox::on_copyFramesButton_clicked()
 {
     qDebug("HERE! on_copyFramesButton_clicked");
@@ -616,18 +683,30 @@ void Toolbox::on_copyFramesButton_clicked()
     copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);
 }
 
+/**
+ * Signal for when the value for the current time box associated with time intervals is changed
+ * @param A QTime value of what the time has been changed to
+ */
 void Toolbox::on_currentTime_timeChanged(QTime timeVal){
     qDebug("HERE! on_currentTime_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
     int ms = (timeVal.minute() * 60000) + (timeVal.second() * 1000) + (timeVal.msec());
     qDebug("HERE! on_currentTime_timeChanged in ms: %d", ms);
 }
 
+/**
+ * Signal for when the value for the interval time box associated with time intervals is changed
+ * @param A QTime value of what the time has been changed to
+ */
 void Toolbox::on_timeInterval_timeChanged(QTime timeVal){
     qDebug("HERE! on_timeInterval_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
     int ms = (timeVal.minute() * 60000) + (timeVal.second() * 1000) + (timeVal.msec());
     qDebug("HERE! on_timeInterval_timeChanged in ms: %d", ms);
 }
 
+/**
+ * Signal for when the the current selected color has been changed
+ * @param A QColor value of what the color has been changed to
+ */
 void Toolbox::on_colorDialog_currentColorChanged(QColor colorVal)
 {
     qDebug("HERE! on_colorDialog_currentColorChanged %d:%d:%d", colorVal.red(), colorVal.green(), colorVal.blue());
