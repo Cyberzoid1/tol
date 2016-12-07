@@ -75,6 +75,7 @@ void EditorWindow::goLeft()
         updateCells(uiFrames[i], activeFrames[i]);
     }
     currFrame--;
+    animation->setCurrentFrame(&(*(currFrame)));
     currIndex--;
     toggleNavButtons();
 }
@@ -108,6 +109,7 @@ void EditorWindow::goRight()
         updateCells(uiFrames[i], activeFrames[i]);
     }
     currFrame++;
+    animation->setCurrentFrame(&(*(currFrame)));
     currIndex++;
     toggleNavButtons();
 }
@@ -202,6 +204,7 @@ void EditorWindow::setupFrames(Animation *animation)
         uiFrames[i]->self->setLayout(uiFrames[i]->grid);
     }
     this->currFrame = frames.begin();
+    animation->setCurrentFrame(&(*(this->currFrame)));
     this->currIndex = 0;
 
     toggleNavButtons();
