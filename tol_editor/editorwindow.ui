@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="DuplicateIcon">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>530</x>
      <y>410</y>
      <width>71</width>
      <height>28</height>
@@ -29,7 +29,7 @@
   <widget class="QPushButton" name="DeleteFrameIcon">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>430</x>
      <y>410</y>
      <width>41</width>
      <height>28</height>
@@ -42,7 +42,7 @@
   <widget class="QPushButton" name="NewFrameIcon">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>370</x>
      <y>410</y>
      <width>41</width>
      <height>28</height>
@@ -81,7 +81,7 @@
   <widget class="QPushButton" name="upDupIcon">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>540</x>
      <y>380</y>
      <width>51</width>
      <height>28</height>
@@ -94,7 +94,7 @@
   <widget class="QPushButton" name="DownDupIcon">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>540</x>
      <y>440</y>
      <width>51</width>
      <height>28</height>
@@ -107,7 +107,7 @@
   <widget class="QPushButton" name="RightDupIcon">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>600</x>
      <y>410</y>
      <width>41</width>
      <height>28</height>
@@ -120,7 +120,7 @@
   <widget class="QPushButton" name="LeftDupIcon">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>490</x>
      <y>410</y>
      <width>41</width>
      <height>28</height>

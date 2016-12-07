@@ -144,6 +144,7 @@ QPushButton* EditorWindow::createCell(RGB color)                                
     QPushButton* newCell;                                                       // create the new cell
     newCell = new QPushButton;                                                  // assign it some memory
     setCellColor(newCell, color);
+    connect(newCell, SIGNAL(clicked()), this, SLOT(handleCellColor()));
     return newCell;                                                             // return it
 }
 /**
@@ -224,4 +225,11 @@ void EditorWindow::toggleNavButtons()
         ui->GoRightIcon->setEnabled(true);
     else
         ui->GoRightIcon->setEnabled(false);
+}
+
+void EditorWindow::handleCellColor()
+{
+    QPushButton * temp = qobject_cast<QPushButton*>(sender());
+    setCellColor(temp, animation->getLastColor());
+    return;
 }
