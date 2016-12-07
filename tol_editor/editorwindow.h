@@ -49,7 +49,7 @@ public slots:
     //void downHandler();
     //void rightHandler();
     //void leftHandler();
-    //void duplicateHandler();
+    void duplicateHandler();
     //void addFrameHandler();
     //void clearFrameHandler();
     //void deleteFrameHandler();

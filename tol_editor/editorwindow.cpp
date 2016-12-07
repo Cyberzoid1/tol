@@ -35,6 +35,7 @@ EditorWindow::EditorWindow(QWidget *parent) :
     currIndex = 0;
     connect(ui->GoLeftIcon, SIGNAL(clicked(bool)), this, SLOT(goLeft()));
     connect(ui->GoRightIcon, SIGNAL(clicked(bool)), this, SLOT(goRight()));
+    connect(ui->DuplicateIcon, SIGNAL(clicked(bool)), this, SLOT(duplicateHandler()));
     ui->GoLeftIcon->setEnabled(false);
     ui->GoRightIcon->setEnabled(false);
 }
@@ -257,4 +258,9 @@ void EditorWindow::handleCellColor()
 
     currFrame->setCellColor(row.toInt(), col.toInt(), animation->getLastColor());
     animation->setFrames(this->frames);
+}
+
+void EditorWindow::duplicateHandler()
+{
+    animation->duplicateFrame(*(this->currFrame));
 }

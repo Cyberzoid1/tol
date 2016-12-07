@@ -109,12 +109,6 @@ void Animation::setLastColor(int red, int green, int blue)
 {
     lastColor.setColor(red, green, blue);
 }
-
-void Animation::printLastColor()
-{
-    qDebug("HERE! In Animation! printLastColor %d:%d:%d", lastColor.getRed(), lastColor.getGreen(), lastColor.getBlue());
-}
-
 /**
  * Returns the last color used while creating the current animation.
  * @return A copy of an RGB Object containing the color data.
@@ -213,6 +207,15 @@ void Animation::duplicateFrame(Frame frame)
 	//since this is a copy of the previous frame, increment the position
 	newFrame.setFrameNumber(newFrame.getFrameNumber()+1);
 	std::list<Frame>::iterator it = std::next(frames.begin(), newFrame.getFrameNumber());
+/// Added tis part of code      --Adonay
+    std::list<Frame>::iterator temp = it;
+    while(temp != frames.end())
+    {
+        temp->setFrameNumber(temp->getFrameNumber() + 1);
+        temp = std::next(frames.begin(), temp->getFrameNumber());
+    }
+
+/// ----- Adonay
 
 	frames.insert(it, newFrame);
 }
