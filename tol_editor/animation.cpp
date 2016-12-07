@@ -4,6 +4,7 @@
 
 #include "animation.h"
 #include "rgb.h"
+#include <QDebug>
 
 /**
  * Construct a new Animation with the following default values;
@@ -98,6 +99,12 @@ void Animation::setLastColor(int red, int green, int blue)
 {
     lastColor.setColor(red, green, blue);
 }
+
+void Animation::printLastColor()
+{
+    qDebug("HERE! In Animation! printLastColor %d:%d:%d", lastColor.getRed(), lastColor.getGreen(), lastColor.getBlue());
+}
+
 /**
  * Returns the last color used while creating the current animation.
  * @return A copy of an RGB Object containing the color data.

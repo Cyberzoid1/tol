@@ -21,6 +21,7 @@
 #include "toolbox.h"
 #include "editorwindow.h"
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -44,6 +45,7 @@ private:
     QWidget *outerWrapper;
     QHBoxLayout *hlayout;
 
+
     Animation *animation; //!< Reference to animation storage object
 
     QMenu *fileMenu; //!< Reference to the MainWindow's file menu
@@ -52,6 +54,13 @@ private:
 
     void createActions(); //!< Helper method to instantiate actions
     void createMenus(); //!< Helper method to instantiate menus
+
+
+    Toolbox *tBox; //!< Toolbox object
+
+/*protected:
+    Animation *animation; //!< Reference to animation storage object
+    Toolbox *tBox; //!< Toolbox object*/
 };
 
 #endif // MAINWINDOW_H

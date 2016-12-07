@@ -1,12 +1,15 @@
 /**
-* @class Cell
-*/
+ * CS 383
+ * Group #4
+ * Created: 11/05/2016
+ *
+ * This file contains the implimentation of the Cell class defined in cell.h
+ */
 
 #include "cell.h"
 
 /**
- * Initialize a cell with the defualt RGB object color
- * black.
+ * Initialize a cell with the defualt color black
  */
 Cell::Cell()
 {
@@ -14,9 +17,8 @@ Cell::Cell()
 }
 
 /**
- * Initialize a cell with a pre-existing RGB object.
- * @param newColorValue An RGB object containing the
- * color to set the cell to.
+ * Initialize a cell with an rgb structure
+ * @param Color of the cell contained in an rgb struct
  */
 Cell::Cell(RGB newColorValue)
 {
@@ -24,19 +26,15 @@ Cell::Cell(RGB newColorValue)
 }
 
 /**
- * Default destructor, no memory to clean up so empty for
- * now.
+ * Destructor empty for now
  */
 Cell::~Cell()
 {
 }
 
 /**
- * Sets the color of a cell using the color stored inside
- * an RGB object.
- * @param newColorValue An RGB object containing the
- * color to set the cell to.
- * @return Void.
+ * Sets the color of the cell using an rgb struct
+ * @param Color of the cell contained in an rgb struct
  */
 void Cell::setColor(RGB newColorValue)
 {
@@ -44,9 +42,7 @@ void Cell::setColor(RGB newColorValue)
 }
 
 /**
- * Returns a copy of the RGB object that contains
- * this cell's color.
- * @return An RGB object.
+ * Returns the color of this cell as an rgb struct
  */
 RGB Cell::getColor()
 {
@@ -54,10 +50,7 @@ RGB Cell::getColor()
 }
 
 /**
- * Serializes this class by returing a string object
- * containing the RGB color as a 3 integer tuple.
- * @return A string containing 3 integers representing
- * red, green, blue in that order.
+ * Serializes this class as a string suitable for output as part of a .tan file
  */
 std::string Cell::toString()
 {

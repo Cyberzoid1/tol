@@ -1,14 +1,10 @@
 /**
-* @author Peter Fetros
-* @date 11/08/2016
-* @name Input
-* @brief This is the header file that defines the file output functionality.
-* @details This header file defines the different functions that are used
-* during the process of writing an animations into a .tan2 file. It also defines
-* several helper functions that are used for determinding proper filename and paths
-* as well a function for getting a string representation of any errors returned by the
-* file writing process.
-*/
+ * CS 383
+ * Group #4
+ * Created: 11/08/2016
+ *
+ * This file defines the function defintions for outputting a tan file
+ */
 
 #ifndef outputfile_h
 #define outputfile_h
@@ -18,6 +14,10 @@
 #include <fstream>
 
 #include "animation.h"
+
+/**
+ * Header for functions relating to writing out  tan file
+ */
 
 int writeFile(std::string rawFileName, Animation* animation);
 

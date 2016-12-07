@@ -5,7 +5,6 @@
 #include "toolbox.h"
 #include "editorwindow.h"
 #include <QApplication>
-#include <QWidget>
 
 /**
  * Initial point of execution for the program. Yhis function

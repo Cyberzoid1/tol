@@ -1,11 +1,11 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/17/2016
- *
- * This file contains the definitions of Toolbox class used
- * to hold the color picker and various other tools.
- */
+* @author Matthew Holman and Domanic Welker
+* @date 11/17/2016
+* @class Toolbox
+* @brief This is the header file that defines the Toolbox class.
+* @details This file contains the definitions of Toolbox class used
+* to hold the color picker and various other tools.
+*/
 
 #ifndef TOOLBOX_H
 #define TOOLBOX_H
@@ -28,16 +28,23 @@
 #include <QTime>
 #include <QColorDialog>
 #include <QColor>
+#include <QFont>
+#include "animation.h"
 
 /**
  * Toolbox class definition - this will be worked on
  * to make it an explicit QObject
  */
-class Toolbox : public QMainWindow
+class Toolbox : public QWidget
 {
    Q_OBJECT
 
 public:
+    /**
+     * Font Widgets
+     */
+    QFont toolBoxFont;
+
     /**
      * Tab Widgets
      */
@@ -121,16 +128,20 @@ public:
      */
     QColorDialog *colorDialog;
 
+    Animation *animPtr;
+
     /**
      * Toolbox Constructor/ Destructor Functions
      */
-    explicit Toolbox(QWidget *parent = 0);
+    explicit Toolbox(QWidget *parent = 0, Animation *aPtr = 0);
     ~Toolbox();
 
     /**
      * Toolbox Setup Functions
      */
     void setupUi(QWidget *Toolbox);
+
+    void setupUiFont();
 
     void setupUiTabs(QWidget *Toolbox);
 
@@ -145,6 +156,15 @@ public:
     void setupUiColorDialogue();
 
     void retranslateUi(QWidget *Toolbox);
+
+private:
+    int addFramesInsertionIndex = 0;
+    int addFramesNumberOfFrames = 0;
+    int removeFramesDeletionIndex = 0;
+    int removeFramesNumberOfFrames = 0;
+    int copyFramesInsertionIndex = 0;
+    int copyFramesStartIndex = 0;
+    int copyFramesEndIndex = 0;
 
 public slots:
 
