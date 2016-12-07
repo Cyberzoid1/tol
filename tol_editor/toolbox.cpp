@@ -707,6 +707,7 @@ void Toolbox::on_copyFramesButton_clicked()
 void Toolbox::on_currentTime_timeChanged(QTime timeVal){
     qDebug("HERE! on_currentTime_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
     int ms = (timeVal.minute() * 60000) + (timeVal.second() * 1000) + (timeVal.msec());
+    animPtr->getCurrentFrame()->setStartTime(ms);
     qDebug("HERE! on_currentTime_timeChanged in ms: %d", ms);
 }
 
