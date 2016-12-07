@@ -56,6 +56,16 @@ void Animation::setVersion(std::string ver)
 	version = ver;
 }
 
+Frame* Animation::getCurrentFrame()
+{
+    return currentFrame;
+}
+
+void Animation::setCurrentFrame(Frame* newFrame)
+{
+    currentFrame = newFrame;
+}
+
 /**
  * Returns the animation's version.
  * @return A string object representing the animations version number.

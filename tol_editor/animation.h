@@ -27,6 +27,8 @@ public:
 	void setFrames(std::list<Frame> frms);
 	std::list<Frame> getFrames();
 	void setVersion(std::string ver);
+    Frame* getCurrentFrame();
+    void setCurrentFrame(Frame* newFrame);
 	std::string getVersion();
 	void setFilename(std::string fname);
 	std::string getFilename();
@@ -58,5 +60,6 @@ private:
     int numFrames; //!< The total number of frames in the animation.
     int height; //!< The height in cell objects of each animation frame.
     int width; //!< The width in cell objects of each animation frame.
+    Frame* currentFrame; //!< The currently displayed frame in the editor window.
 };
 #endif
