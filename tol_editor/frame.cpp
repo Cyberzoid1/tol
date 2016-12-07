@@ -79,7 +79,7 @@ RGB Frame::getCellColor(int x, int y)
     if (y > cells.size() || y < 0 || x > cells[y].size() || x < 0)
         return RGB();
     
-    return cells[y-1][x-1].getColor();
+    return cells[y][x].getColor();
 }
 
 /**

@@ -17,14 +17,23 @@ MainWindow::MainWindow(QWidget *parent) :
 
     outerWrapper = new QWidget;
     hlayout = new QHBoxLayout;
-    toolbox = new Toolbox(outerWrapper);
-    editor = new EditorWindow(outerWrapper);
+    tbParent = new QWidget;
+    toolbox = new Toolbox(tbParent);
+    edParent = new QWidget;
+    editor = new EditorWindow(edParent);
 
-    editor->move(toolbox->width() + 30,0);
+    tbParent->setMaximumWidth(toolbox->width());
+    edParent->setMaximumWidth(editor->width());
+    hlayout->setSpacing(0);
+    hlayout->setMargin(0);
+    hlayout->addWidget(tbParent);
+    hlayout->addWidget(edParent);
 
     outerWrapper->setLayout(hlayout);
 
     this->setCentralWidget(outerWrapper);
+    this->setMinimumWidth(toolbox->width() + editor->width());
+    this->setMinimumHeight(editor->height());
 
     createActions();
     createMenus();
@@ -50,6 +59,7 @@ void MainWindow::open()
     //read in the animation from the file and store it in the window's
     //data object
     *animation = readInAnimation(filename.toStdString().c_str());
+    editor->setupFrames(animation);
 }
 /**
  * Slot for the 'Save' action in the 'File' menu. Writes the animation out
