@@ -636,7 +636,6 @@ void Toolbox::on_removeFramesButton_clicked()
         copyFramesIndex->setRange(0, animPtr->getNumFrames() - 1);
         copyFramesEnd->setRange(0, animPtr->getNumFrames() - 1);
         copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);
-    }
 }
 
 /**
