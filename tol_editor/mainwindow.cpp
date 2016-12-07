@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     outerWrapper = new QWidget;
     hlayout = new QHBoxLayout;
     tbParent = new QWidget;
-    toolbox = new Toolbox(tbParent);
+    toolbox = new Toolbox(tbParent, animation);
     edParent = new QWidget;
     editor = new EditorWindow(edParent);
 
@@ -37,8 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createActions();
     createMenus();
-
-    tBox = new Toolbox(this, animation);
 }
 
 MainWindow::~MainWindow()

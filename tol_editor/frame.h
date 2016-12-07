@@ -12,6 +12,7 @@
 #include "Cell.h"
 #include <string>
 #include <vector>
+#include <iterator>
 
 /**
  * Class for storing all cells and represents a single
