@@ -120,12 +120,15 @@ void EditorWindow::goRight()
  */
 void EditorWindow::setup(frameElement *frame,Frame data)
 {
-
+    QString row, col;
     for( int i = 0; i < animation->getWidth(); i++ )
     {
         for( int j = 0; j < animation->getHeight(); j++ )
         {
             currCells = createCell(data.getCellColor(i, j));
+            row = ((i<10) ? "0" + QString::number(i) : QString::number(i));
+            col = ((j<10) ? "0" + QString::number(j) : QString::number(j));
+            currCells->setObjectName(row + "," + col);
             frame->grid->addWidget( currCells, i, j, 0 );
         }
     }
@@ -231,5 +234,10 @@ void EditorWindow::handleCellColor()
 {
     QPushButton * temp = qobject_cast<QPushButton*>(sender());
     setCellColor(temp, animation->getLastColor());
-    return;
+    Frame *currFrame = &(*this->currFrame);
+    QString index = temp->objectName();
+    QString row = index.mid(0, 2);
+    QString col = index.mid(3, 2);
+    currFrame->setCellColor(row.toInt(), col.toInt(), animation->getLastColor());
+    animation->setFrames(this->frames);
 }
