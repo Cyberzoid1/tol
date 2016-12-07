@@ -33,6 +33,7 @@ public:
     ~EditorWindow();
 
     void setup(frameElement *frame, Frame data);
+    void setButtonInfo(QPushButton *button, int row, int col);
     QPushButton* createCell(RGB color);
     void setCellColor(QPushButton *cell, RGB color);
     void updateCells(frameElement *frame, Frame data);

@@ -120,19 +120,33 @@ void EditorWindow::goRight()
  */
 void EditorWindow::setup(frameElement *frame,Frame data)
 {
-    QString row, col;
     for( int i = 0; i < animation->getWidth(); i++ )
     {
         for( int j = 0; j < animation->getHeight(); j++ )
         {
             currCells = createCell(data.getCellColor(i, j));
-            row = ((i<10) ? "0" + QString::number(i) : QString::number(i));
-            col = ((j<10) ? "0" + QString::number(j) : QString::number(j));
-            currCells->setObjectName(row + "," + col);
+            setButtonInfo(currCells, i, j);
             frame->grid->addWidget( currCells, i, j, 0 );
         }
     }
 }
+/**
+ * Set the object name of the specified button to hold the row and column
+ * in a comma-separated string.
+ * @param button
+ * @param row
+ * @param col
+ * @return void
+ */
+void EditorWindow::setButtonInfo(QPushButton *button, int row, int col)
+{
+    QString rowIndex = QString::number(row);
+    QString colIndex = QString::number(col);
+    QString rowStr = ((row < 10) ? "0" + rowIndex : rowIndex);
+    QString colStr = ((col < 10) ? "0" + colIndex : colIndex);
+    button->setObjectName(rowStr + "," + colStr);
+}
+
 /**
  * @brief EditorWindow::createCell
  * this creates a new QPushbutton with
@@ -232,12 +246,15 @@ void EditorWindow::toggleNavButtons()
 
 void EditorWindow::handleCellColor()
 {
-    QPushButton * temp = qobject_cast<QPushButton*>(sender());
+    QPushButton *temp = qobject_cast<QPushButton*>(sender());
     setCellColor(temp, animation->getLastColor());
     Frame *currFrame = &(*this->currFrame);
+    //the (row,col) position is stored in the qpushbutton's object name
+    //extract those values for setting the corresponding cell's color
     QString index = temp->objectName();
     QString row = index.mid(0, 2);
     QString col = index.mid(3, 2);
+
     currFrame->setCellColor(row.toInt(), col.toInt(), animation->getLastColor());
     animation->setFrames(this->frames);
 }
