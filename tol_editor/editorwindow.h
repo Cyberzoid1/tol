@@ -52,7 +52,7 @@ public slots:
     void duplicateHandler();
     void addFrameHandler();
     //void clearFrameHandler();
-    //void deleteFrameHandler();
+    void deleteFrameHandler();
     //void inputTanHandler();
 
 private:

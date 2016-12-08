@@ -232,8 +232,8 @@ void Animation::duplicateFrame(Frame frame)
 	frames.insert(it, newFrame);
 }
 /**
- * Called after manipulating the list of frames (add, duplicate, etc.). Loops
- * throught the remaining frames and updates their number and time accordingly.
+ * Called after adding to the list of frames. Loops through the
+ * remaining frames and updates their number and time accordingly.
  * @param it pointer to the frame to start at
  * @return Void.
  */
@@ -256,9 +256,25 @@ void Animation::incrementFrameInfo(std::list<Frame>::iterator it)
 void Animation::removeFrame(int pos)
 {
 	std::list<Frame>::iterator it = std::next(frames.begin(), pos);
+    decrementFrameInfo(it);
     frames.erase(it);
 }
-
+/**
+ * Called after removing from the list of frames. Loops through the
+ * remaining frames and updates their number and time accordingly.
+ * @param it pointer to the frame to start at
+ * @return Void.
+ */
+void Animation::decrementFrameInfo(std::list<Frame>::iterator it)
+{
+    std::list<Frame>::iterator curr = it;
+    int removedTime = it->getStartTime();
+    while (curr != frames.end()){
+        curr->setStartTime(curr->getStartTime() - removedTime);
+        curr->setFrameNumber(curr->getFrameNumber() - 1);
+        curr++;
+    }
+}
 /**
  * Removes all of the frames between the specified indices from the
  * frame list (inclusive).

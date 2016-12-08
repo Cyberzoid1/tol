@@ -37,6 +37,7 @@ EditorWindow::EditorWindow(QWidget *parent) :
     connect(ui->GoRightIcon, SIGNAL(clicked(bool)), this, SLOT(goRight()));
     connect(ui->DuplicateIcon, SIGNAL(clicked(bool)), this, SLOT(duplicateHandler()));
     connect(ui->NewFrameIcon, SIGNAL(clicked(bool)), this, SLOT(addFrameHandler()));
+    connect(ui->DeleteFrameIcon, SIGNAL(clicked(bool)), this, SLOT(deleteFrameHandler()));
     ui->GoLeftIcon->setEnabled(false);
     ui->GoRightIcon->setEnabled(false);
 }
@@ -287,4 +288,12 @@ void EditorWindow::addFrameHandler()
     this->currFrame = std::next(this->frames.begin(), currIndex);
     animation->setCurrentFrame(&(*this->currFrame));
     goRight();
+}
+void EditorWindow::deleteFrameHandler()
+{
+    animation->removeFrame(this->currIndex);
+    this->frames = animation->getFrames();
+    this->currFrame = std::next(this->frames.begin(), this->currIndex);
+    animation->setCurrentFrame(&(*this->currFrame));
+    goLeft();
 }

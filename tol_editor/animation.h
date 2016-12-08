@@ -49,6 +49,7 @@ public:
 	void duplicateFrame(Frame frame);
     void incrementFrameInfo(std::list<Frame>::iterator it);
 	void removeFrame(int pos);
+    void decrementFrameInfo(std::list<Frame>::iterator it);
 	void removeFrames(int first, int last);
 	std::string toString();
 
