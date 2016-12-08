@@ -259,8 +259,16 @@ void EditorWindow::handleCellColor()
     currFrame->setCellColor(row.toInt(), col.toInt(), animation->getLastColor());
     animation->setFrames(this->frames);
 }
-
+/**
+ * Called when the 'duplicate' button is clicked. Duplicates the current frame,
+ * updates the list of frames and currFrame pointer, and then transitions to the new,
+ * duplicate frame.
+ */
 void EditorWindow::duplicateHandler()
 {
     animation->duplicateFrame(*(this->currFrame));
+    this->frames = animation->getFrames();
+    this->currFrame = std::next(this->frames.begin(), currIndex);
+    animation->setCurrentFrame(&(*this->currFrame));
+    goRight();
 }
