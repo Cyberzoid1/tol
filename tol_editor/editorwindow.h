@@ -39,7 +39,9 @@ public:
     void updateCells(frameElement *frame, Frame data);
 
     void setupFrames(Animation *animation);
+    void connectSlots();
     void toggleNavButtons();
+    void updateFrameData();
 
 public slots:
     void goLeft();

@@ -33,11 +33,7 @@ EditorWindow::EditorWindow(QWidget *parent) :
         uiFrames.push_back(new frameElement);
 
     currIndex = 0;
-    connect(ui->GoLeftIcon, SIGNAL(clicked(bool)), this, SLOT(goLeft()));
-    connect(ui->GoRightIcon, SIGNAL(clicked(bool)), this, SLOT(goRight()));
-    connect(ui->DuplicateIcon, SIGNAL(clicked(bool)), this, SLOT(duplicateHandler()));
-    connect(ui->NewFrameIcon, SIGNAL(clicked(bool)), this, SLOT(addFrameHandler()));
-    connect(ui->DeleteFrameIcon, SIGNAL(clicked(bool)), this, SLOT(deleteFrameHandler()));
+    connectSlots();
     ui->GoLeftIcon->setEnabled(false);
     ui->GoRightIcon->setEnabled(false);
 }
@@ -50,76 +46,11 @@ EditorWindow::~EditorWindow()
 {
     delete ui;
 }
-
-/**
- * This is the slot for when the
- * "Go-Left" Button is clicked
- * by the user
- */
-void EditorWindow::goLeft()
-{
-    int width = animation->getWidth();
-    int height = animation->getHeight();
-    Frame newPrev(width, height),
-          newCurr(width, height);
-
-    if (currIndex - 2 > 0)
-        newPrev = *std::next(currFrame, -2);
-    if (currIndex - 1 > 0)
-        newCurr = *std::next(currFrame, -1);
-
-    std::vector<Frame> activeFrames = {
-        newPrev,
-        newCurr,
-        *currFrame
-    };
-
-    for (int i = 0; i < activeFrames.size(); i++){
-        updateCells(uiFrames[i], activeFrames[i]);
-    }
-    currFrame--;
-    animation->setCurrentFrame(&(*(currFrame)));
-    currIndex--;
-    toggleNavButtons();
-}
-
-
-/**
- * This is the slot used when the user
- * clicks the "Go-Right" button.
- */
-void EditorWindow::goRight()
-{
-    int width = animation->getWidth();
-    int height = animation->getHeight();
-    Frame newCurr(width, height),
-          newNext(width, height);
-
-    if (frames.size() > 1 &&
-            currIndex + 1 < frames.size())
-        newCurr = *std::next(currFrame, 1);
-    if (frames.size() > 2 &&
-            currIndex + 2 < frames.size())
-        newNext = *std::next(currFrame, 2);
-
-    std::vector<Frame> activeFrames = {
-        *currFrame,
-        newCurr,
-        newNext
-    };
-
-    for (int i = 0; i < activeFrames.size(); i++){
-        updateCells(uiFrames[i], activeFrames[i]);
-    }
-    currFrame++;
-    animation->setCurrentFrame(&(*(currFrame)));
-    currIndex++;
-    toggleNavButtons();
-}
 /**
  * Setup the specified frameElement.
- * @param frame
- * @param data
+ * @param frame pointer to the UI frame
+ * @param data Frame of data
+ * @return Void.
  */
 void EditorWindow::setup(frameElement *frame,Frame data)
 {
@@ -136,9 +67,9 @@ void EditorWindow::setup(frameElement *frame,Frame data)
 /**
  * Set the object name of the specified button to hold the row and column
  * in a comma-separated string.
- * @param button
- * @param row
- * @param col
+ * @param button pointer to the button to update
+ * @param row corresponds to the x value in the grid for the button
+ * @param col corresponds to the y value in the grid for the button
  * @return void
  */
 void EditorWindow::setButtonInfo(QPushButton *button, int row, int col)
@@ -169,8 +100,8 @@ QPushButton* EditorWindow::createCell(RGB color)                                
 }
 /**
  * Set the color of a cell in a frame to the specified color.
- * @param cell
- * @param color
+ * @param cell pointer to a button in the grid
+ * @param color object containing the RGB value to update the cell to
  */
 void EditorWindow::setCellColor(QPushButton *cell, RGB color)
 {
@@ -184,8 +115,9 @@ void EditorWindow::setCellColor(QPushButton *cell, RGB color)
 }
 /**
  * Update the colors of the cells in the specified frame after a transition.
- * @param frame
- * @param data
+ * @param frame pointer to the UI frame
+ * @param data Frame of data
+ * @return Void.
  */
 void EditorWindow::updateCells(frameElement *frame, Frame data)
 {
@@ -202,7 +134,8 @@ void EditorWindow::updateCells(frameElement *frame, Frame data)
  * Using the animation read in from the file, setup the first few frames
  * in the UI of the editor window. Also, handle enabling/disabling the
  * navigation buttons.
- * @param animation
+ * @param animation pointer to the animation read in from a file
+ * @return Void.
  */
 void EditorWindow::setupFrames(Animation *animation)
 {
@@ -231,8 +164,22 @@ void EditorWindow::setupFrames(Animation *animation)
     toggleNavButtons();
 }
 /**
+ * Connect the signals and slots for the various UI buttons.
+ * @return Void.
+ */
+void EditorWindow::connectSlots()
+{
+    connect(ui->GoLeftIcon, SIGNAL(clicked(bool)), this, SLOT(goLeft()));
+    connect(ui->GoRightIcon, SIGNAL(clicked(bool)), this, SLOT(goRight()));
+    connect(ui->DuplicateIcon, SIGNAL(clicked(bool)), this, SLOT(duplicateHandler()));
+    connect(ui->NewFrameIcon, SIGNAL(clicked(bool)), this, SLOT(addFrameHandler()));
+    connect(ui->DeleteFrameIcon, SIGNAL(clicked(bool)), this, SLOT(deleteFrameHandler()));
+}
+
+/**
  * Toggle navigation buttons to prevent the user from transitioning
  * beyond the start or end of the list of frames.
+ * @return Void.
  */
 void EditorWindow::toggleNavButtons()
 {
@@ -246,7 +193,84 @@ void EditorWindow::toggleNavButtons()
     else
         ui->GoRightIcon->setEnabled(false);
 }
+/**
+ * Helper method to update the list of frames and pointer to the current frame.
+ * @return void.
+ */
+void EditorWindow::updateFrameData()
+{
+    this->frames = animation->getFrames();
+    this->currFrame = std::next(this->frames.begin(), currIndex);
+    animation->setCurrentFrame(&(*this->currFrame));
+}
+/**
+ * This is the slot for when the "Go-Left" Button is clicked
+ * by the user.
+ * @return Void.
+ */
+void EditorWindow::goLeft()
+{
+    int width = animation->getWidth();
+    int height = animation->getHeight();
+    Frame newPrev(width, height),
+          newCurr(width, height);
 
+    if (currIndex - 2 > 0)
+        newPrev = *std::next(currFrame, -2);
+    if (currIndex - 1 > 0)
+        newCurr = *std::next(currFrame, -1);
+
+    std::vector<Frame> activeFrames = {
+        newPrev,
+        newCurr,
+        *currFrame
+    };
+
+    for (int i = 0; i < activeFrames.size(); i++){
+        updateCells(uiFrames[i], activeFrames[i]);
+    }
+    currFrame--;
+    animation->setCurrentFrame(&(*(currFrame)));
+    currIndex--;
+    toggleNavButtons();
+}
+/**
+ * This is the slot used when the user clicks the "Go-Right" button.
+ * @return Void.
+ */
+void EditorWindow::goRight()
+{
+    int width = animation->getWidth();
+    int height = animation->getHeight();
+    Frame newCurr(width, height),
+          newNext(width, height);
+
+    if (frames.size() > 1 &&
+            currIndex + 1 < frames.size())
+        newCurr = *std::next(currFrame, 1);
+    if (frames.size() > 2 &&
+            currIndex + 2 < frames.size())
+        newNext = *std::next(currFrame, 2);
+
+    std::vector<Frame> activeFrames = {
+        *currFrame,
+        newCurr,
+        newNext
+    };
+
+    for (int i = 0; i < activeFrames.size(); i++){
+        updateCells(uiFrames[i], activeFrames[i]);
+    }
+    currFrame++;
+    animation->setCurrentFrame(&(*(currFrame)));
+    currIndex++;
+    toggleNavButtons();
+}
+/**
+ * Called when a cell in a frame is clicked. Changes the color of that cell
+ * in the UI and backend data to the last color selected from the toolbox.
+ * @return Void.
+ */
 void EditorWindow::handleCellColor()
 {
     QPushButton *temp = qobject_cast<QPushButton*>(sender());
@@ -265,35 +289,37 @@ void EditorWindow::handleCellColor()
  * Called when the 'duplicate' button is clicked. Duplicates the current frame,
  * updates the list of frames and currFrame pointer, and then transitions to the new,
  * duplicate frame.
+ * @return Void.
  */
 void EditorWindow::duplicateHandler()
 {
     animation->duplicateFrame(*(this->currFrame));
-    this->frames = animation->getFrames();
-    this->currFrame = std::next(this->frames.begin(), currIndex);
-    animation->setCurrentFrame(&(*this->currFrame));
+    updateFrameData();
     goRight();
 }
 /**
- * Called when the 'duplicate' button is clicked. Duplicates the current frame,
- * updates the list of frames and currFrame pointer, and then transitions to the new,
- * duplicate frame.
+ * Called when the 'add' button is clicked. Adds a new, blank frame after
+ * the current frame, updates the list of frames, and then transitions to the new
+ * frame.
+ * @return Void.
  */
 void EditorWindow::addFrameHandler()
 {
     animation->addFrame(animation->getWidth(),
                         animation->getHeight(),
                         this->currIndex+1);
-    this->frames = animation->getFrames();
-    this->currFrame = std::next(this->frames.begin(), currIndex);
-    animation->setCurrentFrame(&(*this->currFrame));
+    updateFrameData();
     goRight();
 }
+/**
+ * Called when the 'delete' button is clicked. Removes the current frame, updates
+ * the list of frames, and transitions to the previous frame.
+ * @return Void.
+ */
 void EditorWindow::deleteFrameHandler()
 {
     animation->removeFrame(this->currIndex);
-    this->frames = animation->getFrames();
-    this->currFrame = std::next(this->frames.begin(), this->currIndex);
-    animation->setCurrentFrame(&(*this->currFrame));
+    updateFrameData();
     goLeft();
 }
+
