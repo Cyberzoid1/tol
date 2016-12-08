@@ -36,6 +36,7 @@ EditorWindow::EditorWindow(QWidget *parent) :
     connect(ui->GoLeftIcon, SIGNAL(clicked(bool)), this, SLOT(goLeft()));
     connect(ui->GoRightIcon, SIGNAL(clicked(bool)), this, SLOT(goRight()));
     connect(ui->DuplicateIcon, SIGNAL(clicked(bool)), this, SLOT(duplicateHandler()));
+    connect(ui->NewFrameIcon, SIGNAL(clicked(bool)), this, SLOT(addFrameHandler()));
     ui->GoLeftIcon->setEnabled(false);
     ui->GoRightIcon->setEnabled(false);
 }
@@ -267,6 +268,21 @@ void EditorWindow::handleCellColor()
 void EditorWindow::duplicateHandler()
 {
     animation->duplicateFrame(*(this->currFrame));
+    this->frames = animation->getFrames();
+    this->currFrame = std::next(this->frames.begin(), currIndex);
+    animation->setCurrentFrame(&(*this->currFrame));
+    goRight();
+}
+/**
+ * Called when the 'duplicate' button is clicked. Duplicates the current frame,
+ * updates the list of frames and currFrame pointer, and then transitions to the new,
+ * duplicate frame.
+ */
+void EditorWindow::addFrameHandler()
+{
+    animation->addFrame(animation->getWidth(),
+                        animation->getHeight(),
+                        this->currIndex+1);
     this->frames = animation->getFrames();
     this->currFrame = std::next(this->frames.begin(), currIndex);
     animation->setCurrentFrame(&(*this->currFrame));

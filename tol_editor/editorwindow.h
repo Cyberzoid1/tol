@@ -50,7 +50,7 @@ public slots:
     //void rightHandler();
     //void leftHandler();
     void duplicateHandler();
-    //void addFrameHandler();
+    void addFrameHandler();
     //void clearFrameHandler();
     //void deleteFrameHandler();
     //void inputTanHandler();

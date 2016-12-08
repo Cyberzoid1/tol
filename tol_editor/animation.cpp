@@ -117,6 +117,23 @@ RGB Animation::getLastColor()
 	return lastColor;
 }
 /**
+ * Set the default time interval between frames.
+ * @param interval time interval in ms.
+ * @return Void.
+ */
+void Animation::setTimeInterval(int interval)
+{
+    timeInterval = interval;
+}
+/**
+ * Returns the default time interval between frames.
+ * @return time interval (in ms).
+ */
+int Animation::getTimeInterval()
+{
+    return timeInterval;
+}
+/**
  * Set the values of the recent colors used on the Animation in the editor.
  * @param recColors array of rgb structures
  */
@@ -191,6 +208,9 @@ void Animation::addFrame(int w, int h, int pos)
 	Frame frame(w,h);
 	frame.setFrameNumber(pos);
 	std::list<Frame>::iterator it = std::next(frames.begin(), frame.getFrameNumber());
+    std::list<Frame>::iterator prev = std::next(it, -1);
+    frame.setStartTime(prev->getStartTime() + timeInterval);
+    incrementFrameInfo(it);
 	frames.insert(it, frame);
 }
 
@@ -205,18 +225,27 @@ void Animation::duplicateFrame(Frame frame)
 	Frame newFrame = frame;
 	//since this is a copy of the previous frame, increment the position
 	newFrame.setFrameNumber(newFrame.getFrameNumber()+1);
+    newFrame.setStartTime(newFrame.getStartTime() + timeInterval);
 	std::list<Frame>::iterator it = std::next(frames.begin(), newFrame.getFrameNumber());
-/// Added tis part of code      --Adonay
+    incrementFrameInfo(it);
+
+	frames.insert(it, newFrame);
+}
+/**
+ * Called after manipulating the list of frames (add, duplicate, etc.). Loops
+ * throught the remaining frames and updates their number and time accordingly.
+ * @param it pointer to the frame to start at
+ * @return Void.
+ */
+void Animation::incrementFrameInfo(std::list<Frame>::iterator it)
+{
     std::list<Frame>::iterator temp = it;
     while(temp != frames.end())
     {
+        temp->setStartTime(temp->getStartTime() + timeInterval);
         temp->setFrameNumber(temp->getFrameNumber() + 1);
-        temp = std::next(frames.begin(), temp->getFrameNumber());
+        temp++;
     }
-
-/// ----- Adonay
-
-	frames.insert(it, newFrame);
 }
 
 /**

@@ -57,6 +57,12 @@ void MainWindow::open()
     //read in the animation from the file and store it in the window's
     //data object
     *animation = readInAnimation(filename.toStdString().c_str());
+    //now that an animation has been read into the window, update the time interval
+    //to the default value stored in the toolbox.
+    QTime intvl = toolbox->timeInterval->time();
+    int ms = (intvl.minute() * 60000) + (intvl.second() * 1000) + (intvl.msec());
+    animation->setTimeInterval(ms);
+
     editor->setupFrames(animation);
 }
 /**

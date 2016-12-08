@@ -353,6 +353,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     timeInterval->setFont(toolBoxFont);
     timeInterval->setDisplayFormat("mm:ss.zzz");
     timeInterval->setTime(defaultTime);
+    animPtr->setTimeInterval(100);
 }
 
 /**
@@ -719,6 +720,7 @@ void Toolbox::on_timeInterval_timeChanged(QTime timeVal){
     qDebug("HERE! on_timeInterval_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
     int ms = (timeVal.minute() * 60000) + (timeVal.second() * 1000) + (timeVal.msec());
     qDebug("HERE! on_timeInterval_timeChanged in ms: %d", ms);
+    animPtr->setTimeInterval(ms);
 }
 
 /**
