@@ -208,8 +208,12 @@ void Animation::addFrame(int w, int h, int pos)
 	Frame frame(w,h);
 	frame.setFrameNumber(pos);
 	std::list<Frame>::iterator it = std::next(frames.begin(), frame.getFrameNumber());
-    std::list<Frame>::iterator prev = std::next(it, -1);
-    frame.setStartTime(prev->getStartTime() + timeInterval);
+    if (pos != 0){
+        std::list<Frame>::iterator prev = std::next(it, -1);
+        frame.setStartTime(prev->getStartTime() + timeInterval);
+    }
+    else
+        frame.setStartTime(0);
     incrementFrameInfo(it);
 	frames.insert(it, frame);
 }
