@@ -8,7 +8,7 @@ The output required of this program, in order for it to interact with the curren
 The header is divided into 5 pieces:
 	\begin{itemize}
 		\item The Version Number: 0.4 in the current, perhaps 0.5 or 1.0 for this project
-		\item File Type: either NoAudioFile or its converse
+		\item File Type: either NoAudioFile or its converse--i.e., the audio file associated with the .tan2
 		\item Last Color Used: the last RGB value used in editing the frames
 		\item List of Pre-Set Colors: the RGB values for each of the pre-set colors included in the program
 		\item Show information: the number of frames, the heighth, and the width of the tower in the frame
@@ -57,3 +57,4 @@ In this example, the first line is the version number.  The second line is the f
 
 \subsection{Notes}
 The format of the .tan2 file is very straightforward.  It has simple requirements, and these could be easily produced.  The data required would also be fairly easy to store, as both the pre-set colors and the grid of LEDs could be stored in arrays, while the type and the last color used could be variables.  The version number and tower size could be constants.  And the time signatures could be determined as the frames are added on; while the frame number could be the size of a linked list holding the frames.  
+
