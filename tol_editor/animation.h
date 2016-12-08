@@ -35,8 +35,6 @@ public:
 	void setLastColor(int red, int green, int blue);
     RGB getLastColor();
 
-    void printLastColor(); //!< For Debugging Purposes - is it really working?
-
     void setRecentColors(RGB *recColors);
     RGB* getRecentColors();
 	int getNumFrames();

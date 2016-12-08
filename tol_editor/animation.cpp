@@ -4,7 +4,6 @@
 
 #include "animation.h"
 #include "rgb.h"
-#include <QDebug>
 
 /**
  * Construct a new Animation with the following default values;
