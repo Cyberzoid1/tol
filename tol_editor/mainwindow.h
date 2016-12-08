@@ -45,10 +45,6 @@ private:
     void createMenus(); //!< Helper method to instantiate menus
 
     Toolbox *tBox; //!< Toolbox object
-
-/*protected:
-    Animation *animation; //!< Reference to animation storage object
-    Toolbox *tBox; //!< Toolbox object*/
 };
 
 #endif // MAINWINDOW_H
