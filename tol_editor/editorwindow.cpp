@@ -54,12 +54,12 @@ EditorWindow::~EditorWindow()
  */
 void EditorWindow::setup(frameElement *frame,Frame data)
 {
-    for( int i = 0; i < animation->getWidth(); i++ )
+    for( int i = 0; i < animation->getHeight(); i++ )
     {
-        for( int j = 0; j < animation->getHeight(); j++ )
+        for( int j = 0; j < animation->getWidth(); j++ )
         {
-            currCells = createCell(data.getCellColor(i, j));
-            setButtonInfo(currCells, i, j);
+            currCells = createCell(data.getCellColor(j, i));
+            setButtonInfo(currCells, j, i);
             frame->grid->addWidget( currCells, i, j, 0 );
         }
     }
@@ -121,12 +121,12 @@ void EditorWindow::setCellColor(QPushButton *cell, RGB color)
  */
 void EditorWindow::updateCells(frameElement *frame, Frame data)
 {
-    for (int i = 0; i < animation->getWidth(); i++){
-        for (int j = 0; j < animation->getHeight(); j++){
+    for (int i = 0; i < animation->getHeight(); i++){
+        for (int j = 0; j < animation->getWidth(); j++){
             QLayoutItem *cell = frame->grid->itemAtPosition(i, j);
             QWidget *widg = cell->widget();
             QPushButton *button = dynamic_cast<QPushButton*>(widg);
-            setCellColor(button, data.getCellColor(i, j));
+            setCellColor(button, data.getCellColor(j, i));
         }
     }
 }
