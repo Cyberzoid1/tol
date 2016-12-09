@@ -7,15 +7,15 @@
 
 /**
  * Construct a new Animation with the following default values;
- * version: 0.4, filename: (empty string), height: 10. width: 4.
+ * version: 0.4, filename: (empty string), height: 20. width: 12.
  */
 Animation::Animation()
 {
 	version = "0.4";
     filename = "NoAudioFile";
     numFrames = (int)frames.size();
-	height = 10;
-	width = 4;
+    height = 20;
+    width = 12;
 }
 /**
  * TODO: verify that deconstructor is not needed
