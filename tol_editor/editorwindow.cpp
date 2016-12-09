@@ -175,6 +175,9 @@ void EditorWindow::connectSlots()
     connect(ui->NewFrameIcon, SIGNAL(clicked(bool)), this, SLOT(addFrameHandler()));
     connect(ui->DeleteFrameIcon, SIGNAL(clicked(bool)), this, SLOT(deleteFrameHandler()));
     connect(ui->upDupIcon, SIGNAL(clicked(bool)), this, SLOT(upHandler()));
+    connect(ui->DownDupIcon, SIGNAL(clicked(bool)), this, SLOT(downHandler()));
+    connect(ui->LeftDupIcon, SIGNAL(clicked(bool)), this, SLOT(leftHandler()));
+    connect(ui->RightDupIcon, SIGNAL(clicked(bool)), this, SLOT(rightHandler()));
 }
 
 /**
@@ -298,7 +301,42 @@ void EditorWindow::upHandler()
     updateFrameData();
     goRight();
 }
-
+/**
+ * Called when the 'up' button is clicked. Duplicates the current frame, shifts its
+ * rows up, updates the list of frames, and then transitions to the shifted frame.
+ * @return Void.
+ */
+void EditorWindow::downHandler()
+{
+    //0 corresponds to direction=up
+    animation->shiftFrame(*(this->currFrame), 1);
+    updateFrameData();
+    goRight();
+}
+/**
+ * Called when the 'up' button is clicked. Duplicates the current frame, shifts its
+ * rows up, updates the list of frames, and then transitions to the shifted frame.
+ * @return Void.
+ */
+void EditorWindow::leftHandler()
+{
+    //0 corresponds to direction=up
+    animation->shiftFrame(*(this->currFrame), 2);
+    updateFrameData();
+    goRight();
+}
+/**
+ * Called when the 'up' button is clicked. Duplicates the current frame, shifts its
+ * rows up, updates the list of frames, and then transitions to the shifted frame.
+ * @return Void.
+ */
+void EditorWindow::rightHandler()
+{
+    //0 corresponds to direction=up
+    animation->shiftFrame(*(this->currFrame), 3);
+    updateFrameData();
+    goRight();
+}
 /**
  * Called when the 'duplicate' button is clicked. Duplicates the current frame,
  * updates the list of frames and currFrame pointer, and then transitions to the new,

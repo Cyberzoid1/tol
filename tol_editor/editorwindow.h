@@ -48,9 +48,9 @@ public slots:
     void goRight();
     void handleCellColor();
     void upHandler();
-    //void downHandler();
-    //void rightHandler();
-    //void leftHandler();
+    void downHandler();
+    void rightHandler();
+    void leftHandler();
     void duplicateHandler();
     void addFrameHandler();
     //void clearFrameHandler();

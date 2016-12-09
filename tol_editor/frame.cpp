@@ -133,7 +133,60 @@ void Frame::shiftUp(int width, int height)
         }
     }
 }
-
+/**
+ * Shift the rows of the frame down, inserting a blank row at the top.
+ * @param width number of columns
+ * @param height number of rows
+ * @return Void.
+ */
+void Frame::shiftDown(int width, int height)
+{
+    RGB black;
+    for (int row = height - 1; row >= 0; row--) {
+        for (int column = width - 1; column >= 0; column--) {
+            if (row-1 < 0)
+                cells[row][column] = Cell(black);
+            else
+                cells[row][column] = cells[row-1][column];
+        }
+    }
+}
+/**
+ * Shift the columns of the frame left, inserting a blank column at the far right.
+ * @param width number of columns
+ * @param height number of rows
+ * @return Void.
+ */
+void Frame::shiftLeft(int width, int height)
+{
+    RGB black;
+    for (int row = 0; row < height; row++) {
+        for (int column = 0; column < width; column++) {
+            if (column+1 < width)
+                cells[row][column] = cells[row][column+1];
+            else
+                cells[row][column] = Cell(black);
+        }
+    }
+}
+/**
+ * Shift the columns of the frame right, inserting a blank column at the far left.
+ * @param width number of columns
+ * @param height number of rows
+ * @return Void.
+ */
+void Frame::shiftRight(int width, int height)
+{
+    RGB black;
+    for (int row = height - 1; row >= 0; row--) {
+        for (int column = width - 1; column >= 0; column--) {
+            if (column-1 < 0)
+                cells[row][column] = Cell(black);
+            else
+                cells[row][column] = cells[row][column-1];
+        }
+    }
+}
 /**
  * Serialize the frame into string format suitable for tan file ouput.
  */

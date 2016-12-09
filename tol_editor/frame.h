@@ -35,6 +35,9 @@ public:
     RGB getCellColor(int x, int y);
 
     void shiftUp(int width, int height);
+    void shiftDown(int width, int height);
+    void shiftLeft(int width, int height);
+    void shiftRight(int width, int height);
 
     std::string toString();
     

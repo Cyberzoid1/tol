@@ -316,10 +316,13 @@ void Animation::shiftFrame(Frame frame, int dir)
             newFrame->shiftUp(width, height);
             break;
         case down:
+            newFrame->shiftDown(width, height);
             break;
         case left:
+            newFrame->shiftLeft(width, height);
             break;
         case right:
+            newFrame->shiftRight(width, height);
             break;
         default:
             break;
