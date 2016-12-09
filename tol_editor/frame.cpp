@@ -115,7 +115,24 @@ void Frame::setStartTime(int time)
 {
     startTime = time;
 }
-
+/**
+ * Shift the rows of the frame up, inserting a blank row at the bottom.
+ * @param width number of columns
+ * @param height number of rows
+ * @return Void.
+ */
+void Frame::shiftUp(int width, int height)
+{
+    RGB black;
+    for (int row = 0; row < height; row++) {
+        for (int column = 0; column < width; column++) {
+            if (row+1 < height)
+                cells[row][column] = cells[row+1][column];
+            else
+                cells[row][column] = Cell(black);
+        }
+    }
+}
 
 /**
  * Serialize the frame into string format suitable for tan file ouput.

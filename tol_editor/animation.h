@@ -50,7 +50,10 @@ public:
     void incrementFrameInfo(std::list<Frame>::iterator it);
 	void removeFrame(int pos);
     void decrementFrameInfo(std::list<Frame>::iterator it);
-	void removeFrames(int first, int last);
+    void removeFrames(int first, int last);
+
+    void shiftFrame(Frame frame, int dir);
+
 	std::string toString();
 
 private:

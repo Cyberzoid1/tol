@@ -299,6 +299,32 @@ void Animation::removeFrames(int start, int stop)
 	//since the loop stops when end is hit, it must be deleted separately
 	frames.erase(end);
 }
+/**
+ * Duplicate the specified frame and shift its rows/columns in the specified
+ * direction.
+ * @param frame Frame to duplicate and shift.
+ * @param dir {0=up, 1=down, 2=left, 3=right}
+ */
+void Animation::shiftFrame(Frame frame, int dir)
+{
+    duplicateFrame(frame);
+    int pos = frame.getFrameNumber() + 1;
+    Frame *newFrame = &(*std::next(frames.begin(), pos));
+    enum direction {up, down, left, right};
+    switch(dir){
+        case up:
+            newFrame->shiftUp(width, height);
+            break;
+        case down:
+            break;
+        case left:
+            break;
+        case right:
+            break;
+        default:
+            break;
+    }
+}
 
 /**
  * Serializes the Animation into a string suitable for output in a .tan2 file.

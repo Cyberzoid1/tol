@@ -47,7 +47,7 @@ public slots:
     void goLeft();
     void goRight();
     void handleCellColor();
-    //void upHandler();
+    void upHandler();
     //void downHandler();
     //void rightHandler();
     //void leftHandler();
