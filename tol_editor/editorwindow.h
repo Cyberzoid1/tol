@@ -42,6 +42,7 @@ public:
     void connectSlots();
     void toggleNavButtons();
     void updateFrameData();
+    void updateLocLabel();
 
 public slots:
     void goLeft();

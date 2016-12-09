@@ -161,6 +161,7 @@ void EditorWindow::setupFrames(Animation *animation)
     animation->setCurrentFrame(&(*(this->currFrame)));
     this->currIndex = 0;
 
+    updateLocLabel();
     toggleNavButtons();
 }
 /**
@@ -208,6 +209,16 @@ void EditorWindow::updateFrameData()
     animation->setCurrentFrame(&(*this->currFrame));
 }
 /**
+ * Update the locationLabel so that it contains: "current index/number of frames"
+ * @return Void.
+ */
+void EditorWindow::updateLocLabel()
+{
+    ui->locationLabel->setText(QString::number(this->currIndex + 1)+
+                               "/" +
+                               QString::number(frames.size()));
+}
+/**
  * This is the slot for when the "Go-Left" Button is clicked
  * by the user.
  * @return Void.
@@ -237,6 +248,7 @@ void EditorWindow::goLeft()
     animation->setCurrentFrame(&(*(currFrame)));
     currIndex--;
     toggleNavButtons();
+    updateLocLabel();
 }
 /**
  * This is the slot used when the user clicks the "Go-Right" button.
@@ -269,6 +281,7 @@ void EditorWindow::goRight()
     animation->setCurrentFrame(&(*(currFrame)));
     currIndex++;
     toggleNavButtons();
+    updateLocLabel();
 }
 /**
  * Called when a cell in a frame is clicked. Changes the color of that cell
