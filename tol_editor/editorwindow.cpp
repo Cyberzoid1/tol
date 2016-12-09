@@ -217,7 +217,7 @@ void EditorWindow::goLeft()
 
     if (currIndex - 2 > 0)
         newPrev = *std::next(currFrame, -2);
-    if (currIndex - 1 > 0)
+    if (currIndex - 1 >= 0)
         newCurr = *std::next(currFrame, -1);
 
     std::vector<Frame> activeFrames = {
