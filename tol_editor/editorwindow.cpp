@@ -174,10 +174,10 @@ void EditorWindow::connectSlots()
     connect(ui->DuplicateIcon, SIGNAL(clicked(bool)), this, SLOT(duplicateHandler()));
     connect(ui->NewFrameIcon, SIGNAL(clicked(bool)), this, SLOT(addFrameHandler()));
     connect(ui->DeleteFrameIcon, SIGNAL(clicked(bool)), this, SLOT(deleteFrameHandler()));
-    connect(ui->upDupIcon, SIGNAL(clicked(bool)), this, SLOT(upHandler()));
-    connect(ui->DownDupIcon, SIGNAL(clicked(bool)), this, SLOT(downHandler()));
-    connect(ui->LeftDupIcon, SIGNAL(clicked(bool)), this, SLOT(leftHandler()));
-    connect(ui->RightDupIcon, SIGNAL(clicked(bool)), this, SLOT(rightHandler()));
+    connect(ui->upDupIcon, SIGNAL(clicked(bool)), this, SLOT(shiftHandler()));
+    connect(ui->DownDupIcon, SIGNAL(clicked(bool)), this, SLOT(shiftHandler()));
+    connect(ui->LeftDupIcon, SIGNAL(clicked(bool)), this, SLOT(shiftHandler()));
+    connect(ui->RightDupIcon, SIGNAL(clicked(bool)), this, SLOT(shiftHandler()));
 }
 
 /**
@@ -294,46 +294,19 @@ void EditorWindow::handleCellColor()
  * rows up, updates the list of frames, and then transitions to the shifted frame.
  * @return Void.
  */
-void EditorWindow::upHandler()
+void EditorWindow::shiftHandler()
 {
-    //0 corresponds to direction=up
-    animation->shiftFrame(*(this->currFrame), 0);
-    updateFrameData();
-    goRight();
-}
-/**
- * Called when the 'up' button is clicked. Duplicates the current frame, shifts its
- * rows up, updates the list of frames, and then transitions to the shifted frame.
- * @return Void.
- */
-void EditorWindow::downHandler()
-{
-    //0 corresponds to direction=up
-    animation->shiftFrame(*(this->currFrame), 1);
-    updateFrameData();
-    goRight();
-}
-/**
- * Called when the 'up' button is clicked. Duplicates the current frame, shifts its
- * rows up, updates the list of frames, and then transitions to the shifted frame.
- * @return Void.
- */
-void EditorWindow::leftHandler()
-{
-    //0 corresponds to direction=up
-    animation->shiftFrame(*(this->currFrame), 2);
-    updateFrameData();
-    goRight();
-}
-/**
- * Called when the 'up' button is clicked. Duplicates the current frame, shifts its
- * rows up, updates the list of frames, and then transitions to the shifted frame.
- * @return Void.
- */
-void EditorWindow::rightHandler()
-{
-    //0 corresponds to direction=up
-    animation->shiftFrame(*(this->currFrame), 3);
+    int dir = 0;
+    QString name = sender()->objectName();
+    if (name == "upDupIcon")
+        dir = 0;
+    else if (name == "DownDupIcon")
+        dir = 1;
+    else if (name == "LeftDupIcon")
+        dir = 2;
+    else if (name == "RightDupIcon")
+        dir = 3;
+    animation->shiftFrame(*(this->currFrame), dir);
     updateFrameData();
     goRight();
 }
