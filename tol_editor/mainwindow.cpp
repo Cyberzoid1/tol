@@ -12,28 +12,23 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    animation = new Animation();
     ui->setupUi(this);
 
-    outerWrapper = new QWidget;
+    QWidget* windowFrame = new QWidget(this);
+    animation = new Animation();
+    toolbox = new Toolbox(windowFrame,animation);
+    editor = new EditorWindow(windowFrame);
+
+    windowFrame->setMinimumHeight(toolbox->height());
+    windowFrame->setMinimumWidth(toolbox->width() + editor->width());
+
     hlayout = new QHBoxLayout;
-    tbParent = new QWidget;
-    toolbox = new Toolbox(tbParent, animation);
-    edParent = new QWidget;
-    editor = new EditorWindow(edParent);
+    const int WINDOWPADDING = 70; // amount of padding to add between windows
+    hlayout->addWidget(toolbox,WINDOWPADDING, Qt::AlignCenter);
+    hlayout->addWidget(editor, Qt::AlignCenter);
 
-    tbParent->setMaximumWidth(toolbox->width());
-    edParent->setMaximumWidth(editor->width());
-    hlayout->setSpacing(0);
-    hlayout->setMargin(0);
-    hlayout->addWidget(tbParent);
-    hlayout->addWidget(edParent);
-
-    outerWrapper->setLayout(hlayout);
-
-    this->setCentralWidget(outerWrapper);
-    this->setMinimumWidth(toolbox->width() + editor->width());
-    this->setMinimumHeight(editor->height());
+    windowFrame->setLayout(hlayout);
+    setCentralWidget(windowFrame);
 
     createActions();
     createMenus();
