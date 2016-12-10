@@ -218,6 +218,32 @@ void EditorWindow::updateLocLabel()
                                "/" +
                                QString::number(frames.size()));
 }
+void EditorWindow::refreshFrames()
+{
+    int width = animation->getWidth();
+    int height = animation->getHeight();
+    Frame newPrev(width, height),
+          newNext(width, height);
+
+    if (currIndex - 1 > 0)
+        newPrev = *std::next(currFrame, -1);
+    if (currIndex + 1 < frames.size())
+        newNext = *std::next(currFrame, 1);
+
+    std::vector<Frame> activeFrames = {
+        newPrev,
+        *currFrame,
+        newNext
+    };
+
+    for (int i = 0; i < activeFrames.size(); i++){
+        updateCells(uiFrames[i], activeFrames[i]);
+    }
+    animation->setCurrentFrame(&(*(currFrame)));
+    toggleNavButtons();
+    updateLocLabel();
+}
+
 /**
  * This is the slot for when the "Go-Left" Button is clicked
  * by the user.
@@ -357,7 +383,11 @@ void EditorWindow::addFrameHandler()
 void EditorWindow::deleteFrameHandler()
 {
     animation->removeFrame(this->currIndex);
+    //TODO: handle updating as a special case for removal
+    //particularly need to handle case when removing last frame of animation
+    if (this->currIndex != 0)
+        this->currIndex--;
     updateFrameData();
-    goLeft();
+    refreshFrames();
 }
 
