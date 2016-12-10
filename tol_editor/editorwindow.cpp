@@ -225,6 +225,12 @@ void EditorWindow::updateLocLabel()
                                "/" +
                                QString::number(frames.size()));
 }
+/**
+ * Called for updating the UI after a frame has been removed. Since the current
+ * index and frame has been adjusted prior to calling, simply refresh the
+ * UI frames in place in the editor.
+ * @return Void.
+ */
 void EditorWindow::refreshFrames()
 {
     int width = animation->getWidth();
@@ -390,8 +396,6 @@ void EditorWindow::addFrameHandler()
 void EditorWindow::deleteFrameHandler()
 {
     animation->removeFrame(this->currIndex);
-    //TODO: handle updating as a special case for removal
-    //particularly need to handle case when removing last frame of animation
     if (this->currIndex != 0)
         this->currIndex--;
     updateFrameData();
