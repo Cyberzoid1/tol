@@ -1,13 +1,13 @@
 /**
- * CS 383
- * Group #4
- * Created: 11/07/2016
- *
- * This file contains the method definitions for the Cell class.
+ * @author Peter Fetros
+ * @date 11/07/2016
+ * @class Cell
+ * @brief This is the header file for the Cell class.
+ * @details This class handles the cell data such as color
+ * values related to the cells of an animations frames as well
+ * as the various functions and methods usd to set a cells color
+ * values
  */
-
-// This class handles the the cell data structure which holds
-// the color value for a single cell within a frame.
 
 #ifndef CELL_H
 #define CELL_H
@@ -15,9 +15,6 @@
 #include "RGB.h"
 #include <string>
 
-/**
- * Class for storing RGB values for a single frame cell
- */
 class Cell
 {
 public:
@@ -30,7 +27,7 @@ public:
     std::string toString();
     
 private:
-    RGB colorValue;
+    RGB colorValue; //!< An RGB object used to contain the color data relevant to this cell
 };
 
 
