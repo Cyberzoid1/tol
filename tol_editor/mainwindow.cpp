@@ -6,16 +6,34 @@
 #include "ui_mainwindow.h"
 #include "input.h"
 #include "outputfile.h"
+#include "toolbox.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    animation = new Animation();
     ui->setupUi(this);
+
+    QWidget* windowFrame = new QWidget(this);
+    animation = new Animation();
+    toolbox = new Toolbox(windowFrame,animation);
+    editor = new EditorWindow(windowFrame);
+
+    windowFrame->setMinimumHeight(toolbox->height());
+    windowFrame->setMinimumWidth(toolbox->width() + editor->width());
+
+    hlayout = new QHBoxLayout;
+    const int WINDOWPADDING = 70; // amount of padding to add between windows
+    hlayout->addWidget(toolbox,WINDOWPADDING, Qt::AlignCenter);
+    hlayout->addWidget(editor, Qt::AlignCenter);
+
+    windowFrame->setLayout(hlayout);
+    setCentralWidget(windowFrame);
 
     createActions();
     createMenus();
+
+    init();
 }
 
 MainWindow::~MainWindow()
@@ -36,6 +54,13 @@ void MainWindow::open()
     //read in the animation from the file and store it in the window's
     //data object
     *animation = readInAnimation(filename.toStdString().c_str());
+    //now that an animation has been read into the window, update the time interval
+    //to the default value stored in the toolbox.
+    QTime intvl = toolbox->timeInterval->time();
+    int ms = (intvl.minute() * 60000) + (intvl.second() * 1000) + (intvl.msec());
+    animation->setTimeInterval(ms);
+
+    editor->setupFrames(animation);
 }
 /**
  * Slot for the 'Save' action in the 'File' menu. Writes the animation out
@@ -70,4 +95,19 @@ void MainWindow::createMenus()
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
+}
+/**
+ * When the window is first opened, intialize the animation with a single
+ * frame of default size. This will allow the user to start creating an
+ * animation without reading in from a file first.
+ * @return Void.
+ */
+void MainWindow::init()
+{
+    animation->addFrame(animation->getWidth(),
+                        animation->getHeight(),
+                        0);
+    int defaultIntvl = 100;
+    animation->setTimeInterval(defaultIntvl);
+    editor->setupFrames(animation);
 }

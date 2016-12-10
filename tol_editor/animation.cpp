@@ -7,15 +7,15 @@
 
 /**
  * Construct a new Animation with the following default values;
- * version: 0.4, filename: (empty string), height: 10. width: 4.
+ * version: 0.4, filename: (empty string), height: 20. width: 12.
  */
 Animation::Animation()
 {
 	version = "0.4";
     filename = "NoAudioFile";
     numFrames = (int)frames.size();
-	height = 10;
-	width = 4;
+    height = 20;
+    width = 12;
 }
 /**
  * TODO: verify that deconstructor is not needed
@@ -53,6 +53,16 @@ std::list<Frame> Animation::getFrames()
 void Animation::setVersion(std::string ver)
 {
 	version = ver;
+}
+
+Frame* Animation::getCurrentFrame()
+{
+    return currentFrame;
+}
+
+void Animation::setCurrentFrame(Frame* newFrame)
+{
+    currentFrame = newFrame;
 }
 
 /**
@@ -105,6 +115,23 @@ void Animation::setLastColor(int red, int green, int blue)
 RGB Animation::getLastColor()
 {
 	return lastColor;
+}
+/**
+ * Set the default time interval between frames.
+ * @param interval time interval in ms.
+ * @return Void.
+ */
+void Animation::setTimeInterval(int interval)
+{
+    timeInterval = interval;
+}
+/**
+ * Returns the default time interval between frames.
+ * @return time interval (in ms).
+ */
+int Animation::getTimeInterval()
+{
+    return timeInterval;
 }
 /**
  * Set the values of the recent colors used on the Animation in the editor.
@@ -181,6 +208,13 @@ void Animation::addFrame(int w, int h, int pos)
 	Frame frame(w,h);
 	frame.setFrameNumber(pos);
 	std::list<Frame>::iterator it = std::next(frames.begin(), frame.getFrameNumber());
+    if (pos != 0){
+        std::list<Frame>::iterator prev = std::next(it, -1);
+        frame.setStartTime(prev->getStartTime() + timeInterval);
+    }
+    else
+        frame.setStartTime(0);
+    incrementFrameInfo(it);
 	frames.insert(it, frame);
 }
 
@@ -195,9 +229,27 @@ void Animation::duplicateFrame(Frame frame)
 	Frame newFrame = frame;
 	//since this is a copy of the previous frame, increment the position
 	newFrame.setFrameNumber(newFrame.getFrameNumber()+1);
+    newFrame.setStartTime(newFrame.getStartTime() + timeInterval);
 	std::list<Frame>::iterator it = std::next(frames.begin(), newFrame.getFrameNumber());
+    incrementFrameInfo(it);
 
 	frames.insert(it, newFrame);
+}
+/**
+ * Called after adding to the list of frames. Loops through the
+ * remaining frames and updates their number and time accordingly.
+ * @param it pointer to the frame to start at
+ * @return Void.
+ */
+void Animation::incrementFrameInfo(std::list<Frame>::iterator it)
+{
+    std::list<Frame>::iterator temp = it;
+    while(temp != frames.end())
+    {
+        temp->setStartTime(temp->getStartTime() + timeInterval);
+        temp->setFrameNumber(temp->getFrameNumber() + 1);
+        temp++;
+    }
 }
 
 /**
@@ -208,9 +260,25 @@ void Animation::duplicateFrame(Frame frame)
 void Animation::removeFrame(int pos)
 {
 	std::list<Frame>::iterator it = std::next(frames.begin(), pos);
+    decrementFrameInfo(it);
     frames.erase(it);
 }
-
+/**
+ * Called after removing from the list of frames. Loops through the
+ * remaining frames and updates their number and time accordingly.
+ * @param it pointer to the frame to start at
+ * @return Void.
+ */
+void Animation::decrementFrameInfo(std::list<Frame>::iterator it)
+{
+    std::list<Frame>::iterator curr = it;
+    int removedTime = it->getStartTime();
+    while (curr != frames.end()){
+        curr->setStartTime(curr->getStartTime() - removedTime);
+        curr->setFrameNumber(curr->getFrameNumber() - 1);
+        curr++;
+    }
+}
 /**
  * Removes all of the frames between the specified indices from the
  * frame list (inclusive).
@@ -230,6 +298,35 @@ void Animation::removeFrames(int start, int stop)
 	}
 	//since the loop stops when end is hit, it must be deleted separately
 	frames.erase(end);
+}
+/**
+ * Duplicate the specified frame and shift its rows/columns in the specified
+ * direction.
+ * @param frame Frame to duplicate and shift.
+ * @param dir {0=up, 1=down, 2=left, 3=right}
+ */
+void Animation::shiftFrame(Frame frame, int dir)
+{
+    duplicateFrame(frame);
+    int pos = frame.getFrameNumber() + 1;
+    Frame *newFrame = &(*std::next(frames.begin(), pos));
+    enum direction {up, down, left, right};
+    switch(dir){
+        case up:
+            newFrame->shiftUp(width, height);
+            break;
+        case down:
+            newFrame->shiftDown(width, height);
+            break;
+        case left:
+            newFrame->shiftLeft(width, height);
+            break;
+        case right:
+            newFrame->shiftRight(width, height);
+            break;
+        default:
+            break;
+    }
 }
 
 /**

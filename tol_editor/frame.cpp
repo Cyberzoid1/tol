@@ -15,10 +15,10 @@ Frame::Frame()
 }
 
 /**
- * Initialize a frame object by specifying the frames
- * width in cell objects followed by its height in cell objects.
- * @param width Width of the frame (number of cells in a row)
- * @param height Height of the frame (number of rows in a column)
+  * Initialize a frame object by specifying the frames
+  * width in cell objects followed by its height in cell objects.
+  * @param width Width of the frame (number of cells in a row)
+  * @param height Height of the frame (number of rows in a column)
  */
 Frame::Frame(int width, int height)
 {
@@ -81,7 +81,7 @@ RGB Frame::getCellColor(int x, int y)
     if (y > cells.size() || y < 0 || x > cells[y].size() || x < 0)
         return RGB();
     
-    return cells[y-1][x-1].getColor();
+    return cells[y][x].getColor();
 }
 
 /**
@@ -125,8 +125,78 @@ void Frame::setStartTime(int time)
 {
     startTime = time;
 }
-
-
+/**
+ * Shift the rows of the frame up, inserting a blank row at the bottom.
+ * @param width number of columns
+ * @param height number of rows
+ * @return Void.
+ */
+void Frame::shiftUp(int width, int height)
+{
+    RGB black;
+    for (int row = 0; row < height; row++) {
+        for (int column = 0; column < width; column++) {
+            if (row+1 < height)
+                cells[row][column] = cells[row+1][column];
+            else
+                cells[row][column] = Cell(black);
+        }
+    }
+}
+/**
+ * Shift the rows of the frame down, inserting a blank row at the top.
+ * @param width number of columns
+ * @param height number of rows
+ * @return Void.
+ */
+void Frame::shiftDown(int width, int height)
+{
+    RGB black;
+    for (int row = height - 1; row >= 0; row--) {
+        for (int column = width - 1; column >= 0; column--) {
+            if (row-1 < 0)
+                cells[row][column] = Cell(black);
+            else
+                cells[row][column] = cells[row-1][column];
+        }
+    }
+}
+/**
+ * Shift the columns of the frame left, inserting a blank column at the far right.
+ * @param width number of columns
+ * @param height number of rows
+ * @return Void.
+ */
+void Frame::shiftLeft(int width, int height)
+{
+    RGB black;
+    for (int row = 0; row < height; row++) {
+        for (int column = 0; column < width; column++) {
+            if (column+1 < width)
+                cells[row][column] = cells[row][column+1];
+            else
+                cells[row][column] = Cell(black);
+        }
+    }
+}
+/**
+ * Shift the columns of the frame right, inserting a blank column at the far left.
+ * @param width number of columns
+ * @param height number of rows
+ * @return Void.
+ */
+void Frame::shiftRight(int width, int height)
+{
+    RGB black;
+    for (int row = height - 1; row >= 0; row--) {
+        for (int column = width - 1; column >= 0; column--) {
+            if (column-1 < 0)
+                cells[row][column] = Cell(black);
+            else
+                cells[row][column] = cells[row][column-1];
+        }
+    }
+}
 /**
  * Serialize the frame into a string object representing this
  * frame which is suitable for output into a .tan2 file
@@ -135,7 +205,8 @@ void Frame::setStartTime(int time)
  */
 std::string Frame::toString()
 {
-    std::string frameString = std::to_string(startTime);
+    std::string frameString = std::to_string(startTime) + "\n";
+
     
     for(auto columnIt = cells.begin(); columnIt != cells.end(); ++columnIt) {
         

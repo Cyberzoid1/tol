@@ -9,11 +9,18 @@
 */
 
 #ifndef MAINWINDOW_H
+
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QWidget>
 #include "animation.h"
+#include "toolbox.h"
+#include "editorwindow.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +33,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    Animation *animation; //!< Reference to animation storage object
 
 private slots:
     void open();
@@ -34,7 +42,12 @@ private slots:
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object
 
-    Animation *animation; //!< Reference to animation storage object
+    Toolbox *toolbox; //!< Reference to toolbox object
+    EditorWindow *editor; //!< Reference to editor object
+    QWidget *outerWrapper; //!< Reference to wrapper element that serves as MainWindow's central widget
+    QHBoxLayout *hlayout; //!< Reference to horizontal layout that contains the toolbox and editor
+    QWidget *tbParent; //!< Reference to widget that acts as the toolbox's parent
+    QWidget *edParent; //!< Reference to widget that acts as the editor's parent
 
     QMenu *fileMenu; //!< Reference to the MainWindow's file menu
     QAction *openAct; //!< Reference to the open action in the file menu
@@ -42,6 +55,14 @@ private:
 
     void createActions(); //!< Helper method to instantiate actions
     void createMenus(); //!< Helper method to instantiate menus
+
+    void init();
+
+    Toolbox *tBox; //!< Toolbox object
+
+/*protected:
+    Animation *animation; //!< Reference to animation storage object
+    Toolbox *tBox; //!< Toolbox object*/
 };
 
 #endif // MAINWINDOW_H

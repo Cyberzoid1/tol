@@ -2,6 +2,8 @@
 #include "animation.h"
 #include "input.h"
 #include "outputfile.h"
+#include "toolbox.h"
+#include "editorwindow.h"
 #include <QApplication>
 
 /**
@@ -18,8 +20,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    MainWindow mainwindow;
+    mainwindow.show();
 
     return a.exec();
 }
