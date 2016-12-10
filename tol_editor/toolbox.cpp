@@ -58,7 +58,7 @@ void Toolbox::setupUi(QWidget *parent)
         parent->setObjectName(QStringLiteral("Toolbox"));
     }
 
-    setupUiTabs(parent);
+    setupUiTabs(this);
 
     setupUiColorDialogue();
 
@@ -72,7 +72,7 @@ void Toolbox::setupUi(QWidget *parent)
 
     retranslateUi(parent);
 
-    tabParent->move(0, 50);
+    this->setMaximumSize(tabParent->size());
 } // setupUi
 
 /**
