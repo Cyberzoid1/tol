@@ -135,9 +135,10 @@ void EditorWindow::updateCells(frameElement *frame, Frame data)
  * in the UI of the editor window. Also, handle enabling/disabling the
  * navigation buttons.
  * @param animation pointer to the animation read in from a file
+ * @param initial indicates whether this is the inital setup or not
  * @return Void.
  */
-void EditorWindow::setupFrames(Animation *animation)
+void EditorWindow::setupFrames(Animation *animation, bool initial)
 {
     this->frames = animation->getFrames();
     this->animation = animation;
@@ -153,10 +154,16 @@ void EditorWindow::setupFrames(Animation *animation)
     dataFrames.push_back(next);
 
     for (int i = 0; i < uiFrames.size(); i++){
-        setup(uiFrames[i], dataFrames[i]);
-        uiFrames[i]->self = uiContainers[i];
-        uiFrames[i]->self->setLayout(uiFrames[i]->grid);
+        if (initial){
+            setup(uiFrames[i], dataFrames[i]);
+            uiFrames[i]->self = uiContainers[i];
+            uiFrames[i]->self->setLayout(uiFrames[i]->grid);
+        }
+        else{
+            updateCells(uiFrames[i], dataFrames[i]);
+        }
     }
+
     this->currFrame = frames.begin();
     animation->setCurrentFrame(&(*(this->currFrame)));
     this->currIndex = 0;

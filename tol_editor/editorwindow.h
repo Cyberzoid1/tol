@@ -38,7 +38,7 @@ public:
     void setCellColor(QPushButton *cell, RGB color);
     void updateCells(frameElement *frame, Frame data);
 
-    void setupFrames(Animation *animation);
+    void setupFrames(Animation *animation, bool initial);
     void connectSlots();
     void toggleNavButtons();
     void updateFrameData();
