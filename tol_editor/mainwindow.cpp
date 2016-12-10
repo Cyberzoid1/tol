@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
     windowFrame->setMinimumWidth(toolbox->width() + editor->width());
 
     hlayout = new QHBoxLayout;
-    hlayout->addSpacerItem(new QSpacerItem(20,20,QSizePolicy::Fixed));
-    hlayout->addWidget(toolbox, Qt::AlignCenter);
+    const int WINDOWPADDING = 70; // amount of padding to add between windows
+    hlayout->addWidget(toolbox,WINDOWPADDING, Qt::AlignCenter);
     hlayout->addWidget(editor, Qt::AlignCenter);
 
     windowFrame->setLayout(hlayout);
