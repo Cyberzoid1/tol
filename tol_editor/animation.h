@@ -27,11 +27,16 @@ public:
 	void setFrames(std::list<Frame> frms);
 	std::list<Frame> getFrames();
 	void setVersion(std::string ver);
+    Frame* getCurrentFrame();
+    void setCurrentFrame(Frame* newFrame);
 	std::string getVersion();
 	void setFilename(std::string fname);
 	std::string getFilename();
 	void setLastColor(int red, int green, int blue);
     RGB getLastColor();
+    void setTimeInterval(int interval);
+    int getTimeInterval();
+
     void setRecentColors(RGB *recColors);
     RGB* getRecentColors();
 	int getNumFrames();
@@ -42,8 +47,13 @@ public:
 
 	void addFrame(int w, int h, int pos);
 	void duplicateFrame(Frame frame);
+    void incrementFrameInfo(std::list<Frame>::iterator it);
 	void removeFrame(int pos);
-	void removeFrames(int first, int last);
+    void decrementFrameInfo(std::list<Frame>::iterator it);
+    void removeFrames(int first, int last);
+
+    void shiftFrame(Frame frame, int dir);
+
 	std::string toString();
 
 private:
@@ -55,5 +65,7 @@ private:
     int numFrames; //!< The total number of frames in the animation.
     int height; //!< The height in cell objects of each animation frame.
     int width; //!< The width in cell objects of each animation frame.
+    Frame* currentFrame; //!< The currently displayed frame in the editor window.
+    int timeInterval; //!< The time interval (in ms) set in the toolbox.
 };
 #endif

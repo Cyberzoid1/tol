@@ -29,6 +29,8 @@
 #include <QColorDialog>
 #include <QColor>
 #include <QFont>
+#include <QTextEdit>
+#include <QLineEdit>
 #include "animation.h"
 
 /**
@@ -51,16 +53,33 @@ public:
     QTabWidget *tabParent;
     QWidget *tabColor;
     QWidget *tabEdit;
+    QWidget *tabMusic;
 
     /**
-     * Master Control Widget
+     * Master Control Widgets
      */
     QWidget *widget;
+    QWidget *musicWidget;
+
+    /**
+     * Master Layouts
+     */
+    QVBoxLayout *loMasterLayout;
+    QVBoxLayout *loMusicMasterLayout;
+
+    /**
+     * Music Widgets
+     */
+    QHBoxLayout *loMusicFileName;
+    QVBoxLayout *loMusicFileNameText;
+    QVBoxLayout *loMusicFileNameButton;
+    QLabel *lblMusicFileName;
+    QLineEdit *txtMusicFileName;
+    QPushButton *btnMusicFileName;
 
     /**
      * Add Frame Widgets
      */
-    QVBoxLayout *loMasterLayout;
     QHBoxLayout *loAddFrames;
     QVBoxLayout *loAddFramesStart;
     QLabel *lblAddFramesStart;
@@ -149,9 +168,15 @@ public:
 
     void setupUiLabels(QWidget *widget);
 
+    void setupUiLabelsMusic(QWidget *musWidget);
+
     void setupUiWidgets(QWidget *widget);
 
+    void setupUiWidgetsMusic(QWidget *musWidget);
+
     void setupUiLayouts(QWidget *widget);
+
+    void setupUiLayoutsMusic(QWidget *musWidget);
 
     void setupUiColorDialogue();
 
@@ -193,6 +218,8 @@ public slots:
     void on_timeInterval_timeChanged(QTime timeVal);
 
     void on_colorDialog_currentColorChanged(QColor colorVal);
+
+    void on_btnMusicFileName_clicked();
 };
 
 #endif // TOOLBOX_H
