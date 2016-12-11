@@ -252,7 +252,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont = addFramesStart->font();
     toolBoxFont.setPointSize(8);
     addFramesStart->setFont(toolBoxFont);
-    addFramesStart->setRange(0, 0);
+    //addFramesStart->setRange(0, 0);
 
     addFramesEnd = new QSpinBox(widget);
     addFramesEnd->setObjectName(QStringLiteral("addFramesEnd"));
@@ -260,7 +260,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont = addFramesEnd->font();
     toolBoxFont.setPointSize(8);
     addFramesEnd->setFont(toolBoxFont);
-    addFramesEnd->setRange(0, 999999);
+    //addFramesEnd->setRange(0, 999999);
 
     addFramesButton = new QPushButton(widget);
     addFramesButton->setObjectName(QStringLiteral("addFramesButton"));
@@ -278,7 +278,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont = removeFramesStart->font();
     toolBoxFont.setPointSize(8);
     removeFramesStart->setFont(toolBoxFont);
-    removeFramesStart->setRange(0, 0);
+    //removeFramesStart->setRange(0, 0);
 
     removeFramesEnd = new QSpinBox(widget);
     removeFramesEnd->setObjectName(QStringLiteral("removeFramesEnd"));
@@ -286,7 +286,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont = removeFramesEnd->font();
     toolBoxFont.setPointSize(8);
     removeFramesEnd->setFont(toolBoxFont);
-    removeFramesEnd->setRange(0, 0);
+    //removeFramesEnd->setRange(0, 0);
 
     removeFramesButton = new QPushButton(widget);
     removeFramesButton->setObjectName(QStringLiteral("removeFramesButton"));
@@ -304,7 +304,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont = copyFramesIndex->font();
     toolBoxFont.setPointSize(8);
     copyFramesIndex->setFont(toolBoxFont);
-    copyFramesIndex->setRange(0, 0);
+    //copyFramesIndex->setRange(0, 0);
 
     copyFramesStart = new QSpinBox(widget);
     copyFramesStart->setObjectName(QStringLiteral("copyFramesStart"));
@@ -312,7 +312,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont = copyFramesStart->font();
     toolBoxFont.setPointSize(8);
     copyFramesStart->setFont(toolBoxFont);
-    copyFramesStart->setRange(0, 0);
+    //copyFramesStart->setRange(0, 0);
 
     copyFramesEnd = new QSpinBox(widget);
     copyFramesEnd->setObjectName(QStringLiteral("copyFramesEnd"));
@@ -320,7 +320,7 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     toolBoxFont = copyFramesEnd->font();
     toolBoxFont.setPointSize(8);
     copyFramesEnd->setFont(toolBoxFont);
-    copyFramesEnd->setRange(0, 0);
+    //copyFramesEnd->setRange(0, 0);
 
     copyFramesButton = new QPushButton(widget);
     copyFramesButton->setObjectName(QStringLiteral("copyFramesButton"));
@@ -583,13 +583,15 @@ void Toolbox::on_addFramesButton_clicked()
     for(int i = 0; i < addFramesNumberOfFrames; i++){
         animPtr->addFrame(animPtr->getWidth(), animPtr->getHeight(), addFramesInsertionIndex);
     }
-    qDebug("HERE! on_addFramesButton_clicked Insetion Index: %d, # of Frames Added: %d", addFramesInsertionIndex, addFramesNumberOfFrames);
-    addFramesStart->setRange(0, animPtr->getNumFrames() - 1);
-    removeFramesStart->setRange(0, animPtr->getNumFrames() - 1);
-    removeFramesEnd->setRange(0, animPtr->getNumFrames() - removeFramesDeletionIndex - 1);
-    copyFramesIndex->setRange(0, animPtr->getNumFrames() - 1);
-    copyFramesEnd->setRange(0, animPtr->getNumFrames() - 1);
-    copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);
+    /* qDebug("HERE! on_copyFramesButton_clicked");
+     addFramesStart->setRange(0, animPtr->getNumFrames() - 1);
+     removeFramesStart->setRange(0, animPtr->getNumFrames() - 1);
+     removeFramesEnd->setRange(0, animPtr->getNumFrames() - removeFramesDeletionIndex - 1);
+     copyFramesIndex->setRange(0, animPtr->getNumFrames() - 1);
+     copyFramesEnd->setRange(0, animPtr->getNumFrames() - 1);
+     copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);*/
+
+    emit updateUI();
 }
 
 /**
@@ -600,7 +602,7 @@ void Toolbox::on_removeFramesStart_valueChanged(int arg1)
 {
     removeFramesDeletionIndex = arg1;
     qDebug("HERE! on_removeFramesStart_valueChanged %d", removeFramesDeletionIndex);
-    removeFramesEnd->setRange(0, animPtr->getNumFrames() - removeFramesDeletionIndex - 1);
+    //removeFramesEnd->setRange(0, animPtr->getNumFrames() - removeFramesDeletionIndex - 1);
 }
 
 /**
@@ -630,13 +632,15 @@ void Toolbox::on_removeFramesButton_clicked()
         frames.erase(startIt,endIt);
         animPtr->setFrames(frames);
     }
-        qDebug("HERE! on_removeFramesButton_clicked");
-        addFramesStart->setRange(0, animPtr->getNumFrames() - 1);
-        removeFramesStart->setRange(0, animPtr->getNumFrames() - 1);
-        removeFramesEnd->setRange(0, animPtr->getNumFrames() - removeFramesDeletionIndex - 1);
-        copyFramesIndex->setRange(0, animPtr->getNumFrames() - 1);
-        copyFramesEnd->setRange(0, animPtr->getNumFrames() - 1);
-        copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);
+    /* qDebug("HERE! on_copyFramesButton_clicked");
+     addFramesStart->setRange(0, animPtr->getNumFrames() - 1);
+     removeFramesStart->setRange(0, animPtr->getNumFrames() - 1);
+     removeFramesEnd->setRange(0, animPtr->getNumFrames() - removeFramesDeletionIndex - 1);
+     copyFramesIndex->setRange(0, animPtr->getNumFrames() - 1);
+     copyFramesEnd->setRange(0, animPtr->getNumFrames() - 1);
+     copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);*/
+
+        emit updateUI();
 }
 
 /**
@@ -656,7 +660,7 @@ void Toolbox::on_copyFramesIndex_valueChanged(int arg1)
 void Toolbox::on_copyFramesStart_valueChanged(int arg1)
 {
     copyFramesStartIndex = arg1;
-    copyFramesEnd->setRange(copyFramesStartIndex, animPtr->getNumFrames() - 1);
+    //copyFramesEnd->setRange(copyFramesStartIndex, animPtr->getNumFrames() - 1);
     qDebug("HERE! on_copyFramesStart_valueChanged %d", copyFramesStartIndex);
 }
 
@@ -667,7 +671,7 @@ void Toolbox::on_copyFramesStart_valueChanged(int arg1)
 void Toolbox::on_copyFramesEnd_valueChanged(int arg1)
 {
     copyFramesEndIndex = arg1;
-    copyFramesStart->setRange(0, copyFramesEnd->maximum());
+    //copyFramesStart->setRange(0, copyFramesEnd->maximum());
     qDebug("HERE! on_copyFramesEnd_valueChanged %d", copyFramesEndIndex);
 }
 
@@ -692,13 +696,15 @@ void Toolbox::on_copyFramesButton_clicked()
     animPtr->setFrames(frames);
 
 
-    qDebug("HERE! on_copyFramesButton_clicked");
+   /* qDebug("HERE! on_copyFramesButton_clicked");
     addFramesStart->setRange(0, animPtr->getNumFrames() - 1);
     removeFramesStart->setRange(0, animPtr->getNumFrames() - 1);
     removeFramesEnd->setRange(0, animPtr->getNumFrames() - removeFramesDeletionIndex - 1);
     copyFramesIndex->setRange(0, animPtr->getNumFrames() - 1);
     copyFramesEnd->setRange(0, animPtr->getNumFrames() - 1);
-    copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);
+    copyFramesStart->setRange(0, animPtr->getNumFrames() - 1);*/
+
+    emit updateUI();
 }
 
 /**
