@@ -96,7 +96,7 @@ This time line is a rough estimate of each week's tasks that will be completed t
 		\end{itemize}
 		\item Editing:
 		\begin{itemize}
-			\item In order to edit a given frame, the user will utilize a combination of features in this section as well as in the toolboxes. (See Section \ref{toolbox} for more details.)
+			\item In order to edit a given frame, the user will utilize a combination of features in this section as well as in the toolboxes. (See Section toolbox for more details.)
 			\item The current frame will be enlarged in the center of the view. Each panel inside represents an LED panel on the tower (panels in the figure are not necessarily to scale).  The panels are also only editable when in the current frame.  If in the previous or next frame, the user will be unable to edit them, preventing any slips on already finished or yet to be edited frames.  This also allows the user to focus on the current frame.
 			\item The user will be able to select one or more LED panels at a time and specify the given options within the toolboxes.
 			\item Below the current frame are a series of buttons. One allows the user to insert a new, blank frame immediately after the current frame. Another button allows the user to duplicate the current frame in a new frame after it.  The button with an "x" on it deletes the current frame.  The up/down/left/right labeled buttons are for the shifted duplications as used in the original tower lights animator.  Thus, maintaining the old functionality alongside new additions. 
@@ -137,6 +137,14 @@ This tab will include several tools used for selecting and saving colors that wi
 			\item Copying sections of a frame: Designate a frame and add its content to a selection of other frames.  This allows a user to reuse certain frames within an animation; especially useful when a user is reusing common themes, like letters or comets.
 			\item Time Intervals: this allows a user to set the duration of time for a particular frame, and to view the current time for the frame being viewed.  The time intervals are in milliseconds, which allows easier usage by the user.
 	\end{itemize}
+
+	\subsection{Functionality: Music Tab }
+	This tab will allow the user to specify a music file and commit it to the animation.
+	\begin{itemize}
+		\item A text box allows the user to type in the file name of the music file that the user wishes to use.  
+		\item A button named "Commit" allows the user to commit the specified file to the animation.  The backend for this runs some checks to make sure the file is of the proper type.
+	\end{itemize}
+
 	
 	\subsection{Notes}
 	\begin{itemize}
@@ -163,14 +171,23 @@ This tab will include several tools used for selecting and saving colors that wi
 {This drop-down list deals with IO manipulation. Features include:}
 
 	\begin{itemize}
-	\item \textbf{New} - Creates a new blank project. 
+	\item \textbf{New} - Creates a new blank project. Currently, the frames are loaded with a single start, so this is a future improvement.
 	\item \textbf{Open} - Opens an existing .tan2 file for editing.
 	\item \textbf{Save} - Saves file.
-	\item \textbf{Save As} - Similar to traditional "Save As" option.  This is not a core feature, but should be implemented.
+	\item \textbf{Save As} - Similar to traditional "Save As" option.  This is not a core feature, but could be implemented.
 	\item \textbf{Close} - Closes window.   This is not core functionality, and would be added if time allows.  The window already has a close button provided, which renders this a convenience.
 
 
 	\end{itemize}
+
+
+\end{itemize}
+
+\subsection{Future Works}
+
+{These features will not be present in the first few iterations of the software; however, if time permits should be implemented.  The playback features are important features that are, if not core functionality, a must for additional functionality. }
+
+\begin{itemize}
 
 \item \textbf{Edit}
 
@@ -198,13 +215,6 @@ This tab will include several tools used for selecting and saving colors that wi
 
 {This option will enable users to search for a specific frame by label or frame number.  Again, this is an additional feature to be added as time permits.}
 
-\end{itemize}
-
-\subsection{Future Works}
-
-{These features will not be present in the first few iterations of the software; however, if time permits should be implemented.  The playback features are important features that are, if not core functionality, a must for additional functionality. }
-
-\begin{itemize}
 \item \textbf{Playback}
 
 {This drop-down list will be used to play, pause, or stop the various animations created within an open file. Options include: }
@@ -225,7 +235,7 @@ This tab will include several tools used for selecting and saving colors that wi
 \section{Additional Features/ Potential Improvements}
 {There are a variety of additional features and potential improvements that we believe can be made to the basic functionality demonstrated in both versions 1 and 2 of the tower lights design program. The first of the following improvements are ranked first by the number of times they were mentioned in the design meeting, with the most often mentioned features ranked first and descending from there. Please note that after the first few entries, the features are essentially unranked as they were each only mentioned once and thus have equal weighting in the list.}
 
-{\begin{itemize}
+\begin{itemize}
 	\item Clear Frame (Four Mentions)
 	\begin{itemize}
 		\item The user should be able to clear the contents of a frame either by clicking a button, pressing the `del' key, etc.
@@ -272,7 +282,7 @@ This tab will include several tools used for selecting and saving colors that wi
 	\end{itemize}
 	\item Save Custom Colors (One Mention)
 	\begin{itemize}
-		\item The user should be able to save a specified color to a color palette for use later in the animation process.
+		\item The user should be able to save a specified color to a color palette for use later in the animation process. This was implemented as part of the toolbox.
 	\end{itemize}
 	\item Move Tower Indicator Box/ Snapshot Button $\rightarrow$ Frame (One Mention)
 	\begin{itemize}
@@ -294,7 +304,8 @@ This tab will include several tools used for selecting and saving colors that wi
 	\begin{itemize}
 		\item Automatically save the users work every so often - just in case the program crashes.
 	\end{itemize}
-\end{itemize}}
+
+\end{itemize}
 
 \clearpage
 
