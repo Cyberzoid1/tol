@@ -1,5 +1,4 @@
 
-
 /**
 * @author ...
 * @date 11/20/2016
@@ -58,6 +57,8 @@ private:
     void createActions(); //!< Helper method to instantiate actions
     void createMenus(); //!< Helper method to instantiate menus
 
+
+    void init();
 
     Toolbox *tBox; //!< Toolbox object
 

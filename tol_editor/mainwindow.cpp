@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     animation = new Animation();
     ui->setupUi(this);
 
+
     outerWrapper = new QWidget;
     hlayout = new QHBoxLayout;
     tbParent = new QWidget;
@@ -37,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createActions();
     createMenus();
+
+    init();
+
 }
 
 MainWindow::~MainWindow()
@@ -98,4 +102,20 @@ void MainWindow::createMenus()
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
+}
+
+/**
+ * When the window is first opened, intialize the animation with a single
+ * frame of default size. This will allow the user to start creating an
+ * animation without reading in from a file first.
+ * @return Void.
+ */
+void MainWindow::init()
+{
+    animation->addFrame(animation->getWidth(),
+                        animation->getHeight(),
+                        0);
+    int defaultIntvl = 100;
+    animation->setTimeInterval(defaultIntvl);
+    editor->setupFrames(animation);
 }

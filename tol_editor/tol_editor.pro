@@ -35,5 +35,6 @@ HEADERS  += mainwindow.h \
     outputfile.h \
     toolbox.h
 
+
 FORMS    += mainwindow.ui \
-editorwindow.ui
+        editorwindow.ui

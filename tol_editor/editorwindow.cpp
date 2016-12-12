@@ -360,3 +360,4 @@ void EditorWindow::deleteFrameHandler()
     updateFrameData();
     goLeft();
 }
+

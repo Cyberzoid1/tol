@@ -64,6 +64,7 @@ RGB::RGB(int hue, float saturation, float lightness)
     float C = (1 - std::abs(2*lightnessValue - 1)) * saturationValue;
     float X = C * (1 - std::abs(((hueAngle / 60) % 2) - 1));
     float m = lightnessValue - (C / 2);
+    
 
     if (hueAngle < 60) {
         this->red = (C+m)*255;
@@ -172,10 +173,18 @@ void RGB::setColor(int red, int green, int blue)
     this->green = checkRange(green);
     this->blue = checkRange(blue);
 
+
 }
 
 /**
  * Sets the color of the RGB class using a
+=======
+    
+}
+
+/**
+ * Sets the color of the RGB class using a 
+>>>>>>> master
  * string representation of a hex value.
  * @param hex A string value representing a 6 bit hexidecimal value.
  * @return Void.
@@ -204,9 +213,11 @@ void RGB::setColor(int hue, float saturation, float lightness)
     int saturationValue = (ceil(std::abs(saturation)) - std::abs(saturation));
     int lightnessValue = (ceil(std::abs(lightness)) - std::abs(lightness));
 
+    
     float C = (1 - std::abs(2*lightnessValue - 1)) * saturationValue;
     float X = C * (1 - std::abs(((hueAngle / 60) % 2) - 1));
     float m = lightnessValue - (C / 2);
+    
 
     if (hueAngle < 60) {
         this->red = (C+m)*255;
@@ -244,9 +255,11 @@ std::string RGB::toString()
 {
     std::string cellString = "";
 
+    
     cellString += std::to_string(this->red) + " ";
     cellString += std::to_string(this->green) + " ";
     cellString += std::to_string(this->blue);
+    
 
     return cellString;
 }

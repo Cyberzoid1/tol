@@ -33,28 +33,34 @@ public:
     void setFilename(std::string fname);
     std::string getFilename();
     void setLastColor(int red, int green, int blue);
+
+
     RGB getLastColor();
     void setTimeInterval(int interval);
     int getTimeInterval();
 
     void setRecentColors(RGB *recColors);
     RGB* getRecentColors();
-    int getNumFrames();
-    void setHeight(int h);
-    int getHeight();
-    void setWidth(int w);
-    int getWidth();
 
-    void addFrame(int w, int h, int pos);
-    void duplicateFrame(Frame frame);
+	int getNumFrames();
+	void setHeight(int h);
+	int getHeight();
+	void setWidth(int w);
+	int getWidth();
+
+	void addFrame(int w, int h, int pos);
+	void duplicateFrame(Frame frame);
     void incrementFrameInfo(std::list<Frame>::iterator it);
-    void removeFrame(int pos);
+	void removeFrame(int pos);
+
     void decrementFrameInfo(std::list<Frame>::iterator it);
     void removeFrames(int first, int last);
 
     void shiftFrame(Frame frame, int dir);
 
-    std::string toString();
+
+	std::string toString();
+
 
 private:
     std::list<Frame> frames; //!< List containing the ordered sequence of frames.

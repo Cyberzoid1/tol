@@ -29,12 +29,10 @@ public:
     Frame(int width, int height);
     Frame(Frame* newFrame);
     ~Frame();
-
     int getFrameNumber();
     void setFrameNumber(int number);
     int getStartTime();
     void setStartTime(int time);
-
     void setCellColor(int x, int y, RGB color);
     RGB getCellColor(int x, int y);
 

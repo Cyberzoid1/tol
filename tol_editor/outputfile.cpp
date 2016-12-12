@@ -33,8 +33,9 @@ int writeFile(std::string rawFileName, Animation* animation)
 
     if (animation == NULL)
         return -2;
-
+    
     std::string fileName = formatFileName(rawFileName);
+    
 
     std::ofstream outFile (fileName);
     if (outFile.good()) {

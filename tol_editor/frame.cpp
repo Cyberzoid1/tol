@@ -209,6 +209,7 @@ std::string Frame::toString()
 
 
     for(auto columnIt = cells.begin(); columnIt != cells.end(); ++columnIt) {
+        
 
         std::vector<Cell> cellRow = *columnIt;
         for (auto rowIt = cellRow.begin(); rowIt != cellRow.end(); ++rowIt) {

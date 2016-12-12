@@ -11,7 +11,9 @@
  */
 Animation::Animation()
 {
-    version = "0.4";
+
+	version = "0.4";
+
     filename = "NoAudioFile";
     numFrames = (int)frames.size();
     height = 20;
@@ -42,7 +44,9 @@ void Animation::setFrames(std::list<Frame> frms)
  */
 std::list<Frame> Animation::getFrames()
 {
-    return frames;
+
+	return frames;
+
 }
 /**
  * Set the Animation's version number.
@@ -52,7 +56,9 @@ std::list<Frame> Animation::getFrames()
  */
 void Animation::setVersion(std::string ver)
 {
-    version = ver;
+
+	version = ver;
+
 }
 
 Frame* Animation::getCurrentFrame()
@@ -71,7 +77,9 @@ void Animation::setCurrentFrame(Frame* newFrame)
  */
 std::string Animation::getVersion()
 {
-    return version;
+
+	return version;
+
 }
 /**
  * Check if the parameter has the right extension. If not, add it
@@ -81,12 +89,13 @@ std::string Animation::getVersion()
  */
 void Animation::setFilename(std::string fname)
 {
-    //may need to check for invalid char's as well
-    if (fname.compare("NoAudioFile") == 0 ||
-        fname.find(".wav") != std::string::npos)
-        filename = fname;
-    else
-        filename = fname.append(".wav");
+	//may need to check for invalid char's as well
+	if (fname.compare("NoAudioFile") == 0 || 
+		fname.find(".wav") != std::string::npos)
+		filename = fname;
+	else
+		filename = fname.append(".wav");
+
 }
 /**
  * Returns the file name associated with the animation.
@@ -94,7 +103,9 @@ void Animation::setFilename(std::string fname)
  */
 std::string Animation::getFilename()
 {
-    return filename;
+
+	return filename;
+
 }
 
 /**
@@ -114,7 +125,9 @@ void Animation::setLastColor(int red, int green, int blue)
  */
 RGB Animation::getLastColor()
 {
-    return lastColor;
+
+	return lastColor;
+
 }
 /**
  * Set the default time interval between frames.
@@ -139,16 +152,20 @@ int Animation::getTimeInterval()
  */
 void Animation::setRecentColors(RGB *recColors)
 {
-    for (int i = 0; i < NUMCOLORS; i++) {
-        recentColors[i] = recColors[i];
-    }
+
+	for (int i = 0; i < NUMCOLORS; i++) {
+		recentColors[i] = recColors[i];
+	}
+
 }
 /**
  * We need to look at what this does
  */
 RGB* Animation::getRecentColors()
 {
-    return recentColors;
+
+	return recentColors;
+
 }
 /**
  * Returns the current number of frames used in the Animation.
@@ -165,7 +182,9 @@ int Animation::getNumFrames()
  */
 void Animation::setHeight(int h)
 {
-    height = h;
+
+	height = h;
+
 }
 /**
  * Returns the number of cells that make up the column of a frame.
@@ -174,7 +193,9 @@ void Animation::setHeight(int h)
  */
 int Animation::getHeight()
 {
-    return height;
+
+	return height;
+
 }
 
 /**
@@ -183,7 +204,9 @@ int Animation::getHeight()
  */
 void Animation::setWidth(int w)
 {
-    width = w;
+
+	width = w;
+
 }
 
 /**
@@ -193,7 +216,9 @@ void Animation::setWidth(int w)
  */
 int Animation::getWidth()
 {
-    return width;
+
+	return width;
+
 }
 
 /**
@@ -205,9 +230,11 @@ int Animation::getWidth()
  */
 void Animation::addFrame(int w, int h, int pos)
 {
+
     Frame frame(w,h);
     frame.setFrameNumber(pos);
     std::list<Frame>::iterator it = std::next(frames.begin(), frame.getFrameNumber());
+
     if (pos != 0){
         std::list<Frame>::iterator prev = std::next(it, -1);
         frame.setStartTime(prev->getStartTime() + timeInterval);
@@ -215,7 +242,9 @@ void Animation::addFrame(int w, int h, int pos)
     else
         frame.setStartTime(0);
     incrementFrameInfo(it);
-    frames.insert(it, frame);
+
+	frames.insert(it, frame);
+
 }
 
 /**
@@ -226,14 +255,16 @@ void Animation::addFrame(int w, int h, int pos)
  */
 void Animation::duplicateFrame(Frame frame)
 {
-    Frame newFrame = frame;
-    //since this is a copy of the previous frame, increment the position
-    newFrame.setFrameNumber(newFrame.getFrameNumber()+1);
+
+	Frame newFrame = frame;
+	//since this is a copy of the previous frame, increment the position
+	newFrame.setFrameNumber(newFrame.getFrameNumber()+1);
     newFrame.setStartTime(newFrame.getStartTime() + timeInterval);
-    std::list<Frame>::iterator it = std::next(frames.begin(), newFrame.getFrameNumber());
+	std::list<Frame>::iterator it = std::next(frames.begin(), newFrame.getFrameNumber());
     incrementFrameInfo(it);
 
-    frames.insert(it, newFrame);
+	frames.insert(it, newFrame);
+
 }
 /**
  * Called after adding to the list of frames. Loops through the
@@ -259,7 +290,9 @@ void Animation::incrementFrameInfo(std::list<Frame>::iterator it)
  */
 void Animation::removeFrame(int pos)
 {
-    std::list<Frame>::iterator it = std::next(frames.begin(), pos);
+
+	std::list<Frame>::iterator it = std::next(frames.begin(), pos);
+
     decrementFrameInfo(it);
     frames.erase(it);
 }
@@ -288,16 +321,18 @@ void Animation::decrementFrameInfo(std::list<Frame>::iterator it)
  */
 void Animation::removeFrames(int start, int stop)
 {
-    std::list<Frame>::iterator curr = std::next(frames.begin(), start);
-    std::list<Frame>::iterator end = std::next(frames.begin(), stop);
-    std::list<Frame>::iterator tmp = curr;
-    while (curr != end) {
-        tmp = curr;
-        curr++;
-        frames.erase(tmp);
-    }
-    //since the loop stops when end is hit, it must be deleted separately
-    frames.erase(end);
+
+	std::list<Frame>::iterator curr = std::next(frames.begin(), start);
+	std::list<Frame>::iterator end = std::next(frames.begin(), stop);
+	std::list<Frame>::iterator tmp = curr;
+	while (curr != end) {
+		tmp = curr;
+		curr++;
+		frames.erase(tmp);
+	}
+	//since the loop stops when end is hit, it must be deleted separately
+	frames.erase(end);
+
 }
 /**
  * Duplicate the specified frame and shift its rows/columns in the specified
@@ -336,25 +371,29 @@ void Animation::shiftFrame(Frame frame, int dir)
  */
 std::string Animation::toString()
 {
-    std::string recColors = "";
-    for (int i = 0; i < NUMCOLORS; i++)
-    {
+
+	std::string recColors = "";
+	for (int i = 0; i < NUMCOLORS; i++)
+	{
+
         recColors += (std::to_string(recentColors[i].getRed()) + " "
             + std::to_string(recentColors[i].getGreen()) + " "
             + std::to_string(recentColors[i].getBlue())
             + " ");
-    }
 
-    std::string frms = "";
-    for (std::list<Frame>::iterator it = frames.begin(); it != frames.end(); it++)
-    {
-        frms += it->toString();
-    }
+	}
 
-    return (version + "\n"
-        + ((filename != "") ? filename : "NoAudioFile") + "\n"
+	std::string frms = "";
+	for (std::list<Frame>::iterator it = frames.begin(); it != frames.end(); it++)
+	{
+		frms += it->toString();
+	}
+
+	return (version + "\n"
+		+ ((filename != "") ? filename : "NoAudioFile") + "\n"
         + std::to_string(lastColor.getRed()) + " " + std::to_string(lastColor.getGreen()) + " " + std::to_string(lastColor.getBlue()) + "\n"
-        + recColors + "\n"
-        + std::to_string(frames.size()) + " " + std::to_string(height) + " " + std::to_string(width) + "\n"
-        + frms);
+		+ recColors + "\n"
+		+ std::to_string(frames.size()) + " " + std::to_string(height) + " " + std::to_string(width) + "\n"
+		+ frms);
+
 }

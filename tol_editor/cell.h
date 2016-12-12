@@ -22,9 +22,11 @@ public:
     Cell(RGB newColorValue);
     ~Cell();
 
+
     void setColor(RGB newColorValue);
     RGB getColor();
     std::string toString();
+
 
 private:
     RGB colorValue; //!< An RGB object used to contain the color data relevant to this cell
