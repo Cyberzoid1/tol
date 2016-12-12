@@ -234,10 +234,10 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>160</width>
-      <height>80</height>
+      <x>-1</x>
+      <y>-1</y>
+      <width>291</width>
+      <height>351</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="CurrentFrameGrid"/>
@@ -281,10 +281,10 @@
    <widget class="QWidget" name="gridLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>160</width>
-      <height>80</height>
+      <x>0</x>
+      <y>0</y>
+      <width>211</width>
+      <height>261</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="previousFrameGrid"/>
@@ -361,25 +361,27 @@
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>160</width>
-      <height>80</height>
+      <x>-1</x>
+      <y>-1</y>
+      <width>211</width>
+      <height>261</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="nextFrameGrid"/>
    </widget>
   </widget>
-  <widget class="QWidget" name="gridLayoutWidget_4">
+  <widget class="QLabel" name="locationLabel">
    <property name="geometry">
     <rect>
-     <x>930</x>
-     <y>200</y>
-     <width>160</width>
-     <height>80</height>
+     <x>460</x>
+     <y>160</y>
+     <width>47</width>
+     <height>13</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="NullLayout"/>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
   </widget>
  </widget>
  <resources/>

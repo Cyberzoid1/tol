@@ -2,7 +2,6 @@
 * @class EditorWindow
 */
 
-
 #include "editorwindow.h"
 #include "ui_editorwindow.h"
 #include <list>
@@ -19,83 +18,24 @@
  * fills the list of frameElements,
  * and creates all the initial values
  */
-
-
 EditorWindow::EditorWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EditorWindow)
 {
     ui->setupUi(this);
-    QPushButton * tempCell;
 
+    uiContainers = {
+        ui->previousFrame,
+        ui->currentFrame,
+        ui->nextFrame
+    };
+    for (int i = 0; i < 3; i++)
+        uiFrames.push_back(new frameElement);
 
-    /**
-     * This creates an initial frameElement p for the
-     * initial frame that will be in the "previous" or
-     * leftmost position in the UI.  It assigns a name,
-     * a height, a width, whether it is the currently viewed
-     * frame, ties it to a specific UI frame, and sets up
-     * its grid.  It then also fills that grid with all of
-     * the cells required by height and width.
-     */
-
-
-
-    frameElement *p = new frameElement( 1, 20, 8, false, ui->previousFrame );
-    setup( *p );                                     // set up the cells
-    listFrames.push_front( *p );                       // push it to the front of the list
-
-    /**
-     * This creates an initial frameElement q for the
-     * initial frame that will be in the "current" or
-     * center position in the UI.  It assigns a name,
-     * a height, a width, whether it is the currently viewed
-     * frame, ties it to a specific UI frame, and sets up
-     * its grid.  It then also fills that grid with all of
-     * the cells required by height and width.
-     */
-
-    frameElement *q = new frameElement( 2, 20, 8, true, ui->currentFrame );                     // tying to appropriate UI element
-    setup( *q );
-    listFrames.push_back( *q );                        // put it after the first frame in the list
-
-    /**
-     * This creates an initial frameElement r for the
-     * initial frame that will be in the "next" or
-     * rightmost position in the UI.  It assigns a name,
-     * a height, a width, whether it is the currently viewed
-     * frame, ties it to a specific UI frame, and sets up
-     * its grid.  It then also fills that grid with all of
-     * the cells required by height and width.
-     */
-
-    frameElement *r = new frameElement( 3, 20, 8, false, ui->nextFrame );
-    setup( *r );
-    listFrames.push_back( *r );                        // last pre-set frame, so placed at the end of the list
-
-
-
-    // BEGIN NEW STUFF
-
-    /** These lines apply the developed grids of the frameElements
-      * to the UI frames themselves.  Since the first 3 frames
-      * are defaults, then this can be done statically
-      */
-
-    q->self->setLayout( q->grid );
-    p->self->setLayout( p->grid );
-    r->self->setLayout( r->grid );
-
-    /** These lines setup an iterator on the list of frameElements
-      * The iterator, currFrame, was defined in the .h and should
-      * always point the to the frame currently being viewed
-      * Initially, that should be the middle frame in the list
-      */
-
-
-    setCurrentFrame();
-
-    // END NEW STUFF
+    currIndex = 0;
+    connectSlots();
+    ui->GoLeftIcon->setEnabled(false);
+    ui->GoRightIcon->setEnabled(false);
 }
 
 /**
@@ -106,271 +46,317 @@ EditorWindow::~EditorWindow()
 {
     delete ui;
 }
-
 /**
- * @brief EditorWindow::update
- * This is the slot for when the
- * "Go-Right" Button is clicked
- * by the user
+ * Setup the specified frameElement.
+ * @param frame pointer to the UI frame
+ * @param data Frame of data
+ * @return Void.
  */
-
-void EditorWindow::update()
+void EditorWindow::setup(frameElement *frame,Frame data)
 {
-    /** This is for when the user clicks the "Go-Left Button"
-     * It should take the UI view left depending on the current
-     * state of true and false in the isCurrent field of the
-     * frameElement nodes in the std::list listFrames
-     */
-    //frameElement p = listFrames.front();
-    //frameElement q = listFrames.back();
-    std::list<frameElement>::iterator it = std::next( listFrames.begin(), 1 );
-    bool prevExist, nextExist;
-
-    /**
-     * @brief This section creates iterators previous to and after
-     * the iterator that always points to the current-viewed frame.
-     * These iterators will allow the program to manipulate the frames
-     * around the current frame as well as the current frame itself.
-     * The iterators must be dynamic to accomodate arbitrarily large
-     * lists of frames.  This section also assigns values to the booleans
-     * prevExist and nextExist, which values indicate whether the view is
-     * at the head or the back of the list.  If one of those is the case,
-     * then the booleans prevent stepping off the list.
-     */
-
-    std::list<frameElement>::iterator prev, next, beforePrev, afterNext;        // Defines a previous, a next, and for larger lists
-    if( currFrame == listFrames.begin() )                                       // it also defines iterators for after the next and
-    {                                                                           // before the previous
-        prevExist = false;
-        next = std::next( currFrame, 1 );
-        if( listFrames.size() > 3 )
+    for( int i = 0; i < animation->getHeight(); i++ )
+    {
+        for( int j = 0; j < animation->getWidth(); j++ )
         {
-            afterNext = std::next( currFrame, 2);
+            currCells = createCell(data.getCellColor(j, i));
+            setButtonInfo(currCells, j, i);
+            frame->grid->addWidget( currCells, i, j, 0 );
         }
     }
-    else if( currFrame == listFrames.end() )
-    {
-        nextExist = false;
-        prev = std::next( currFrame, -1 );
-        if( listFrames.size() > 3 )
-        {
-            beforePrev = std::next( currFrame, -2 );
-        }
-    }
-    else
-    {
-        nextExist = true;
-        prevExist = true;
-        next = std::next( currFrame, 1 );
-        prev = std::next( currFrame, -1 );
-    }
-
-    /** This section actually performs the manipulation.
-      * First, it checks if the user is as far left as
-      * possible; if so, then the user cannot proceed farther left.
-      * Otherwise, the program evaluates the values of prevExist and
-      * isCurrent and performs the required motion.
-      */
-
-
-    if( currFrame->name == listFrames.size() )
-    {
-        //
-    }
-    else
-    {
-
-        if( prevExist ==  false )                       // if the user is at the farthest right
-        {
-
-            ui->nextFrameTable->resize( 290, 350 );
-            afterNext = std::next( currFrame, 2 );      // assign the frame after next to the afterNext iterator
-            moveCent( next );
-            moveLeft( currFrame );
-            afterNext->self->show();                    // show the frame after next
-            currFrame = next;                           // update the iterator to point to the current frame
-
-        }
-        else                                            // when the Current frame is a middle frame
-        {
-            ui->nextFrameTable->resize( 290, 350 );
-            prev->self->hide();                         // hide the previous frame
-            moveLeft( currFrame );
-            moveCent( next );
-            currFrame = next;                           // update the iterator to point to the current frame
-
-
-        }
-    }
-
-
-
-
 }
-
-
 /**
- * @brief EditorWindow::lower
- * This is the slot used when the user
- * clicks the "Go-Right" button.
+ * Set the object name of the specified button to hold the row and column
+ * in a comma-separated string.
+ * @param button pointer to the button to update
+ * @param row corresponds to the x value in the grid for the button
+ * @param col corresponds to the y value in the grid for the button
+ * @return void
  */
-
-void EditorWindow::lower()
+void EditorWindow::setButtonInfo(QPushButton *button, int row, int col)
 {
-
-    /** When the user clicks the "go-right" button
-     * It should take the user right depending on the current
-     * state of true and false in the isCurrent field of the
-     * frameElement class nodes of the std::list listFrames
-     */
-
-    frameElement p = listFrames.front();
-    frameElement q = listFrames.back();
-
-
-    std::list<frameElement>::iterator it = std::next( listFrames.begin(), 1 );
-    bool prevExist, nextExist;
-
-    /**
-     * @brief This section creates iterators previous to and after
-     * the iterator that always points to the current-viewed frame.
-     * These iterators will allow the program to manipulate the frames
-     * around the current frame as well as the current frame itself.
-     * The iterators must be dynamic to accomodate arbitrarily large
-     * lists of frames.  This section also assigns values to the booleans
-     * prevExist and nextExist, which values indicate whether the view is
-     * at the head or the back of the list.  If one of those is the case,
-     * then the booleans prevent stepping off the list.
-     */
-
-    std::list<frameElement>::iterator prev, next, beforePrev, afterNext;
-    if( currFrame == listFrames.begin() )
-    {
-        prevExist = false;
-        next = std::next( currFrame, 1 );
-        if( listFrames.size() > 3 )
-        {
-            afterNext = std::next( currFrame, 2);
-        }
-    }
-    else if( currFrame == std::next( listFrames.end(), -1 ) )
-    {
-        nextExist = false;
-        prev = std::next( currFrame, -1 );
-        if( listFrames.size() > 3 )
-        {
-            beforePrev = std::next( currFrame, -2 );
-        }
-    }
-    else
-    {
-        nextExist = true;
-        prevExist = true;
-        next = std::next( currFrame, 1 );
-        prev = std::next( currFrame, -1 );
-    }
-
-    /** This section actually performs the manipulation.
-      * First, it checks if the user is as far right as
-      * possible; if so, then the user cannot proceed farther right.
-      * Otherwise, the program evaluates the values of nextExist and
-      * isCurrent and performs the required motion.
-      */
-    if( listFrames.begin()->isCurrent == true )
-    {
-        //
-    }
-    else
-    {
-        if( nextExist ==  false )                           // when the user is at the farthest left
-        {
-            ui->previousFrameTable->resize( 290, 350 );
-            beforePrev = std::next( currFrame, -2 );        // Assign beforePrev to the frame before prev
-            moveCent( prev );
-            moveRght( currFrame );
-            beforePrev->self->show();                       // show the frame before previous
-            currFrame = prev;                               // update the iterator to point to the current frame
-
-        }
-        else                                                // When the Current Frame is in the center
-        {
-            ui->previousFrameTable->resize( 290, 350 );
-            next->self->hide();                             // hide the next frame
-            moveRght( currFrame );
-            moveCent( prev );
-            currFrame = prev;                               // Update the iterator
-
-        }
-    }
-
-}
-
-void EditorWindow::setup( frameElement q )
-{
-
-    for( int i = 0; i < nrows; i++ )                   // defaults
-    {
-        for( int j = 0; j < ncolumns; j++ )
-        {
-            q.cellGrid[j][i].setColor( 0, 0, 0 );
-            currCells = createCell();
-            q.grid->addWidget( currCells, i, j, 0 );
-            q.cellGrid[j][i].setCell( currCells );
-        }
-    }
-
+    QString rowIndex = QString::number(row);
+    QString colIndex = QString::number(col);
+    QString rowStr = ((row < 10) ? "0" + rowIndex : rowIndex);
+    QString colStr = ((col < 10) ? "0" + colIndex : colIndex);
+    button->setObjectName(rowStr + "," + colStr);
 }
 
 /**
  * @brief EditorWindow::createCell
  * this creates a new QPushbutton with
  * our own style.
+ * @param color RGB object containing the color value
  * @return a pointer to a QPushButton, as
  * that is the implementation of our cells
  * in the UI
  */
-
-
-QPushButton* EditorWindow::createCell()                                         // Definition of the createCell function
+QPushButton* EditorWindow::createCell(RGB color)                                         // Definition of the createCell function
 {
     QPushButton* newCell;                                                       // create the new cell
     newCell = new QPushButton;                                                  // assign it some memory
-    newCell->setStyleSheet( "border: 1px solid;" "background-color: blue");     // Set the style
+    setCellColor(newCell, color);
+    connect(newCell, SIGNAL(clicked()), this, SLOT(handleCellColor()));
     return newCell;                                                             // return it
 }
-
-
-void EditorWindow::moveLeft( std::list<frameElement>::iterator q )
+/**
+ * Set the color of a cell in a frame to the specified color.
+ * @param cell pointer to a button in the grid
+ * @param color object containing the RGB value to update the cell to
+ */
+void EditorWindow::setCellColor(QPushButton *cell, RGB color)
 {
-    q->self->move( 30, 220 );
-    q->self->resize( 210, 260 );
-    q->self->show();
-    q->isCurrent = false;
+    QColor qcolor(color.getRed(), color.getGreen(), color.getBlue());
+    QPalette pal = cell->palette();
+    pal.setColor(QPalette::Button, qcolor);
+    cell->setAutoFillBackground(true);
+    cell->setPalette(pal);
+    cell->setFlat(true);
+    cell->update();
 }
-
-void EditorWindow::moveCent( std::list<frameElement>::iterator q )
+/**
+ * Update the colors of the cells in the specified frame after a transition.
+ * @param frame pointer to the UI frame
+ * @param data Frame of data
+ * @return Void.
+ */
+void EditorWindow::updateCells(frameElement *frame, Frame data)
 {
-    q->self->move( 350, 180 );
-    q->self->resize( 290, 350 );
-    q->self->show();
-    q->isCurrent= true;
-}
-
-void EditorWindow::moveRght( std::list<frameElement>::iterator q )
-{
-    q->self->move( 740, 220 );
-    q->self->resize( 210, 260 );
-    q->self->show();
-    q->isCurrent = false;
-}
-
-void EditorWindow::setCurrentFrame()
-{
-    for( currFrame = listFrames.begin(); currFrame != listFrames.end(); currFrame++ )  // Setup the iterator that points to the current frame
-    {
-        if( currFrame->isCurrent == true )            // Current Frame will always have isCurrent == true
-        {
-            break;
+    for (int i = 0; i < animation->getHeight(); i++){
+        for (int j = 0; j < animation->getWidth(); j++){
+            QLayoutItem *cell = frame->grid->itemAtPosition(i, j);
+            QWidget *widg = cell->widget();
+            QPushButton *button = dynamic_cast<QPushButton*>(widg);
+            setCellColor(button, data.getCellColor(j, i));
         }
     }
+}
+/**
+ * Using the animation read in from the file, setup the first few frames
+ * in the UI of the editor window. Also, handle enabling/disabling the
+ * navigation buttons.
+ * @param animation pointer to the animation read in from a file
+ * @return Void.
+ */
+void EditorWindow::setupFrames(Animation *animation)
+{
+    this->frames = animation->getFrames();
+    this->animation = animation;
+
+    Frame prev(animation->getWidth(), animation->getHeight());
+    std::vector<Frame> dataFrames = {
+        prev,
+        *frames.begin()
+    };
+    Frame next = prev;
+    if (animation->getNumFrames() > 1)
+        next = *std::next(frames.begin(), 1);
+    dataFrames.push_back(next);
+
+    for (int i = 0; i < uiFrames.size(); i++){
+        setup(uiFrames[i], dataFrames[i]);
+        uiFrames[i]->self = uiContainers[i];
+        uiFrames[i]->self->setLayout(uiFrames[i]->grid);
+    }
+    this->currFrame = frames.begin();
+    animation->setCurrentFrame(&(*(this->currFrame)));
+    this->currIndex = 0;
+
+    updateLocLabel();
+    toggleNavButtons();
+}
+/**
+ * Connect the signals and slots for the various UI buttons.
+ * @return Void.
+ */
+void EditorWindow::connectSlots()
+{
+    connect(ui->GoLeftIcon, SIGNAL(clicked(bool)), this, SLOT(goLeft()));
+    connect(ui->GoRightIcon, SIGNAL(clicked(bool)), this, SLOT(goRight()));
+    connect(ui->DuplicateIcon, SIGNAL(clicked(bool)), this, SLOT(duplicateHandler()));
+    connect(ui->NewFrameIcon, SIGNAL(clicked(bool)), this, SLOT(addFrameHandler()));
+    connect(ui->DeleteFrameIcon, SIGNAL(clicked(bool)), this, SLOT(deleteFrameHandler()));
+    connect(ui->upDupIcon, SIGNAL(clicked(bool)), this, SLOT(shiftHandler()));
+    connect(ui->DownDupIcon, SIGNAL(clicked(bool)), this, SLOT(shiftHandler()));
+    connect(ui->LeftDupIcon, SIGNAL(clicked(bool)), this, SLOT(shiftHandler()));
+    connect(ui->RightDupIcon, SIGNAL(clicked(bool)), this, SLOT(shiftHandler()));
+}
+
+/**
+ * Toggle navigation buttons to prevent the user from transitioning
+ * beyond the start or end of the list of frames.
+ * @return Void.
+ */
+void EditorWindow::toggleNavButtons()
+{
+    if (this->currIndex > 0)
+        ui->GoLeftIcon->setEnabled(true);
+    else
+        ui->GoLeftIcon->setEnabled(false);
+    //subtract 1 from size to account for zero-based indexing
+    if (this->currIndex < (frames.size() - 1))
+        ui->GoRightIcon->setEnabled(true);
+    else
+        ui->GoRightIcon->setEnabled(false);
+}
+/**
+ * Helper method to update the list of frames and pointer to the current frame.
+ * @return void.
+ */
+void EditorWindow::updateFrameData()
+{
+    this->frames = animation->getFrames();
+    this->currFrame = std::next(this->frames.begin(), currIndex);
+    animation->setCurrentFrame(&(*this->currFrame));
+}
+/**
+ * Update the locationLabel so that it contains: "current index/number of frames"
+ * @return Void.
+ */
+void EditorWindow::updateLocLabel()
+{
+    ui->locationLabel->setText(QString::number(this->currIndex + 1)+
+                               "/" +
+                               QString::number(frames.size()));
+}
+/**
+ * This is the slot for when the "Go-Left" Button is clicked
+ * by the user.
+ * @return Void.
+ */
+void EditorWindow::goLeft()
+{
+    int width = animation->getWidth();
+    int height = animation->getHeight();
+    Frame newPrev(width, height),
+          newCurr(width, height);
+
+    if (currIndex - 2 > 0)
+        newPrev = *std::next(currFrame, -2);
+    if (currIndex - 1 >= 0)
+        newCurr = *std::next(currFrame, -1);
+
+    std::vector<Frame> activeFrames = {
+        newPrev,
+        newCurr,
+        *currFrame
+    };
+
+    for (int i = 0; i < activeFrames.size(); i++){
+        updateCells(uiFrames[i], activeFrames[i]);
+    }
+    currFrame--;
+    animation->setCurrentFrame(&(*(currFrame)));
+    currIndex--;
+    toggleNavButtons();
+    updateLocLabel();
+}
+/**
+ * This is the slot used when the user clicks the "Go-Right" button.
+ * @return Void.
+ */
+void EditorWindow::goRight()
+{
+    int width = animation->getWidth();
+    int height = animation->getHeight();
+    Frame newCurr(width, height),
+          newNext(width, height);
+
+    if (frames.size() > 1 &&
+            currIndex + 1 < frames.size())
+        newCurr = *std::next(currFrame, 1);
+    if (frames.size() > 2 &&
+            currIndex + 2 < frames.size())
+        newNext = *std::next(currFrame, 2);
+
+    std::vector<Frame> activeFrames = {
+        *currFrame,
+        newCurr,
+        newNext
+    };
+
+    for (int i = 0; i < activeFrames.size(); i++){
+        updateCells(uiFrames[i], activeFrames[i]);
+    }
+    currFrame++;
+    animation->setCurrentFrame(&(*(currFrame)));
+    currIndex++;
+    toggleNavButtons();
+    updateLocLabel();
+}
+/**
+ * Called when a cell in a frame is clicked. Changes the color of that cell
+ * in the UI and backend data to the last color selected from the toolbox.
+ * @return Void.
+ */
+void EditorWindow::handleCellColor()
+{
+    QPushButton *temp = qobject_cast<QPushButton*>(sender());
+    setCellColor(temp, animation->getLastColor());
+    Frame *currFrame = &(*this->currFrame);
+    //the (row,col) position is stored in the qpushbutton's object name
+    //extract those values for setting the corresponding cell's color
+    QString index = temp->objectName();
+    QString row = index.mid(0, 2);
+    QString col = index.mid(3, 2);
+
+    currFrame->setCellColor(row.toInt(), col.toInt(), animation->getLastColor());
+    animation->setFrames(this->frames);
+}
+/**
+ * Called when the 'up' button is clicked. Duplicates the current frame, shifts its
+ * rows up, updates the list of frames, and then transitions to the shifted frame.
+ * @return Void.
+ */
+void EditorWindow::shiftHandler()
+{
+    int dir = 0;
+    QString name = sender()->objectName();
+    if (name == "upDupIcon")
+        dir = 0;
+    else if (name == "DownDupIcon")
+        dir = 1;
+    else if (name == "LeftDupIcon")
+        dir = 2;
+    else if (name == "RightDupIcon")
+        dir = 3;
+    animation->shiftFrame(*(this->currFrame), dir);
+    updateFrameData();
+    goRight();
+}
+/**
+ * Called when the 'duplicate' button is clicked. Duplicates the current frame,
+ * updates the list of frames and currFrame pointer, and then transitions to the new,
+ * duplicate frame.
+ * @return Void.
+ */
+void EditorWindow::duplicateHandler()
+{
+    animation->duplicateFrame(*(this->currFrame));
+    updateFrameData();
+    goRight();
+}
+/**
+ * Called when the 'add' button is clicked. Adds a new, blank frame after
+ * the current frame, updates the list of frames, and then transitions to the new
+ * frame.
+ * @return Void.
+ */
+void EditorWindow::addFrameHandler()
+{
+    animation->addFrame(animation->getWidth(),
+                        animation->getHeight(),
+                        this->currIndex+1);
+    updateFrameData();
+    goRight();
+}
+/**
+ * Called when the 'delete' button is clicked. Removes the current frame, updates
+ * the list of frames, and transitions to the previous frame.
+ * @return Void.
+ */
+void EditorWindow::deleteFrameHandler()
+{
+    animation->removeFrame(this->currIndex);
+    updateFrameData();
+    goLeft();
 }

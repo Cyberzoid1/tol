@@ -19,10 +19,7 @@
 #include <QFrame>
 #include <QGridLayout>
 #include <QPushButton>
-#include <QAbstractButton>
 
-#define nrows 20
-#define ncolumns 8
 
 class cell
 {
@@ -44,21 +41,18 @@ public:
     QFrame* self;                               //!< A pointer to the UI frame belonging to the node
     QGridLayout *grid;                          //!< A pointer to the grid layout of the node
     bool isCurrent;                             //!< A boolean to hold whether the node is the current frame being viewed
-    cell cellGrid[8][20];                       //!< An array of cells for the grid
     int name;                                   //!< A name, which is the number identifying the frame
     int width;                                  //!< A number holding the width of the frame
     int height;                                 //!< A number holding the height of the frame
 
 
 public slots:
-    void handleCellColor( QPushButton* temp );
+    //void colorChangedHandler();
 
 public:
-    explicit frameElement();
-    frameElement( const frameElement &obj );
-    frameElement( int Name, int Height, int Width, bool Curr, QFrame *Self );
+    frameElement();
+    frameElement( int n, int h, int w, bool isCurr );
     ~frameElement();
-    void setCurrClickable();
 };
 
 #endif // FRAMEELEMENT_H

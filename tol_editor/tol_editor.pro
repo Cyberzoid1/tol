@@ -15,11 +15,25 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     editorwindow.cpp \
-    frameelement.cpp
+    frameelement.cpp \
+    animation.cpp \
+    cell.cpp \
+    frame.cpp \
+    input.cpp \
+    outputfile.cpp \
+    toolbox.cpp \
+    RGB.cpp
 
 HEADERS  += mainwindow.h \
     editorwindow.h \
-    frameelement.h
+    frameelement.h \
+    RGB.h \
+    animation.h \
+    cell.h \
+    frame.h \
+    input.h \
+    outputfile.h \
+    toolbox.h
 
 FORMS    += mainwindow.ui \
 editorwindow.ui
