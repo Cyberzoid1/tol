@@ -335,13 +335,13 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     QTime defaultTime;
     defaultTime.setHMS(0,0,0,100);
 
-    currentTime = new QTimeEdit(widget);
+    /*currentTime = new QTimeEdit(widget);
     currentTime->setObjectName(QStringLiteral("currentTime"));
     currentTime->connect(currentTime, SIGNAL(timeChanged(QTime)), this, SLOT(on_currentTime_timeChanged(QTime)));
     toolBoxFont = currentTime->font();
     toolBoxFont.setPointSize(8);
     currentTime->setFont(toolBoxFont);
-    currentTime->setDisplayFormat("mm:ss.zzz");
+    currentTime->setDisplayFormat("mm:ss.zzz");*/
     //currentTime->setTime(defaultTime);
 
     timeInterval = new QTimeEdit(widget);
@@ -452,7 +452,7 @@ void Toolbox::setupUiLayouts(QWidget *widget)
     loTiming = new QHBoxLayout();
     loTiming->setSpacing(6);
     loTiming->setObjectName(QStringLiteral("loTiming"));
-    loTimingCurrentTime = new QVBoxLayout();
+    /*loTimingCurrentTime = new QVBoxLayout();
     loTimingCurrentTime->setSpacing(6);
     loTimingCurrentTime->setObjectName(QStringLiteral("loTimingCurrentTime"));
     loTimingCurrentTime->addWidget(lblTimingCurrentTime);
@@ -461,7 +461,7 @@ void Toolbox::setupUiLayouts(QWidget *widget)
     loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer2);
     loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer3);
     loTimingCurrentTime->addWidget(lblTimingCurrentTimeSpacer4);
-    loTiming->addLayout(loTimingCurrentTime);
+    loTiming->addLayout(loTimingCurrentTime);*/
     loTimingTimeInterval = new QVBoxLayout();
     loTimingTimeInterval->setSpacing(6);
     loTimingTimeInterval->setObjectName(QStringLiteral("loTimingTimeInterval"));
@@ -517,12 +517,12 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
     /**
      * Retranslate Timing Layout
      */
-    lblTimingCurrentTime->setText(QApplication::translate("Toolbox", "Current Time", 0));//
+    /*lblTimingCurrentTime->setText(QApplication::translate("Toolbox", "Current Time", 0));//
     currentTime->setDisplayFormat(QApplication::translate("Toolbox", "mm:ss.zzz", 0));
     lblTimingCurrentTimeSpacer4->setText(QString());
     lblTimingCurrentTimeSpacer3->setText(QString());
     lblTimingCurrentTimeSpacer2->setText(QString());
-    lblTimingCurrentTimeSpacer1->setText(QString());
+    lblTimingCurrentTimeSpacer1->setText(QString());*/
     lblTimingTimeInterval->setText(QApplication::translate("Toolbox", "Time interval", 0));//
     timeInterval->setDisplayFormat(QApplication::translate("Toolbox", "mm:ss.zzz", 0));
     lblTimingTimeIntervalSpacer1->setText(QString());
