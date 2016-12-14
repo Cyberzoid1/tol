@@ -9,7 +9,6 @@
  * as well a function for getting a string representation of any errors returned by the
  * file writing process.
  */
- */
 
 #ifndef outputfile_h
 #define outputfile_h
