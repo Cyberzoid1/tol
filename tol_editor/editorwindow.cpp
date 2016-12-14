@@ -221,9 +221,9 @@ void EditorWindow::updateFrameData()
  */
 void EditorWindow::updateLocLabel()
 {
-    ui->locationLabel->setText(QString::number(this->currIndex + 1)+
+    ui->locationLabel->setText(QString::number(this->currIndex)+
                                "/" +
-                               QString::number(frames.size()));
+                               QString::number(frames.size() - 1));
 }
 /**
  * Called for updating the UI after a frame has been removed. Since the current
