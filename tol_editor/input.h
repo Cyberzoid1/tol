@@ -27,6 +27,6 @@ int getActualWidth(std::ifstream &tanfile);
 int getActualHeight(std::ifstream &tanfile);
 void handleRowOfCells(int rowNum, std::string data, Frame *frame, int width);
 void readFrames(std::ifstream &tanfile, Animation *animation);
-Animation readInAnimation(const char *filename);
+Animation* readInAnimation(const char *filename);
 
 #endif // !INPUT_H

@@ -10,7 +10,6 @@
  * file writing process.
  */
 
-
 #ifndef outputfile_h
 #define outputfile_h
 
