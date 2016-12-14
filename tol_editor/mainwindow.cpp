@@ -102,6 +102,7 @@ void MainWindow::createMenus()
 void MainWindow::updateUI()
 {
     editor->updateFrameData();
+    editor->refreshFrames();
 }
 
 /**
