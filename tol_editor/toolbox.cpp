@@ -608,7 +608,7 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
      * Retranslate Music Layout
      */
     lblMusicFileName->setText(QApplication::translate("Toolbox", "Music File Name", 0));
-    txtMusicFileName->setText(QApplication::translate("Toolbox", "None", 0));
+    txtMusicFileName->setText(QApplication::translate("Toolbox", "NoAudioFile", 0));
     btnMusicFileName->setText(QApplication::translate("Toolbox", "Commit Name", 0));
 
 } // retranslateUi
@@ -828,4 +828,5 @@ void Toolbox::on_colorDialog_currentColorChanged(QColor colorVal)
 void Toolbox::on_btnMusicFileName_clicked()
 {
     qDebug("HERE! on_btnMusicFileName_clicked %s", txtMusicFileName->text().toLatin1().constData());
+    animPtr->setFilename(txtMusicFileName->text().toStdString());
 }
