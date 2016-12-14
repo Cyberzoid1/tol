@@ -38,6 +38,7 @@ public:
 private slots:
     void open();
     void save();
+    void updateUI();
 
 private:
     Ui::MainWindow *ui; //!< Reference to the internal UI object

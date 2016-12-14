@@ -30,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     windowFrame->setLayout(hlayout);
     setCentralWidget(windowFrame);
 
+    connect(toolbox,SIGNAL(updateUI()),this,SLOT(updateUI()));
+
     createActions();
     createMenus();
 
@@ -96,6 +98,13 @@ void MainWindow::createMenus()
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
 }
+
+void MainWindow::updateUI()
+{
+    editor->updateFrameData();
+    editor->refreshFrames();
+}
+
 /**
  * When the window is first opened, intialize the animation with a single
  * frame of default size. This will allow the user to start creating an
