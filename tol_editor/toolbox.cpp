@@ -25,7 +25,6 @@
 #include <QColorDialog>
 #include <QObject>
 #include <QTime>
-//#include <mainwindow.h>
 #include <QRect>
 #include <QFont>
 #include <QLabel>
@@ -66,9 +65,15 @@ void Toolbox::setupUi(QWidget *parent)
 
     setupUiLabels(widget);
 
+    setupUiLabelsMusic(musicWidget);
+
     setupUiWidgets(widget);
 
+    setupUiWidgetsMusic(musicWidget);
+
     setupUiLayouts(widget);
+
+    setupUiLayoutsMusic(musicWidget);
 
     retranslateUi(parent);
 
@@ -95,6 +100,11 @@ void Toolbox::setupUiTabs(QWidget *Toolbox){
     tabEdit->setObjectName(QStringLiteral("tabEdit"));
     tabEdit->setGeometry(QRect(0,0,tabParent->width(), tabParent->height()));
     tabParent->addTab(tabEdit, QString());
+
+    tabMusic = new QWidget();
+    tabMusic->setObjectName(QStringLiteral("tabMusic"));
+    tabMusic->setGeometry(QRect(0,0,tabParent->width(), tabParent->height()));
+    tabParent->addTab(tabMusic,QString());
 }
 
 /**
@@ -104,6 +114,10 @@ void Toolbox::setupUiMasterWidget(){
     widget = new QWidget(tabEdit);
     widget->setObjectName(QStringLiteral("widget"));
     widget->setGeometry(QRect(0, 0, tabParent->width(), tabParent->height()));
+
+    musicWidget = new QWidget(tabMusic);
+    musicWidget->setObjectName(QStringLiteral("musicWidget"));
+    musicWidget->setGeometry(QRect(0,0,tabParent->width(), tabParent->height()));
 }
 
 /**
@@ -236,6 +250,16 @@ void Toolbox::setupUiLabels(QWidget *widget)
     lblTimingTimeIntervalSpacer4->show();
 }
 
+void  Toolbox::setupUiLabelsMusic(QWidget *musWidget)
+{
+    lblMusicFileName = new QLabel(musWidget);
+    lblMusicFileName->setObjectName(QStringLiteral("lblMusicFileName"));
+    toolBoxFont = lblMusicFileName->font();
+    toolBoxFont.setPointSize(8);
+    lblMusicFileName->setFont(toolBoxFont);
+    lblMusicFileName->show();
+}
+
 /**
  * Used to create and setup the various widgets used in the toolbox including Add Frames Widgets, Remove Frames Widgets,
  * Copy Frames Widgets, and Timing Widgets.
@@ -354,6 +378,23 @@ void Toolbox::setupUiWidgets(QWidget *widget)
     timeInterval->setDisplayFormat("mm:ss.zzz");
     timeInterval->setTime(defaultTime);
     animPtr->setTimeInterval(100);
+}
+
+void Toolbox::setupUiWidgetsMusic(QWidget *musWidget)
+{
+    txtMusicFileName = new QLineEdit(musWidget);
+    txtMusicFileName->setObjectName(QStringLiteral("txtMusicFileName"));
+    toolBoxFont = txtMusicFileName->font();
+    toolBoxFont.setPointSize(8);
+    txtMusicFileName->setFont(toolBoxFont);
+    txtMusicFileName->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+    btnMusicFileName = new QPushButton(musWidget);
+    btnMusicFileName->setObjectName(QStringLiteral("btnMusicFileName"));
+    btnMusicFileName->connect(btnMusicFileName, SIGNAL(clicked(bool)), this, SLOT(on_btnMusicFileName_clicked()));
+    toolBoxFont = btnMusicFileName->font();
+    toolBoxFont.setPointSize(8);
+    btnMusicFileName->setFont(toolBoxFont);
 }
 
 /**
@@ -475,6 +516,38 @@ void Toolbox::setupUiLayouts(QWidget *widget)
     loMasterLayout->addLayout(loTiming);
 }
 
+void Toolbox::setupUiLayoutsMusic(QWidget *musWidget)
+{
+    /**
+     * Set up Music Tab Layout
+     */
+    loMusicMasterLayout = new QVBoxLayout(musWidget);
+    loMusicMasterLayout->setSpacing(6);
+    loMusicMasterLayout->setContentsMargins(musWidget->width()*0.05, musWidget->height()*0.05, musWidget->width()*0.05, musWidget->height()*0.05);
+    loMusicMasterLayout->setObjectName(QStringLiteral("loMusicMasterLayout"));
+
+    loMusicFileName = new QHBoxLayout();
+    loMusicFileName->setSpacing(6);
+    loMusicFileName->setObjectName(QStringLiteral("loMusicFileName"));
+
+    loMusicFileNameText = new QVBoxLayout();
+    loMusicFileNameText->setSpacing(6);
+    loMusicFileNameText->setObjectName(QStringLiteral("loMusicFileNameText"));
+    loMusicFileNameText->addWidget(lblMusicFileName);
+    loMusicFileNameText->addWidget(txtMusicFileName);
+    loMusicFileNameText->addSpacing(musWidget->height() * 0.004);
+    loMusicFileName->addLayout(loMusicFileNameText);
+
+    loMusicFileNameButton = new QVBoxLayout();
+    loMusicFileNameButton->setSpacing(6);
+    loMusicFileNameButton->setObjectName(QStringLiteral("loMusicFileNameButton"));
+    loMusicFileNameButton->addSpacing(musWidget->height() * 0.05);
+    loMusicFileNameButton->addWidget(btnMusicFileName);
+    loMusicFileName->addLayout(loMusicFileNameButton);
+
+    loMusicMasterLayout->addLayout(loMusicFileName);
+}
+
 /**
  * Function to retranslate the user interface
  * @param A pointer to the parent widget of the toolbox
@@ -484,6 +557,7 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
     Toolbox->setWindowTitle(QApplication::translate("Toolbox", "Toolbox", 0));
     tabParent->setTabText(tabParent->indexOf(tabColor), QApplication::translate("Toolbox", "Color", 0));
     tabParent->setTabText(tabParent->indexOf(tabEdit), QApplication::translate("Toolbox", "Editing", 0));
+    tabParent->setTabText(tabParent->indexOf(tabMusic), QApplication::translate("Toolbox", "Music", 0));
 
     /**
      * Retranslate Add Frames Layout
@@ -529,6 +603,14 @@ void Toolbox::retranslateUi(QWidget *Toolbox)
     lblTimingTimeIntervalSpacer2->setText(QString());
     lblTimingTimeIntervalSpacer3->setText(QString());
     lblTimingTimeIntervalSpacer4->setText(QString());
+
+    /**
+     * Retranslate Music Layout
+     */
+    lblMusicFileName->setText(QApplication::translate("Toolbox", "Music File Name", 0));
+    txtMusicFileName->setText(QApplication::translate("Toolbox", "None", 0));
+    btnMusicFileName->setText(QApplication::translate("Toolbox", "Commit Name", 0));
+
 } // retranslateUi
 
 /**
@@ -695,7 +777,6 @@ void Toolbox::on_copyFramesButton_clicked()
 
     animPtr->setFrames(frames);
 
-
    /* qDebug("HERE! on_copyFramesButton_clicked");
     addFramesStart->setRange(0, animPtr->getNumFrames() - 1);
     removeFramesStart->setRange(0, animPtr->getNumFrames() - 1);
@@ -711,7 +792,8 @@ void Toolbox::on_copyFramesButton_clicked()
  * Signal for when the value for the current time box associated with time intervals is changed
  * @param A QTime value of what the time has been changed to
  */
-void Toolbox::on_currentTime_timeChanged(QTime timeVal){
+void Toolbox::on_currentTime_timeChanged(QTime timeVal)
+{
     qDebug("HERE! on_currentTime_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
     int ms = (timeVal.minute() * 60000) + (timeVal.second() * 1000) + (timeVal.msec());
     animPtr->getCurrentFrame()->setStartTime(ms);
@@ -722,7 +804,8 @@ void Toolbox::on_currentTime_timeChanged(QTime timeVal){
  * Signal for when the value for the interval time box associated with time intervals is changed
  * @param A QTime value of what the time has been changed to
  */
-void Toolbox::on_timeInterval_timeChanged(QTime timeVal){
+void Toolbox::on_timeInterval_timeChanged(QTime timeVal)
+{
     qDebug("HERE! on_timeInterval_timeChanged %d:%d:%d", timeVal.minute(), timeVal.second(), timeVal.msec());
     int ms = (timeVal.minute() * 60000) + (timeVal.second() * 1000) + (timeVal.msec());
     qDebug("HERE! on_timeInterval_timeChanged in ms: %d", ms);
@@ -737,4 +820,12 @@ void Toolbox::on_colorDialog_currentColorChanged(QColor colorVal)
 {
     qDebug("HERE! on_colorDialog_currentColorChanged %d:%d:%d", colorVal.red(), colorVal.green(), colorVal.blue());
     animPtr->setLastColor(colorVal.red(), colorVal.green(), colorVal.blue());
+}
+
+/**
+ * Signal for when the button associated with setting the music file name is clicked
+ */
+void Toolbox::on_btnMusicFileName_clicked()
+{
+    qDebug("HERE! on_btnMusicFileName_clicked %s", txtMusicFileName->text().toLatin1().constData());
 }
