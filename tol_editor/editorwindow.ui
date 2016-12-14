@@ -268,9 +268,9 @@
   <widget class="QLabel" name="locationLabel">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>480</x>
      <y>0</y>
-     <width>291</width>
+     <width>71</width>
      <height>20</height>
     </rect>
    </property>
