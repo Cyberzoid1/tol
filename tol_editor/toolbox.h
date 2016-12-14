@@ -182,6 +182,9 @@ public:
 
     void retranslateUi(QWidget *Toolbox);
 
+signals:
+    void updateUI();
+
 private:
     int addFramesInsertionIndex = 0;
     int addFramesNumberOfFrames = 0;
