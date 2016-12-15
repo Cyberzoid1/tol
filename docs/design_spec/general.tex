@@ -5,66 +5,67 @@
 
 \begin{document}
 \section{General}
-This design spec is to outline and specify the details of our team's Tower of Light project. Throughout this document our team will detail how we have decided to develop this application, starting with our goals and getting down to functionality and features.
+This design spec is to outline and specify the details of our team's Tower of Light project. Throughout this document our team will detail how we have decided to develop this application, starting with our goals and getting down to functionality and features.  It will also detail the design decisions and adjustments made over time as the project has progressed.
+
 \subsection{Goals}
-Our team's main goal is the completion of our Tower of Light application before the assigned due date, which is currently undecided. This can be achieved through the completion of mini-goals that when completed will result in a finished product.
+The primary goal is the completion of our Tower of Light application by Thursday, December 15. This can be achieved through the completion of  each sprint such that it will result in a finished product.
 	\begin{itemize}
-		\item Our first goal should be the completed design of our application, which is partially achieved through the creation of this document. This goal is necessary for the creation of the 				project to go smoothly.
-		\item After we have a finished design the next goal will be the creation of a simple form of our application which will be version 0.1. This version should only contain the minimum core 				functionality for the Tower of Lights application detailed in this document.
-		\item Once our team has a working version 0.1 our next goal will be to include as many additional features that we can get working correctly before the due date. The completion of this goal will result in achieving our overall goal.
+		\item Our first goal was the completed design of our application. The original design specification was an integral portion of this goal.  Our mockups and design meetings were the other main portion.  This goal is the fundamental building block for the creation of the project.  As part of the goal, each team member developed a section of the design spec; following which, the team created editor and toolbox mockups and met in meetings to determine core functionality and extra features.
+		\item Our second goal was the creation of working sections of the project: a working UI and a back-end IO.  The team split the UI into the editor portion and the toolbox portion, and determined the backend should run the data as well as IO.  Thus, the goal was to create a testable toolbox, a testable editor window, and a testable backend.  The focus was on core functionality, rather than expansions of the program.  The team wanted something that worked over something that had lots of potential.
+		\item Our third and final goal was, once all core functions were complete, to include as many agreed-upon additional features as possible before the due date. The completion of this goal is equivalent to achieving our overall goal.  
 	\end{itemize}
 \subsection{Development Plans}
-We plan to develop our application through the specified goals and time line. Each week we will set a task for our team to finish until the project is complete. Given time constraints this will be a quick process with multiple meetings to discuss how to complete these weekly tasks. 
+We went on to develop our application through the specified goals, modified as necessary over time, and time line for sprints, both as originally envisioned and as modified in class. Each week we set a task for each pair in the team to finish by the sprint deadline until the project is completed. Given time constraints, this will be a difficult process with multiple meetings to discuss the completion and feasibility of these weekly tasks. 
 \subsection{Timeline}
 This time line is a rough estimate of each week's tasks that will be completed to finish our Tower of Lights application. It has yet to be fully reviewed by the team and is subject to change.
 	\begin{itemize}
-		\item \textbf{Week 1 (10/26 - 11/2)} The first week will be dedicated to completing the rough draft of this Design Specification. 
-		\item \textbf{Week 2 (11/2 - 11/11)} Initial development: part of the group works on starting the User Interface, while part of the group creates the necessary data structures and handles the File I/O.
-		\item \textbf{Week 3 (11/11 - 11/18)} Continue work on User Interface, test File I/O more rigorously, and integrate work into base Qt project.
-		\item \textbf{Week 4 (11/18 - 11/25)} Continue development and work towards first working prototype.
-		\item \textbf{Week 5 (11/25 - 12/2)} Seek to complete first working prototype and run testing.
-		\item \textbf{Week 6 (12/2 - 12/9)} Address any bugs in the first prototype and keep developing functionality that needs to be implemented.
-		\item \textbf{Week 7 (12/9 - 12/14)} Complete version of the program that will be turned in and run final testing.
+		\item \textbf{Week 1 (10/26 - 11/2)} The first week was dedicated to completing the rough draft of this Design Specification. It was completed on time and in good order.
+		\item \textbf{Week 2 (11/2 - 11/11)} Initial development: one pair began the toolbox development; a second pair began the editor development; and the final pair began the IO and data work.  Toolbox and editor should be in Qt's mockup language, QML.  This was completed on time and in good order.
+		\item \textbf{Week 3 (11/11 - 11/18)} Continued development: User Interface was switch from mockups into a base form in the Qt project; while the backend code was to be in first completion.  Essentially, the goal was to be at the 5o percent completion mark.  This was completed on time and in fairly good order.  The editor window had posed some difficulty, but was overcome.
+		\item \textbf{Week 4 (11/18 - 11/25)} Continued development: complete pieces.  Essentially, the goal here was to have the toolbox, backend, and editor in the 100 percent conmpletion.  This would allow the bringing together of all the pieces into one for the main prototype.  This goal was partially completed, though in good order.  The toolbox was about 95 percent complete, the backend data was 100 percent complete, and the editor was about 85 percent complete.  
+		\item \textbf{Week 5 (11/25 - 12/2)} Continued development: finish the previous sprint and put the pieces into a prototype for presentation.  In this goal, both the toolbox and editor had to be finished as isolated windows and then integrated with the backend into the main project.  This goal was completed, and in good order.  
+		\item \textbf{Week 6 (12/2 - 12/9)} Continued development: present prototype, bring all documentation up-to-date, and finaluze all core functions and additions as time permits.  One member of the editor pair was shifted to updating documentation, while the pair that finished the backend data took on the protoype and presentation.  Other members of the group took on modified coding assignments.  This goal was completed, and in good order.
+		\item \textbf{Week 7 (12/9 - 12/15)} Finish development: Have a working version of the main program, run final testing, finish all documentation, craft all final memorandums, and turn in project.
 	\end{itemize}
-\subsection{Flowchart}
-This section is used to display several flowcharts where each is a representation for how a user will interact with a section of the program. These flowcharts will represent how we want the core functionality of the application to function.
-\subsubsection{User interaction with the toolbox}
-\centering
-	\begin{tikzpicture}[node distance=2cm]
-		\node (start) [startstop] {User requires a tool};
-		\node (dec1) [decision, below of=start, yshift=-1cm] {Is required tool tab open?};
-		\node (in1) [io, right of=dec1, xshift=3cm] {User clicks appropriate tab};
-		\node (in2) [io, below of=dec1, yshift=-1cm] {User Selects desired tool};
-		\node (stop) [startstop, below of=in2] {Tool is ready for use};
-		\draw [arrow] (start) -- (dec1);
-		\draw [arrow] (in2) -- (stop);
-		\draw [arrow] (dec1) -- node[anchor=south] {no} (in1);
-		\draw [arrow] (dec1) -- node[anchor=east] {yes} (in2);
-		\draw [arrow] (in1) |- (start);
-	\end{tikzpicture}
-	\begin{flushleft}
-		\subsubsection{User interaction with the editor}
-	\end{flushleft}
-		\begin{tikzpicture}[node distance=2cm]
-			\node (start) [startstop] {User desires to edit a frame};
-			\node (dec1) [decision, below of=start, yshift=-.8cm] {Is frame currently selected?};
-			\node (in1) [io, right of=dec1, xshift=3cm] {User clicks arrows to find frame};
-			\node (proc1) [process, below of =dec1, yshift=-0.5cm] {Frame is displayed in center of editor};
-			\node (dec2) [decision, below of=proc1, yshift=-0.8cm] {Is frame complete?};
-			\node (proc2) [process, right of=dec2, xshift=3cm] {continue editing};
-			\node (in2) [io, below of=dec2, yshift=-0.5cm] {User selects option for frame};
-			\node (proc3) [process, left of=in2, xshift=-3.2cm] {Frame is saved and a new one created};
-			\node (stop) [startstop, below of=in2] {Frame is saved};
-			\draw [arrow] (start) -- (dec1);
-			\draw [arrow] (dec1) -- node[anchor=south] {no} (in1);
-			\draw [arrow] (dec1) -- node[anchor=east] {yes} (proc1);
-			\draw [arrow] (in1) |- (start);
-			\draw [arrow] (proc1) -- (dec2);
-			\draw [arrow] (dec2) -- node[anchor=south] {no} (proc2);
-			\draw [arrow] (dec2) -- node[anchor=east] {yes} (in2);
-			\draw [arrow] (proc2) |- (proc1);
-			\draw [arrow] (in2) -- node[anchor=south] {new frame} (proc3); 
-			\draw [arrow] (proc3) |- (proc1);
-			\draw [arrow] (in2) -- node[anchor=east] {save frame} (stop);
-		\end{tikzpicture}
+%\subsection{Flowchart}
+%This section is used to display several flowcharts where each is a representation for how a user will interact with a section of the program. These flowcharts will represent how we want the core functionality of the application to function.
+%\subsubsection{User interaction with the toolbox}
+%\centering
+%	\begin{tikzpicture}[node distance=2cm]
+%		\node (start) [startstop] {User requires a tool};
+%		\node (dec1) [decision, below of=start, yshift=-1cm] {Is required tool tab open?};
+%		\node (in1) [io, right of=dec1, xshift=3cm] {User clicks appropriate tab};
+%		\node (in2) [io, below of=dec1, yshift=-1cm] {User Selects desired tool};
+%		\node (stop) [startstop, below of=in2] {Tool is ready for use};
+%		\draw [arrow] (start) -- (dec1);
+%		\draw [arrow] (in2) -- (stop);
+%		\draw [arrow] (dec1) -- node[anchor=south] {no} (in1);
+%		\draw [arrow] (dec1) -- node[anchor=east] {yes} (in2);
+%		\draw [arrow] (in1) |- (start);
+%	\end{tikzpicture}
+%	\begin{flushleft}
+%		\subsubsection{User interaction with the editor}
+%	\end{flushleft}
+%		\begin{tikzpicture}[node distance=2cm]
+%			\node (start) [startstop] {User desires to edit a frame};
+%			\node (dec1) [decision, below of=start, yshift=-.8cm] {Is frame currently selected?};
+%			\node (in1) [io, right of=dec1, xshift=3cm] {User clicks arrows to find frame};
+%			\node (proc1) [process, below of =dec1, yshift=-0.5cm] {Frame is displayed in center of editor};
+%			\node (dec2) [decision, below of=proc1, yshift=-0.8cm] {Is frame complete?};
+%			\node (proc2) [process, right of=dec2, xshift=3cm] {continue editing};
+%			\node (in2) [io, below of=dec2, yshift=-0.5cm] {User selects option for frame};
+%			\node (proc3) [process, left of=in2, xshift=-3.2cm] {Frame is saved and a new one created};
+%			\node (stop) [startstop, below of=in2] {Frame is saved};
+%			\draw [arrow] (start) -- (dec1);
+%			\draw [arrow] (dec1) -- node[anchor=south] {no} (in1);
+%			\draw [arrow] (dec1) -- node[anchor=east] {yes} (proc1);
+%			\draw [arrow] (in1) |- (start);
+%			\draw [arrow] (proc1) -- (dec2);
+%			\draw [arrow] (dec2) -- node[anchor=south] {no} (proc2);
+%			\draw [arrow] (dec2) -- node[anchor=east] {yes} (in2);
+%			\draw [arrow] (proc2) |- (proc1);
+%			\draw [arrow] (in2) -- node[anchor=south] {new frame} (proc3); 
+%			\draw [arrow] (proc3) |- (proc1);
+%			\draw [arrow] (in2) -- node[anchor=east] {save frame} (stop);
+%		\end{tikzpicture}
 \end{document}

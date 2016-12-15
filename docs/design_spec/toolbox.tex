@@ -11,33 +11,45 @@
 	\section{ToolBox} \label{toolbox}
 	
 	\subsection{Functionality: General}
-	The ToolBox portion of the GUI will be a rectangular area that will contain several different tabs. Each tab will contain tools for a specific category, such as tools used for selecting colors and tools for editing and manipulating frames of the animation. Two such tabs that have been decided are the “Color Tab” and the “Editing Tab” which are described below. However more tabs may be added as future improvements.
+	The ToolBox portion of the GUI is a rectangular area that containing several different tabs. Each tab contains tools for a specific category.  On the first tab, tools used for color manipulation, editing, and other color tasks are housed.  And on the second tab, tools for editing, manipulating,and expanding frames of the animation are housed. These tabs are the “Color Tab” and the “Editing Tab” and are described below in more detail. However more tabs may be added as future improvements.
 	\subsection{Functionality: Color Tab}
 This tab will include several tools used for selecting and saving colors that will then be used for creating the tower lights animation frames. The following are the current features planned for this tab.
 	\begin{itemize}
-			\item Color wheel (pallet) for visually selecting the desired color by using the mouse to click on a location within the wheel.
-			\item Predefined color selection box as well as a box to select colors that have previously been saved for easier access later.
+			\item Color pallete for visually selecting the desired color by using the mouse to click on a location within the pallete.  This allows the user to choose a color based on what he/she sees in his/her head.  It also does not require a user to be familiar with html-style hex, HSV, or RGB, which are other methods of selecting a color within this tab.  
+			\item Predefined color selection box as well as a box to select colors that have previously been saved for easier access later.  This allows a user to not have to define common colors, like blue and red, and not to have redefine colors used througout the animation.  It also allows a user to have some colors to go back and forth between without having to use the pallete.
 			\item Several  boxes that allows a text input representation of a color in the following format:
 		\begin{itemize}
 				\item Red, Green, Blue (RGB)
 				\item HTML Hexadecimal Codes
-				\item Cyan, Yellow, Magenta, Key (CYMK)
+				\item Hue, Saturation, and Value ( HSV )
+				\item A future feature that could be added is Cyan, Yellow, Magenta, and Key ( CYMK )
 		\end{itemize}
 	\end{itemize}
 
 	\subsection{Functionality: Editing Tab}
 	This tab will include several tools used for selecting and editing frames that have already been made. This includes features such as
 	\begin{itemize}
-			\item Adding a range of frames: Insert a large number of frames by referring to the frame index and the number of frames you'd like to insert.
-			\item Removing a range of frames: Remove a large number of frames by referring to the first and last frame indices that you would like to remove.
-			\item Copying sections of a frame: Designate a frame and add its content to a selection of other frames.
+			\item Adding a range of frames: Insert a large number of frames by referring to the frame index and the number of frames you'd like to insert.  This allows the insertion of many frames without having to insert one frame at a time repeatedly.  This is especially useful when the user wants to insert arbitrarily many frames.
+			\item Removing a range of frames: Remove a large number of frames by referring to the first and last frame indices that you would like to remove.  This allows the deletion of arbitrarily many frames, without having to delete one frame at a time repeatedly.  useful again, when the user wants to delete a large number of frames.
+			\item Copying sections of a frame: Designate a frame and add its content to a selection of other frames.  This allows a user to reuse certain frames within an animation; especially useful when a user is reusing common themes, like letters or comets.
+			\item Time Intervals: this allows a user to set the duration of time for a particular frame, and to view the current time for the frame being viewed.  The time intervals are in milliseconds, which allows easier usage by the user.
 	\end{itemize}
 	
+
+	\subsection{Functionality: Music Tab }
+	This tab will allow the user to specify a music file and commit it to the animation.
+	\begin{itemize}
+		\item A text box allows the user to type in the file name of the music file that the user wishes to use.  
+		\item A button named "Commit" allows the user to commit the specified file to the animation.  The backend for this runs some checks to make sure the file is of the proper type.
+	\end{itemize}
+
 	\subsection{Notes}
 	\begin{itemize}
-		\item The toolbox section of the GUI will work alongside the Editor section to create a frame/animation. 
+		\item The toolbox section of the GUI works alongside the Editor section to create a frame/animation. 
 
 		\item It will be possible to later designate more ToolBox Tabs such that Tabs can be added and removed at will by both programmers and users.
 	\end{itemize}
+
+	
 	
 \end{document}
