@@ -135,9 +135,10 @@ void EditorWindow::updateCells(frameElement *frame, Frame data)
  * in the UI of the editor window. Also, handle enabling/disabling the
  * navigation buttons.
  * @param animation pointer to the animation read in from a file
+ * @param initial indicates whether this is the inital setup or not
  * @return Void.
  */
-void EditorWindow::setupFrames(Animation *animation)
+void EditorWindow::setupFrames(Animation *animation, bool initial)
 {
     this->frames = animation->getFrames();
     this->animation = animation;
@@ -153,10 +154,16 @@ void EditorWindow::setupFrames(Animation *animation)
     dataFrames.push_back(next);
 
     for (int i = 0; i < uiFrames.size(); i++){
-        setup(uiFrames[i], dataFrames[i]);
-        uiFrames[i]->self = uiContainers[i];
-        uiFrames[i]->self->setLayout(uiFrames[i]->grid);
+        if (initial){
+            setup(uiFrames[i], dataFrames[i]);
+            uiFrames[i]->self = uiContainers[i];
+            uiFrames[i]->self->setLayout(uiFrames[i]->grid);
+        }
+        else{
+            updateCells(uiFrames[i], dataFrames[i]);
+        }
     }
+
     this->currFrame = frames.begin();
     animation->setCurrentFrame(&(*(this->currFrame)));
     this->currIndex = 0;
@@ -214,10 +221,42 @@ void EditorWindow::updateFrameData()
  */
 void EditorWindow::updateLocLabel()
 {
-    ui->locationLabel->setText(QString::number(this->currIndex + 1)+
+    ui->locationLabel->setText(QString::number(this->currIndex)+
                                "/" +
-                               QString::number(frames.size()));
+                               QString::number(frames.size() - 1));
 }
+/**
+ * Called for updating the UI after a frame has been removed. Since the current
+ * index and frame has been adjusted prior to calling, simply refresh the
+ * UI frames in place in the editor.
+ * @return Void.
+ */
+void EditorWindow::refreshFrames()
+{
+    int width = animation->getWidth();
+    int height = animation->getHeight();
+    Frame newPrev(width, height),
+          newNext(width, height);
+
+    if (currIndex - 1 > 0)
+        newPrev = *std::next(currFrame, -1);
+    if (currIndex + 1 < frames.size())
+        newNext = *std::next(currFrame, 1);
+
+    std::vector<Frame> activeFrames = {
+        newPrev,
+        *currFrame,
+        newNext
+    };
+
+    for (int i = 0; i < activeFrames.size(); i++){
+        updateCells(uiFrames[i], activeFrames[i]);
+    }
+    animation->setCurrentFrame(&(*(currFrame)));
+    toggleNavButtons();
+    updateLocLabel();
+}
+
 /**
  * This is the slot for when the "Go-Left" Button is clicked
  * by the user.
@@ -357,7 +396,9 @@ void EditorWindow::addFrameHandler()
 void EditorWindow::deleteFrameHandler()
 {
     animation->removeFrame(this->currIndex);
+    if (this->currIndex != 0)
+        this->currIndex--;
     updateFrameData();
-    goLeft();
+    refreshFrames();
 }
 

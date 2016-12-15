@@ -288,18 +288,19 @@ void readFrames(std::ifstream &tanfile, Animation *animation){
 /**
  * Read in an Animation from the specified file location/name.
  * @param a filename or filepath to read from.
- * @return An Animation object containing the animation.
+ * @return A reference to an Animation object.
  */
-Animation readInAnimation(const char *filename) {
 
-	Animation animation;
+Animation* readInAnimation(const char *filename) {
+    Animation *animation = new Animation;
+
 
 	std::ifstream tanfile;
 	tanfile.open(filename);
 
     if (tanfile.good()){
-        readHeader(tanfile, &animation);
-        readFrames(tanfile, &animation);
+        readHeader(tanfile, animation);
+        readFrames(tanfile, animation);
     }
 
 	tanfile.close();

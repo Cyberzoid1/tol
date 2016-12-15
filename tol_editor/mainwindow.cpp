@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setMinimumWidth(toolbox->width() + editor->width());
     this->setMinimumHeight(editor->height());
 
+    connect(toolbox,SIGNAL(updateUI()),this,SLOT(updateUI()));
     createActions();
     createMenus();
 
@@ -60,14 +61,14 @@ void MainWindow::open()
                                                     tr("TAN Files (*.tan2)"));
     //read in the animation from the file and store it in the window's
     //data object
-    *animation = readInAnimation(filename.toStdString().c_str());
+    animation = readInAnimation(filename.toStdString().c_str());
     //now that an animation has been read into the window, update the time interval
     //to the default value stored in the toolbox.
     QTime intvl = toolbox->timeInterval->time();
     int ms = (intvl.minute() * 60000) + (intvl.second() * 1000) + (intvl.msec());
     animation->setTimeInterval(ms);
 
-    editor->setupFrames(animation);
+    editor->setupFrames(animation, false);
 }
 /**
  * Slot for the 'Save' action in the 'File' menu. Writes the animation out
@@ -77,8 +78,8 @@ void MainWindow::save()
 {
     QString filename = QFileDialog::getSaveFileName(this,
                                                     tr("Save Animation"),
-                                                       "",
-                                                       tr("TAN Files (*.tan2)"));
+                                                    "",
+                                                    tr("TAN Files (*.tan2)"));
     writeFile(filename.toStdString(), animation);
 }
 /**
@@ -104,6 +105,12 @@ void MainWindow::createMenus()
     fileMenu->addAction(saveAct);
 }
 
+void MainWindow::updateUI()
+{
+    editor->updateFrameData();
+    editor->refreshFrames();
+}
+
 /**
  * When the window is first opened, intialize the animation with a single
  * frame of default size. This will allow the user to start creating an
@@ -117,5 +124,5 @@ void MainWindow::init()
                         0);
     int defaultIntvl = 100;
     animation->setTimeInterval(defaultIntvl);
-    editor->setupFrames(animation);
+    editor->setupFrames(animation, true);
 }
